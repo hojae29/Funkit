@@ -1,7 +1,10 @@
-body{
-    font-family:'Noto Sans KR';
-    margin: 0px;
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    font-family:'Noto Sans KR', sans-serif;
 }
+
 nav{
     width: 100%;
     top: 0px;
@@ -31,7 +34,7 @@ nav{
     margin:0;
 }
 .logo{
-    font-family: 'Noto Sans KR';
+    font-family: 'Noto Sans KR', sans-serif;
     font-size:26px;
     font-weight:bold;
     color:#ff7e00;
@@ -39,6 +42,11 @@ nav{
 .nav_top_user li{
     float:left;
     padding:10px;
+}
+.nav_top_user button{
+    font-size: 14px;
+    border: none;
+    background: none;
 }
 .nav_top_user{
     float:right;

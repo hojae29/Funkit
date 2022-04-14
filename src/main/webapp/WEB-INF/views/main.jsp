@@ -8,10 +8,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/header.css">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700&display=swap');
-    </style>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/modal.css"/>
     <title>Funkit</title>
 </head>
 <body>
@@ -26,10 +24,10 @@
                         <button class="add_recipe">레시피 등록</button>
                         <ul class="nav_top_user">
                             <li>
-                                <a href="">로그인</a>
+                               <button id="login-btn">로그인</button>
                             </li>
                             <li>
-                                <a href="">회원가입</a>
+                                <button id="register-btn">회원가입</button>
                             </li>
                         </ul>
                     </div>
@@ -52,5 +50,27 @@
             </div>
         </nav>
     </div>
+    <!-- 로그인/회원가입 modal -->
+    <div id="modal" class="modal-overlay">
+        <div class="modal-window">
+            <div>
+                <button id="modal-close">닫기</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const modal = document.getElementById("modal");
+        document.getElementById("login-btn").addEventListener("click", ev => {
+            modal.style.display = "flex";
+        });
+
+        document.getElementById("register-btn").addEventListener("click", ev => {
+            modal.style.display = "flex";
+        });
+
+        document.getElementById("modal-close").addEventListener("click", ev => {
+           modal.style.display = "none";
+        });
+    </script>
 </body>
 </html>
