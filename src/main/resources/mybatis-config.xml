@@ -11,6 +11,6 @@
     </typeAliases>
 
     <mappers>
-
+        <mapper resource="mybatis/login.xml"/>
     </mappers>
 </configuration>

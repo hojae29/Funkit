@@ -16,6 +16,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 
+    //jackson
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.13.1'
+
     //spring
     implementation group: 'org.springframework', name: 'spring-webmvc', version: '4.3.30.RELEASE'
     implementation group: 'org.springframework', name: 'spring-context', version: '4.3.30.RELEASE'
@@ -35,7 +38,7 @@ dependencies {
     //MySQL(MariaDB) connector 사용을 위한 dependency
     implementation 'mysql:mysql-connector-java:8.0.28'
     //MariaDB 사용을 위한 dependency
-    //implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.4'
+    implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.4'
 }
 
 test {
