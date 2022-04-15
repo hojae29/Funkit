@@ -4,4 +4,6 @@ import com.funkit.model.Member;
 
 public interface LoginService {
     void register(Member member);
+
+    String idCheck(String id);
 }

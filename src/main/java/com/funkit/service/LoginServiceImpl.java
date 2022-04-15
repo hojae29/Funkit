@@ -18,4 +18,13 @@ public class LoginServiceImpl implements LoginService{
     public void register(Member member) {
         dao.register(member);
     }
+
+    @Override
+    public String idCheck(String id) {
+        boolean whether = dao.idCheck(id);
+        if(whether)
+            return "OK";
+        else
+            return "FAIL";
+    }
 }

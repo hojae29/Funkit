@@ -6,4 +6,10 @@
         INSERT INTO member
         VALUES(#{id}, #{passwd}, #{phone}, #{nickname}, #{email})
     </insert>
+
+    <select id="idCheck" resultType="String">
+        SELECT id
+        FROM member
+        WHERE id=#{id}
+    </select>
 </mapper>

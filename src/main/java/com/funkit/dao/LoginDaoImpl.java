@@ -18,4 +18,10 @@ public class LoginDaoImpl implements LoginDao{
     public void register(Member member) {
         sql.insert("login.register", member);
     }
+
+    @Override
+    public boolean idCheck(String id) {
+        String item = sql.selectOne("login.idCheck", id);
+        return item == null;
+    }
 }
