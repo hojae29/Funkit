@@ -1,25 +1,28 @@
 //modal
 const modal = document.getElementById("modal");
+const loginForm = document.getElementById("login-form");
+const registerForm = document.getElementById("register-form");
+
 document.getElementById("login-btn").addEventListener("click", () => {
     modal.style.display = "flex";
-    document.getElementById("login-form").style.display = "block";
-    document.getElementById("register-form").style.display = "none";
+    loginForm.style.display = "block";
+    registerForm.style.display = "none";
 });
 
 document.getElementById("register-btn").addEventListener("click", () => {
     modal.style.display = "flex";
-    document.getElementById("register-form").style.display = "block";
-    document.getElementById("login-form").style.display = "none";
+    registerForm.style.display = "block";
+    loginForm.style.display = "none";
 });
 
 document.getElementById("modal-login-btn").addEventListener("click", () => {
-    document.getElementById("login-form").style.display = "block";
-    document.getElementById("register-form").style.display = "none";
+    loginForm.style.display = "block";
+    registerForm.style.display = "none";
 });
 
 document.getElementById("modal-register-btn").addEventListener("click", () => {
-    document.getElementById("register-form").style.display = "block";
-    document.getElementById("login-form").style.display = "none";
+    registerForm.style.display = "block";
+    loginForm.style.display = "none";
 });
 
 document.getElementById("modal-close").addEventListener("click", () => {
