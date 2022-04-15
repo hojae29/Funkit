@@ -107,7 +107,7 @@
                         <input type="text" id="address"/>
                     </div>
                     <div>
-                        <button id="submit-register-btn">회원가입하기</button>
+                        <button type="button" id="submit-register-btn">회원가입하기</button>
                     </div>
                 </form>
             </div>

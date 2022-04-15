@@ -2,7 +2,7 @@ package com.funkit.service;
 
 import com.funkit.dao.LoginDao;
 import com.funkit.model.Member;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,6 +16,7 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     public void register(Member member) {
+        member.setPasswd(BCrypt.hashpw(member.getPasswd(), BCrypt.gensalt()));
         dao.register(member);
     }
 
