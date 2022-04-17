@@ -1,53 +1,51 @@
 //modal
 const modal = document.getElementById("modal");
-const loginForm = document.getElementById("login-form");
-const registerForm = document.getElementById("register-form");
+const loginForm = document.getElementById("login_form");
+const registerForm = document.getElementById("register_form");
 
-document.getElementById("login-btn").addEventListener("click", () => {
+document.getElementById("login_btn").addEventListener("click", () => {
     modal.style.display = "flex";
     loginForm.style.display = "block";
     registerForm.style.display = "none";
 });
 
-document.getElementById("register-btn").addEventListener("click", () => {
+document.getElementById("register_btn").addEventListener("click", () => {
     modal.style.display = "flex";
     registerForm.style.display = "block";
     loginForm.style.display = "none";
 });
 
-document.getElementById("modal-login-btn").addEventListener("click", () => {
+document.getElementById("modal_login_btn").addEventListener("click", () => {
     loginForm.style.display = "block";
     registerForm.style.display = "none";
 });
 
-document.getElementById("modal-register-btn").addEventListener("click", () => {
+document.getElementById("modal_register_btn").addEventListener("click", () => {
     registerForm.style.display = "block";
     loginForm.style.display = "none";
 });
 
-document.getElementById("modal-close").addEventListener("click", () => {
+document.getElementById("modal_close").addEventListener("click", () => {
     modal.style.display = "none";
 });
 
 //id 중복체크
-document.getElementById("id-check-btn").addEventListener("click", () => {
-    $.ajax("/id-check?id=" + document.getElementById("id").value, {
+document.getElementById("check_id_btn").addEventListener("click", () => {
+    const form = document.getElementById("register_form");
+    $.ajax("/id-check?id=" + form.id.value, {
         type: "GET",
-        success: msg => {
-            if(msg == "OK"){
-                document.getElementById("checkId").value = document.getElementById("id").value
-                alert("사용가능한 아이디 입니다");
-            }
-            else if(msg == "FAIL")
-                alert(document.getElementById("id").value + "는 사용중인 ID입니다");
+        success: () => {
+            form.checkId.value = form.id.value;
+            alert("사용가능한 아이디 입니다");
         },
-        error: msg => console.log(msg)
+        error: () => alert(form.id.value + "는 사용중인 ID입니다")
     });
 });
 
 //유효성검사 & 회원가입
-document.getElementById("submit-register-btn").addEventListener("click", () => {
-    const form = document.getElementById("register-form");
+document.getElementById("submit_register_btn").addEventListener("click", () => {
+    const form = document.getElementById("register_form");
+
     const regex_pw = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
     const regex_e = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     const regex_tel = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
@@ -80,12 +78,17 @@ document.getElementById("submit-register-btn").addEventListener("click", () => {
         form.checkPasswd.focus();
         return false;
     }
+    if(form.name.value == ""){
+        alert("이름을 입력해주세요");
+        form.name.focus();
+        return false;
+    }
     if(form.passwd.value != form.checkPasswd.value){
         alert("비밀번호 확인이 일치하지 않습니다");
         form.checkPasswd.focus();
         return false;
     }
-    if(form.nickname.value == ""){
+    if(form.nickName.value == ""){
         alert("닉네임을 입력해주세요");
         form.nickname.focus();
         return false;
@@ -110,22 +113,32 @@ document.getElementById("submit-register-btn").addEventListener("click", () => {
         form.email.focus();
         return false;
     }
+    if(form.postCode.value == "" || form.address.value == ""){
+        alert("주소를 입력해주세요");
+        return false;
+    }
 
     const member = {
-        id: document.getElementById("id").value,
-        passwd: document.getElementById("passwd").value,
-        nickname: document.getElementById("nickname").value,
-        phone: document.getElementById("phone").value,
-        email: document.getElementById("email").value,
-        address: document.getElementById("address").value,
+        id: form.id.value,
+        passwd: form.passwd.value,
+        name: form.name.value,
+        nickName: form.nickName.value,
+        phone: form.phone.value,
+        email: form.email.value,
+        postCode: form.postCode.value,
+        address: form.address.value,
+        detailAddress: form.detailAddress.value
     }
 
     $.ajax("/register", {
         type: "POST",
         contentType: "application/json",
-        dataType: "text",
         data: JSON.stringify(member),
-        success: msg => alert(msg + "회원가입이 완료되었습니다"),
-        error: msg => console.log(msg)
+        success: res => alert(res.status + res.msg),
+        error: res => alert(res.responseJSON.status + res.responseJSON.msg)
     });
+
+    //form data reset
+    // form.checkId.value = "";
+    // form.reset();
 });

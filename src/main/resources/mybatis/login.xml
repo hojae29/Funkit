@@ -3,13 +3,19 @@
 
 <mapper namespace="login">
     <insert id="register">
-        INSERT INTO member
-        VALUES(#{id}, #{passwd}, #{phone}, #{nickname}, #{email})
+        INSERT INTO member(id, passwd, name, phone, nick_name, email, post_code, address, detail_address)
+        VALUES(#{id}, #{passwd}, #{name}, #{phone}, #{nickName}, #{email}, #{postCode}, #{address}, #{detailAddress})
     </insert>
 
-    <select id="idCheck" resultType="String">
+    <select id="checkId" resultType="String">
         SELECT id
         FROM member
         WHERE id=#{id}
+    </select>
+
+    <select id="checkEmail" resultType="Member">
+        SELECT *
+        FROM member
+        WHERE email=#{email}
     </select>
 </mapper>

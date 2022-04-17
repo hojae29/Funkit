@@ -1,4 +1,4 @@
-.modal-overlay{
+.modal_overlay{
     position: absolute;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.modal-window{
+.modal_window{
     width: 500px;
     height: 500px;
 

@@ -10,8 +10,6 @@
 <head>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/modal.css"/>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <title>Funkit</title>
 </head>
 <body>
@@ -26,10 +24,10 @@
                         <button class="add_recipe">레시피 등록</button>
                         <ul class="nav_top_user">
                             <li>
-                               <button id="login-btn">로그인</button>
+                               <button id="login_btn">로그인</button>
                             </li>
                             <li>
-                                <button id="register-btn">회원가입</button>
+                                <button id="register_btn">회원가입</button>
                             </li>
                         </ul>
                     </div>
@@ -53,16 +51,16 @@
         </nav>
     </div>
     <!-- 로그인/회원가입 modal -->
-    <div id="modal" class="modal-overlay">
-        <div class="modal-window">
+    <div id="modal" class="modal_overlay">
+        <div class="modal_window">
             <div>
                 <div>
-                    <button id="modal-login-btn">로그인</button>
-                    <button id="modal-register-btn">회원가입</button>
+                    <button id="modal_login_btn">로그인</button>
+                    <button id="modal_register_btn">회원가입</button>
                 </div>
             </div>
             <div>
-                <form id="login-form" style="display: none">
+                <form id="login_form" style="display: none">
                     <div>
                         <label>아이디</label>
                         <input type="text"/>
@@ -75,47 +73,64 @@
                         <button type="button">로그인</button>
                     </div>
                 </form>
-                <form id="register-form" style="display: none">
-                    <input type="hidden" id="checkId">
+                <form id="register_form" style="display: none">
+                    <input type="hidden" name="checkId">
                     <div>
                         <label>아이디</label>
-                        <input type="text" id="id"/>
-                        <button type="button" id="id-check-btn">중복검사</button>
+                        <input type="text" name="id"/>
+                        <button type="button" id="check_id_btn">중복검사</button>
                     </div>
                     <div>
                         <label>비밀번호</label>
-                        <input type="password" id="passwd"/>
+                        <input type="password" name="passwd"/>
                     </div>
                     <div>
                         <label>비밀번호 확인</label>
-                        <input type="password" id="checkPasswd"/>
+                        <input type="password" name="checkPasswd"/>
+                    </div>
+                    <div>
+                        <label>이름</label>
+                        <input type="text" name="name"/>
                     </div>
                     <div>
                         <label>닉네임</label>
-                        <input type="text" id="nickname"/>
+                        <input type="text" name="nickName"/>
                     </div>
                     <div>
                         <label>전화번호</label>
-                        <input type="text" id="phone"/>
+                        <input type="text" name="phone"/>
                     </div>
                     <div>
                         <label>이메일</label>
-                        <input type="text" id="email"/>
+                        <input type="text" name="email"/>
+                    </div>
+                    <div>
+                        <label>우편번호</label>
+                        <input type="text" name="postCode" readonly/>
+                        <button type="button" onclick="findAddress('register_form')">찾기</button>
                     </div>
                     <div>
                         <label>주소</label>
-                        <input type="text" id="address"/>
+                        <input type="text" name="address" readonly/>
                     </div>
                     <div>
-                        <button type="button" id="submit-register-btn">회원가입하기</button>
+                        <label>상세주소</label>
+                        <input type="text" name="detailAddress"/>
+                    </div>
+                    <div>
+                        <button type="button" id="submit_register_btn">회원가입하기</button>
                     </div>
                 </form>
             </div>
             <div>
-                <button id="modal-close">닫기</button>
+                <button id="modal_close">닫기</button>
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="/resources/js/main.js"></script>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <!-- Daum Postcode Api -->
+    <script src="/resources/js/postcode.js"></script>
+    <script src="/resources/js/main.js"></script>
 </body>
 </html>

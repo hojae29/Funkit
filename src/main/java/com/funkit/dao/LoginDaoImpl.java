@@ -2,8 +2,9 @@ package com.funkit.dao;
 
 import com.funkit.model.Member;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
 
 @Repository
 public class LoginDaoImpl implements LoginDao{
@@ -20,8 +21,13 @@ public class LoginDaoImpl implements LoginDao{
     }
 
     @Override
-    public boolean idCheck(String id) {
-        String item = sql.selectOne("login.idCheck", id);
+    public boolean checkId(String id) {
+        String item = sql.selectOne("login.checkId", id);
         return item == null;
+    }
+
+    @Override
+    public Optional<Member> checkEmail(String email) {
+        return Optional.ofNullable(sql.selectOne("login.checkEmail", email));
     }
 }
