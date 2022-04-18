@@ -1,4 +1,4 @@
-package com.funkit.exception;
+package com.funkit.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;

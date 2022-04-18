@@ -1,5 +1,6 @@
-package com.funkit.exception;
+package com.funkit.model;
 
+import com.funkit.exception.ErrorCode;
 import org.springframework.http.ResponseEntity;
 
 public class JsonErrorResponse {

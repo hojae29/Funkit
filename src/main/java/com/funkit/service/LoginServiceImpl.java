@@ -3,7 +3,7 @@ package com.funkit.service;
 import com.funkit.dao.LoginDao;
 import com.funkit.exception.CustomException;
 import com.funkit.exception.ErrorCode;
-import com.funkit.exception.JsonResponse;
+import com.funkit.model.JsonResponse;
 import com.funkit.model.Member;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
