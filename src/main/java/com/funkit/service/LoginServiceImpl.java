@@ -1,8 +1,9 @@
 package com.funkit.service;
 
 import com.funkit.dao.LoginDao;
-import com.funkit.exception.AlreadyExistEmailException;
-import com.funkit.model.DefaultResponse;
+import com.funkit.exception.CustomException;
+import com.funkit.exception.ErrorCode;
+import com.funkit.exception.JsonResponse;
 import com.funkit.model.Member;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.http.HttpStatus;
@@ -23,25 +24,25 @@ public class LoginServiceImpl implements LoginService{
 
     @Override
     @Transactional
-    public ResponseEntity<DefaultResponse<?>> register(Member member) {
+    public ResponseEntity register(Member member) {
         member.setPasswd(BCrypt.hashpw(member.getPasswd(), BCrypt.gensalt()));
         //check email
-        Optional<Member> user= dao.checkEmail(member.getEmail());
+        Optional<Member> user= dao.checkId(member.getId());
         if(user.isEmpty()){
             dao.register(member);
-            var res = new DefaultResponse<>(HttpStatus.CREATED.value(), "회원가입 완료");
-            return new ResponseEntity<>(res, HttpStatus.CREATED);
+            return new JsonResponse(HttpStatus.CREATED, "회원가입 성공").toResponseEntity();
         } else{
-            throw new AlreadyExistEmailException();
+            throw new CustomException(ErrorCode.ALREADY_EXIST_ID);
         }
     }
 
     @Override
-    public ResponseEntity<String> checkId(String id) {
-        boolean whether = dao.checkId(id);
-        if(whether)
-            return new ResponseEntity(HttpStatus.OK);
-        else
-            return new ResponseEntity(HttpStatus.NOT_FOUND);
+    public ResponseEntity checkId(String id) {
+        Optional<Member> user = dao.checkId(id);
+        if(user.isEmpty()){
+            return new JsonResponse(HttpStatus.OK, id + "는 사용가능한 아이디 입니다").toResponseEntity();
+        } else {
+            throw new CustomException(ErrorCode.ALREADY_EXIST_ID);
+        }
     }
 }

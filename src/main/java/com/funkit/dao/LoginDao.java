@@ -7,7 +7,5 @@ import java.util.Optional;
 public interface LoginDao {
     void register(Member member);
 
-    boolean checkId(String id);
-
-    Optional<Member> checkEmail(String email);
+    Optional<Member> checkId(String id);
 }

@@ -34,11 +34,11 @@ document.getElementById("check_id_btn").addEventListener("click", () => {
     const form = document.getElementById("register_form");
     $.ajax("/id-check?id=" + form.id.value, {
         type: "GET",
-        success: () => {
+        success: res => {
             form.checkId.value = form.id.value;
-            alert("사용가능한 아이디 입니다");
+            alert(res.msg);
         },
-        error: () => alert(form.id.value + "는 사용중인 ID입니다")
+        error: res => alert(res.responseJSON.msg)
     });
 });
 
@@ -50,7 +50,7 @@ document.getElementById("submit_register_btn").addEventListener("click", () => {
     const regex_e = /^([0-9a-zA-Z_\.-]+)@([0-9a-zA-Z_-]+)(\.[0-9a-zA-Z_-]+){1,2}$/;
     const regex_tel = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?[0-9]{3,4}-?[0-9]{4}$/;
 
-    if(form.id.value == ""){
+    if(form.id.value === ""){
         alert("아이디를 입력해주세요");
         form.id.focus();
         return false;

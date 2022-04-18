@@ -7,15 +7,9 @@
         VALUES(#{id}, #{passwd}, #{name}, #{phone}, #{nickName}, #{email}, #{postCode}, #{address}, #{detailAddress})
     </insert>
 
-    <select id="checkId" resultType="String">
-        SELECT id
-        FROM member
-        WHERE id=#{id}
-    </select>
-
-    <select id="checkEmail" resultType="Member">
+    <select id="checkId" resultType="Member">
         SELECT *
         FROM member
-        WHERE email=#{email}
+        WHERE id=#{id}
     </select>
 </mapper>

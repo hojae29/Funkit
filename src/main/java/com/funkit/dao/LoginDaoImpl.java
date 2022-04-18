@@ -21,13 +21,7 @@ public class LoginDaoImpl implements LoginDao{
     }
 
     @Override
-    public boolean checkId(String id) {
-        String item = sql.selectOne("login.checkId", id);
-        return item == null;
-    }
-
-    @Override
-    public Optional<Member> checkEmail(String email) {
-        return Optional.ofNullable(sql.selectOne("login.checkEmail", email));
+    public Optional<Member> checkId(String id) {
+        return Optional.ofNullable(sql.selectOne("login.checkId", id));
     }
 }
