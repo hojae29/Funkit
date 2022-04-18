@@ -36,9 +36,9 @@ document.getElementById("check_id_btn").addEventListener("click", () => {
         type: "GET",
         success: res => {
             form.checkId.value = form.id.value;
-            alert(res.msg);
+            alert(res.message);
         },
-        error: res => alert(res.responseJSON.msg)
+        error: res => alert(res.responseJSON.message)
     });
 });
 
@@ -134,11 +134,11 @@ document.getElementById("submit_register_btn").addEventListener("click", () => {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(member),
-        success: res => alert(res.status + res.msg),
-        error: res => alert(res.responseJSON.status + res.responseJSON.msg)
+        success: res => alert(res.message),
+        error: res => alert(res.responseJSON.message)
     });
 
     //form data reset
-    // form.checkId.value = "";
-    // form.reset();
+    form.checkId.value = "";
+    form.reset();
 });
