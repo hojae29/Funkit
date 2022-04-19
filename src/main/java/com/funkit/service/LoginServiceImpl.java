@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService{
     public ResponseEntity checkId(String id) {
         Optional<Member> user = dao.checkId(id);
         if(user.isEmpty()){
-            return new JsonResponse(HttpStatus.OK, id + "는 사용가능한 아이디 입니다").toResponseEntity();
+            return new JsonResponse(HttpStatus.OK, id + "valid ok").toResponseEntity();
         } else {
             throw new CustomException(ErrorCode.ALREADY_EXIST_ID);
         }

@@ -7,10 +7,9 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Member {
-    @NotEmpty(message = "아이디를 입력해주세요")
     @Pattern(
             regexp = "^[A-za-z0-9]{4,12}$",
-            message = "아이디는 4~12자리 영문으로 입력해야 합니다"
+            message = "*아이디는 4자에서 12자 사이의 영문이어야 합니다"
     )
     private String id;
 
