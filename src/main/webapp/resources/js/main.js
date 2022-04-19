@@ -1,6 +1,5 @@
 //modal
 const modal = document.getElementById("modal");
-
 $("#login_btn").on("click", () => {
     modal.style.display = "flex";
     changeTab("login");
@@ -25,26 +24,20 @@ $("#modal_register_btn").on("click", () => {
     changeTab("register");
 });
 
-const delay = makeDelay(500);
-const regex_id = /^[A-za-z0-9]{4,12}$/;
+const delay = makeDelay(300);
 const registerId = $("#register_id");
 
 registerId.on("keyup", () => {
-    checkIdAjax();
+    delay(() => checkIdAjax());
 });
 
 registerId.on("paste", () => {
-    checkIdAjax();
+    delay(() => checkIdAjax());
 });
 
-registerId.on("focusout ", function() {
-    if(registerId.data("vst") === "1"){
-        $("#id_msg").text("");
-    }else{
-        if(!$("#id_msg").text()){
-            $("#id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
-        }
-    }
+//focusout 이벤트 발생시 아이디검증여부가 저장되어 있을때만 실행
+registerId.on("focusout ", () => {
+    if(registerId.data("vst") != null) checkIdAjax();
 });
 
 //유효성검사 & 회원가입
@@ -150,24 +143,33 @@ document.getElementById("submit_register_form").addEventListener("click", () => 
     });
 });
 
+/**
+ * id input 태그의 모든 이벤트는 checkIdAjax()를 실행
+ * 정규식을 통과한후에 비동기통신으로 사용가능한 아이디인지 판별하여 JQuery Data() 함수로 검증여부를 저장
+ * KEY=vst, VALUE=status (status=1 OK status=0 FAIL)
+ **/
 function checkIdAjax(){
-    delay(() => {
-        if(regex_id.test(registerId.val())){
-            registerId.data("vst", "1");
-
-            $.ajax("/id-check?id=" + registerId.val(), {
-                method: "GET",
-                success: () => $("#id_msg").text(""),
-                error: res => {
-                    registerId.data("vst", "0");
+    const regex_id = /^[A-za-z0-9]{4,12}$/;
+    if(!regex_id.test(registerId.val())){
+        registerId.data("vst", "0");
+        $("#id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
+    } else{
+        $.ajax("/id-check?id=" + registerId.val(), {
+            method: "GET",
+            success: () => {
+                registerId.data("vst", "1");
+                $("#id_msg").text("");
+            },
+            error: res => {
+                registerId.data("vst", "0");
+                console.log(res);
+                if(res.status == 500)
+                    $("#id_msg").text(res.responseText);
+                else
                     $("#id_msg").text(res.responseJSON.message);
-                }
-            });
-        } else{
-            registerId.data("vst", "0");
-            $("#id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
-        }
-    });
+            }
+        });
+    }
 }
 
 function makeDelay(ms) {
@@ -179,10 +181,12 @@ function makeDelay(ms) {
 }
 
 function formReset(index){
-    $(index)[0].reset();
-    $(index + " p").text("");
+    $(index)[0].reset(); //폼 초기화
+    $(index + " p").text(""); //폼 메세지 초기화
+    registerId.data("vst", null); //검증여부 data 초기화
 }
 
+//modal창을 열거나 창에서 메뉴이동시 실행
 function changeTab(index){
     const mlb = document.getElementById("modal_login_btn");
     const mrb = document.getElementById("modal_register_btn");
@@ -191,7 +195,6 @@ function changeTab(index){
     const loginForm = document.getElementById("login_form");
     const registerForm = document.getElementById("register_form");
 
-    document.getElementById("modal_register_btn")
     if(index === "login"){
         loginForm.style.display = "block";
         loginBtn.style.display = "block";
@@ -213,7 +216,6 @@ function changeTab(index){
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         registerForm.id.focus();
-        registerId.data("vst", "1");
         formReset("#login_form");
     }
 }
