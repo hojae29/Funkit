@@ -13,7 +13,7 @@ public enum ErrorCode {
     /* 404 NOT_FOUND */
 
     /* 409 CONFLICT */
-    ALREADY_EXIST_ID(CONFLICT, "사용중인 아이디입니다"),
+    ALREADY_EXIST_ID(CONFLICT, "*사용할 수 없는 아이디입니다"),
     DUPLICATE_RESOURCE(CONFLICT, "데이터가 이미 존재합니다")
     ;
 
