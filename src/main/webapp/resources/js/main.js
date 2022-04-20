@@ -1,5 +1,13 @@
 //modal
 const modal = document.getElementById("modal");
+const delay = makeDelay(300);
+const registerId = $("#register_id");
+const registerPasswd = $("#register_passwd");
+const registerCheckPasswd = $("#check_passwd");
+const registerName = $("#name");
+const registerPhone = $("#phone");
+const registerEmail = $("#email");
+
 $("#login_btn").on("click", () => {
     modal.style.display = "flex";
     changeTab("login");
@@ -24,121 +32,165 @@ $("#modal_register_btn").on("click", () => {
     changeTab("register");
 });
 
-const delay = makeDelay(300);
-const registerId = $("#register_id");
-
 registerId.on("keyup", () => {
-    delay(() => checkIdAjax());
+    delay(() => {
+        checkIdAjax();
+        checkRegisterForm();
+    });
 });
 
 registerId.on("paste", () => {
-    delay(() => checkIdAjax());
+    delay(() => {
+        checkIdAjax();
+        checkRegisterForm();
+    });
 });
 
-//focusout 이벤트 발생시 아이디검증여부가 저장되어 있을때만 실행
 registerId.on("focusout ", () => {
-    if(registerId.data("vst") != null) checkIdAjax();
+    if(registerId.data("vst") != null){
+        checkIdAjax();
+        checkRegisterForm();
+    }
+});
+
+registerPasswd.on("keyup", () => {
+    delay(() => {
+        checkPasswd(1);
+        checkRegisterForm();
+    });
+});
+
+registerPasswd.on("paste", () => {
+    delay(() => {
+        checkPasswd(1);
+        checkRegisterForm();
+    });
+});
+
+registerPasswd.on("focusout", () => {
+    if(registerPasswd.data("vst") != null) {
+        checkPasswd(1);
+        checkRegisterForm();
+    }
+});
+
+registerCheckPasswd.on("keyup", () => {
+    delay(() => {
+        checkPasswd(2);
+        checkRegisterForm();
+    });
+});
+
+registerCheckPasswd.on("paste", () => {
+    delay(() => {
+        checkPasswd(2);
+        checkRegisterForm();
+    });
+});
+
+registerCheckPasswd.on("focusout", () => {
+    if(registerCheckPasswd.data("vst") != null){
+        checkPasswd(2);
+        checkRegisterForm();
+    }
+});
+
+registerName.on("keyup", () => {
+    delay(() => {
+        checkName();
+        checkRegisterForm();
+    });
+});
+
+registerName.on("paste", () => {
+    delay(() => {
+        checkName();
+        checkRegisterForm();
+    });
+});
+
+registerName.on("focusout", () => {
+    if(registerName.data("vst") != null){
+        checkName();
+        checkRegisterForm();
+    }
+});
+
+registerPhone.on("keyup", () => {
+    delay(() => {
+        checkPhone();
+        checkRegisterForm();
+    });
+});
+
+registerPhone.on("paste", () => {
+    delay(() => {
+        checkPhone();
+        checkRegisterForm();
+    });
+});
+
+registerPhone.on("focusout", () => {
+    if(registerPhone.data("vst") != null) {
+        checkPhone();
+        checkRegisterForm();
+    }
+});
+
+registerEmail.on("keyup", () => {
+    delay(() => {
+        checkEmail();
+        checkRegisterForm();
+    });
+});
+
+registerEmail.on("paste", () => {
+    delay(() => {
+        checkEmail();
+        checkRegisterForm();
+    });
+});
+
+registerEmail.on("focusout", () => {
+    if(registerPhone.data("vst") != null) {
+        checkEmail();
+        checkRegisterForm();
+    }
 });
 
 //유효성검사 & 회원가입
-document.getElementById("submit_register_form").addEventListener("click", () => {
-    const form = document.getElementById("register_form");
-
-    //최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자
-    const regex_pw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-    const regex_e = /^([0-9a-zA-Z_\.-]+)@([\da-zA-Z_-]+)(\.[\da-zA-Z_-]+){1,2}$/;
-    const regex_tel = /^(01[016789]{1}|02|0[3-9]{1}\d{1})-?\d{3,4}-?\d{4}$/;
-
-    if (form.checkId.value == "") {
-        alert("아이디 중복검사를 해주세요");
-        return false;
-    }
-    if (form.id.value != form.checkId.value) {
-        alert("아이디 중복검사를 다시 해주세요");
-        return false;
-    }
-    if (form.passwd.value == "") {
-        alert("비밀번호를 입력해주세요");
-        form.passwd.focus();
-        return false;
-    }
-    if (!regex_pw.test(form.passwd.value)) {
-        alert("비밀번호 형식이 맞지 않습니다(최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자)");
-        form.passwd.focus();
-        return false;
-    }
-    if (form.checkPasswd.value == "") {
-        alert("비밀번호 확인을 입력해주세요");
-        form.checkPasswd.focus();
-        return false;
-    }
-    if (form.passwd.value != form.checkPasswd.value) {
-        alert("비밀번호 확인이 일치하지 않습니다");
-        form.checkPasswd.focus();
-        return false;
-    }
-    if (form.name.value == "") {
-        alert("이름을 입력해주세요");
-        form.name.focus();
-        return false;
-    }
-    if (form.nickName.value == "") {
-        alert("닉네임을 입력해주세요");
-        form.nickname.focus();
-        return false;
-    }
-    if (form.phone.value == "") {
-        alert("전화번호를 입력해주세요");
-        form.phone.focus();
-        return false;
-    }
-    if (!regex_tel.test(form.phone.value)) {
-        alert("전화번호 형식을 확인해주세요");
-        form.phone.focus();
-        return false;
-    }
-    if (form.email.value == "") {
-        alert("이메일을 입력해주세요");
-        form.email.focus();
-        return false;
-    }
-    if (!regex_e.test(form.email.value)) {
-        alert("잘못된 이메일 형식입니다");
-        form.email.focus();
-        return false;
-    }
-    if (form.postCode.value == "" || form.address.value == "") {
-        alert("주소를 입력해주세요");
-        return false;
-    }
+$("#submit_register_form").on("click", () => {
 
     const member = {
-        id: form.id.value,
-        passwd: form.passwd.value,
-        name: form.name.value,
-        nickName: form.nickName.value,
-        phone: form.phone.value,
-        email: form.email.value,
-        postCode: form.postCode.value,
-        address: form.address.value,
-        detailAddress: form.detailAddress.value
+        id: $("#register_id").val(),
+        passwd: $("#register_passwd").val(),
+        name: $("#name").val(),
+        phone: $("#phone").val(),
+        email: $("#email").val(),
     }
+
+    console.log(member);
 
     $.ajax("/register", {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(member),
-        success: res => alert(res.message),
+        success: res => {
+            alert(res.message);
+            changeTab("login");
+        },
         error: res => {
             res = res.responseJSON;
-            console.log(res);
             if (res.status == 409) {
                 alert(res.message);
             } else if (res.status == 400) {
                 for (const [key, value] of Object.entries(res.data)) {
-                    console.log(`${key} : ${value}`);
+                    if(key == "id") $("#register_id_msg").text(value);
+                    else if(key == "passwd") $("#register_passwd_msg").text(value);
+                    else $(`#${key}_msg`).text(value);
                 }
             }
+            $("#submit_register_form").attr("disabled", true);
         }
     });
 });
@@ -151,24 +203,96 @@ document.getElementById("submit_register_form").addEventListener("click", () => 
 function checkIdAjax(){
     const regex_id = /^[A-za-z0-9]{4,12}$/;
     if(!regex_id.test(registerId.val())){
-        registerId.data("vst", "0");
-        $("#id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
+        registerId.data("vst", 0);
+        $("#register_id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
     } else{
         $.ajax("/id-check?id=" + registerId.val(), {
             method: "GET",
             success: () => {
-                registerId.data("vst", "1");
-                $("#id_msg").text("");
+                registerId.data("vst", 1);
+                $("#register_id_msg").text("");
             },
             error: res => {
-                registerId.data("vst", "0");
+                registerId.data("vst", 0);
                 console.log(res);
-                if(res.status == 500)
-                    $("#id_msg").text(res.responseText);
-                else
-                    $("#id_msg").text(res.responseJSON.message);
+                if(res.status == 500) $("#register_id_msg").text(res.responseText);
+                else $("#register_id_msg").text(res.responseJSON.message);
             }
         });
+    }
+}
+
+function checkPasswd(index){
+    const regex_pw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
+
+    if(index === 1){
+        if(!regex_pw.test(registerPasswd.val())){
+            registerPasswd.data("vst", 0);
+            $("#register_passwd_msg").text("*비밀번호는 하나의 문자, 숫자, 특수문자와 8자리 이상이어야 합니다");
+        } else{
+            registerPasswd.data("vst", 1);
+            $("#register_passwd_msg").text("");
+        }
+    } else if(index === 2){
+        if(registerPasswd.val() !== registerCheckPasswd.val()){
+            registerCheckPasswd.data("vst", 0);
+            $("#check_passwd_msg").text("*비밀번호가 일치하지 않습니다. 다시 시도하세요");
+        } else{
+            registerCheckPasswd.data("vst", 1);
+            $("#check_passwd_msg").text("");
+        }
+    }
+}
+
+function checkName(){
+    if(registerName.val() == ""){
+        registerName.data("vst", 0);
+        $("#name_msg").text("*이름은 필수사항입니다");
+    } else{
+        registerName.data("vst", 1);
+        $("#name_msg").text("");
+    }
+}
+
+function checkPhone(){
+    const regex_tel = /^(01[016789]{1}|02|0[3-9]{1}\d{1})-?\d{3,4}-?\d{4}$/;
+
+    if(!regex_tel.test(registerPhone.val())){
+        registerPhone.data("vst", 0);
+        $("#phone_msg").text("*올바른 전화번호를 입력해주세요");
+    }else{
+        registerPhone.data("vst", 1);
+        $("#phone_msg").text("");
+    }
+}
+
+function checkEmail(){
+    const regex_e = /^([0-9a-zA-Z_\.-]+)@([\da-zA-Z_-]+)(\.[\da-zA-Z_-]+){1,2}$/;
+
+    if(!regex_e.test(registerEmail.val())){
+        registerEmail.data("vst", 0);
+        $("#email_msg").text("*올바른 이메일을 입력해주세요");
+    }else{
+        registerEmail.data("vst", 1);
+        $("#email_msg").text("");
+    }
+}
+
+function checkRegisterForm(){
+    let validList = [];
+    validList.push(registerId.data("vst"));
+    validList.push(registerPasswd.data("vst"));
+    validList.push(registerCheckPasswd.data("vst"));
+    validList.push(registerName.data("vst"));
+    validList.push(registerPhone.data("vst"));
+    validList.push(registerEmail.data("vst"));
+
+    //유효성검사 성공시 버튼 활성화
+    if(!(validList.includes(0) || validList.includes(null))){
+        $("#submit_register_form").attr("disabled", false);
+    } else{
+        $("#submit_register_form").attr("disabled", true);
+        return false;
     }
 }
 
@@ -183,7 +307,13 @@ function makeDelay(ms) {
 function formReset(index){
     $(index)[0].reset(); //폼 초기화
     $(index + " p").text(""); //폼 메세지 초기화
-    registerId.data("vst", null); //검증여부 data 초기화
+    //검증여부 data 초기화
+    registerId.data("vst", null);
+    registerPasswd.data("vst", null);
+    registerCheckPasswd.data("vst", null);
+    registerName.data("vst", null);
+    registerPhone.data("vst", null);
+    registerEmail.data("vst", null);
 }
 
 //modal창을 열거나 창에서 메뉴이동시 실행

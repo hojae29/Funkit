@@ -4,44 +4,38 @@ import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
-import javax.validation.constraints.Size;
 
 public class Member {
+    @NotEmpty(message = "*아이디는 필수사항입니다")
     @Pattern(
             regexp = "^[A-za-z0-9]{4,12}$",
             message = "*아이디는 4자에서 12자 사이의 영문이어야 합니다"
     )
     private String id;
 
-    @NotEmpty(message = "비밀번호를 입력해주세요")
+    @NotEmpty(message = "*비밀번호는 필수사항입니다")
     @Pattern(
             regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$",
-            message = "비밀번호 형식이 맞지 않습니다(최소 8 자, 최소 하나의 문자, 하나의 숫자 및 하나의 특수 문자)"
+            message = "*비밀번호는 하나의 문자, 숫자, 특수문자와 8자리 이상이어야 합니다"
     )
     private String passwd;
 
-    @NotEmpty(message = "이름을 입력해주세요")
+    @NotEmpty(message = "*이름은 필수사항입니다")
     private String name;
 
-    @NotEmpty(message = "닉네임을 입력해주세요")
-    @Size(max = 8, message = "닉네임은 8자리이하여야 합니다")
-    private String nickName;
-
-    @NotEmpty(message = "전화번호를 입력해주세요")
+    @NotEmpty(message = "*전화번호는 필수사항입니다")
     @Pattern(
             regexp = "^(01[016789]{1}|02|0[3-9]{1}\\d{1})-?\\d{3,4}-?\\d{4}$",
-            message = "잘못된 전화번호 형식입니다"
+            message = "*올바른 전화번호를 입력해주세요"
     )
     private String phone;
 
-    @NotEmpty(message = "이메일을 입력해주세요")
-    @Email(message = "잘못된 이메일 형식입니다")
+    @NotEmpty(message = "*이메일은 필수사항입니다")
+    @Email(message = "*올바른 이메일을 입력해주세요")
     private String email;
 
-    @NotEmpty(message = "주소를 입력해주세요")
     private String postCode;
 
-    @NotEmpty(message = "주소를 입력해주세요")
     private String address;
 
     private String detailAddress;
@@ -68,14 +62,6 @@ public class Member {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getNickName() {
-        return nickName;
-    }
-
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
     }
 
     public String getPhone() {

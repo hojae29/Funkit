@@ -3,8 +3,8 @@
 
 <mapper namespace="login">
     <insert id="register">
-        INSERT INTO member(id, passwd, name, phone, nick_name, email, post_code, address, detail_address)
-        VALUES(#{id}, #{passwd}, #{name}, #{phone}, #{nickName}, #{email}, #{postCode}, #{address}, #{detailAddress})
+        INSERT INTO member(id, passwd, name, phone, email)
+        VALUES(#{id}, #{passwd}, #{name}, #{phone}, #{email})
     </insert>
 
     <select id="checkId" resultType="Member">

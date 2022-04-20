@@ -30,7 +30,7 @@ public class LoginServiceImpl implements LoginService{
         Optional<Member> user= dao.checkId(member.getId());
         if(user.isEmpty()){
             dao.register(member);
-            return new JsonResponse(HttpStatus.CREATED, "회원가입 성공").toResponseEntity();
+            return new JsonResponse(HttpStatus.CREATED, "User Created").toResponseEntity();
         } else{
             throw new CustomException(ErrorCode.ALREADY_EXIST_ID);
         }
@@ -40,7 +40,7 @@ public class LoginServiceImpl implements LoginService{
     public ResponseEntity checkId(String id) {
         Optional<Member> user = dao.checkId(id);
         if(user.isEmpty()){
-            return new JsonResponse(HttpStatus.OK, id + "valid ok").toResponseEntity();
+            return new JsonResponse(HttpStatus.OK, "Validation OK").toResponseEntity();
         } else {
             throw new CustomException(ErrorCode.ALREADY_EXIST_ID);
         }
