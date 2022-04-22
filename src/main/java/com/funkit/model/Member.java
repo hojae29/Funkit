@@ -23,11 +23,6 @@ public class Member {
     @NotEmpty(message = "*이름은 필수사항입니다")
     private String name;
 
-    @NotEmpty(message = "*전화번호는 필수사항입니다")
-    @Pattern(
-            regexp = "^(01[016789]{1}|02|0[3-9]{1}\\d{1})-?\\d{3,4}-?\\d{4}$",
-            message = "*올바른 전화번호를 입력해주세요"
-    )
     private String phone;
 
     @NotEmpty(message = "*이메일은 필수사항입니다")

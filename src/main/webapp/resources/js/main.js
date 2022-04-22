@@ -5,7 +5,6 @@ const registerId = $("#register_id");
 const registerPasswd = $("#register_passwd");
 const registerCheckPasswd = $("#check_passwd");
 const registerName = $("#name");
-const registerPhone = $("#phone");
 const registerEmail = $("#email");
 
 $("#login_btn").on("click", () => {
@@ -116,27 +115,6 @@ registerName.on("focusout", () => {
     }
 });
 
-registerPhone.on("keyup", () => {
-    delay(() => {
-        checkPhone();
-        checkRegisterForm();
-    });
-});
-
-registerPhone.on("paste", () => {
-    delay(() => {
-        checkPhone();
-        checkRegisterForm();
-    });
-});
-
-registerPhone.on("focusout", () => {
-    if(registerPhone.data("vst") != null) {
-        checkPhone();
-        checkRegisterForm();
-    }
-});
-
 registerEmail.on("keyup", () => {
     delay(() => {
         checkEmail();
@@ -152,7 +130,7 @@ registerEmail.on("paste", () => {
 });
 
 registerEmail.on("focusout", () => {
-    if(registerPhone.data("vst") != null) {
+    if(registerEmail.data("vst") != null) {
         checkEmail();
         checkRegisterForm();
     }
@@ -165,8 +143,7 @@ $("#submit_register_form").on("click", () => {
         id: $("#register_id").val(),
         passwd: $("#register_passwd").val(),
         name: $("#name").val(),
-        phone: $("#phone").val(),
-        email: $("#email").val(),
+        email: $("#email").val()
     }
 
     console.log(member);
@@ -254,18 +231,6 @@ function checkName(){
     }
 }
 
-function checkPhone(){
-    const regex_tel = /^(01[016789]{1}|02|0[3-9]{1}\d{1})-?\d{3,4}-?\d{4}$/;
-
-    if(!regex_tel.test(registerPhone.val())){
-        registerPhone.data("vst", 0);
-        $("#phone_msg").text("*올바른 전화번호를 입력해주세요");
-    }else{
-        registerPhone.data("vst", 1);
-        $("#phone_msg").text("");
-    }
-}
-
 function checkEmail(){
     const regex_e = /^([0-9a-zA-Z_\.-]+)@([\da-zA-Z_-]+)(\.[\da-zA-Z_-]+){1,2}$/;
 
@@ -284,7 +249,6 @@ function checkRegisterForm(){
     validList.push(registerPasswd.data("vst"));
     validList.push(registerCheckPasswd.data("vst"));
     validList.push(registerName.data("vst"));
-    validList.push(registerPhone.data("vst"));
     validList.push(registerEmail.data("vst"));
 
     //유효성검사 성공시 버튼 활성화
@@ -312,7 +276,6 @@ function formReset(index){
     registerPasswd.data("vst", null);
     registerCheckPasswd.data("vst", null);
     registerName.data("vst", null);
-    registerPhone.data("vst", null);
     registerEmail.data("vst", null);
 }
 
