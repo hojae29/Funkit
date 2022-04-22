@@ -178,11 +178,6 @@
                             <div><p id="name_msg"></p></div>
                         </div>
                         <div>
-                            <div><label>전화번호</label></div>
-                            <div><input type="text" name="phone" id="phone"/></div>
-                            <div><p id="phone_msg"></p></div>
-                        </div>
-                        <div>
                             <div><label>이메일</label></div>
                             <div><input type="text" name="email" id="email"/></div>
                             <div><p id="email_msg"></p></div>
