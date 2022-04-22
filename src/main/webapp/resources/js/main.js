@@ -133,6 +133,7 @@ registerEmail.on("focusout", () => {
 
 //유효성검사 & 회원가입
 $("#submit_register_form").on("click", () => {
+    let code = null;
 
     const member = {
         id: $("#register_id").val(),
@@ -145,7 +146,12 @@ $("#submit_register_form").on("click", () => {
     changeTab("check_email");
     $.ajax({
         type:"GET",
-        url:"mail-check?email=" + member.email
+        url:"mail-check?email=" + member.email,
+        success: res => {
+        },
+        error: res => {
+
+        }
     });
 
     /*$.ajax("/register", {

@@ -13,6 +13,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Random;
@@ -48,17 +50,13 @@ public class LoginRestController {
     }
 
     @GetMapping("/mail-check")
-    public ResponseEntity mailCheck(@RequestParam String email){
+    public void mailCheck(@RequestParam String email, HttpServletResponse response){
         Random random = new Random();
         int checkNum = random.nextInt(88888) + 11111;
 
-        String subject = "test 메일";
-        String content = "홈페이지를 방문해주셔서 감사합니다." +
-                        "<br><br>" +
-                        "인증 번호는 " + checkNum + "입니다." +
-                        "<br>" +
-                        "해당 인증번호를 인증번호 확인란에 기입하여 주세요.";
-        String from = "gkqthd6386@naver.com";
+        String subject = "Funkit 인증번호";
+        String content = "Funkit 회원가입 이메일 인증번호" + "<br><br>" + checkNum;
+        String from = "Funkit";
         String to = email;
 
         try {
@@ -75,7 +73,9 @@ public class LoginRestController {
             e.printStackTrace();
         }
 
-        return null;
+        Cookie cookie = new Cookie("token", Integer.toString(checkNum));
+        cookie.setMaxAge(3 * 60);
+        response.addCookie(cookie);
     }
 }
 
