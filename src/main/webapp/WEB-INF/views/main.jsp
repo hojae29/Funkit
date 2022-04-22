@@ -183,6 +183,10 @@
                             <div><p id="email_msg"></p></div>
                         </div>
                     </form>
+                    <form id="check_email_form" style="display: none">
+                        <div><lable>인증번호 입력</lable></div>
+                        <div><input type="text"></div>
+                    </form>
                 </div>
                 <div>
                     <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>

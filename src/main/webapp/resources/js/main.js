@@ -32,107 +32,102 @@ $("#modal_register_btn").on("click", () => {
 });
 
 registerId.on("keyup", () => {
+    registerId.data("vst", 0);
     delay(() => {
         checkIdAjax();
-        checkRegisterForm();
     });
 });
 
 registerId.on("paste", () => {
+    registerId.data("vst", 0);
     delay(() => {
         checkIdAjax();
-        checkRegisterForm();
     });
 });
 
 registerId.on("focusout ", () => {
     if(registerId.data("vst") != null){
         checkIdAjax();
-        checkRegisterForm();
     }
 });
 
 registerPasswd.on("keyup", () => {
+    registerPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(1);
-        checkRegisterForm();
     });
 });
 
 registerPasswd.on("paste", () => {
+    registerPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(1);
-        checkRegisterForm();
     });
 });
 
 registerPasswd.on("focusout", () => {
     if(registerPasswd.data("vst") != null) {
         checkPasswd(1);
-        checkRegisterForm();
     }
 });
 
 registerCheckPasswd.on("keyup", () => {
+    registerCheckPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(2);
-        checkRegisterForm();
     });
 });
 
 registerCheckPasswd.on("paste", () => {
+    registerCheckPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(2);
-        checkRegisterForm();
     });
 });
 
 registerCheckPasswd.on("focusout", () => {
     if(registerCheckPasswd.data("vst") != null){
         checkPasswd(2);
-        checkRegisterForm();
     }
 });
 
 registerName.on("keyup", () => {
+    registerName.data("vst", 0);
     delay(() => {
         checkName();
-        checkRegisterForm();
     });
 });
 
 registerName.on("paste", () => {
+    registerName.data("vst", 0);
     delay(() => {
         checkName();
-        checkRegisterForm();
     });
 });
 
 registerName.on("focusout", () => {
     if(registerName.data("vst") != null){
         checkName();
-        checkRegisterForm();
     }
 });
 
 registerEmail.on("keyup", () => {
+    registerEmail.data("vst", 0);
     delay(() => {
         checkEmail();
-        checkRegisterForm();
     });
 });
 
 registerEmail.on("paste", () => {
+    registerEmail.data("vst", 0);
     delay(() => {
         checkEmail();
-        checkRegisterForm();
     });
 });
 
 registerEmail.on("focusout", () => {
     if(registerEmail.data("vst") != null) {
         checkEmail();
-        checkRegisterForm();
     }
 });
 
@@ -145,10 +140,15 @@ $("#submit_register_form").on("click", () => {
         name: $("#name").val(),
         email: $("#email").val()
     }
-
     console.log(member);
 
-    $.ajax("/register", {
+    changeTab("check_email");
+    $.ajax({
+        type:"GET",
+        url:"mail-check?email=" + member.email
+    });
+
+    /*$.ajax("/register", {
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(member),
@@ -169,7 +169,7 @@ $("#submit_register_form").on("click", () => {
             }
             $("#submit_register_form").attr("disabled", true);
         }
-    });
+    });*/
 });
 
 /**
@@ -182,18 +182,21 @@ function checkIdAjax(){
     if(!regex_id.test(registerId.val())){
         registerId.data("vst", 0);
         $("#register_id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
+        checkRegisterForm();
     } else{
         $.ajax("/id-check?id=" + registerId.val(), {
             method: "GET",
             success: () => {
                 registerId.data("vst", 1);
                 $("#register_id_msg").text("");
+                checkRegisterForm();
             },
             error: res => {
                 registerId.data("vst", 0);
                 console.log(res);
                 if(res.status == 500) $("#register_id_msg").text(res.responseText);
                 else $("#register_id_msg").text(res.responseJSON.message);
+                checkRegisterForm();
             }
         });
     }
@@ -219,6 +222,7 @@ function checkPasswd(index){
             $("#check_passwd_msg").text("");
         }
     }
+    checkRegisterForm();
 }
 
 function checkName(){
@@ -229,6 +233,7 @@ function checkName(){
         registerName.data("vst", 1);
         $("#name_msg").text("");
     }
+    checkRegisterForm();
 }
 
 function checkEmail(){
@@ -241,15 +246,19 @@ function checkEmail(){
         registerEmail.data("vst", 1);
         $("#email_msg").text("");
     }
+    checkRegisterForm();
 }
 
 function checkRegisterForm(){
+
     let validList = [];
     validList.push(registerId.data("vst"));
     validList.push(registerPasswd.data("vst"));
     validList.push(registerCheckPasswd.data("vst"));
     validList.push(registerName.data("vst"));
     validList.push(registerEmail.data("vst"));
+
+    console.log(validList);
 
     //유효성검사 성공시 버튼 활성화
     if(!(validList.includes(0) || validList.includes(null))){
@@ -277,6 +286,8 @@ function formReset(index){
     registerCheckPasswd.data("vst", null);
     registerName.data("vst", null);
     registerEmail.data("vst", null);
+    $("#submit_register_form").attr("disabled", true);
+    $("#submit_login_form").attr("disabled", true);
 }
 
 //modal창을 열거나 창에서 메뉴이동시 실행
@@ -287,12 +298,14 @@ function changeTab(index){
     const loginBtn = document.getElementById("submit_login_form");
     const loginForm = document.getElementById("login_form");
     const registerForm = document.getElementById("register_form");
+    const checkEmailForm = document.getElementById("check_email_form");
 
     if(index === "login"){
         loginForm.style.display = "block";
         loginBtn.style.display = "block";
         registerForm.style.display = "none";
         registerBtn.style.display = "none";
+        checkEmailForm.style.display = "none";
         mlb.style.borderBottom = "2px solid #ff7e00";
         mlb.style.color = "#ff7e00";
         mrb.style.borderBottom = "2px solid white";
@@ -304,12 +317,18 @@ function changeTab(index){
         registerBtn.style.display = "block";
         loginForm.style.display = "none";
         loginBtn.style.display = "none";
+        checkEmailForm.style.display = "none";
         mrb.style.borderBottom ="2px solid #ff7e00";
         mrb.style.color = "#ff7e00";
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         registerForm.id.focus();
         formReset("#login_form");
+    } else if(index === "check_email"){
+        registerForm.style.display = "none";
+        registerBtn.style.display = "none";
+        checkEmailForm.style.display = "block";
+        formReset("#register_form");
     }
 }
 
