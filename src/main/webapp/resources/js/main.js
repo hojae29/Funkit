@@ -31,114 +31,112 @@ $("#modal_register_btn").on("click", () => {
     changeTab("register");
 });
 
-registerId.on("keyup", () => {
+registerId.on("input", () => {
+    registerId.data("vst", 0);
     delay(() => {
         checkIdAjax();
-        checkRegisterForm();
     });
 });
 
 registerId.on("paste", () => {
+    registerId.data("vst", 0);
     delay(() => {
         checkIdAjax();
-        checkRegisterForm();
     });
 });
 
 registerId.on("focusout ", () => {
     if(registerId.data("vst") != null){
         checkIdAjax();
-        checkRegisterForm();
     }
 });
 
-registerPasswd.on("keyup", () => {
+registerPasswd.on("input", () => {
+    registerPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(1);
-        checkRegisterForm();
     });
 });
 
 registerPasswd.on("paste", () => {
+    registerPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(1);
-        checkRegisterForm();
     });
 });
 
 registerPasswd.on("focusout", () => {
     if(registerPasswd.data("vst") != null) {
         checkPasswd(1);
-        checkRegisterForm();
     }
 });
 
-registerCheckPasswd.on("keyup", () => {
+registerCheckPasswd.on("input", () => {
+    registerCheckPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(2);
-        checkRegisterForm();
     });
 });
 
 registerCheckPasswd.on("paste", () => {
+    registerCheckPasswd.data("vst", 0);
     delay(() => {
         checkPasswd(2);
-        checkRegisterForm();
     });
 });
 
 registerCheckPasswd.on("focusout", () => {
     if(registerCheckPasswd.data("vst") != null){
         checkPasswd(2);
-        checkRegisterForm();
     }
 });
 
-registerName.on("keyup", () => {
+registerName.on("input", () => {
+    registerName.data("vst", 0);
     delay(() => {
         checkName();
-        checkRegisterForm();
     });
 });
 
 registerName.on("paste", () => {
+    registerName.data("vst", 0);
     delay(() => {
         checkName();
-        checkRegisterForm();
     });
 });
 
 registerName.on("focusout", () => {
     if(registerName.data("vst") != null){
         checkName();
-        checkRegisterForm();
     }
 });
 
-registerEmail.on("keyup", () => {
+registerEmail.on("input", () => {
+    registerEmail.data("vst", 0);
     delay(() => {
         checkEmail();
-        checkRegisterForm();
     });
 });
 
 registerEmail.on("paste", () => {
+    registerEmail.data("vst", 0);
     delay(() => {
         checkEmail();
-        checkRegisterForm();
     });
 });
 
 registerEmail.on("focusout", () => {
     if(registerEmail.data("vst") != null) {
         checkEmail();
-        checkRegisterForm();
     }
 });
 
 //유효성검사 & 회원가입
 $("#submit_register_form").on("click", () => {
+    let code;
+    if(!checkRegisterForm()) return false; //사용자 임의조작 방지
 
+    //회원가입 폼 데이터 member에 저장
     const member = {
         id: $("#register_id").val(),
         passwd: $("#register_passwd").val(),
@@ -146,28 +144,50 @@ $("#submit_register_form").on("click", () => {
         email: $("#email").val()
     }
 
-    console.log(member);
+    //인증번호 입력 탭으로 이동 및 인증번호 발송
+    changeTab("check_email");
+    $.ajax({
+        type:"GET",
+        url:"mail-check?email=" + member.email,
+        success: res => code = res,
+        error: res => console.log("인증번호 발송 실패")
+    });
 
-    $.ajax("/register", {
-        type: "POST",
-        contentType: "application/json",
-        data: JSON.stringify(member),
-        success: res => {
-            alert(res.message);
-            changeTab("login");
-        },
-        error: res => {
-            res = res.responseJSON;
-            if (res.status == 409) {
-                alert(res.message);
-            } else if (res.status == 400) {
-                for (const [key, value] of Object.entries(res.data)) {
-                    if(key == "id") $("#register_id_msg").text(value);
-                    else if(key == "passwd") $("#register_passwd_msg").text(value);
-                    else $(`#${key}_msg`).text(value);
+    //인증하기 버튼 클릭시 실행
+    $("#check_token_btn").on("click", () => {
+        //인증번호가 일치하면 실행
+        if(code == $("#token").val()){
+            $.ajax("/register", {
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(member),
+                success: res => {
+                    alert("회원가입 완료");
+                    changeTab("login");
+                },
+                error: res => {
+                    formReset("#register_form"); //에러 발생 시 폼 초기화
+                    changeTab("register"); //회원가입 폼으로 이동
+                    res = res.responseJSON;
+                    if (res.status == 409) { // 409 = 아이디 중복
+                        $("#register_id_msg").text(res.message);
+                        registerId.data("vst", 0);
+                    } else if (res.status == 400) { // 400 = 서버 유효성검증 에러
+                        for (const [key, value] of Object.entries(res.data)) {
+                            if(key == "id")
+                                $("#register_id_msg").text(value);
+                            else if(key == "passwd")
+                                $("#register_passwd_msg").text(value);
+                            else
+                                $(`#${key}_msg`).text(value);
+                        }
+                    } else alert("알 수 없는 에러");
                 }
-            }
-            $("#submit_register_form").attr("disabled", true);
+            });
+            code = null;
+        }else{
+            $("#token").focus();
+            $("#token_msg").text("*인증번호가 일치하지 않습니다. 다시 입력해주세요");
         }
     });
 });
@@ -182,18 +202,21 @@ function checkIdAjax(){
     if(!regex_id.test(registerId.val())){
         registerId.data("vst", 0);
         $("#register_id_msg").text("*아이디는 4자에서 12자 사이의 영문이어야 합니다");
+        checkRegisterForm();
     } else{
         $.ajax("/id-check?id=" + registerId.val(), {
             method: "GET",
             success: () => {
                 registerId.data("vst", 1);
                 $("#register_id_msg").text("");
+                checkRegisterForm();
             },
             error: res => {
                 registerId.data("vst", 0);
                 console.log(res);
                 if(res.status == 500) $("#register_id_msg").text(res.responseText);
                 else $("#register_id_msg").text(res.responseJSON.message);
+                checkRegisterForm();
             }
         });
     }
@@ -219,6 +242,7 @@ function checkPasswd(index){
             $("#check_passwd_msg").text("");
         }
     }
+    checkRegisterForm();
 }
 
 function checkName(){
@@ -229,6 +253,7 @@ function checkName(){
         registerName.data("vst", 1);
         $("#name_msg").text("");
     }
+    checkRegisterForm();
 }
 
 function checkEmail(){
@@ -241,9 +266,11 @@ function checkEmail(){
         registerEmail.data("vst", 1);
         $("#email_msg").text("");
     }
+    checkRegisterForm();
 }
 
 function checkRegisterForm(){
+
     let validList = [];
     validList.push(registerId.data("vst"));
     validList.push(registerPasswd.data("vst"));
@@ -251,9 +278,12 @@ function checkRegisterForm(){
     validList.push(registerName.data("vst"));
     validList.push(registerEmail.data("vst"));
 
-    //유효성검사 성공시 버튼 활성화
+    console.log(validList);
+
+    //data-vst 값이 모두 1일 때 버튼 활성화
     if(!(validList.includes(0) || validList.includes(null))){
         $("#submit_register_form").attr("disabled", false);
+        return true;
     } else{
         $("#submit_register_form").attr("disabled", true);
         return false;
@@ -269,30 +299,38 @@ function makeDelay(ms) {
 }
 
 function formReset(index){
-    $(index)[0].reset(); //폼 초기화
+    $(index)[0].reset(); //폼 데이터 초기화
     $(index + " p").text(""); //폼 메세지 초기화
+    $("#token_msg").text("");
     //검증여부 data 초기화
     registerId.data("vst", null);
     registerPasswd.data("vst", null);
     registerCheckPasswd.data("vst", null);
     registerName.data("vst", null);
     registerEmail.data("vst", null);
+    //버튼 비활성화
+    $("#submit_register_form").attr("disabled", true);
+    $("#submit_login_form").attr("disabled", true);
 }
 
 //modal창을 열거나 창에서 메뉴이동시 실행
 function changeTab(index){
     const mlb = document.getElementById("modal_login_btn");
     const mrb = document.getElementById("modal_register_btn");
-    const registerBtn = document.getElementById("submit_register_form");
     const loginBtn = document.getElementById("submit_login_form");
     const loginForm = document.getElementById("login_form");
     const registerForm = document.getElementById("register_form");
+    const registerBtn = document.getElementById("submit_register_form");
+    const checkEmailForm = document.getElementById("check_email_form");
+    const checkTokenBtn = document.getElementById("check_token_btn");
 
     if(index === "login"){
         loginForm.style.display = "block";
         loginBtn.style.display = "block";
         registerForm.style.display = "none";
         registerBtn.style.display = "none";
+        checkEmailForm.style.display = "none";
+        checkTokenBtn.style.display = "none"
         mlb.style.borderBottom = "2px solid #ff7e00";
         mlb.style.color = "#ff7e00";
         mrb.style.borderBottom = "2px solid white";
@@ -304,12 +342,22 @@ function changeTab(index){
         registerBtn.style.display = "block";
         loginForm.style.display = "none";
         loginBtn.style.display = "none";
+        checkTokenBtn.style.display = "none"
+        checkEmailForm.style.display = "none";
         mrb.style.borderBottom ="2px solid #ff7e00";
         mrb.style.color = "#ff7e00";
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         registerForm.id.focus();
         formReset("#login_form");
+    } else if(index === "check_email"){
+        loginForm.style.display = "none";
+        loginBtn.style.display = "none";
+        registerForm.style.display = "none";
+        registerBtn.style.display = "none";
+        checkTokenBtn.style.display = "block"
+        checkEmailForm.style.display = "block";
+        $("#token").focus();
     }
 }
 

@@ -13,7 +13,6 @@
     <title>Funkit</title>
 
     <style>
-
         label {
             font-size: 14px;
             margin-bottom: 10px;
@@ -183,10 +182,18 @@
                             <div><p id="email_msg"></p></div>
                         </div>
                     </form>
+                    <form id="check_email_form" style="display: none">
+                        <div>
+                            <div><label>인증번호 입력</label></div>
+                            <div><input type="text" id="token"></div>
+                            <div><p id="token_msg"></p></div>
+                        </div>
+                    </form>
                 </div>
                 <div>
                     <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
                     <button type="button" class="submit_btn" id="submit_login_form" disabled>로그인</button>
+                    <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>
             </div>
         </div>
@@ -194,6 +201,5 @@
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/resources/js/main.js"></script>
-
 </body>
 </html>
