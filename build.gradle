@@ -21,8 +21,6 @@ dependencies {
     implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
 
-    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
-
     //Validation
     implementation group: 'javax.validation', name: 'validation-api', version: '1.1.0.Final'
     implementation group: 'org.hibernate', name: 'hibernate-validator', version: '5.4.2.Final'
@@ -57,6 +55,8 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
     //MariaDB 사용을 위한 dependency
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.4'
+    //Mail
+    implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
 }
 
 test {

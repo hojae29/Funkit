@@ -32,7 +32,6 @@ public class LoginRestController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid Member member, BindingResult bindingResult){
-        //Validation Error
         if(bindingResult.hasErrors()){
             HashMap<String, String> errorList = new HashMap<>();
             for(ObjectError e : bindingResult.getAllErrors())
@@ -50,7 +49,7 @@ public class LoginRestController {
     }
 
     @GetMapping("/mail-check")
-    public void mailCheck(@RequestParam String email, HttpServletResponse response){
+    public String mailCheck(@RequestParam String email, HttpServletResponse response){
         Random random = new Random();
         int checkNum = random.nextInt(88888) + 11111;
 
@@ -59,7 +58,7 @@ public class LoginRestController {
         String from = "Funkit";
         String to = email;
 
-        try {
+/*        try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
             mailHelper.setFrom(from);
@@ -71,11 +70,9 @@ public class LoginRestController {
 
         } catch(Exception e) {
             e.printStackTrace();
-        }
+        }*/
 
-        Cookie cookie = new Cookie("token", Integer.toString(checkNum));
-        cookie.setMaxAge(3 * 60);
-        response.addCookie(cookie);
+        return Integer.toString(checkNum);
     }
 }
 

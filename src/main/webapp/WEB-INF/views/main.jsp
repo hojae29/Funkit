@@ -13,7 +13,6 @@
     <title>Funkit</title>
 
     <style>
-
         label {
             font-size: 14px;
             margin-bottom: 10px;
@@ -184,13 +183,17 @@
                         </div>
                     </form>
                     <form id="check_email_form" style="display: none">
-                        <div><lable>인증번호 입력</lable></div>
-                        <div><input type="text"></div>
+                        <div>
+                            <div><label>인증번호 입력</label></div>
+                            <div><input type="text" id="token"></div>
+                            <div><p id="token_msg"></p></div>
+                        </div>
                     </form>
                 </div>
                 <div>
                     <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
                     <button type="button" class="submit_btn" id="submit_login_form" disabled>로그인</button>
+                    <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>
             </div>
         </div>
