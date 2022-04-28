@@ -7,5 +7,5 @@ import java.util.Optional;
 public interface LoginDao {
     void register(Member member);
 
-    Optional<Member> checkId(String id);
+    Optional<Member> item(String id);
 }

@@ -7,4 +7,6 @@ public interface LoginService {
     ResponseEntity register(Member member);
 
     ResponseEntity checkId(String id);
+
+    Member login(Member member);
 }

@@ -147,11 +147,11 @@
                     <form id="login_form" style="display: none">
                         <div>
                             <div><label>아이디</label></div>
-                            <div><input type="text" name="id" id="login_id"/></div>
+                            <div><input type="text" id="login_id"/></div>
                         </div>
                         <div>
                             <div><label>비밀번호</label></div>
-                            <div><input type="password" name="passwd"/></div>
+                            <div><input type="password" id="login_passwd"/></div>
                         </div>
                     </form>
                     <form id="register_form" style="display: none">
@@ -192,7 +192,7 @@
                 </div>
                 <div>
                     <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
-                    <button type="button" class="submit_btn" id="submit_login_form" disabled>로그인</button>
+                    <button type="button" class="submit_btn" id="submit_login_form">로그인</button>
                     <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>
             </div>

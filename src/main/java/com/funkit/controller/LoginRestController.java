@@ -13,8 +13,8 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Random;
@@ -58,7 +58,7 @@ public class LoginRestController {
         String from = "Funkit";
         String to = email;
 
-/*        try {
+        try {
             MimeMessage mail = mailSender.createMimeMessage();
             MimeMessageHelper mailHelper = new MimeMessageHelper(mail,true,"UTF-8");
             mailHelper.setFrom(from);
@@ -70,9 +70,17 @@ public class LoginRestController {
 
         } catch(Exception e) {
             e.printStackTrace();
-        }*/
+        }
 
         return Integer.toString(checkNum);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody Member member, HttpSession session){
+        Member user = service.login(member);
+        if(user != null) {
+            session.setAttribute("member", user);
+        }
     }
 }
 

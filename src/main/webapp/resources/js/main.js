@@ -131,6 +131,26 @@ registerEmail.on("focusout", () => {
     }
 });
 
+$("#submit_login_form").on("click", () =>{
+
+    const member = {
+        id: $("#login_id").val(),
+        passwd: $("#login_passwd").val()
+    }
+    console.log(member);
+
+    $.ajax({
+        url: "/login",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(member),
+        success: res => {
+
+        },
+        error: res => alert("로그인 실패")
+    });
+});
+
 //유효성검사 & 회원가입
 $("#submit_register_form").on("click", () => {
     let code;
