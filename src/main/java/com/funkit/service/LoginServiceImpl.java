@@ -46,13 +46,8 @@ public class LoginServiceImpl implements LoginService{
     }
 
     @Override
-    public Member login(Member member) {
+    public boolean login(Member member) {
         Optional<Member> user = dao.item(member.getId());
-        if(user.isEmpty())
-            throw new CustomException(ErrorCode.LOGIN_FAIL);
-        if(BCrypt.checkpw(member.getPasswd(), user.get().getPasswd()))
-            return user.get();
-        else
-            throw new CustomException(ErrorCode.LOGIN_FAIL);
+        return user.isPresent() && BCrypt.checkpw(member.getPasswd(), user.get().getPasswd());
     }
 }

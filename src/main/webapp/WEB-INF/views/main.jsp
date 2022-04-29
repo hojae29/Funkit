@@ -6,85 +6,13 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/modal.css"/>
+    <link rel="stylesheet" href="/resources/css/main.css">
     <title>Funkit</title>
-
-    <style>
-        label {
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .modal_window input{
-            width: 400px;
-            height: 30px;
-
-            background-color: #efefef;
-            border: none;
-            outline:none;
-            border-radius: 5px;
-            padding: 0px 5px;
-            margin: 5px 0px;
-        }
-        .modal_window input:focus{
-            background-color: white;
-
-            outline: 2px solid #ff7e00;
-        }
-
-        .modal_window form p {
-            font-size: 12px;
-            color: red;
-        }
-
-        .modal_window > div{
-            margin-top:16px;
-        }
-        .modal_top div:nth-child(1){
-            height : 60px;
-        }
-
-        .modal_top div:nth-child(2){
-            border-bottom: 2px solid #efefef;
-        }
-
-        .modal_top div:nth-child(2) button{
-            border:none;
-            height: 40px;
-            background-color: white;
-            padding: 0px 8px;
-            font-size: 14px;
-            margin-right: 16px;
-            border-bottom: 2px solid white;
-        }
-        .modal_top div:nth-child(2) button:hover{
-            background-color: #efefef;
-        }
-
-        .submit_btn{
-            width: 400px;
-            height: 30px;
-            background-color: #ff7e00;
-            color: white;
-            font-size: 14px;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 16px;
-        }
-
-        .submit_btn:hover {
-            background-color: #e77400;
-        }
-
-        .submit_btn:disabled {
-            background-color: rgba(0, 0, 0, 0.05);
-            color: rgba(0, 0, 0, 0.24);
-        }
-
-    </style>
 </head>
 <body>
     <div>
@@ -97,12 +25,14 @@
                 <div>
                     <button class="add_recipe">레시피 등록</button>
                     <ul class="nav_top_user">
-                        <li>
-                            <button id="login_btn">로그인</button>
-                        </li>
-                        <li>
-                            <button id="register_btn">회원가입</button>
-                        </li>
+                        <c:if test="${sessionScope.member == null}">
+                            <li><button id="login_btn">로그인</button></li>
+                            <li><button id="register_btn">회원가입</button></li>
+                        </c:if>
+                        <c:if test="${sessionScope.member != null}">
+                            <li><a href="/myfunkit">${member.id}님</a></li>
+                            <li><a href="/logout">로그아웃</a></li>
+                        </c:if>
                     </ul>
                 </div>
             </div>
@@ -152,6 +82,9 @@
                         <div>
                             <div><label>비밀번호</label></div>
                             <div><input type="password" id="login_passwd"/></div>
+                        </div>
+                        <div>
+                            <p id="login_msg"></p>
                         </div>
                     </form>
                     <form id="register_form" style="display: none">

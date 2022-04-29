@@ -1,5 +1,7 @@
 package com.funkit.controller;
 
+import com.funkit.exception.CustomException;
+import com.funkit.exception.ErrorCode;
 import com.funkit.model.JsonResponse;
 import com.funkit.model.Member;
 import com.funkit.service.LoginService;
@@ -7,25 +9,25 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.internet.MimeMessage;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Random;
 
 @RestController
-public class LoginRestController {
+public class LoginApiController {
 
     final LoginService service;
     final JavaMailSender mailSender;
 
-    public LoginRestController(LoginService service, JavaMailSender mailSender) {
+    public LoginApiController(LoginService service, JavaMailSender mailSender) {
         this.service = service;
         this.mailSender = mailSender;
     }
@@ -49,7 +51,7 @@ public class LoginRestController {
     }
 
     @GetMapping("/mail-check")
-    public String mailCheck(@RequestParam String email, HttpServletResponse response){
+    public String mailCheck(@RequestParam String email){
         Random random = new Random();
         int checkNum = random.nextInt(88888) + 11111;
 
@@ -76,11 +78,13 @@ public class LoginRestController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody Member member, HttpSession session){
-        Member user = service.login(member);
-        if(user != null) {
-            session.setAttribute("member", user);
-        }
+    public ResponseEntity login(@RequestBody Member member, HttpSession session, Model model){
+        if(service.login(member)) {
+            member.setPasswd(null);
+            session.setAttribute("member", member);
+            model.addAttribute("member", member);
+            return new JsonResponse<>(HttpStatus.OK, "Login Success").toResponseEntity();
+        }else throw new CustomException(ErrorCode.LOGIN_FAIL);
     }
 }
 

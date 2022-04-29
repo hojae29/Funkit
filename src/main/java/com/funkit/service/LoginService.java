@@ -8,5 +8,5 @@ public interface LoginService {
 
     ResponseEntity checkId(String id);
 
-    Member login(Member member);
+    boolean login(Member member);
 }
