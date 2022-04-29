@@ -1,10 +1,12 @@
 package com.funkit.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Member {
     @NotEmpty(message = "*아이디는 필수사항입니다")
     @Pattern(

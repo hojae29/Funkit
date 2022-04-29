@@ -131,6 +131,26 @@ registerEmail.on("focusout", () => {
     }
 });
 
+$("#submit_login_form").on("click", () =>{
+
+    const member = {
+        id: $("#login_id").val(),
+        passwd: $("#login_passwd").val()
+    }
+    console.log(member);
+
+    $.ajax({
+        url: "/login",
+        method: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(member),
+        success: res => location.href = "http://localhost:8181/",
+        error: res => {
+            $("#login_msg").text("*로그인 실패. 다시시도하세요");
+        }
+    });
+});
+
 //유효성검사 & 회원가입
 $("#submit_register_form").on("click", () => {
     let code;
@@ -310,7 +330,6 @@ function formReset(index){
     registerEmail.data("vst", null);
     //버튼 비활성화
     $("#submit_register_form").attr("disabled", true);
-    $("#submit_login_form").attr("disabled", true);
 }
 
 //modal창을 열거나 창에서 메뉴이동시 실행
