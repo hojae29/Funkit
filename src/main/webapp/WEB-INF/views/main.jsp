@@ -96,7 +96,7 @@
                     <a href="/"><p class="logo">FunKit</p></a>
                 </div>
                 <div>
-                    <button class="add_recipe">레시피 등록</button>
+                    <button class="add_recipe" onclick="location.href='http://localhost:9090/recipe/add'">레시피 등록</button>
                     <ul class="nav_top_user">
                         <li>
                             <button id="login_btn">로그인</button>
@@ -111,7 +111,7 @@
                 <div class="nav_contents">
                     <ul>
                         <li>홈</li>
-                        <li>레시피</li>
+                        <li><a href="recipe/list">레시피</a></li>
                         <li>펀딩</li>
                         <li>랭킹</li>
                         <li>스토어</li>
