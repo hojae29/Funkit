@@ -41,7 +41,7 @@
                     <ul>
                         <li>홈</li>
                         <li>레시피</li>
-                        <li>펀딩</li>
+                        <li><a href="/funding/">펀딩</a></li>
                         <li>랭킹</li>
                         <li>스토어</li>
                         <li>더보기</li>
