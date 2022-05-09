@@ -1,0 +1,92 @@
+#add_box{
+    margin: 0 auto;
+    width:1180px;
+    height:120%;
+    background-color:#fafafa;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+}
+#add_recipe{
+    padding-top:65px;
+    font-size:36pt;
+    font-weight: bold;
+    text-align: center;
+}
+#content_mar{
+    margin-top:20px;
+}
+#recipe_info{
+    margin-top:50px;
+    font-size: 14pt;
+}
+#recipe_info div{
+    margin-top:15px;
+}
+
+#recipe_info div label{
+    width:80px;
+    text-align: right;
+
+}
+.long_text{
+    border-radius: 5px;
+    border: 1px solid #ff7e00;
+    outline: none;
+    width:600px;
+    height:125px;
+}
+.mid_text{
+    border-radius: 5px;
+    border: 1px solid #ff7e00;
+    outline: none;
+    width:600px;
+    height:35px;
+}
+.align_input{
+    text-align: center;
+}
+.align_info{
+    display: flex;
+    align-items: center;
+}
+#form_area{
+    width:700px;
+}
+.sel_area{
+
+    width:600px;
+}
+.label_area{
+    text-align: end;
+    width:100px;
+    padding-right:30px;
+}
+select{
+    width:60px;
+    height:35px;
+    background-color: white;
+    border: 1px solid #ff7e00;
+    border-radius: 5px;
+    outline: none;
+}
+.select_area{
+    text-align: left;
+}
+.sm_num{
+    width:100px;
+    height:35px;
+    background-color: white;
+    border: 1px solid #ff7e00;
+    border-radius: 5px;
+}
+#sel_lpad{
+    padding-left:10px;
+}
+input{
+    outline: none;
+}
+textarea{
+    width:100%;
+    resize:none;
+}
