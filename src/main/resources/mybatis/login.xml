@@ -3,26 +3,14 @@
 
 <mapper namespace="login">
     <insert id="individualRegister">
-        INSERT INTO member(id, passwd, name, email)
-        VALUES(#{id}, #{passwd}, #{name}, #{email})
+        INSERT INTO member(id, passwd, name, email, phone, corporate_name, code)
+        VALUES(#{id}, #{passwd}, #{name}, #{email}, #{phone}, #{corporateName}, #{code})
     </insert>
 
-    <insert id="companyRegister">
-        INSERT INTO company_member(id, passwd, name, email, phone, corporate_name)
-        VALUES(#{id}, #{passwd}, #{name}, #{email}, #{phone}, #{corporateName})
-    </insert>
-
-    <select id="individualItem" resultType="Member">
+    <select id="item" resultType="Member">
         SELECT *
         FROM member
         WHERE id=#{id}
     </select>
-
-    <select id="companyItem" resultType="CompanyMember">
-        SELECT *
-        FROM company_member
-        WHERE id=#{id}
-    </select>
-
 
 </mapper>
