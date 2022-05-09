@@ -146,7 +146,7 @@
                                     <div class="img_button">
                                         <label for="img_input_1">이미지 업로드</label>
                                     </div>
-                                    <input type="file" class="img_input" id="img_input_1">
+                                    <input type="file" accept="image/*" class="img_input" id="img_input_1">
                                     <div>
                                         <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>
                                     </div>

@@ -8,7 +8,7 @@ function add_order(){
         +'<div class="img_button">'
         +'<label for="img_input_'+no+'">이미지 업로드' + '</label>'
         +'</div>'
-        +'<input type="file" class="img_input" id="img_input_'+no+'">'
+        +'<input type="file" class="img_input" id="img_input_'+no+'"  accept="image/*">'
         +'<div>'
         +'<textarea placeholder="조리 과정을 입력해주세요." class="text_box">' + '</textarea>'
         +'</div>'
