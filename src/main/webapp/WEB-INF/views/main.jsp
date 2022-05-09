@@ -74,6 +74,10 @@
                     </div>
                 </div>
                 <div>
+                    <button id="individual_btn" type="button">개인</button>
+                    <button id="company_btn" type="button">기업</button>
+                </div>
+                <div>
                     <form id="login_form" style="display: none">
                         <div>
                             <div><label>아이디</label></div>
@@ -88,7 +92,7 @@
                         </div>
                     </form>
                     <form id="register_form" style="display: none">
-                        <input type="hidden" name="checkId">
+                        <input type="hidden" id="register_type">
                         <div>
                             <div><label>아이디</label></div>
                             <div><input type="text" name="id" id="register_id"/></div>
@@ -113,6 +117,18 @@
                             <div><label>이메일</label></div>
                             <div><input type="text" name="email" id="email"/></div>
                             <div><p id="email_msg"></p></div>
+                        </div>
+                        <div id="company_box">
+                            <div>
+                                <div><label>전화번호</label></div>
+                                <div><input type="text" id="phone"></div>
+                                <div><p></p></div>
+                            </div>
+                            <div>
+                                <div><label>상호명</label></div>
+                                <div><input type="text" id="corporate_name"></div>
+                                <div><p></p></div>
+                            </div>
                         </div>
                     </form>
                     <form id="check_email_form" style="display: none">

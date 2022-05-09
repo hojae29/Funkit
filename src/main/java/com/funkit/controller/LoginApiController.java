@@ -2,6 +2,7 @@ package com.funkit.controller;
 
 import com.funkit.exception.CustomException;
 import com.funkit.exception.ErrorCode;
+import com.funkit.model.CompanyMember;
 import com.funkit.model.JsonResponse;
 import com.funkit.model.Member;
 import com.funkit.service.LoginService;
@@ -33,7 +34,7 @@ public class LoginApiController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid Member member, BindingResult bindingResult){
+    public ResponseEntity individualRegister(@RequestBody @Valid Member member, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             HashMap<String, String> errorList = new HashMap<>();
             for(ObjectError e : bindingResult.getAllErrors())
@@ -42,7 +43,20 @@ public class LoginApiController {
             return new JsonResponse<>(HttpStatus.BAD_REQUEST, "Validation Error", errorList)
                     .toResponseEntity();
         }
-        return service.register(member);
+        return service.individualRegister(member);
+    }
+
+    @PostMapping("/company-register")
+    public ResponseEntity companyRegister(@RequestBody @Valid CompanyMember companyMember, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            HashMap<String, String> errorList = new HashMap<>();
+            for(ObjectError e : bindingResult.getAllErrors())
+                errorList.put(((FieldError)e).getField(), e.getDefaultMessage());
+
+            return new JsonResponse<>(HttpStatus.BAD_REQUEST, "Validation Error", errorList)
+                    .toResponseEntity();
+        }
+        return service.companyRegister(companyMember);
     }
 
     @GetMapping("/id-check")

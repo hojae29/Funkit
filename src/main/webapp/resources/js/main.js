@@ -6,6 +6,8 @@ const registerPasswd = $("#register_passwd");
 const registerCheckPasswd = $("#check_passwd");
 const registerName = $("#name");
 const registerEmail = $("#email");
+const registerPhone = $("#phone");
+const corporateName = $("#corporate_name");
 
 $("#login_btn").on("click", () => {
     modal.style.display = "flex";
@@ -131,6 +133,16 @@ registerEmail.on("focusout", () => {
     }
 });
 
+$("#individual_btn").on("click", () => {
+   changeTab("register");
+});
+
+$("#company_btn").on("click", () => {
+    document.getElementById("company_box").style.display = "block";
+    formReset("#register_form");
+    $("#register_type").text("company"); //회원가입 유형 = 기업
+});
+
 $("#submit_login_form").on("click", () =>{
 
     const member = {
@@ -156,61 +168,79 @@ $("#submit_register_form").on("click", () => {
     let code;
     if(!checkRegisterForm()) return false; //사용자 임의조작 방지
 
-    //회원가입 폼 데이터 member에 저장
-    const member = {
-        id: $("#register_id").val(),
-        passwd: $("#register_passwd").val(),
-        name: $("#name").val(),
-        email: $("#email").val()
+    //개인/기업 회원 구분
+    if($("#register_type").text() === "company"){
+        const member = {
+            id: $("#register_id").val(),
+            passwd: $("#register_passwd").val(),
+            name: $("#name").val(),
+            email: $("#email").val(),
+            phone: $("#phone").val(),
+            corporateName: $("#corporate_name").val()
+        }
+        console.log(member);
+        registerAjax("/company-register", member);
+    } else if($("#register_type").text() === "individual"){
+        const member = {
+            id: $("#register_id").val(),
+            passwd: $("#register_passwd").val(),
+            name: $("#name").val(),
+            email: $("#email").val()
+        }
+
+        //인증번호 입력 탭으로 이동 및 인증번호 발송
+        changeTab("check_email");
+        $.ajax({
+            type:"GET",
+            url:"mail-check?email=" + member.email,
+            success: res => code = res,
+            error: res => console.log("인증번호 발송 실패")
+        });
+
+        //인증하기 버튼 클릭시 실행
+        $("#check_token_btn").on("click", () => {
+            registerAjax("/register", member);
+            //인증번호가 일치하면 실행
+            if(code == $("#token").val()){
+                registerAjax("/register");
+                code = null;
+            }else{
+                $("#token").focus();
+                $("#token_msg").text("*인증번호가 일치하지 않습니다. 다시 입력해주세요");
+            }
+        });
     }
+});
 
-    //인증번호 입력 탭으로 이동 및 인증번호 발송
-    changeTab("check_email");
-    $.ajax({
-        type:"GET",
-        url:"mail-check?email=" + member.email,
-        success: res => code = res,
-        error: res => console.log("인증번호 발송 실패")
-    });
-
-    //인증하기 버튼 클릭시 실행
-    $("#check_token_btn").on("click", () => {
-        //인증번호가 일치하면 실행
-        if(code == $("#token").val()){
-            $.ajax("/register", {
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(member),
-                success: res => {
-                    alert("회원가입 완료");
-                    changeTab("login");
-                },
-                error: res => {
-                    formReset("#register_form"); //에러 발생 시 폼 초기화
-                    changeTab("register"); //회원가입 폼으로 이동
-                    res = res.responseJSON;
-                    if (res.status == 409) { // 409 = 아이디 중복
-                        $("#register_id_msg").text(res.message);
-                        registerId.data("vst", 0);
-                    } else if (res.status == 400) { // 400 = 서버 유효성검증 에러
-                        for (const [key, value] of Object.entries(res.data)) {
-                            if(key == "id")
-                                $("#register_id_msg").text(value);
-                            else if(key == "passwd")
-                                $("#register_passwd_msg").text(value);
-                            else
-                                $(`#${key}_msg`).text(value);
-                        }
-                    } else alert("알 수 없는 에러");
+function registerAjax(url, data){
+    $.ajax(url, {
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(data),
+        success: res => {
+            alert("회원가입 완료");
+            changeTab("login");
+        },
+        error: res => {
+            formReset("#register_form"); //에러 발생 시 폼 초기화
+            changeTab("register"); //회원가입 폼으로 이동
+            res = res.responseJSON;
+            if (res.status == 409) { // 409 = 아이디 중복
+                $("#register_id_msg").text(res.message);
+                registerId.data("vst", 0);
+            } else if (res.status == 400) { // 400 = 서버 유효성검증 에러
+                for (const [key, value] of Object.entries(res.data)) {
+                    if(key == "id")
+                        $("#register_id_msg").text(value);
+                    else if(key == "passwd")
+                        $("#register_passwd_msg").text(value);
+                    else
+                        $(`#${key}_msg`).text(value);
                 }
-            });
-            code = null;
-        }else{
-            $("#token").focus();
-            $("#token_msg").text("*인증번호가 일치하지 않습니다. 다시 입력해주세요");
+            } else alert("알 수 없는 에러");
         }
     });
-});
+}
 
 /**
  * id input 태그의 모든 이벤트는 checkIdAjax()를 실행
@@ -342,7 +372,8 @@ function changeTab(index){
     const registerBtn = document.getElementById("submit_register_form");
     const checkEmailForm = document.getElementById("check_email_form");
     const checkTokenBtn = document.getElementById("check_token_btn");
-
+    const companyBox = document.getElementById("company_box");
+    $("#register_type").text("individual"); //회원가입 유형 = 개인
     if(index === "login"){
         loginForm.style.display = "block";
         loginBtn.style.display = "block";
@@ -354,6 +385,7 @@ function changeTab(index){
         mlb.style.color = "#ff7e00";
         mrb.style.borderBottom = "2px solid white";
         mrb.style.color = "black";
+        companyBox.style.display="none";
         loginForm.id.focus();
         formReset("#register_form");
     } else if(index === "register"){
@@ -367,6 +399,7 @@ function changeTab(index){
         mrb.style.color = "#ff7e00";
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
+        companyBox.style.display="none";
         registerForm.id.focus();
         formReset("#login_form");
     } else if(index === "check_email"){
@@ -376,7 +409,7 @@ function changeTab(index){
         registerBtn.style.display = "none";
         checkTokenBtn.style.display = "block"
         checkEmailForm.style.display = "block";
+        companyBox.style.display="none";
         $("#token").focus();
     }
 }
-
