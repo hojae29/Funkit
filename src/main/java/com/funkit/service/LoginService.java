@@ -4,9 +4,7 @@ import com.funkit.model.Member;
 import org.springframework.http.ResponseEntity;
 
 public interface LoginService {
-    ResponseEntity register(Member member);
-
+    ResponseEntity individualRegister(Member member);
     ResponseEntity checkId(String id);
-
-    boolean login(Member member);
+    Member login(Member member);
 }

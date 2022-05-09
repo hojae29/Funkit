@@ -9,51 +9,12 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/modal.css"/>
     <link rel="stylesheet" href="/resources/css/main.css">
     <title>Funkit</title>
 </head>
 <body>
-    <div>
-    <nav>
-        <div class="nav">
-            <div class="nav_top">
-                <div class="nav_left">
-                    <a href="/"><p class="logo">FunKit</p></a>
-                </div>
-                <div>
-                    <button class="add_recipe">레시피 등록</button>
-                    <ul class="nav_top_user">
-                        <c:if test="${sessionScope.member == null}">
-                            <li><button id="login_btn">로그인</button></li>
-                            <li><button id="register_btn">회원가입</button></li>
-                        </c:if>
-                        <c:if test="${sessionScope.member != null}">
-                            <li><a href="/myfunkit">${member.id}님</a></li>
-                            <li><a href="/logout">로그아웃</a></li>
-                        </c:if>
-                    </ul>
-                </div>
-            </div>
-            <div class="nav_bottom">
-                <div class="nav_contents">
-                    <ul>
-                        <li>홈</li>
-                        <li>레시피</li>
-                        <li>펀딩</li>
-                        <li>랭킹</li>
-                        <li>스토어</li>
-                        <li>더보기</li>
-                    </ul>
-                </div>
-                <div class="nav_search">
-                    <input type="text" placeholder="검색하기">
-                </div>
-            </div>
-        </div>
-    </nav>
-</div>
+    <jsp:include page="header.jsp"/>
     <!-- 로그인/회원가입 modal -->
     <div id="modal" class="modal_overlay">
         <div style="position: absolute;">
@@ -73,11 +34,15 @@
                         <button id="modal_register_btn">회원가입</button>
                     </div>
                 </div>
+                <div id="type_box">
+                    <button id="individual_btn" type="button">개인</button>
+                    <button id="company_btn" type="button">기업</button>
+                </div>
                 <div>
                     <form id="login_form" style="display: none">
                         <div>
                             <div><label>아이디</label></div>
-                            <div><input type="text" id="login_id"/></div>
+                            <div><input type="text" id="login_id" name="id"/></div>
                         </div>
                         <div>
                             <div><label>비밀번호</label></div>
@@ -88,7 +53,7 @@
                         </div>
                     </form>
                     <form id="register_form" style="display: none">
-                        <input type="hidden" name="checkId">
+                        <input type="hidden" id="register_type">
                         <div>
                             <div><label>아이디</label></div>
                             <div><input type="text" name="id" id="register_id"/></div>
@@ -113,6 +78,18 @@
                             <div><label>이메일</label></div>
                             <div><input type="text" name="email" id="email"/></div>
                             <div><p id="email_msg"></p></div>
+                        </div>
+                        <div id="company_box">
+                            <div>
+                                <div><label>전화번호</label></div>
+                                <div><input type="text" id="phone"></div>
+                                <div><p id="phone_msg"></p></div>
+                            </div>
+                            <div>
+                                <div><label>상호명</label></div>
+                                <div><input type="text" id="corporate_name"></div>
+                                <div><p id="corporateName_msg"></p></div>
+                            </div>
                         </div>
                     </form>
                     <form id="check_email_form" style="display: none">

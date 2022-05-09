@@ -1,7 +1,5 @@
 package com.funkit.controller;
 
-import com.funkit.exception.CustomException;
-import com.funkit.exception.ErrorCode;
 import com.funkit.model.JsonResponse;
 import com.funkit.model.Member;
 import com.funkit.service.LoginService;
@@ -33,7 +31,7 @@ public class LoginApiController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity register(@RequestBody @Valid Member member, BindingResult bindingResult){
+    public ResponseEntity individualRegister(@RequestBody @Valid Member member, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             HashMap<String, String> errorList = new HashMap<>();
             for(ObjectError e : bindingResult.getAllErrors())
@@ -42,7 +40,7 @@ public class LoginApiController {
             return new JsonResponse<>(HttpStatus.BAD_REQUEST, "Validation Error", errorList)
                     .toResponseEntity();
         }
-        return service.register(member);
+        return service.individualRegister(member);
     }
 
     @GetMapping("/id-check")
@@ -78,13 +76,10 @@ public class LoginApiController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody Member member, HttpSession session, Model model){
-        if(service.login(member)) {
-            member.setPasswd(null);
-            session.setAttribute("member", member);
-            model.addAttribute("member", member);
-            return new JsonResponse<>(HttpStatus.OK, "Login Success").toResponseEntity();
-        }else throw new CustomException(ErrorCode.LOGIN_FAIL);
+    public ResponseEntity login(@RequestBody Member member, HttpSession session){
+        var user = service.login(member);
+        session.setAttribute("member", user);
+        return new JsonResponse<>(HttpStatus.OK, "Login Success").toResponseEntity();
     }
 }
 
