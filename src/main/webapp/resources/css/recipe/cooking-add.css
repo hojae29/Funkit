@@ -4,12 +4,6 @@
     font-weight: bold;
     text-align: center;
 }
-.img_button{
-    width:115px;
-    height:115px;
-    border:1px solid #ff7e00;
-    border-radius: 10px;
-}
 .text_box{
     width:465px;
     height:115px;
@@ -54,4 +48,29 @@
     margin-top:10px;
     display: flex;
     align-items: center;
+}
+.img_input{
+    visibility: hidden;
+    height:0%;
+    width:0%;
+}
+.img_button{
+    display: flex;
+    justify-content: center;
+    width:115px;
+    height:115px;
+    border:1px solid #ff7e00;
+    border-radius: 10px;
+    background-color: #fafafa;
+    cursor: pointer;
+}
+.img_button label{
+    padding-top:45px;
+    cursor: pointer;
+
+    /* 텍스트 드래그 방지 스타일 */
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
 }

@@ -90,3 +90,14 @@ textarea{
     width:100%;
     resize:none;
 }
+#preview{
+    width:600px;
+    height:400px;
+    outline: none;
+    border:none;
+    background-color: white;
+}
+#img_size_info{
+    font-size: 10pt;
+    color:red;
+}

@@ -2,15 +2,17 @@ function add_order(){
     var idx= $(".order_count").size();
     var no = idx+1;
     var addOrder = '<div id="orderNo_'+no+'" class="order_count">'
-                    +'<div class="label_area">'
-                    +'<label class="cooking_orders">' + no + '</label>'
-                    +'</div>'
-                    +'<div>'
-                    +'<input type="file" class="img_button">' + '</div>'
-                    +'<div>'
-                    +'<textarea placeholder="조리 과정을 입력해주세요." class="text_box">' + '</textarea>'
-                    +'</div>'
-                    +'</div>';
+        +'<div class="label_area">'
+        +'<label class="cooking_orders">' + no + '</label>'
+        +'</div>'
+        +'<div class="img_button">'
+        +'<label for="img_input_'+no+'">이미지 업로드' + '</label>'
+        +'</div>'
+        +'<input type="file" class="img_input" id="img_input_'+no+'">'
+        +'<div>'
+        +'<textarea placeholder="조리 과정을 입력해주세요." class="text_box">' + '</textarea>'
+        +'</div>'
+        +'</div>';
 
     var orderHtml = $(".order_count:last");
     orderHtml.after(addOrder);
