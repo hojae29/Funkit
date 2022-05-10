@@ -140,7 +140,7 @@
                     </form>
                 </div>
                 <div>
-                    <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
+                    <button type="button" class="submit_btn" id="submit_register_form" style="cursor: default" disabled>회원가입</button>
                     <button type="button" class="submit_btn" id="submit_login_form">로그인</button>
                     <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>

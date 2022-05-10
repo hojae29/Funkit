@@ -419,10 +419,14 @@ function checkRegisterForm(){
 
     //data-vst 값이 모두 1일 때 버튼 활성화
     if(!(validList.includes(0) || validList.includes(null))){
-        $("#submit_register_form").attr("disabled", false);
+        $("#submit_register_form")
+            .attr("disabled", false)
+            .css("cursor", "pointer");
         return true;
     } else{
-        $("#submit_register_form").attr("disabled", true);
+        $("#submit_register_form")
+            .attr("disabled", true)
+            .css("cursor", "default");
         return false;
     }
 }
@@ -492,7 +496,7 @@ function changeTab(index){
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         companyBox.style.display="none";
-        typeBox.style.display = "flex";
+        typeBox.style.display = "block";
         registerForm.id.focus();
         formReset("#login_form");
     } else if(index === "register2"){
