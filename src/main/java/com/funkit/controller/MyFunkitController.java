@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/myfunkit")
 public class MyFunkitController {
 
-    @RequestMapping("")
+    @RequestMapping("/")
     public String index(){
 
         return "myFunkit";
