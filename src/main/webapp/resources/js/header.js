@@ -175,10 +175,26 @@ corporateName.on("focusout", () => {
 
 $("#individual_btn").on("click", () => {
    changeTab("register");
+    $("#company_btn")
+        .css("background", "none")
+        .css("border", "#cccccc")
+        .css("color", "black");
+    $("#individual_btn")
+        .css("background", "#FF7E00")
+        .css("border", "#FF7E00")
+        .css("color", "white")
 });
 
 $("#company_btn").on("click", () => {
     changeTab("register2");
+    $("#individual_btn")
+        .css("background", "none")
+        .css("border", "#cccccc")
+        .css("color", "black");
+    $("#company_btn")
+        .css("background", "#FF7E00")
+        .css("border", "#FF7E00")
+        .css("color", "white")
 });
 
 //로그인
@@ -467,7 +483,7 @@ function changeTab(index){
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         companyBox.style.display="none";
-        typeBox.style.display = "block";
+        typeBox.style.display = "flex";
         registerForm.id.focus();
         formReset("#login_form");
     } else if(index === "register2"){
@@ -483,6 +499,7 @@ function changeTab(index){
         checkTokenBtn.style.display = "block"
         checkEmailForm.style.display = "block";
         companyBox.style.display="none";
+        typeBox.style.display = "none";
         $("#token").focus();
     }
 }

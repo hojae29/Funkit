@@ -11,6 +11,7 @@
     <title>Funkit</title>
 </head>
 <body>
+    <jsp:include page="header.jsp"/>
     <h1>Funding</h1>
 </body>
 </html>

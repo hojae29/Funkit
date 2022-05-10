@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+    <jsp:include page="header.jsp"/>
     <h1>${member.id}님의 마이페이지</h1>
 </body>
 </html>
