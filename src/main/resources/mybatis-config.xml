@@ -3,7 +3,7 @@
 
 <configuration>
     <settings>
-        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
     </settings>
 
     <typeAliases>
@@ -12,5 +12,6 @@
 
     <mappers>
         <mapper resource="mybatis/login.xml"/>
+        <mapper resource="mybatis/recipe.xml"/>
     </mappers>
 </configuration>
