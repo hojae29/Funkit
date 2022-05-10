@@ -175,27 +175,35 @@ corporateName.on("focusout", () => {
 
 $("#individual_btn").on("click", () => {
    changeTab("register");
-    $("#company_btn")
-        .css("background", "none")
-        .css("border", "#cccccc")
-        .css("color", "black");
-    $("#individual_btn")
-        .css("background", "#FF7E00")
-        .css("border", "#FF7E00")
-        .css("color", "white")
+    registerTypeChange("individual");
 });
 
 $("#company_btn").on("click", () => {
     changeTab("register2");
-    $("#individual_btn")
-        .css("background", "none")
-        .css("border", "#cccccc")
-        .css("color", "black");
-    $("#company_btn")
-        .css("background", "#FF7E00")
-        .css("border", "#FF7E00")
-        .css("color", "white")
+    registerTypeChange("company");
 });
+
+function registerTypeChange(index){
+    if(index === "individual"){
+        $("#company_btn")
+            .css("background", "none")
+            .css("border", "1px solid #cccccc")
+            .css("color", "black");
+        $("#individual_btn")
+            .css("background", "#FF7E00")
+            .css("border", "#FF7E00")
+            .css("color", "white");
+    }else if(index === "company"){
+        $("#individual_btn")
+            .css("background", "none")
+            .css("border", "1px solid #cccccc")
+            .css("color", "black");
+        $("#company_btn")
+            .css("background", "#FF7E00")
+            .css("border", "#FF7E00")
+            .css("color", "white");
+    }
+}
 
 //로그인
 $("#submit_login_form").on("click", () =>{
@@ -456,6 +464,7 @@ function changeTab(index){
     const companyBox = document.getElementById("company_box");
     const typeBox = document.getElementById("type_box");
     $("#register_type").text("individual"); //회원가입 유형 = 개인
+    registerTypeChange("individual");
     if(index === "login"){
         loginForm.style.display = "block";
         loginBtn.style.display = "block";
