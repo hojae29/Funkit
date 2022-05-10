@@ -2,11 +2,13 @@ package com.funkit.exception;
 
 import org.springframework.http.HttpStatus;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.http.HttpStatus.CONFLICT;
 
 //Custom Exception ENUM
 public enum ErrorCode {
     /* 400 BAD_REQUEST */
+    LOGIN_FAIL(BAD_REQUEST, "로그인 실패"),
 
     /* 401 UNAUTHORIZED */
 

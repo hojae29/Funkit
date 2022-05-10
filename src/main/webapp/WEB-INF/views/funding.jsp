@@ -1,17 +1,17 @@
 <%--
   Created by IntelliJ IDEA.
-  User: hojae
-  Date: 2022/04/14
-  Time: 9:18 AM
+  User: gkqth
+  Date: 2022-05-05
+  Time: 오후 9:16
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>Funkit</title>
 </head>
 <body>
     <jsp:include page="header.jsp"/>
+    <h1>Funding</h1>
 </body>
 </html>

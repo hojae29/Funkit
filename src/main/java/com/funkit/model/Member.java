@@ -1,10 +1,12 @@
 package com.funkit.model;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Pattern;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Member {
     @NotEmpty(message = "*아이디는 필수사항입니다")
     @Pattern(
@@ -20,8 +22,12 @@ public class Member {
     )
     private String passwd;
 
+    private int code;
+
     @NotEmpty(message = "*이름은 필수사항입니다")
     private String name;
+
+    private String corporateName;
 
     private String phone;
 
@@ -97,5 +103,21 @@ public class Member {
 
     public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
+    }
+
+    public String getCorporateName() {
+        return corporateName;
+    }
+
+    public void setCorporateName(String corporateName) {
+        this.corporateName = corporateName;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 }

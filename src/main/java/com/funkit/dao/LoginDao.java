@@ -5,7 +5,6 @@ import com.funkit.model.Member;
 import java.util.Optional;
 
 public interface LoginDao {
-    void register(Member member);
-
-    Optional<Member> checkId(String id);
+    void individualRegister(Member member);
+    Optional<Member> item(String id);
 }
