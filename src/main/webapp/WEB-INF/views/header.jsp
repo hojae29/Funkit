@@ -20,7 +20,7 @@
             <div class="nav">
                 <div class="nav_top">
                     <div class="nav_left">
-                        <a href="/"><p class="logo">FunKit</p></a>
+                        <a href="/"><p class="logo">펀키트</p></a>
                     </div>
                     <div>
                         <button class="add_recipe">레시피 등록</button>
