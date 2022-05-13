@@ -54,7 +54,6 @@
     width:700px;
 }
 .sel_area{
-
     width:600px;
 }
 .label_area{
@@ -96,6 +95,7 @@ textarea{
     outline: none;
     border:none;
     background-color: white;
+    border-radius: 5px;
 }
 #img_size_info{
     font-size: 10pt;

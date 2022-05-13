@@ -59,18 +59,12 @@
     justify-content: center;
     width:115px;
     height:115px;
+    background-color: #fafafa;
+    cursor: pointer;
+}
+.img_button img{
     border:1px solid #ff7e00;
     border-radius: 10px;
     background-color: #fafafa;
     cursor: pointer;
-}
-.img_button label{
-    padding-top:45px;
-    cursor: pointer;
-
-    /* 텍스트 드래그 방지 스타일 */
-    -ms-user-select: none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-    user-select: none;
 }
