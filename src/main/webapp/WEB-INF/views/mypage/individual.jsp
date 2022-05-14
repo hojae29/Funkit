@@ -16,7 +16,7 @@
             padding: 0px;
         }
         .mypage_top{
-            width: 1920px;
+            width: 100%;
             height: 230px;
             background: #efefef;
             display: flex;
@@ -57,31 +57,23 @@
     </style>
 </head>
 <body>
-    <jsp:include page="header.jsp"/>
-    <div class="container">
-        <div class="mypage_top">
-            <div class="mypage_top_content_box">
-                <div class="profile_box">
-                    <div class="profile_img_box"></div>
-                    <div>
-                        <h1>${member.name}님</h1>
-                        <c:if test="${member.code == 10}">
-                            <p>개인회원</p>
-                        </c:if>
-                        <c:if test="${member.code == 20}">
-                            <p>기업회원</p>
-                        </c:if>
-                        <c:if test="${member.code == 30}">
-                            <p>관리자</p>
-                        </c:if>
-                    </div>
+<jsp:include page="../header.jsp"/>
+<div class="container">
+    <div class="mypage_top">
+        <div class="mypage_top_content_box">
+            <div class="profile_box">
+                <div class="profile_img_box"></div>
+                <div>
+                    <h1>${member.name}님</h1>
+                    <p>개인회원</p>
                 </div>
-                <div class="menu_box">
-                    <a href="">회원정보 수정</a>
-                    <a href="">로그아웃</a>
-                </div>
+            </div>
+            <div class="menu_box">
+                <a href="">회원정보 수정</a>
+                <a href="">결제정보 설정</a>
             </div>
         </div>
     </div>
+</div>
 </body>
 </html>
