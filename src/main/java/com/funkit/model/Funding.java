@@ -7,42 +7,32 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class Funding {
+public class Funding<T> {
     private int fundingCode;
     private String id;
     private String title;
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date regDate;
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date expDate;
-    private int targetAmount;
-    private int cmlAmount;
+    private Integer targetAmount;
+    private Integer cmlAmount;
     private String status;
 
-    private Image mainImage;
-    private List<Image> fundingImages;
+    private T mainImage;
+    private List<T> fundingImages;
 
-    public void setRegDate(Date regDate) {
-        this.regDate = regDate;
-    }
-
-    public void setExpDate(Date expDate) {
-        this.expDate = expDate;
-    }
-
-    public Image getMainImage() {
+    public T getMainImage() {
         return mainImage;
     }
 
-    public void setMainImage(Image mainImage) {
+    public void setMainImage(T mainImage) {
         this.mainImage = mainImage;
     }
 
-    public List<Image> getFundingImages() {
+    public List<T> getFundingImages() {
         return fundingImages;
     }
 
-    public void setFundingImages(List<Image> fundingImages) {
+    public void setFundingImages(List<T> fundingImages) {
         this.fundingImages = fundingImages;
     }
 
@@ -76,7 +66,6 @@ public class Funding {
 
     public void setRegDate(String regDate) throws ParseException {
         var formatter = new SimpleDateFormat("yyyy-MM-dd");
-
         this.regDate = formatter.parse(regDate);
     }
 
@@ -86,23 +75,22 @@ public class Funding {
 
     public void setExpDate(String expDate) throws ParseException {
         var formatter = new SimpleDateFormat("yyyy-MM-dd");
-
         this.expDate = formatter.parse(expDate);
     }
 
-    public int getTargetAmount() {
+    public Integer getTargetAmount() {
         return targetAmount;
     }
 
-    public void setTargetAmount(int targetAmount) {
+    public void setTargetAmount(Integer targetAmount) {
         this.targetAmount = targetAmount;
     }
 
-    public int getCmlAmount() {
+    public Integer getCmlAmount() {
         return cmlAmount;
     }
 
-    public void setCmlAmount(int cmlAmount) {
+    public void setCmlAmount(Integer cmlAmount) {
         this.cmlAmount = cmlAmount;
     }
 

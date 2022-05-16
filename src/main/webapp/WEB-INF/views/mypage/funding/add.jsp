@@ -186,7 +186,7 @@
                         <div>
                             <div><label>대표 이미지</label></div>
                             <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                            <div><input type="file" name="titleImage" id="title_img_input"></div>
+                            <div><input type="file" name="mainImage" id="title_img_input"></div>
                         </div>
                     </form>
                     <form id="story_form">
