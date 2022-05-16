@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 #add_box{
     margin: 0 auto;
     width:1180px;

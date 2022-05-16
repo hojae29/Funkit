@@ -18,7 +18,7 @@ public class RecipeController {
     @Autowired
     RecipeService service;
 
-    @GetMapping("/list")
+    @GetMapping({"","/list"})
     public String list(Model model){
         List<Recipe> list = service.list();
 

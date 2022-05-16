@@ -24,7 +24,7 @@
                                     <label>제목</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="title" id="title" class="mid_text">
+                                    <input type="text" name="title" id="title" class="mid_text" name="title">
                                 </div>
                             </div>
                             <div class="align_info">
@@ -32,7 +32,7 @@
                                     <label>소개</label>
                                 </div>
                                 <div class="align_input">
-                                    <textarea type="text" name="intro" id="intro" class="long_text"></textarea>
+                                    <textarea type="text" name="intro" id="intro" class="long_text" name="intro"></textarea>
                                 </div>
                             </div>
                             <div class="align_info">
@@ -55,7 +55,7 @@
                                     <label>재료</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="ingredients" id="ingredients" class="mid_text">
+                                    <input type="text" name="ingredients" id="ingredients" class="mid_text" name="ingredients">
                                 </div>
                             </div>
                             <div class="align_info">
@@ -63,7 +63,7 @@
                                     <label>소요시간</label>
                                 </div>
                                 <div>
-                                    <input type="number" name="takes" id="takes" min="0" class="sm_num">
+                                    <input type="number" name="takes" id="takes" min="0" class="sm_num" name="takes">
                                 </div>
                                 <div id="sel_lpad">
                                     <select name="takes_time">
@@ -78,7 +78,7 @@
                                         <label>대표<br>이미지</label>
                                     </div>
                                     <div>
-                                        <input type="file" accept="image/*" onchange="mainImg(this)"><span
+                                        <input type="file" accept="image/*" onchange="mainImg(this)" name="mainImg"><span
                                             id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
                                         <br>
                                         <div>
@@ -90,35 +90,35 @@
                             <div class="show_main" id="show_main"></div>
                         </div>
                         <div>
-                            <div>
-                                <p id="add_cooking">조리과정</p>
-                            </div>
-                            <div class="orders_mar">
-                                <div id="orderNo_1" class="order_count">
-                                    <div class="label_area">
-                                        <labe class="cooking_orders">1</labe>
-                                    </div>
-                                    <div class="img_button">
-                                        <a href="javascript:void(0)" onclick="fileUpload(1)">
-                                            <img src="/resources/img/recipe/default.png" id="order_img_1" />
-                                        </a>
-                                    </div>
-                                    <input type="file" class="img_input" id="img_input_1" accept="image/*">
-                                    <div>
-                                        <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="orders_mar">
-                                <div class="button_area">
-                                    <a href="javascript:void(0)" class="button_PnM" onclick="add_order();">&#43;</a>
-                                    <a href="javascript:void(0)" class="button_PnM" onclick="del_order();">&#45;</a>
-                                </div>
-                            </div>
+<%--                            <div>--%>
+<%--                                <p id="add_cooking">조리과정</p>--%>
+<%--                            </div>--%>
+<%--                            <div class="orders_mar">--%>
+<%--                                <div id="orderNo_1" class="order_count">--%>
+<%--                                    <div class="label_area">--%>
+<%--                                        <labe class="cooking_orders">1</labe>--%>
+<%--                                    </div>--%>
+<%--                                    <div class="img_button">--%>
+<%--                                        <a href="javascript:void(0)" onclick="fileUpload(1)">--%>
+<%--                                            <img src="/resources/img/recipe/default.png" id="order_img_1" />--%>
+<%--                                        </a>--%>
+<%--                                    </div>--%>
+<%--                                    <input type="file" class="img_input" id="img_input_1" accept="image/*">--%>
+<%--                                    <div>--%>
+<%--                                        <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>--%>
+<%--                                    </div>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="orders_mar">--%>
+<%--                                <div class="button_area">--%>
+<%--                                    <a href="javascript:void(0)" class="button_PnM" onclick="add_order();">&#43;</a>--%>
+<%--                                    <a href="javascript:void(0)" class="button_PnM" onclick="del_order();">&#45;</a>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
                             <div class="orders_mar">
                                 <div class="button_area">
                                     <button class="button_">등록</button>
-                                    <button>취소</button>
+                                    <a href="javascript:history.back();"><button type="button">취소</button></a>
                                 </div>
                             </div>
                         </div>

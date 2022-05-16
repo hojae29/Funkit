@@ -10,9 +10,6 @@
 <html>
 <head>
     <title>Title</title>
-    <link rel="stylesheet" href="/resources/css/header.css"/>
-    <link rel="stylesheet" href="/resources/css/modal.css"/>
-    <link rel="stylesheet" href="/resources/css/main.css">
 </head>
 <body>
     <div>
@@ -40,7 +37,7 @@
                     <div class="nav_contents">
                         <ul>
                             <li>홈</li>
-                            <li>레시피</li>
+                            <li><a href="http://localhost:8181/recipe/">레시피</a></li>
                             <li><a href="/funding/">펀딩</a></li>
                             <li>랭킹</li>
                             <li>스토어</li>
@@ -147,6 +144,9 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/modal.css"/>
+    <link rel="stylesheet" href="/resources/css/main.css">
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/resources/js/header.js"></script>
