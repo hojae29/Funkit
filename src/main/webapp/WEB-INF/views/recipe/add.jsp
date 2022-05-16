@@ -78,8 +78,8 @@
                                         <label>대표<br>이미지</label>
                                     </div>
                                     <div>
-                                        <input type="file" accept="image/*" onchange="mainImg(this)" name="mainImg"><span
-                                            id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
+                                        <input type="file" accept="image/*" onchange="mainImage(this)" name="mainImg">
+                                        <span id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
                                         <br>
                                         <div>
                                             <img id="preview" />
@@ -127,12 +127,12 @@
             </div>
         </div>
     </div>
-    <script src="/resources/js/recipe/multi-img.js"></script>
     <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
     <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
     <link rel="stylesheet" href="/resources/css/header.css"/>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/resources/js/recipe/multi-img.js"></script>
     <script src="/resources/js/recipe/recipe-order.js"></script>
     <script src="/resources/js/recipe/main-img.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </body>
 </html>
