@@ -5,9 +5,8 @@ import com.funkit.model.Member;
 import com.funkit.service.FundingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 
@@ -34,6 +33,11 @@ public class FundingController {
     public String moveFundingPage(@PathVariable int code, Model model){
         model.addAttribute("code", code);
         return "/mypage/funding/add";
+    }
+
+    @PostMapping("/{code}")
+    public void saveFunding(@PathVariable String code, Funding funding, MultipartFile titleImage){
+        System.out.println(titleImage.getOriginalFilename());
     }
 }
 

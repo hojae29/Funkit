@@ -70,7 +70,7 @@
                                     <label>제목</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="title" id="title" class="mid_text">
+                                    <input type="text" name="title" id="menu_title" class="mid_text">
                                 </div>
                             </div>
                             <div class="align_info">
