@@ -27,6 +27,7 @@
             width:100%;
             display: flex;
             justify-content: center;
+            flex-direction: column;
         }
         .mypage_top_content_box{
             width: 780px;
@@ -54,6 +55,30 @@
         .menu_box a:nth-child(2){
             margin-left: 16px;
         }
+        .mypage_bottom{
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+        }
+        .title_box{
+            width: 780px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .add_project_btn{
+            border: 1px solid #ff7e00;
+            height: 30px;
+            background: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .add_project_btn > a{
+            color: #ff7e00;
+            font-size: 14px;
+        }
+
     </style>
 </head>
 <body>
@@ -70,6 +95,14 @@
                 </div>
                 <div class="menu_box">
                     <a href="">회원정보 수정</a>
+                </div>
+            </div>
+        </div>
+        <div class="mypage_bottom">
+            <div class="title_box">
+                <div><h1>프로젝트 관리</h1></div>
+                <div>
+                    <button class="add_project_btn"><a href="funding/make">프로젝트 개설하기</a></button>
                 </div>
             </div>
         </div>

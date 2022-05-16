@@ -13,5 +13,6 @@
     <mappers>
         <mapper resource="mybatis/login.xml"/>
         <mapper resource="mybatis/recipe.xml"/>
+        <mapper resource="mybatis/funding.xml"/>
     </mappers>
 </configuration>

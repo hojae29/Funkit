@@ -219,7 +219,7 @@ $("#submit_login_form").on("click", () =>{
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(member),
-        success: res => location.href = "http://localhost:8181/",
+        success: res => location.href = "/",
         error: res => {
             $("#login_msg").text("*로그인 실패. 다시시도하세요");
         }
