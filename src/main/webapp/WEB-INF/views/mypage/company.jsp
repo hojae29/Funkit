@@ -105,6 +105,8 @@
                     <button class="add_project_btn"><a href="funding/make">프로젝트 개설하기</a></button>
                 </div>
             </div>
+            <div>
+            </div>
         </div>
     </div>
 </body>
