@@ -24,7 +24,7 @@
                                     <label>제목</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="title" id="title" class="mid_text" name="title">
+                                    <input type="text" name="title" id="title" class="mid_text">
                                 </div>
                             </div>
                             <div class="align_info">
@@ -32,7 +32,7 @@
                                     <label>소개</label>
                                 </div>
                                 <div class="align_input">
-                                    <textarea type="text" name="intro" id="intro" class="long_text" name="intro"></textarea>
+                                    <textarea type="text" name="intro" id="intro" class="long_text"></textarea>
                                 </div>
                             </div>
                             <div class="align_info">
@@ -55,7 +55,7 @@
                                     <label>재료</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="ingredients" id="ingredients" class="mid_text" name="ingredients">
+                                    <input type="text" name="ingredients" id="ingredients" class="mid_text">
                                 </div>
                             </div>
                             <div class="align_info">
@@ -63,7 +63,7 @@
                                     <label>소요시간</label>
                                 </div>
                                 <div>
-                                    <input type="number" name="takes" id="takes" min="0" class="sm_num" name="takes">
+                                    <input type="number" name="takes" id="takes" min="0" class="sm_num">
                                 </div>
                                 <div id="sel_lpad">
                                     <select name="takes_time">
@@ -78,7 +78,7 @@
                                         <label>대표<br>이미지</label>
                                     </div>
                                     <div>
-                                        <input type="file" accept="image/*" onchange="mainImage(this)" name="mainImg">
+                                        <input type="file" accept="image/*" onchange="mainPreview(this)" id="img" name="mainImg">
                                         <span id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
                                         <br>
                                         <div>
@@ -127,12 +127,12 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
     <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
-    <link rel="stylesheet" href="/resources/css/header.css"/>
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-    <script src="/resources/js/recipe/multi-img.js"></script>
-    <script src="/resources/js/recipe/recipe-order.js"></script>
     <script src="/resources/js/recipe/main-img.js"></script>
+    <script src="/resources/js/recipe/recipe-order.js"></script>
+    <script src="/resources/js/recipe/multi-img.js"></script>
 </body>
 </html>

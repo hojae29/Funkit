@@ -12,7 +12,6 @@ public class Recipe {
     private int like;
     private int view;
     private String ingredients;
-
     private int takes;
 
     private String mainImg;

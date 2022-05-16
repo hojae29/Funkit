@@ -32,7 +32,8 @@ public class RecipeController {
         return path+"add";
     }
     @PostMapping("/add")
-    public String add(Recipe recipe){
+    public String add(@SessionAttribute Member member,Recipe recipe){
+        recipe.setId(member.getId());
 
         service.add(recipe);
 
