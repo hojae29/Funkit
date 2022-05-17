@@ -8,7 +8,7 @@
 
     <insert id="add">
         INSERT INTO recipe(recipe_code, title, id, reg_date,intro,ingredients,takes,main_img)
-        VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes},#{miainImg})
+        VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes},#{mainImg})
     </insert>
 
     <delete id="delete">

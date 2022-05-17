@@ -32,7 +32,7 @@ function mainPreview(input) {
         }else{
             document.getElementById("preview").src="";
     }
-
+    let formData = new FormData();
     let fileInput = $('input[name="mainImg"]');
     let fileList = fileInput[0].files;
     let fileObj = fileList[0];
@@ -40,6 +40,16 @@ function mainPreview(input) {
     if(!fileCheck(fileObj.size)){
         return false;
     }
+    formData.append("mainImg",fileObj);
+
+    $.ajax({
+        url:'/admin/uploadAjaxAction',
+        processData : false,
+        contentType : false,
+        data : formData,
+        type : 'POST',
+        dataType:'json'
+    });
 }
 
 function fileCheck(fileSize){
