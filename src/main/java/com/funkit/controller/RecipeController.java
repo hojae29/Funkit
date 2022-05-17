@@ -37,9 +37,9 @@ public class RecipeController {
     }
     @ResponseBody
     @PostMapping("/add")
-    public Recipe add(Recipe recipe, MultipartFile mainImg){
+    public Recipe add(@SessionAttribute Member member,Recipe recipe, MultipartFile mainImg){
         System.out.println(recipe);
-        //이미지 저장할 폴더 생성 및 경로 지정
+        /*//이미지 저장할 폴더 생성 및 경로 지정
         String uploadFolder = "D:\\upload\\recipe";
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -67,7 +67,7 @@ public class RecipeController {
             }catch (Exception e){
                 e.printStackTrace();
             }
-        }
+        }*/
 
         recipe.setId(member.getId());//session에서 id값 가져오기
 
