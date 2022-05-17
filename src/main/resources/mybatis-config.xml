@@ -12,5 +12,6 @@
 
     <mappers>
         <mapper resource="mybatis/login.xml"/>
+        <mapper resource="mybatis/notice.xml"/>
     </mappers>
 </configuration>
