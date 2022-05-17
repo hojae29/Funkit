@@ -17,7 +17,9 @@ public class NoticeServiceImpl implements NoticeService{
     }
 
     @Override
-    public  void update(Notice notice) {dao.update(notice);}
+    public  void update(Notice notice) {
+        dao.update(notice);
+    }
 
     @Override
     public List<Notice> list() {

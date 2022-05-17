@@ -19,5 +19,10 @@
         delete from notice
         where notice_code = #{noticeCode}
     </delete>
+    <update id="update">
+        update notice
+        set title = #{title} , content = #{content}
+        where notice_code = #{noticeCode}
+    </update>
 
 </mapper>
