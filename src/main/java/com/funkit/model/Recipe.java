@@ -103,4 +103,21 @@ public class Recipe {
     public void setMainImg(String mainImg) {
         this.mainImg = mainImg;
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeCode=" + recipeCode +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", intro='" + intro + '\'' +
+                ", regDate=" + regDate +
+                ", updateDate=" + updateDate +
+                ", like=" + like +
+                ", view=" + view +
+                ", ingredients='" + ingredients + '\'' +
+                ", takes=" + takes +
+                ", mainImg='" + mainImg + '\'' +
+                '}';
+    }
 }

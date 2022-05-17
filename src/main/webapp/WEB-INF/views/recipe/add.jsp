@@ -134,5 +134,22 @@
     <script src="/resources/js/recipe/main-img.js"></script>
     <script src="/resources/js/recipe/recipe-order.js"></script>
     <script src="/resources/js/recipe/multi-img.js"></script>
+    <script>
+        $("#submit_btn").on("click", () => {
+            let formData = new FormData($("#form_area")[0]);
+
+            $.ajax({
+                url: window.location.pathname,
+                type: "POST",
+                enctype: 'multipart/form-data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (result) { },
+                error: function (e) { }
+            });
+        });
+    </script>
 </body>
 </html>
