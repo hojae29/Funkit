@@ -1,7 +1,5 @@
 package com.funkit.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -13,8 +11,8 @@ public class Funding<T> {
     private String title;
     private Date regDate;
     private Date expDate;
-    private Integer targetAmount;
-    private Integer cmlAmount;
+    private Long targetAmount;
+    private Long cmlAmount;
     private String status;
 
     private T mainImage;
@@ -78,19 +76,19 @@ public class Funding<T> {
         this.expDate = formatter.parse(expDate);
     }
 
-    public Integer getTargetAmount() {
+    public Long getTargetAmount() {
         return targetAmount;
     }
 
-    public void setTargetAmount(Integer targetAmount) {
+    public void setTargetAmount(Long targetAmount) {
         this.targetAmount = targetAmount;
     }
 
-    public Integer getCmlAmount() {
+    public Long getCmlAmount() {
         return cmlAmount;
     }
 
-    public void setCmlAmount(Integer cmlAmount) {
+    public void setCmlAmount(Long cmlAmount) {
         this.cmlAmount = cmlAmount;
     }
 
@@ -100,5 +98,21 @@ public class Funding<T> {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Funding{" +
+                "fundingCode=" + fundingCode +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", regDate=" + regDate +
+                ", expDate=" + expDate +
+                ", targetAmount=" + targetAmount +
+                ", cmlAmount=" + cmlAmount +
+                ", status='" + status + '\'' +
+                ", mainImage=" + mainImage +
+                ", fundingImages=" + fundingImages +
+                '}';
     }
 }

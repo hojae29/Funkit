@@ -1,17 +1,19 @@
 package com.funkit.controller;
 
 import com.funkit.model.Funding;
+import com.funkit.model.Image;
 import com.funkit.model.Member;
 import com.funkit.service.FundingService;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.io.IOException;
 
 @Controller
 @RequestMapping("/myfunkit/funding")
@@ -30,9 +32,10 @@ public class FundingController {
         funding.setId(member.getId());
         int code = fundingService.makeFunding(funding);
 
-        File Folder = new File("d:/upload/" + code);
         try{
-            Folder.mkdirs();
+            new File("d:/upload/" + code).mkdirs();
+            new File("d:/upload/" + code + "/mainImage").mkdir();
+            new File("d:/upload/" + code + "/fundingImage").mkdir();
         } catch(Exception e){
             e.getStackTrace();
         }
@@ -42,12 +45,16 @@ public class FundingController {
 
     @GetMapping("/{code}")
     public String moveFundingPage(@PathVariable int code, Model model){
-
+        Funding<Image> funding = fundingService.getFunding(code);
+        System.out.println(funding.toString());
+        model.addAttribute("funding", funding);
         return "/mypage/funding/add";
     }
 
     @PostMapping("/{code}")
-    public void saveFunding(@PathVariable String code, Funding<MultipartFile> funding){
+    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding){
+        funding.setFundingCode(code);
+        System.out.println(funding);
         fundingService.saveFunding(funding);
     }
 }

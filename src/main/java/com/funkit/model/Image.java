@@ -1,22 +1,30 @@
 package com.funkit.model;
 
 public class Image {
-    private String filename;
-    private String extension;
+    private String fileName;
+    private long fileSize;
 
-    public String getFilename() {
-        return filename;
+    public String getFileName() {
+        return fileName;
     }
 
-    public void setFilename(String filename) {
-        this.filename = filename;
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
 
-    public String getExtension() {
-        return extension;
+    public long getFileSize() {
+        return fileSize;
     }
 
-    public void setExtension(String extension) {
-        this.extension = extension;
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "fileName='" + fileName + '\'' +
+                ", fileSize=" + fileSize +
+                '}';
     }
 }

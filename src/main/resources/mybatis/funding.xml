@@ -3,8 +3,36 @@
 
 <mapper namespace="funding">
     <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
-        INSERT INTO FUNDING(funding_code, id)
-        VALUES(null, #{id})
+        INSERT INTO funding(funding_code, id, exp_date)
+        VALUES(null, #{id}, NOW());
     </insert>
 
+    <insert id="makeMainImage">
+        INSERT INTO main_image(main_image_code, funding_code)
+        VALUES(null, #{fundingCode});
+    </insert>
+
+    <update id="saveFunding">
+        UPDATE funding
+        SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}
+        WHERE funding_code = #{fundingCode}
+    </update>
+
+    <select id="getFunding" resultType="Funding">
+        SELECT *
+        FROM funding
+        WHERE funding_code=#{fundingCode}
+    </select>
+
+    <select id="getMainImage" resultType="Image">
+        SELECT *
+        FROM main_image
+        WHERE funding_code=#{fundingCode}
+    </select>
+
+    <update id="setMainImage">
+        UPDATE main_image
+        SET file_name=#{image.fileName}, file_size=#{image.fileSize}
+        WHERE funding_code=#{code}
+    </update>
 </mapper>

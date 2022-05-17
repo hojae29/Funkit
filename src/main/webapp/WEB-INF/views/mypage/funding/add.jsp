@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
     <title>펀키트</title>
@@ -171,17 +172,17 @@
                         <div>
                             <div><label>프로젝트 제목</label></div>
                             <div><p>프로젝트를 표현할 수 있는 제목을 입력해주세요</p></div>
-                            <div><input class="text_input" name="title" type="text"></div>
+                            <div><input class="text_input" name="title" type="text" value="${funding.title}"></div>
                         </div>
                         <div>
                             <div><label>목표 금액</label></div>
                             <div><p>프로젝트의 펀딩 목표금액을 입력해주세요</p></div>
-                            <div><input class="text_input" name="targetAmount" type="text"></div>
+                            <div><input class="text_input" name="targetAmount" type="text" value="${funding.targetAmount}"></div>
                         </div>
                         <div>
                             <div><label>진행기간</label></div>
                             <div><p>프로젝트 진행기간을 설정해주세요</p></div>
-                            <div><input class="date_input" name="expDate" type="date"></div>
+                            <div><input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>"></div>
                         </div>
                         <div>
                             <div><label>대표 이미지</label></div>
@@ -189,7 +190,7 @@
                             <div><input type="file" name="mainImage" id="title_img_input"></div>
                         </div>
                     </form>
-                    <form id="story_form">
+                    <%--<form id="story_form">
                         <div>
                             <div><label>이미지 등록</label></div>
                             <div><p>프로젝트의 이미지를 등록해주세요</p></div>
@@ -200,7 +201,7 @@
                             <div><p>프로젝트의 스토리를 적어주세요</p></div>
                             <div></div>
                         </div>
-                    </form>
+                    </form>--%>
                 </div>
                 <div>
                     <button id="save_btn" style="margin-right: 10px">저장</button>
