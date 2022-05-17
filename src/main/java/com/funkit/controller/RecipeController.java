@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -34,10 +37,10 @@ public class RecipeController {
     }
     @ResponseBody
     @PostMapping("/add")
-    public Recipe add(Recipe recipe, MultipartFile[] mainIng){
+    public Recipe add(Recipe recipe, MultipartFile mainImg){
         System.out.println(recipe);
         //이미지 저장할 폴더 생성 및 경로 지정
-      /*  String uploadFolder = "D:\\upload\\recipe";
+        String uploadFolder = "D:\\upload\\recipe";
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
@@ -54,7 +57,7 @@ public class RecipeController {
         }
 
         //폴더에 이미지 저장하기
-        for(MultipartFile multipartFile : uploadFile){
+        for(MultipartFile multipartFile : mainImg){
             String uploadFileName = multipartFile.getOriginalFilename();
 
             File saveFile = new File(uploadPath,uploadFileName);
@@ -68,7 +71,7 @@ public class RecipeController {
 
         recipe.setId(member.getId());//session에서 id값 가져오기
 
-        service.add(recipe);*/
+        service.add(recipe);
 
         return recipe;
     }

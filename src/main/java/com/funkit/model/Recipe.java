@@ -14,8 +14,6 @@ public class Recipe {
     private String ingredients;
     private int takes;
 
-    private String mainImg;
-
     public int getTakes() {
         return takes;
     }
@@ -96,14 +94,6 @@ public class Recipe {
         this.view = view;
     }
 
-    public String getMainImg() {
-        return mainImg;
-    }
-
-    public void setMainImg(String mainImg) {
-        this.mainImg = mainImg;
-    }
-
     @Override
     public String toString() {
         return "Recipe{" +
@@ -117,7 +107,6 @@ public class Recipe {
                 ", view=" + view +
                 ", ingredients='" + ingredients + '\'' +
                 ", takes=" + takes +
-                ", mainImg='" + mainImg + '\'' +
                 '}';
     }
 }
