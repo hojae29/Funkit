@@ -40,9 +40,13 @@ public class RecipeController {
         //이미지 저장할 폴더 생성 및 경로 지정
         String uploadFolder = "D:\\upload\\recipe";
 
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+        Date date = new Date();
 
-        String recipePath = ;
+        String str = sdf.format(date);
+
+        String recipePath = str.replace("-", File.separator);
 
         File uploadPath = new File(uploadFolder,recipePath);
 
