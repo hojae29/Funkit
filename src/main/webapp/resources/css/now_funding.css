@@ -1,0 +1,19 @@
+.now_funding_pic{
+    width:480px;
+    height:330px;
+}
+.now_funding_pic img{
+    border-radius:10px;
+}
+.now_contents{
+    width:700px;
+    height:330px;
+    /* background-color:gray; */
+}
+.now_dis{
+    display: flex;
+    justify-content: space-between;
+}
+.now_info{
+    height:450px;
+}
