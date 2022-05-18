@@ -8,7 +8,7 @@
     width:465px;
     height:115px;
     border-radius: 5px;
-    border:1px solid #ff7e00;
+    border:1px solid #cccccc;
     margin-left:20px;
     outline: none;
 }
@@ -63,8 +63,24 @@
     cursor: pointer;
 }
 .img_button img{
-    border:1px solid #ff7e00;
+    border:1px solid #cccccc;
     border-radius: 10px;
     background-color: #fafafa;
     cursor: pointer;
+}
+#sub_btn{
+    margin:0 auto;
+    width: 200px;
+    display: flex;
+    justify-content: space-evenly;
+}
+#sub_btn button{
+    margin-top:100px;
+    margin-bottom:100px;
+    width:80px;
+    height:35px;
+    background-color: #ff7e00;
+    border:1px solid #ff7e00;
+    border-radius: 5px;
+    color: white;
 }

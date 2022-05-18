@@ -10,4 +10,6 @@ public interface RecipeDao {
     void add(Recipe recipe);
 
     void delete(int recipeCode);
+
+    int addImg(Recipe recipeMain);
 }

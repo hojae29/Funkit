@@ -30,6 +30,7 @@ function del_order(){
         var orderNo="orderNo_"+idx;
         var last_order = document.getElementById(orderNo);
         last_order.remove();
+        no--;
     }else{
         alert("더 이상 삭제할 수 없습니다.")
     }

@@ -4,7 +4,6 @@ import com.funkit.dao.RecipeDao;
 import com.funkit.model.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    @Transactional
     public void add(Recipe recipe) {
         dao.add(recipe);
 
@@ -30,5 +28,10 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public void delete(int recipeCode) {
         dao.delete(recipeCode);
+    }
+
+    @Override
+    public int addImg(Recipe recipeMain) {
+        return dao.addImg(recipeMain);
     }
 }

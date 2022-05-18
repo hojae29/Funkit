@@ -35,45 +35,27 @@ public class RecipeController {
 
         return path+"add";
     }
-    @ResponseBody
     @PostMapping("/add")
-    public Recipe add(@SessionAttribute Member member,Recipe recipe, MultipartFile mainImg){
-        System.out.println(recipe);
-        /*//이미지 저장할 폴더 생성 및 경로 지정
-        String uploadFolder = "D:\\upload\\recipe";
-
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        Date date = new Date();
-
-        String str = sdf.format(date);
-
-        String recipePath = str.replace("-", File.separator);
-
-        File uploadPath = new File(uploadFolder,recipePath);
-
-        if(uploadPath.exists() == false){
-            uploadPath.mkdirs();
-        }
-
-        //폴더에 이미지 저장하기
-        for(MultipartFile multipartFile : mainImg){
-            String uploadFileName = multipartFile.getOriginalFilename();
-
-            File saveFile = new File(uploadPath,uploadFileName);
-
-            try{
-                multipartFile.transferTo(saveFile);
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }*/
-
+    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
+
+        String uploadMain = "D:\\upload\\recipe";
+
+        var recipeMain = new Recipe();
+
+        int recipeCode = service.addImg(recipeMain);
+
+        File imgPath = new File(uploadMain + recipeCode);
+
+        if(imgPath.exists() == false){
+            imgPath.mkdirs();
+        }
 
         service.add(recipe);
 
-        return recipe;
+
+
+        return "redirect:list";
     }
     @GetMapping("/view/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){

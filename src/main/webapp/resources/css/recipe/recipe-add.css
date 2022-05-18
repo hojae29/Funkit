@@ -1,7 +1,6 @@
 #add_box{
     margin: 0 auto;
     width:1180px;
-    /*height:100%;*/
     background-color:#fafafa;
     border-radius: 10px;
     display: flex;
@@ -31,14 +30,14 @@
 }
 .long_text{
     border-radius: 5px;
-    border: 1px solid #ff7e00;
+    border: 1px solid #cccccc;
     outline: none;
     width:600px;
     height:125px;
 }
 .mid_text{
     border-radius: 5px;
-    border: 1px solid #ff7e00;
+    border: 1px solid #cccccc;
     outline: none;
     width:600px;
     height:35px;
@@ -65,7 +64,7 @@ select{
     width:60px;
     height:35px;
     background-color: white;
-    border: 1px solid #ff7e00;
+    border: 1px solid #cccccc;
     border-radius: 5px;
     outline: none;
 }
@@ -76,7 +75,7 @@ select{
     width:100px;
     height:35px;
     background-color: white;
-    border: 1px solid #ff7e00;
+    border: 1px solid #cccccc;
     border-radius: 5px;
 }
 #sel_lpad{
