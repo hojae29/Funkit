@@ -11,5 +11,7 @@ public interface FundingDao {
 
     Funding<Image> getFunding(int code);
 
-    void setMainImage(int code, Image image);
+    void setMainImage(int fundingCode, Image image);
+
+    void setFundingImage(int fundingCode, Image image);
 }

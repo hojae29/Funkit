@@ -7,14 +7,9 @@
         VALUES(null, #{id}, NOW());
     </insert>
 
-    <insert id="makeMainImage">
-        INSERT INTO main_image(code, funding_code)
-        VALUES(null, #{fundingCode});
-    </insert>
-
     <update id="saveFunding">
         UPDATE funding
-        SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}
+        SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}
         WHERE funding_code = #{fundingCode}
     </update>
 
@@ -30,9 +25,21 @@
         WHERE funding_code=#{fundingCode}
     </select>
 
-    <update id="setMainImage">
+    <insert id="insertMainImage">
+        INSERT INTO main_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+
+    <update id="updateMainImage">
         UPDATE main_image
         SET file_name=#{image.fileName}, file_size=#{image.fileSize}
-        WHERE funding_code=#{code}
+        WHERE funding_code = #{fundingCode}
     </update>
+
+    <insert id="insertFundingImage">
+        INSERT INTO funding_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+
+
 </mapper>

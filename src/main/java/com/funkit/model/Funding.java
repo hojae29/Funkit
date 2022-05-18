@@ -14,9 +14,10 @@ public class Funding<T> {
     private Long targetAmount;
     private Long cmlAmount;
     private String status;
+    private String introduction;
 
     private T mainImage;
-    private List<T> fundingImages;
+    private List<T> fundingImage;
 
     public T getMainImage() {
         return mainImage;
@@ -26,12 +27,12 @@ public class Funding<T> {
         this.mainImage = mainImage;
     }
 
-    public List<T> getFundingImages() {
-        return fundingImages;
+    public List<T> getFundingImage() {
+        return fundingImage;
     }
 
-    public void setFundingImages(List<T> fundingImages) {
-        this.fundingImages = fundingImages;
+    public void setFundingImage(List<T> fundingImage) {
+        this.fundingImage = fundingImage;
     }
 
     public int getFundingCode() {
@@ -100,6 +101,14 @@ public class Funding<T> {
         this.status = status;
     }
 
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
     @Override
     public String toString() {
         return "Funding{" +
@@ -111,8 +120,9 @@ public class Funding<T> {
                 ", targetAmount=" + targetAmount +
                 ", cmlAmount=" + cmlAmount +
                 ", status='" + status + '\'' +
+                ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
-                ", fundingImages=" + fundingImages +
+                ", fundingImage=" + fundingImage +
                 '}';
     }
 }

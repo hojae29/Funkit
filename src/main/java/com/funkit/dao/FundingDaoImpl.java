@@ -21,7 +21,6 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public int makeFunding(Funding funding) {
         sql.insert("funding.makeFunding", funding);
-        sql.insert("funding.makeMainImage", funding.getFundingCode());
         return funding.getFundingCode();
     }
 
@@ -44,10 +43,22 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public void setMainImage(int code, Image image) {
+    public void setMainImage(int fundingCode, Image image) {
         Map map = new HashMap();
-        map.put("code", code);
+        map.put("fundingCode", fundingCode);
         map.put("image", image);
-        sql.update("funding.setMainImage", map);
+
+        if(sql.selectOne("funding.getMainImage", fundingCode) == null)
+            sql.insert("funding.insertMainImage", map);
+        else
+            sql.update("funding.updateMainImage", map);
+    }
+
+    @Override
+    public void setFundingImage(int fundingCode, Image image) {
+        Map map = new HashMap();
+        map.put("fundingCode", fundingCode);
+        map.put("image", image);
+        sql.insert("funding.setFundingImage", map);
     }
 }

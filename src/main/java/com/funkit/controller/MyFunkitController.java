@@ -17,13 +17,11 @@ public class MyFunkitController {
         Member member = (Member) session.getAttribute("member");
         int type = member.getCode();
 
-        if(type == 10)
-            return "mypage/individual";
-        else if(type == 20)
-            return "mypage/company";
-        else if(type == 30)
-            return "mypage/manager";
-        else
-            throw new CustomException(ErrorCode.WRONG_ACCESS);
+        switch(type){
+            case 10 : return "mypage/individual";
+            case 20 : return "mypage/company";
+            case 30 : return "mypage/manager";
+            default : throw new CustomException(ErrorCode.WRONG_ACCESS);
+        }
     }
 }

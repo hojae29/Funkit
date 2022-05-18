@@ -190,16 +190,21 @@
                             <div><input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png"></div>
                         </div>
                     </form>
-                    <form id="story_form" style="display:none">
+                    <form id="story_form" method="post" enctype="multipart/form-data" style="display:none">
                         <div>
                             <div><label>이미지 등록</label></div>
                             <div><p>프로젝트의 이미지를 등록해주세요</p></div>
-                            <div><input type="file" id="story_img_input"></div>
+                            <div id="funding_image_input_box">
+                                <input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">
+                            </div>
+                        </div>
+                        <div>
+                            <button type="button" id="add_input">추가</button>
                         </div>
                         <div>
                             <div><label>간단 소개글</label></div>
                             <div><p>간단한 소개글을 적어주세요</p></div>
-                            <div><input type="text" class="text_input"></div>
+                            <div><input type="text" class="text_input" name="introduction"></div>
                         </div>
                         <div>
                             <div><label>스토리 작성</label></div>
@@ -232,25 +237,24 @@
         //저장 버튼
         $("#save_btn").on("click", () => {
             let formType = $("#form_type").data("form");
-            if(formType === 1){ //기본정보 폼
-                let formData = new FormData($("#basic_form")[0]);
+            let formData;
+            if(formType === 1) //기본정보 폼
+                formData = new FormData($("#basic_form")[0]);
+            else if(formType === 2) //스토리 폼
+                formData = new FormData($("#story_form")[0]);
+            else if(formType === 3){} //리워드 폼
 
-                $.ajax({
-                    url: window.location.pathname,
-                    type: "POST",
-                    enctype: 'multipart/form-data',
-                    data: formData,
-                    processData: false,
-                    contentType: false,
-                    cache: false,
-                    success: function (result) { },
-                    error: function (e) { }
-                });
-            }else if(formType === 2){ //스토리 폼
-
-            }else if(formType === 3){ //리워드 폼
-
-            }
+            $.ajax({
+                url: window.location.pathname,
+                type: "POST",
+                enctype: 'multipart/form-data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (result) { },
+                error: function (e) { }
+            });
         });
 
         //다음 버튼
@@ -285,6 +289,11 @@
 
             }
         }
+
+        $("#add_input").on("click", () => {
+            let html = '<input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">'
+            $("#funding_image_input_box").append(html);
+        });
     </script>
 </body>
 </html>

@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class FundingServiceImpl implements FundingService {
@@ -26,22 +27,39 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public void saveFunding(Funding<MultipartFile> funding) {
         fundingDao.saveFunding(funding);
+
         if(funding.getMainImage() != null){
+            UUID uuid = UUID.randomUUID();
+
             Image image = new Image();
-            image.setFileName(funding.getFundingCode() + ".png");
+            image.setFileName(uuid + ".png");
             image.setFileSize(funding.getMainImage().getSize());
 
             try {
-                funding.getMainImage().transferTo(
-                        new File("d:/upload/" +
-                                funding.getFundingCode() +
-                                "/mainImage/" +
-                                image.getFileName()));
+                funding.getMainImage().transferTo(new File("d:/upload/" + funding.getFundingCode() + "/mainImage/" + image.getFileName()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
             fundingDao.setMainImage(funding.getFundingCode(), image);
+        }
+
+        if(funding.getFundingImage() != null){
+            for (MultipartFile file : funding.getFundingImage()){
+                UUID uuid = UUID.randomUUID();
+
+                Image image = new Image();
+                image.setFileName(uuid + ".png");
+                image.setFileSize(file.getSize());
+
+                try {
+                    file.transferTo(new File("d:/upload/" + funding.getFundingCode() + "/fundingImage/" + image.getFileName()));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+
+                fundingDao.setFundingImage(funding.getFundingCode(), image);
+            }
         }
     }
 
