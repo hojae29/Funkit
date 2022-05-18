@@ -100,7 +100,7 @@
         #basic_info_form > div{
             margin-bottom: 20px;
         }
-        #story_form > div{
+        .form_box form > div{
             margin-bottom:20px;
         }
 
@@ -160,15 +160,15 @@
         <div class="bottom_box">
             <div class="side_menu_box">
                 <ul id="side_menu">
-                    <li>1. 기본정보</li>
+                    <li style="color:#ff7e00">1. 기본정보</li>
                     <li>2. 스토리</li>
                     <li>3. 리워드 설계</li>
                 </ul>
             </div>
             <div class="form_box">
-                <div>
+                <div id="form_type" data-form="1">
                     <div><p id="menu_title">기본정보</p></div>
-                    <form id="basic_info_form" method="post" enctype="multipart/form-data">
+                    <form id="basic_form" method="post" enctype="multipart/form-data">
                         <div>
                             <div><label>프로젝트 제목</label></div>
                             <div><p>프로젝트를 표현할 수 있는 제목을 입력해주세요</p></div>
@@ -187,21 +187,29 @@
                         <div>
                             <div><label>대표 이미지</label></div>
                             <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                            <div><input type="file" name="mainImage" id="title_img_input"></div>
+                            <div><input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png"></div>
                         </div>
                     </form>
-                    <%--<form id="story_form">
+                    <form id="story_form" style="display:none">
                         <div>
                             <div><label>이미지 등록</label></div>
                             <div><p>프로젝트의 이미지를 등록해주세요</p></div>
                             <div><input type="file" id="story_img_input"></div>
                         </div>
                         <div>
+                            <div><label>간단 소개글</label></div>
+                            <div><p>간단한 소개글을 적어주세요</p></div>
+                            <div><input type="text" class="text_input"></div>
+                        </div>
+                        <div>
                             <div><label>스토리 작성</label></div>
                             <div><p>프로젝트의 스토리를 적어주세요</p></div>
                             <div></div>
                         </div>
-                    </form>--%>
+                    </form>
+                    <form id="reward_form" style="display:none;">
+                        
+                    </form>
                 </div>
                 <div>
                     <button id="save_btn" style="margin-right: 10px">저장</button>
@@ -211,21 +219,72 @@
         </div>
     </div>
     <script>
-        $("#save_btn").on("click", () => {
-            let formData = new FormData($("#basic_info_form")[0]);
-
-            $.ajax({
-                url: window.location.pathname,
-                type: "POST",
-                enctype: 'multipart/form-data',
-                data: formData,
-                processData: false,
-                contentType: false,
-                cache: false,
-                success: function (result) { },
-                error: function (e) { }
-            });
+        $("#side_menu > li:nth-child(1)").on("click", () => {
+           changeForm("basicForm");
         });
+        $("#side_menu > li:nth-child(2)").on("click", () => {
+            changeForm("storyForm");
+        });
+        $("#side_menu > li:nth-child(3)").on("click", () => {
+            changeForm("rewardForm");
+        });
+
+        //저장 버튼
+        $("#save_btn").on("click", () => {
+            let formType = $("#form_type").data("form");
+            if(formType === 1){ //기본정보 폼
+                let formData = new FormData($("#basic_form")[0]);
+
+                $.ajax({
+                    url: window.location.pathname,
+                    type: "POST",
+                    enctype: 'multipart/form-data',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    cache: false,
+                    success: function (result) { },
+                    error: function (e) { }
+                });
+            }else if(formType === 2){ //스토리 폼
+
+            }else if(formType === 3){ //리워드 폼
+
+            }
+        });
+
+        //다음 버튼
+        $("#next_btn").on("click", () => {
+            let formType = $("#form_type").data("form");
+            if(formType === 1){
+                changeForm("storyForm");
+            }
+            if(formType === 2){
+                changeForm("rewardForm");
+            }
+        });
+
+        function changeForm(name) {
+            if (name === "basicForm") {
+                $("#menu_title").text("기본정보");
+                $("#story_form").css("display", "none");
+                $("#basic_form").css("display", "block");
+                $("#form_type").data("form", 1);
+                $("#side_menu > li:nth-child(1)").css("color", "#ff7e00");
+                $("#side_menu > li:nth-child(2)").css("color", "black");
+                $("#side_menu > li:nth-child(3)").css("color", "black");
+            } else if (name === "storyForm") {
+                $("#menu_title").text("스토리");
+                $("#story_form").css("display", "block");
+                $("#basic_form").css("display", "none");
+                $("#form_type").data("form", 2);
+                $("#side_menu > li:nth-child(1)").css("color", "black");
+                $("#side_menu > li:nth-child(2)").css("color", "#ff7e00");
+                $("#side_menu > li:nth-child(3)").css("color", "black");
+            } else if (name === "rewardForm") {
+
+            }
+        }
     </script>
 </body>
 </html>

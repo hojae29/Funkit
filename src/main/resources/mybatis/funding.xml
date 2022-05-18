@@ -8,7 +8,7 @@
     </insert>
 
     <insert id="makeMainImage">
-        INSERT INTO main_image(main_image_code, funding_code)
+        INSERT INTO main_image(code, funding_code)
         VALUES(null, #{fundingCode});
     </insert>
 

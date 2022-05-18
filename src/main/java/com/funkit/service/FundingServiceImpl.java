@@ -32,10 +32,11 @@ public class FundingServiceImpl implements FundingService {
             image.setFileSize(funding.getMainImage().getSize());
 
             try {
-                funding.getMainImage().transferTo(new File("d:/upload/" +
-                                                                    funding.getFundingCode() +
-                                                                    "/mainImage/" +
-                                                                    image.getFileName()));
+                funding.getMainImage().transferTo(
+                        new File("d:/upload/" +
+                                funding.getFundingCode() +
+                                "/mainImage/" +
+                                image.getFileName()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

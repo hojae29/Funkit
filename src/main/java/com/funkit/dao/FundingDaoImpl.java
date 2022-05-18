@@ -34,9 +34,12 @@ public class FundingDaoImpl implements FundingDao {
     public Funding<Image> getFunding(int code) {
         Funding<Image> funding = new Funding<>();
         Image mainImage = new Image();
+
         funding = sql.selectOne("funding.getFunding", code);
         mainImage = sql.selectOne("funding.getMainImage", code);
+
         funding.setMainImage(mainImage);
+
         return funding;
     }
 
