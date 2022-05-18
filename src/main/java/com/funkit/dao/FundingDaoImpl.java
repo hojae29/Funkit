@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -33,11 +35,14 @@ public class FundingDaoImpl implements FundingDao {
     public Funding<Image> getFunding(int code) {
         Funding<Image> funding = new Funding<>();
         Image mainImage = new Image();
+        List<Image> fundingImage = new ArrayList<>();
 
         funding = sql.selectOne("funding.getFunding", code);
         mainImage = sql.selectOne("funding.getMainImage", code);
+        fundingImage = sql.selectList("funding.getFundingImage", code);
 
         funding.setMainImage(mainImage);
+        funding.setFundingImage(fundingImage);
 
         return funding;
     }
@@ -59,6 +64,13 @@ public class FundingDaoImpl implements FundingDao {
         Map map = new HashMap();
         map.put("fundingCode", fundingCode);
         map.put("image", image);
-        sql.insert("funding.setFundingImage", map);
+        sql.insert("funding.insertFundingImage", map);
+    }
+
+    @Override
+    public void deleteFundingImage(List<String> deleteImages) {
+        for(String fileName : deleteImages){
+            sql.delete("funding.deleteFundingImage", fileName);
+        }
     }
 }

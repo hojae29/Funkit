@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>펀키트</title>
@@ -194,6 +195,13 @@
                         <div>
                             <div><label>이미지 등록</label></div>
                             <div><p>프로젝트의 이미지를 등록해주세요</p></div>
+                            <div>
+                                <c:forEach var="image" items="${funding.fundingImage}">
+                                    <p>${image.fileName}
+                                        <button type="button" onclick="deleteImage('${image.fileName}')">삭제</button>
+                                    </p>
+                                </c:forEach>
+                            </div>
                             <div id="funding_image_input_box">
                                 <input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">
                             </div>
@@ -224,6 +232,8 @@
         </div>
     </div>
     <script>
+        let deleteImgList = [];
+
         $("#side_menu > li:nth-child(1)").on("click", () => {
            changeForm("basicForm");
         });
@@ -240,8 +250,16 @@
             let formData;
             if(formType === 1) //기본정보 폼
                 formData = new FormData($("#basic_form")[0]);
-            else if(formType === 2) //스토리 폼
+            else if(formType === 2){
                 formData = new FormData($("#story_form")[0]);
+                if(deleteImgList.length >= 1)
+                {
+                    for(const item of deleteImgList){
+                        console.dir(item);
+                        formData.append("deleteImages", item);
+                    }
+                }
+            } //스토리 폼
             else if(formType === 3){} //리워드 폼
 
             $.ajax({
@@ -294,6 +312,13 @@
             let html = '<input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">'
             $("#funding_image_input_box").append(html);
         });
+
+
+        function deleteImage(uuid){
+            deleteImgList.push(uuid);
+            console.log(deleteImgList);
+        }
+
     </script>
 </body>
 </html>

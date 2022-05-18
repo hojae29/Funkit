@@ -6,14 +6,12 @@ import com.funkit.model.Member;
 import com.funkit.service.FundingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.List;
 
 @Controller
 @RequestMapping("/myfunkit/funding")
@@ -46,16 +44,16 @@ public class FundingController {
     @GetMapping("/{code}")
     public String moveFundingPage(@PathVariable int code, Model model){
         Funding<Image> funding = fundingService.getFunding(code);
-        System.out.println(funding.toString());
         model.addAttribute("funding", funding);
         return "/mypage/funding/add";
     }
 
     @PostMapping("/{code}")
-    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding){
+    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding, @RequestParam("deleteImages") List<String> deleteImages){
         funding.setFundingCode(code);
-        System.out.println(funding);
-        fundingService.saveFunding(funding);
+
+        System.out.println("가나다 : " + funding);
+        fundingService.saveFunding(funding, deleteImages);
+
     }
 }
-

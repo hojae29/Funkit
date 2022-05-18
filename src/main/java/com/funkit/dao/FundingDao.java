@@ -4,6 +4,8 @@ import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 public interface FundingDao {
     int makeFunding(Funding funding);
 
@@ -14,4 +16,6 @@ public interface FundingDao {
     void setMainImage(int fundingCode, Image image);
 
     void setFundingImage(int fundingCode, Image image);
+
+    void deleteFundingImage(List<String> deleteImages);
 }

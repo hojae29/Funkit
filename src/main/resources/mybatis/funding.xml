@@ -22,7 +22,14 @@
     <select id="getMainImage" resultType="Image">
         SELECT *
         FROM main_image
-        WHERE funding_code=#{fundingCode}
+        WHERE funding_code=#{code}
+    </select>
+
+    <select id="getFundingImage" resultType="Image">
+        SELECT *
+        FROM funding_image
+        WHERE funding_code=#{code}
+        ORDER BY code
     </select>
 
     <insert id="insertMainImage">
@@ -40,6 +47,11 @@
         INSERT INTO funding_image
         VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
     </insert>
+
+    <delete id="deleteFundingImage">
+        DELETE funding_image
+        WHERE file_name = #{fileName}
+    </delete>
 
 
 </mapper>
