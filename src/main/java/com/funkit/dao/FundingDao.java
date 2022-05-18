@@ -13,9 +13,13 @@ public interface FundingDao {
 
     Funding<Image> getFunding(int code);
 
-    void setMainImage(int fundingCode, Image image);
-
     void setFundingImage(int fundingCode, Image image);
 
     void deleteFundingImage(List<String> deleteImages);
+
+    Image getMainImage(int fundingCode);
+
+    void insertMainImage(int fundingCode, Image image);
+
+    void updateMainImage(int fundingCode, Image image);
 }

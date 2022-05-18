@@ -8,7 +8,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -26,35 +25,42 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void saveFunding(Funding<MultipartFile> funding, List<String> deleteImages) {
+    public void saveFunding(Funding<MultipartFile> funding) {
+        int fundingCode = funding.getFundingCode();
+        var mainImage = funding.getMainImage();
+        var fundingImage = funding.getFundingImage();
+        var deleteImages = funding.getDeleteImages();
+
+        String mainImgPath = "d:/upload/" + fundingCode + "/mainImage/";
+        String fundingImgPath = "d:/upload/" + fundingCode + "/fundingImage/";
+
         fundingDao.saveFunding(funding);
 
-        if(funding.getMainImage() != null){
-            UUID uuid = UUID.randomUUID();
-
-            Image image = new Image();
-            image.setFileName(uuid + ".png");
-            image.setFileSize(funding.getMainImage().getSize());
+        if(mainImage != null && !mainImage.isEmpty()){
+            var image = makeImage(funding.getMainImage());
 
             try {
-                funding.getMainImage().transferTo(new File("d:/upload/" + funding.getFundingCode() + "/mainImage/" + image.getFileName()));
+                funding.getMainImage().transferTo(new File(mainImgPath + image.getFileName()));
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-            fundingDao.setMainImage(funding.getFundingCode(), image);
+            var item = fundingDao.getMainImage(fundingCode);
+            if(item == null) {
+                fundingDao.insertMainImage(fundingCode, image);
+            } else{
+                fundingDao.updateMainImage(fundingCode, image);
+                File file = new File(mainImgPath + item.getFileName());
+                file.delete();
+            }
         }
 
-        if(funding.getFundingImage().size() >= 1){
+        if(fundingImage != null && !fundingImage.isEmpty()){
             for (MultipartFile file : funding.getFundingImage()){
-                UUID uuid = UUID.randomUUID();
-
-                Image image = new Image();
-                image.setFileName(uuid + ".png");
-                image.setFileSize(file.getSize());
+                var image = makeImage(file);
 
                 try {
-                    file.transferTo(new File("d:/upload/" + funding.getFundingCode() + "/fundingImage/" + image.getFileName()));
+                    file.transferTo(new File(fundingImgPath + image.getFileName()));
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -62,17 +68,28 @@ public class FundingServiceImpl implements FundingService {
                 fundingDao.setFundingImage(funding.getFundingCode(), image);
             }
         }
-        if(deleteImages.size() >= 1){
-            for(String fileName : deleteImages){
-                File file = new File("d:/upload/" + funding.getFundingCode() + "/fundingImage/" + fileName);
+
+        if(deleteImages != null && !deleteImages.isEmpty()){
+            for(String fileName : funding.getDeleteImages()){
+                File file = new File(fundingImgPath + fileName);
                 file.delete();
             }
-            fundingDao.deleteFundingImage(deleteImages);
+            fundingDao.deleteFundingImage(funding.getDeleteImages());
         }
     }
 
     @Override
     public Funding<Image> getFunding(int code) {
         return fundingDao.getFunding(code);
+    }
+
+    public Image makeImage(MultipartFile file){
+        UUID uuid = UUID.randomUUID();
+
+        Image image = new Image();
+        image.setFileName(uuid + ".png");
+        image.setFileSize(file.getSize());
+
+        return image;
     }
 }

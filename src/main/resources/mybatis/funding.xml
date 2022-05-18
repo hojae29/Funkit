@@ -49,7 +49,7 @@
     </insert>
 
     <delete id="deleteFundingImage">
-        DELETE funding_image
+        DELETE FROM funding_image
         WHERE file_name = #{fileName}
     </delete>
 

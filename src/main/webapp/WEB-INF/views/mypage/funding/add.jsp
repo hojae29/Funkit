@@ -105,7 +105,7 @@
             margin-bottom:20px;
         }
 
-        #title_img_input{
+        #title_img_box{
             width: 350px;
             height:210px;
             border: 1px solid #cccccc;
@@ -169,59 +169,67 @@
             <div class="form_box">
                 <div id="form_type" data-form="1">
                     <div><p id="menu_title">기본정보</p></div>
-                    <form id="basic_form" method="post" enctype="multipart/form-data">
-                        <div>
-                            <div><label>프로젝트 제목</label></div>
-                            <div><p>프로젝트를 표현할 수 있는 제목을 입력해주세요</p></div>
-                            <div><input class="text_input" name="title" type="text" value="${funding.title}"></div>
-                        </div>
-                        <div>
-                            <div><label>목표 금액</label></div>
-                            <div><p>프로젝트의 펀딩 목표금액을 입력해주세요</p></div>
-                            <div><input class="text_input" name="targetAmount" type="text" value="${funding.targetAmount}"></div>
-                        </div>
-                        <div>
-                            <div><label>진행기간</label></div>
-                            <div><p>프로젝트 진행기간을 설정해주세요</p></div>
-                            <div><input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>"></div>
-                        </div>
-                        <div>
-                            <div><label>대표 이미지</label></div>
-                            <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                            <div><input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png"></div>
-                        </div>
-                    </form>
-                    <form id="story_form" method="post" enctype="multipart/form-data" style="display:none">
-                        <div>
-                            <div><label>이미지 등록</label></div>
-                            <div><p>프로젝트의 이미지를 등록해주세요</p></div>
+                    <form id="add_form" method="post" enctype="multipart/form-data">
+                        <div id="basic_form">
                             <div>
-                                <c:forEach var="image" items="${funding.fundingImage}">
-                                    <p>${image.fileName}
-                                        <button type="button" onclick="deleteImage('${image.fileName}')">삭제</button>
-                                    </p>
-                                </c:forEach>
+                                <div><label>프로젝트 제목</label></div>
+                                <div><p>프로젝트를 표현할 수 있는 제목을 입력해주세요</p></div>
+                                <div><input class="text_input" name="title" type="text" value="${funding.title}"></div>
                             </div>
-                            <div id="funding_image_input_box">
-                                <input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">
+                            <div>
+                                <div><label>목표 금액</label></div>
+                                <div><p>프로젝트의 펀딩 목표금액을 입력해주세요</p></div>
+                                <div><input class="text_input" name="targetAmount" type="text" value="${funding.targetAmount}"></div>
+                            </div>
+                            <div>
+                                <div><label>진행기간</label></div>
+                                <div><p>프로젝트 진행기간을 설정해주세요</p></div>
+                                <div><input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>"></div>
+                            </div>
+                            <div>
+                                <div><label>대표 이미지</label></div>
+                                <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
+                                <div>
+                                    <label for="title_img_input">
+                                        <div id="title_img_box">
+                                            <img src="/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}"/>
+                                        </div>
+                                    </label>
+                                </div>
+                                <div><input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png" style="display: none"></div>
                             </div>
                         </div>
-                        <div>
-                            <button type="button" id="add_input">추가</button>
+
+                        <div id="story_form" style="display: none">
+                            <div>
+                                <div><label>이미지 등록</label></div>
+                                <div><p>프로젝트의 이미지를 등록해주세요</p></div>
+                                <div>
+                                    <c:forEach var="image" items="${funding.fundingImage}">
+                                        <p>${image.fileName}
+                                            <button type="button" onclick="deleteImage('${image.fileName}')">삭제</button>
+                                        </p>
+                                    </c:forEach>
+                                </div>
+                                <div id="funding_image_input_box"></div>
+                            </div>
+                            <div>
+                                <button type="button" id="add_input">추가</button>
+                            </div>
+                            <div>
+                                <div><label>간단 소개글</label></div>
+                                <div><p>간단한 소개글을 적어주세요</p></div>
+                                <div><input type="text" class="text_input" name="introduction"></div>
+                            </div>
+                            <div>
+                                <div><label>스토리 작성</label></div>
+                                <div><p>프로젝트의 스토리를 적어주세요</p></div>
+                                <div></div>
+                            </div>
                         </div>
-                        <div>
-                            <div><label>간단 소개글</label></div>
-                            <div><p>간단한 소개글을 적어주세요</p></div>
-                            <div><input type="text" class="text_input" name="introduction"></div>
+
+                        <div id="reward_form" style="display: none">
                         </div>
-                        <div>
-                            <div><label>스토리 작성</label></div>
-                            <div><p>프로젝트의 스토리를 적어주세요</p></div>
-                            <div></div>
-                        </div>
-                    </form>
-                    <form id="reward_form" style="display:none;">
-                        
                     </form>
                 </div>
                 <div>
@@ -232,7 +240,6 @@
         </div>
     </div>
     <script>
-        let deleteImgList = [];
 
         $("#side_menu > li:nth-child(1)").on("click", () => {
            changeForm("basicForm");
@@ -246,21 +253,7 @@
 
         //저장 버튼
         $("#save_btn").on("click", () => {
-            let formType = $("#form_type").data("form");
-            let formData;
-            if(formType === 1) //기본정보 폼
-                formData = new FormData($("#basic_form")[0]);
-            else if(formType === 2){
-                formData = new FormData($("#story_form")[0]);
-                if(deleteImgList.length >= 1)
-                {
-                    for(const item of deleteImgList){
-                        console.dir(item);
-                        formData.append("deleteImages", item);
-                    }
-                }
-            } //스토리 폼
-            else if(formType === 3){} //리워드 폼
+            let formData = new FormData($("#add_form")[0]);
 
             $.ajax({
                 url: window.location.pathname,
@@ -310,13 +303,19 @@
 
         $("#add_input").on("click", () => {
             let html = '<input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">'
-            $("#funding_image_input_box").append(html);
+            if($("#funding_image_input_box > input").length === 0){
+                $("#funding_image_input_box").append(html);
+            }
+            if($("#funding_image_input_box > input:last-child").val()){
+                $("#funding_image_input_box").append(html);
+            }
         });
 
 
         function deleteImage(uuid){
-            deleteImgList.push(uuid);
-            console.log(deleteImgList);
+            let html = '<input type="hidden" name="deleteImages" value="' + uuid + '">'
+            if($("input[value='" + uuid +"']").length < 1)
+                $("#story_form").append(html);
         }
 
     </script>

@@ -49,11 +49,10 @@ public class FundingController {
     }
 
     @PostMapping("/{code}")
-    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding, @RequestParam("deleteImages") List<String> deleteImages){
+    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding){
         funding.setFundingCode(code);
 
-        System.out.println("가나다 : " + funding);
-        fundingService.saveFunding(funding, deleteImages);
-
+        System.out.println("funding  : " + funding);
+        fundingService.saveFunding(funding);
     }
 }

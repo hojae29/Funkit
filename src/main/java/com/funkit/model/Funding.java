@@ -19,6 +19,16 @@ public class Funding<T> {
     private T mainImage;
     private List<T> fundingImage;
 
+    private List<String> deleteImages;
+
+    public List<String> getDeleteImages() {
+        return deleteImages;
+    }
+
+    public void setDeleteImages(List<String> deleteImages) {
+        this.deleteImages = deleteImages;
+    }
+
     public T getMainImage() {
         return mainImage;
     }
@@ -123,6 +133,7 @@ public class Funding<T> {
                 ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
                 ", fundingImage=" + fundingImage +
+                ", deleteImages=" + deleteImages +
                 '}';
     }
 }
