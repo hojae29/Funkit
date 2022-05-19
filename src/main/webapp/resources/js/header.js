@@ -219,7 +219,7 @@ $("#submit_login_form").on("click", () =>{
         method: "POST",
         contentType: "application/json",
         data: JSON.stringify(member),
-        success: res => location.href = "http://localhost:8181/",
+        success: res => location.href = "/",
         error: res => {
             $("#login_msg").text("*로그인 실패. 다시시도하세요");
         }
@@ -419,10 +419,14 @@ function checkRegisterForm(){
 
     //data-vst 값이 모두 1일 때 버튼 활성화
     if(!(validList.includes(0) || validList.includes(null))){
-        $("#submit_register_form").attr("disabled", false);
+        $("#submit_register_form")
+            .attr("disabled", false)
+            .css("cursor", "pointer");
         return true;
     } else{
-        $("#submit_register_form").attr("disabled", true);
+        $("#submit_register_form")
+            .attr("disabled", true)
+            .css("cursor", "default");
         return false;
     }
 }
@@ -492,7 +496,7 @@ function changeTab(index){
         mlb.style.borderBottom = "2px solid white";
         mlb.style.color = "black";
         companyBox.style.display="none";
-        typeBox.style.display = "flex";
+        typeBox.style.display = "block";
         registerForm.id.focus();
         formReset("#login_form");
     } else if(index === "register2"){

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="funding">
+    <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
+        INSERT INTO funding(funding_code, id, exp_date)
+        VALUES(null, #{id}, NOW());
+    </insert>
+
+    <update id="saveFunding">
+        UPDATE funding
+        SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}
+        WHERE funding_code = #{fundingCode}
+    </update>
+
+    <select id="getFunding" resultType="Funding">
+        SELECT *
+        FROM funding
+        WHERE funding_code=#{fundingCode}
+    </select>
+
+    <select id="getMainImage" resultType="Image">
+        SELECT *
+        FROM main_image
+        WHERE funding_code=#{code}
+    </select>
+
+    <select id="getFundingImage" resultType="Image">
+        SELECT *
+        FROM funding_image
+        WHERE funding_code=#{code}
+        ORDER BY code
+    </select>
+
+    <insert id="insertMainImage">
+        INSERT INTO main_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+
+    <update id="updateMainImage">
+        UPDATE main_image
+        SET file_name=#{image.fileName}, file_size=#{image.fileSize}
+        WHERE funding_code = #{fundingCode}
+    </update>
+
+    <insert id="insertFundingImage">
+        INSERT INTO funding_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+
+    <delete id="deleteFundingImage">
+        DELETE FROM funding_image
+        WHERE file_name = #{fileName}
+    </delete>
+
+
+</mapper>

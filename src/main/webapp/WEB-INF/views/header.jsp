@@ -20,7 +20,11 @@
             <div class="nav">
                 <div class="nav_top">
                     <div class="nav_left">
-                        <a href="/"><p class="logo">FunKit</p></a>
+                        <a href="/">
+                            <p class="logo" style="display: flex;align-items: center;">
+                                <img src="/resources/img/logo.png" width="35" height="35"/>펀키트
+                            </p>
+                        </a>
                     </div>
                     <div>
                         <button class="add_recipe">레시피 등록</button>
@@ -67,7 +71,11 @@
             </div>
             <div class="modal_window">
                 <div class="modal_top" style="margin: 0;">
-                    <div>Funkit</div>
+                    <div>
+                        <p class="logo" style="display: flex;align-items: center; justify-content: center;">
+                            <img src="/resources/img/logo.png" width="35" height="35"/>펀키트
+                        </p>
+                    </div>
                     <div>
                         <button id="modal_login_btn">로그인</button>
                         <button id="modal_register_btn">회원가입</button>
@@ -140,7 +148,7 @@
                     </form>
                 </div>
                 <div>
-                    <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
+                    <button type="button" class="submit_btn" id="submit_register_form" style="cursor: default" disabled>회원가입</button>
                     <button type="button" class="submit_btn" id="submit_login_form">로그인</button>
                     <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>
