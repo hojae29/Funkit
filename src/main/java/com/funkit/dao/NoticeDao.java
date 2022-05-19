@@ -14,4 +14,6 @@ public interface NoticeDao {
     Notice view(int noticeCode);
 
     void delete(int noticeCode);
+
+    Notice item(int noticeCode);
 }

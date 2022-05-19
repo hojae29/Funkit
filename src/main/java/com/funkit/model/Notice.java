@@ -3,18 +3,18 @@ package com.funkit.model;
 import java.util.Date;
 
 public class Notice {
-    private String noticeCode;
+    private int noticeCode;
     private String title;
     private String content;
     private int viewCount;
     private String id;
     private Date regDate;
 
-    public String getNoticeCode() {
+    public int getNoticeCode() {
         return noticeCode;
     }
 
-    public void setNoticeCode(String noticeCode) {
+    public void setNoticeCode(int noticeCode) {
         this.noticeCode = noticeCode;
     }
 

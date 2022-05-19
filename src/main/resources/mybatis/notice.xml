@@ -25,4 +25,10 @@
         where notice_code = #{noticeCode}
     </update>
 
+    <select id="item" resultType="Notice">
+        SELECT *
+        FROM notice
+        WHERE notice_code=#{noticeCode}
+    </select>
+
 </mapper>

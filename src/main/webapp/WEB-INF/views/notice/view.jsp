@@ -22,7 +22,7 @@
         <div>${notice.content}</div>
     </div>
     <div>
-        <p><a href="../update">변경</a></p>
+        <p><a href="${notice.noticeCode}/update">변경</a></p>
         <p><a href="${notice.noticeCode}/delete">삭제</a></p>
     </div>
     <div>

@@ -51,7 +51,7 @@
             <c:forEach var="notice" items="${list}">
                 <tr>
                     <td>${notice.noticeCode}</td>
-                    <td><a href="view/${notice.noticeCode}">${notice.title}</a></td>
+                    <td><a href="/notice/${notice.noticeCode}">${notice.title}</a></td>
                     <td>${notice.id}</td>
                     <td>
                         <fmt:formatDate value="${notice.regDate}" pattern="YYYY-MM-dd"/>
@@ -78,6 +78,6 @@
             </tfoot>
         </table>
     </div>
-    <button><a href="add">글쓰기</a></button>
+    <button><a href="/notice/add">글쓰기</a></button>
 </body>
 </html>

@@ -44,7 +44,7 @@
                             <li><a href="/funding/">펀딩</a></li>
                             <li>랭킹</li>
                             <li>스토어</li>
-                            <li><a href="/notice/">공지사항</a></li>
+                            <li><a href="/notice">공지사항</a></li>
                         </ul>
                     </div>
                     <div class="nav_search">

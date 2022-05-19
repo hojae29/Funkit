@@ -35,4 +35,9 @@ public class NoticeServiceImpl implements NoticeService{
     public void delete(int noticeCode) {
         dao.delete(noticeCode);
     }
+
+    @Override
+    public Notice item(int noticeCode) {
+        return dao.item(noticeCode);
+    }
 }

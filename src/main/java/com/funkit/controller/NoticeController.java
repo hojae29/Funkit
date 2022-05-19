@@ -37,24 +37,27 @@ public class NoticeController {
         Member user = (Member) session.getAttribute("member");
         notice.setId(user.getId());
         service.add(notice);
-        return "redirect:./";
+        return "redirect:../notice";
     }
 
-    @GetMapping("/update")
-    public String update() {
+    @GetMapping("/{noticeCode}/update")
+    public String update(@PathVariable int noticeCode, Model model) {
+        Notice notice = service.item(noticeCode);
+
+        model.addAttribute("notice", notice);
+
         return path + "update";
     }
 
-    @PostMapping("/update")
-    public String update(Notice notice, HttpSession session) {
-
-        Member user = (Member) session.getAttribute("member");
-        notice.setId(user.getId());
+    @PostMapping("/{noticeCode}/update")
+    public String update(@PathVariable int noticeCode, Notice notice) {
+        notice.setNoticeCode(noticeCode);
         service.update(notice);
+
         return "redirect:./";
     }
 
-    @GetMapping("/view/{noticeCode}")
+    @GetMapping("/{noticeCode}")
     public String view(@PathVariable int noticeCode, Model model) {
         Notice notice = new Notice();
         notice = service.view(noticeCode);
@@ -62,7 +65,7 @@ public class NoticeController {
         return path + "view";
     }
 
-    @GetMapping("/view/{noticeCode}/delete")
+    @GetMapping("/{noticeCode}/delete")
     public String delete(@PathVariable int noticeCode) {
         service.delete(noticeCode);
         return "redirect:/notice";

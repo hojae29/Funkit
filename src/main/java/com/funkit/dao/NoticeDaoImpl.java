@@ -34,4 +34,9 @@ public class NoticeDaoImpl implements NoticeDao{
     public void delete(int noticeCode) {
         sql.delete("notice.delete",noticeCode);
     }
+
+    @Override
+    public Notice item(int noticeCode) {
+        return sql.selectOne("notice.item", noticeCode);
+    }
 }

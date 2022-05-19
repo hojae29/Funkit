@@ -14,5 +14,7 @@ public interface NoticeService {
     Notice view(int noticeCode);
 
     void delete(int noticeCode);
+
+    Notice item(int noticeCode);
 }
 
