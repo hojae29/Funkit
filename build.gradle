@@ -51,6 +51,10 @@ dependencies {
     implementation 'mysql:mysql-connector-java:8.0.28'
     //MariaDB 사용을 위한 dependency
     implementation group: 'org.mariadb.jdbc', name: 'mariadb-java-client', version: '2.7.4'
+    //File Upload 사용을 위한 dependenc
+    implementation group: 'commons-fileupload', name: 'commons-fileupload', version: '1.4'
+    //대용량 파일 처리
+    implementation group: 'commons-io', name: 'commons-io', version: '2.11.0'
     //Mail
     implementation group: 'javax.mail', name: 'mail', version: '1.4.7'
 }

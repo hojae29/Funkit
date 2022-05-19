@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recipe">
+    <select id="list" resultType="Recipe">
+        SELECT * FROM RECIPE
+    </select>
+
+    <insert id="add">
+        INSERT INTO recipe(recipe_code, title, id, reg_date,intro,ingredients,takes)
+        VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes})
+    </insert>
+
+    <delete id="delete">
+        DELETE FROM recipe
+        where recipe_code=#{recipeCode}
+    </delete>
+</mapper>
