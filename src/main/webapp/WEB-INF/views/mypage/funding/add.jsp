@@ -98,10 +98,11 @@
             border: 1px solid #cccccc;
         }
 
-        #basic_info_form > div{
-            margin-bottom: 20px;
+        #basic_form > div{
+            margin-bottom:20px;
         }
-        .form_box form > div{
+
+        #story_form > div{
             margin-bottom:20px;
         }
 
@@ -109,6 +110,18 @@
             width: 350px;
             height:210px;
             border: 1px solid #cccccc;
+            background-size: cover;
+        }
+
+        .file_upload_box {
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            height: 100%;
+            align-items: center;
+        }
+        .file_upload_box:hover{
+            background-color: rgba(0, 0, 0, 0.5);
         }
 
         #story_img_input{
@@ -189,14 +202,14 @@
                             <div>
                                 <div><label>대표 이미지</label></div>
                                 <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                                <div>
+                                <div id="title_img_box" style="background-image: url('/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}')">
                                     <label for="title_img_input">
-                                        <div id="title_img_box">
-                                            <img src="/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}"/>
-                                        </div>
+                                        <div class="file_upload_box"><img id="upload_icon" width="40" height="40" src="/resources/img/upload-icon.png"/></div>
                                     </label>
                                 </div>
-                                <div><input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png" style="display: none"></div>
+                                <div>
+                                    <input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png" style="display: none" onchange="readURL(this);">
+                                </div>
                             </div>
                         </div>
 
@@ -219,7 +232,7 @@
                             <div>
                                 <div><label>간단 소개글</label></div>
                                 <div><p>간단한 소개글을 적어주세요</p></div>
-                                <div><input type="text" class="text_input" name="introduction"></div>
+                                <div><input type="text" class="text_input" name="introduction" value="${funding.introduction}"></div>
                             </div>
                             <div>
                                 <div><label>스토리 작성</label></div>
@@ -240,6 +253,23 @@
         </div>
     </div>
     <script>
+        function readURL(input){
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function(e) {
+                    $("#title_img_box").css("background-image", "url('" + e.target.result + "')");
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $('.file_upload_box').hover(function(){
+            $("#upload_icon").css("display", "block");
+        }, function() {
+            $("#upload_icon").css("display", "none");
+        });
+
+        출처: https://devjhs.tistory.com/140 [키보드와 하루]
 
         $("#side_menu > li:nth-child(1)").on("click", () => {
            changeForm("basicForm");
