@@ -29,7 +29,7 @@
         SELECT *
         FROM funding_image
         WHERE funding_code=#{code}
-        ORDER BY code
+        ORDER BY code;
     </select>
 
     <insert id="insertMainImage">

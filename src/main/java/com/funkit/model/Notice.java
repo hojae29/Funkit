@@ -4,10 +4,9 @@ import java.util.Date;
 
 public class Notice {
     private int noticeCode;
+    private String id;
     private String title;
     private String content;
-    private int viewCount;
-    private String id;
     private Date regDate;
 
     public int getNoticeCode() {
@@ -32,14 +31,6 @@ public class Notice {
 
     public void setContent(String content) {
         this.content = content;
-    }
-
-    public int getViewCount() {
-        return viewCount;
-    }
-
-    public void setViewCount(int viewCount) {
-        this.viewCount = viewCount;
     }
 
     public String getId() {

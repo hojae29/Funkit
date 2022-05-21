@@ -22,6 +22,7 @@
             background: #efefef;
             display: flex;
             justify-content: center;
+            margin-bottom: 70px;
 
         }
         .container{
@@ -66,23 +67,24 @@
             margin-right: 20px;
         }
         .form_box{
-            width: 780px;
+            width: 800px;
         }
 
         .form_box form p{
             color: #888888;
             font-size: 14px;
+            margin-bottom: 4px;
         }
 
         .form_box form label{
             font-size: 18px;
+            font-weight: 500;
         }
 
         #menu_title{
             color: #ff7e00;
             font-size: 26px;
             font-weight: bold;
-            margin-top: 50px;
             margin-bottom: 20px;
         }
         .text_input{
@@ -124,12 +126,6 @@
             background-color: rgba(0, 0, 0, 0.5);
         }
 
-        #story_img_input{
-            width: 170px;
-            height: 100px;
-            border: 1px solid #cccccc;
-        }
-
         #save_btn{
             width: 90px;
             height: 30px;
@@ -151,11 +147,43 @@
         }
         #side_menu > li {
             font-size: 18px;
+            font-weight: 500;
             margin-bottom: 15px;
+            cursor: pointer;
+            padding-left: 10px;
         }
-        #side_menu > li:nth-child(1) {
-            margin-top: 96px;
+
+        .funding_img_box{
+            width: 180px;
+            height:120px;
+            border: 1px solid #cccccc;
+            background-size: cover;
+            margin-right: 15px;
+            margin-bottom: 15px;
+            position: relative;
         }
+
+        #funding_img_wrap{
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+        .file_upload_box button{
+            padding: 3px;
+            color: white;
+            background: none;
+            border: 1px solid white;
+        }
+
+        .file_upload_box button:hover {
+            background: #cccccc;
+            border: 1px solid #cccccc;
+        }
+
+        .file_upload_box button{
+            margin: 0px 3px;
+        }
+
     </style>
 </head>
 <body>
@@ -202,13 +230,15 @@
                             <div>
                                 <div><label>대표 이미지</label></div>
                                 <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                                <div id="title_img_box" style="background-image: url('/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}')">
-                                    <label for="title_img_input">
-                                        <div class="file_upload_box"><img id="upload_icon" width="40" height="40" src="/resources/img/upload-icon.png"/></div>
-                                    </label>
-                                </div>
-                                <div>
-                                    <input type="file" name="mainImage" id="title_img_input" accept="image/jpeg, image/jpg, image/png" style="display: none" onchange="readURL(this);">
+                                <div id="title_img_box" data-uuid="${funding.mainImage.fileName}" style="background-image: url('/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}')">
+                                    <input type="file" accept="image/jpeg, image/jpg, image/png" style="display: none" onchange="readURL(this);">
+                                    <div class="file_upload_box">
+                                        <div style="display: none">
+                                            <button class="update_icon" type="button">
+                                                <img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -217,17 +247,30 @@
                             <div>
                                 <div><label>이미지 등록</label></div>
                                 <div><p>프로젝트의 이미지를 등록해주세요</p></div>
-                                <div>
-                                    <c:forEach var="image" items="${funding.fundingImage}">
-                                        <p>${image.fileName}
-                                            <button type="button" onclick="deleteImage('${image.fileName}')">삭제</button>
-                                        </p>
-                                    </c:forEach>
+                                <div id="funding_img_wrap">
+                                <c:forEach var="image" items="${funding.fundingImage}">
+                                    <div data-uuid="${image.fileName}" class="funding_img_box" style="background-image: url('/upload/${funding.fundingCode}/fundingImage/${image.fileName}')">
+                                        <input style="display: none"
+                                               type="file"
+                                               accept="image/jpeg, image/jpg, image/png"
+                                               onchange="readURL(this);">
+                                        <div class="file_upload_box">
+                                            <div style="display: none">
+                                                <button class="update_icon" type="button">
+                                                    <img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경
+                                                </button><button class="delete_icon" type="button">
+                                                    <img width="15" height="15" src="/resources/img/icon/delete_icon.png"/>삭제
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </c:forEach>
+                                    <div class="funding_img_box" style="display: flex;align-items: center;justify-content: center;">
+                                        <button type="button" id="add_input" style="background: none;border: none;">
+                                            <img src="/resources/img/icon/add_icon.svg">
+                                        </button>
+                                    </div>
                                 </div>
-                                <div id="funding_image_input_box"></div>
-                            </div>
-                            <div>
-                                <button type="button" id="add_input">추가</button>
                             </div>
                             <div>
                                 <div><label>간단 소개글</label></div>
@@ -253,26 +296,52 @@
         </div>
     </div>
     <script>
+
+        //미리보기
         function readURL(input){
             if (input.files && input.files[0]) {
                 let reader = new FileReader();
-                reader.onload = function(e) {
-                    $("#title_img_box").css("background-image", "url('" + e.target.result + "')");
+                reader.onload = function (e) {
+                    $(input).closest('div').css("background-image", "url('" + e.target.result + "')");
+                    if($(input).closest('div').attr("id") === "title_img_box"){
+                        $(input).attr("name", "mainImage");
+                    } else{
+                        $(input).attr("name", "fundingImage");
+                    }
                 };
                 reader.readAsDataURL(input.files[0]);
+            }else{
+                let fileName = $(input).closest('div').data('uuid');
+
+                if($(input).closest('div').attr("id") === "title_img_box"){
+                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
+                } else{
+                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/fundingImage/" + fileName + "')");
+                }
+                $(input).removeAttr("name");
             }
         }
 
-        $('.file_upload_box').hover(function(){
-            $("#upload_icon").css("display", "block");
-        }, function() {
-            $("#upload_icon").css("display", "none");
+        $(document).on('mouseenter', '.file_upload_box', function() {
+            $(this).children('div').css('display','block');
         });
 
-        출처: https://devjhs.tistory.com/140 [키보드와 하루]
+        $(document).on('mouseleave', '.file_upload_box', function() {
+            $(this).children('div').css('display','none');
+        });
+
+        $(document).on("click", ".update_icon", function(){
+            $(this).closest('.file_upload_box').prev().click();
+        });
+
+        $(document).on("click", ".delete_icon", function(){
+            deleteImage($(this).closest('.funding_img_box').data("uuid"));
+            $(this).closest('.funding_img_box').remove();
+        });
+
 
         $("#side_menu > li:nth-child(1)").on("click", () => {
-           changeForm("basicForm");
+            changeForm("basicForm");
         });
         $("#side_menu > li:nth-child(2)").on("click", () => {
             changeForm("storyForm");
@@ -316,7 +385,9 @@
                 $("#basic_form").css("display", "block");
                 $("#form_type").data("form", 1);
                 $("#side_menu > li:nth-child(1)").css("color", "#ff7e00");
+                $("#side_menu > li:nth-child(1)").css("border-left", "3px solid #ff7e00");
                 $("#side_menu > li:nth-child(2)").css("color", "black");
+                $("#side_menu > li:nth-child(2)").css("border-left", "none");
                 $("#side_menu > li:nth-child(3)").css("color", "black");
             } else if (name === "storyForm") {
                 $("#menu_title").text("스토리");
@@ -324,28 +395,44 @@
                 $("#basic_form").css("display", "none");
                 $("#form_type").data("form", 2);
                 $("#side_menu > li:nth-child(1)").css("color", "black");
+                $("#side_menu > li:nth-child(1)").css("border-left", "none");
                 $("#side_menu > li:nth-child(2)").css("color", "#ff7e00");
+                $("#side_menu > li:nth-child(2)").css("border-left", "3px solid #ff7e00");
                 $("#side_menu > li:nth-child(3)").css("color", "black");
             } else if (name === "rewardForm") {
-
             }
         }
 
+        let inputCount = 1;
         $("#add_input").on("click", () => {
-            let html = '<input type="file" accept="image/jpeg, image/jpg, image/png" name="fundingImage">'
-            if($("#funding_image_input_box > input").length === 0){
-                $("#funding_image_input_box").append(html);
+            let html = '<div class="funding_img_box">' +
+                           '<input onchange="readURL(this);" style="display: none" type="file" accept="image/jpeg, image/jpg, image/png">' +
+                           '<div class="file_upload_box">' +
+                                '<div style="display: none">' +
+                                    '<button class="update_icon" type="button">' +
+                                        '<img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경' +
+                                    '</button>' +
+                                    '<button class="delete_icon" type="button">' +
+                                        '<img width="15" height="15" src="/resources/img/icon/delete_icon.png"/>삭제' +
+                                    '</button>' +
+                                '</div>' +
+                           '</div>' +
+                       '</div>';
+
+            if($(".funding_img_box > input").length === 0){
+                $("#funding_img_wrap > div:last").before(html);
             }
-            if($("#funding_image_input_box > input:last-child").val()){
-                $("#funding_image_input_box").append(html);
+
+            if($(".funding_img_box:last").prev().css("background-image") !== "none"){
+                $("#funding_img_wrap > div:last").before(html);
             }
         });
 
 
-        function deleteImage(uuid){
-            let html = '<input type="hidden" name="deleteImages" value="' + uuid + '">'
-            if($("input[value='" + uuid +"']").length < 1)
-                $("#story_form").append(html);
+        function deleteImage(fileName){
+            let html = '<input type="hidden" name="deleteImages" value="' + fileName + '">'
+            if($("input[value='" + fileName +"']").length < 1)
+                $("#funding_img_wrap").append(html);
         }
 
     </script>
