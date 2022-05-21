@@ -1,4 +1,4 @@
-package com.funkit.dao;
+package com.funkit.dao.mypage.company;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
@@ -37,7 +37,7 @@ public class FundingDaoImpl implements FundingDao {
         Image mainImage = new Image();
         List<Image> fundingImage = new ArrayList<>();
 
-        funding = sql.selectOne("funding.getFunding", code);
+        funding = sql.selectOne("funding.getFundingByFundingCode", code);
         mainImage = sql.selectOne("funding.getMainImage", code);
         fundingImage = sql.selectList("funding.getFundingImage", code);
 
@@ -83,5 +83,10 @@ public class FundingDaoImpl implements FundingDao {
         map.put("image", image);
 
         sql.update("funding.updateMainImage", map);
+    }
+
+    @Override
+    public List<Funding<Image>> getFundingList(String id) {
+        return sql.selectList("funding.getFundingListById", id);
     }
 }

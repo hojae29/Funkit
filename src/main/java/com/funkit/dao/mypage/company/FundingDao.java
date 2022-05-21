@@ -1,4 +1,4 @@
-package com.funkit.dao;
+package com.funkit.dao.mypage.company;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
@@ -22,4 +22,6 @@ public interface FundingDao {
     void insertMainImage(int fundingCode, Image image);
 
     void updateMainImage(int fundingCode, Image image);
+
+    List<Funding<Image>> getFundingList(String id);
 }

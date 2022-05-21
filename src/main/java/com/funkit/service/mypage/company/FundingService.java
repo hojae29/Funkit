@@ -1,8 +1,10 @@
-package com.funkit.service;
+package com.funkit.service.mypage.company;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
 
 public interface FundingService {
     int makeFunding(Funding funding);
@@ -10,4 +12,6 @@ public interface FundingService {
     void saveFunding(Funding<MultipartFile> funding);
 
     Funding<Image> getFunding(int code);
+
+    List<Funding<Image>> getFundingList(String id);
 }

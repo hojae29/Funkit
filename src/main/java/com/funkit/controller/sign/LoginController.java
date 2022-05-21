@@ -1,4 +1,4 @@
-package com.funkit.controller;
+package com.funkit.controller.sign;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

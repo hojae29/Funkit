@@ -1,17 +1,19 @@
-package com.funkit.controller;
+package com.funkit.controller.mypage.company;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Member;
-import com.funkit.service.FundingService;
+import com.funkit.service.mypage.company.FundingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
-import java.util.List;
 
 @Controller
 @RequestMapping("/myfunkit/funding")
@@ -42,7 +44,7 @@ public class FundingController {
     }
 
     @GetMapping("/{code}")
-    public String moveFundingPage(@PathVariable int code, Model model){
+    public String moveMakeFundingPage(@PathVariable int code, Model model){
         Funding<Image> funding = fundingService.getFunding(code);
         model.addAttribute("funding", funding);
         return "/mypage/funding/add";
