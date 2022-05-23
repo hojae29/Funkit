@@ -188,6 +188,7 @@
 </head>
 <body>
     <jsp:include page="../../header.jsp"/>
+    <div></div>
     <div class="container">
         <div class="top_box">
             <div class="top_content_box">

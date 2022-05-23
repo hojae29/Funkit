@@ -7,14 +7,11 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-    <title>Title</title>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/modal.css"/>
     <link rel="stylesheet" href="/resources/css/main.css">
-</head>
-<body>
     <div>
         <nav>
             <div class="nav">
@@ -155,8 +152,4 @@
             </div>
         </div>
     </div>
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="/resources/js/header.js"></script>
-</body>
-</html>
