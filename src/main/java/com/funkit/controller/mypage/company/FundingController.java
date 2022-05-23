@@ -3,13 +3,11 @@ package com.funkit.controller.mypage.company;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Member;
+import com.funkit.model.Reward;
 import com.funkit.service.mypage.company.FundingService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
@@ -56,5 +54,10 @@ public class FundingController {
 
         System.out.println("funding  : " + funding);
         fundingService.saveFunding(funding);
+    }
+
+    @PostMapping("/{code}/add-reward")
+    public void addReward(@RequestBody Reward reward, @PathVariable String code){
+        System.out.println(reward);
     }
 }

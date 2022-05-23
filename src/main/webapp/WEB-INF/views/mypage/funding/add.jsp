@@ -12,10 +12,6 @@
 <head>
     <title>펀키트</title>
     <style>
-        *{
-            margin: 0px;
-            padding: 0px;
-        }
         .top_box{
             width: 100%;
             height: 160px;
@@ -70,13 +66,13 @@
             width: 800px;
         }
 
-        .form_box form p{
+        .form_box p{
             color: #888888;
             font-size: 14px;
             margin-bottom: 4px;
         }
 
-        .form_box form label{
+        .form_box label{
             font-size: 18px;
             font-weight: 500;
         }
@@ -105,6 +101,10 @@
         }
 
         #story_form > div{
+            margin-bottom:20px;
+        }
+
+        #reward_form > div{
             margin-bottom:20px;
         }
 
@@ -182,6 +182,40 @@
 
         .file_upload_box button{
             margin: 0px 3px;
+        }
+
+        #reward_form > div:nth-child(2) > div {
+            margin-bottom: 15px;
+        }
+        #reward_form > div:nth-child(2) {
+            width: 610px;
+            padding: 20px 30px;
+            background-color: #efefef;
+        }
+        #reward_form > div:nth-child(2) > div {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #reward_form > div:nth-child(2) > div:last-child {
+            justify-content: normal;
+            margin-bottom: 0;
+        }
+
+        #reward_form .text_input{
+            width:400px
+        }
+
+        #reward_form button{
+            padding: 4px 28px;
+            background-color: white;
+            border: 1px solid #ff7e00;
+            font-size: 14px;
+            color: #ff7e00;
+        }
+
+        #reward_form button:nth-child(1){
+            margin-right: 10px;
         }
 
     </style>
@@ -281,11 +315,40 @@
                             <div>
                                 <div><label>스토리 작성</label></div>
                                 <div><p>프로젝트의 스토리를 적어주세요</p></div>
-                                <div></div>
+                                <div id="editor"></div>
                             </div>
                         </div>
-
-                        <div id="reward_form" style="display: none">
+                    </form>
+                    <form id="reward_form" style="display: none">
+                        <div>
+                            <div><label>프로젝트 리워드 구성</label></div>
+                            <div><p>프로젝트를 시작하기 위해서 최소 1개 이상의 리워드가 있어야 합니다.</p></div>
+                        </div>
+                        <div>
+                            <div>
+                                <label>리워드 금액</label>
+                                <input class="text_input" type="text" id="amount">
+                            </div>
+                            <div>
+                                <label>리워드 제공 수</label>
+                                <input class="text_input" type="text" id="quantity">
+                            </div>
+                            <div>
+                                <label>리워드 제목</label>
+                                <input class="text_input" type="text" id="title">
+                            </div>
+                            <div>
+                                <label>리워드 내용</label>
+                                <input class="text_input" type="text" id="info">
+                            </div>
+                            <div>
+                                <label>배송비</label>
+                                <input class="text_input" type="text" id="delivery">
+                            </div>
+                            <div>
+                                <button id="add_reward_btn" type="button">등록</button>
+                                <button type="button">초기화</button>
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -322,6 +385,27 @@
                 $(input).removeAttr("name");
             }
         }
+
+        $("#add_reward_btn").on("click", () => {
+            let reward = {
+                title: $("#reward_form #title").val(),
+                info: $("#reward_form #info").val(),
+                amount: $("#reward_form #amount").val(),
+                delivery: $("#reward_form #delivery").val(),
+                quantity: $("#reward_form #quantity").val()
+            }
+
+            console.log(reward);
+
+            $.ajax({
+                url: window.location.pathname + "/add-reward",
+                method: "POST",
+                data: JSON.stringify(reward),
+                contentType: "application/json",
+                success: () => {},
+                error: () => {}
+            });
+        });
 
         $(document).on('mouseenter', '.file_upload_box', function() {
             $(this).children('div').css('display','block');
@@ -382,25 +466,30 @@
         function changeForm(name) {
             if (name === "basicForm") {
                 $("#menu_title").text("기본정보");
-                $("#story_form").css("display", "none");
                 $("#basic_form").css("display", "block");
+                $("#story_form").css("display", "none");
+                $("#reward_form").css("display", "none");
                 $("#form_type").data("form", 1);
-                $("#side_menu > li:nth-child(1)").css("color", "#ff7e00");
-                $("#side_menu > li:nth-child(1)").css("border-left", "3px solid #ff7e00");
-                $("#side_menu > li:nth-child(2)").css("color", "black");
-                $("#side_menu > li:nth-child(2)").css("border-left", "none");
-                $("#side_menu > li:nth-child(3)").css("color", "black");
+                $("#side_menu > li:nth-child(1)").css("color", "#ff7e00").css("border-left", "3px solid #ff7e00");
+                $("#side_menu > li:nth-child(2)").css("color", "black").css("border-left", "none");
+                $("#side_menu > li:nth-child(3)").css("color", "black").css("border-left", "none");
             } else if (name === "storyForm") {
                 $("#menu_title").text("스토리");
-                $("#story_form").css("display", "block");
                 $("#basic_form").css("display", "none");
-                $("#form_type").data("form", 2);
-                $("#side_menu > li:nth-child(1)").css("color", "black");
-                $("#side_menu > li:nth-child(1)").css("border-left", "none");
-                $("#side_menu > li:nth-child(2)").css("color", "#ff7e00");
-                $("#side_menu > li:nth-child(2)").css("border-left", "3px solid #ff7e00");
-                $("#side_menu > li:nth-child(3)").css("color", "black");
+                $("#story_form").css("display", "block");
+                $("#reward_form").css("display", "none");
+                $("#side_menu > li:nth-child(1)").css("color", "black").css("border-left", "none");
+                $("#side_menu > li:nth-child(2)").css("color", "#ff7e00").css("border-left", "3px solid #ff7e00");
+                $("#side_menu > li:nth-child(3)").css("color", "black").css("border-left", "none");
             } else if (name === "rewardForm") {
+                $("#menu_title").text("리워드 설계");
+                $("#story_form").css("display", "none");
+                $("#basic_form").css("display", "none");
+                $("#reward_form").css("display", "block");
+                $("#form_type").data("form", 2);
+                $("#side_menu > li:nth-child(1)").css("color", "black").css("border-left", "none");
+                $("#side_menu > li:nth-child(2)").css("color", "black").css("border-left", "none");
+                $("#side_menu > li:nth-child(3)").css("color", "ff7e00").css("border-left", "3px solid #ff7e00");
             }
         }
 
@@ -435,7 +524,6 @@
             if($("input[value='" + fileName +"']").length < 1)
                 $("#funding_img_wrap").append(html);
         }
-
     </script>
 </body>
 </html>
