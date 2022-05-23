@@ -30,6 +30,7 @@ public class RecipeController {
 
         return path + "list";
     }
+
     @GetMapping("/add")
     public String add(){
 
@@ -38,6 +39,8 @@ public class RecipeController {
     @PostMapping("/add")
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
+
+
 
         /*String uploadMain = "D:\\upload\\recipe";
 

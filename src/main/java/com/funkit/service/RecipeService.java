@@ -11,5 +11,5 @@ public interface RecipeService {
 
     void delete(int recipeCode);
 
-    int addImg(Recipe recipeMain);
+    //int addImg(Recipe recipeMain);
 }
