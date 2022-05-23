@@ -384,6 +384,9 @@
                         </div>
                         <div id="reward_form_box">
                             <div>
+                                <input type="hidden" id="reward_code">
+                            </div>
+                            <div>
                                 <label>리워드 금액</label>
                                 <input class="text_input" type="text" id="amount">
                             </div>
@@ -404,9 +407,16 @@
                                 <input class="text_input" type="text" id="delivery">
                             </div>
                             <div>
-                                <button id="add_reward_btn" type="button">등록</button>
-                                <button type="button">초기화</button>
+                                <div id="btn_box1">
+                                    <button id="add_reward_btn" type="button">등록</button>
+                                    <button id="reset_reward_btn" type="button">초기화</button>
+                                </div>
+                                <div id="btn_box2" style="display: none">
+                                    <button id="reward_modify_submit_btn" type="button">수정</button>
+                                    <button id="cancel_btn" type="button">취소</button>
+                                </div>
                             </div>
+
                         </div>
                         <div>
                             <div><label>리워드 보기</label></div>
@@ -415,17 +425,17 @@
                         <div class="reward_container">
                             <c:forEach var="reward" items="${funding.reward}">
                                 <div data-code="${reward.rewardCode}" class="reward_box">
-                                    <div>${reward.amount}원</div>
+                                    <div class="amount">${reward.amount}원</div>
                                     <div>
                                         <div>리워드명</div>
-                                        <div>${reward.title}</div>
+                                        <div class="title">${reward.title}</div>
                                     </div>
-                                    <div>${reward.info}</div>
+                                    <div class="info">${reward.info}</div>
                                     <div>
                                         <div>배송비</div>
-                                        <div>${reward.delivery}원</div>
+                                        <div class="delivery">${reward.delivery}원</div>
                                     </div>
-                                    <div>제한수량 ${reward.quantity}개</div>
+                                    <div class="quantity">제한수량 ${reward.quantity}개</div>
                                     <div>
                                         <button type="button" class="reward_btn reward_modify_btn"><img width="15" height="15" src="/resources/img/icon/modify_icon.svg"/> 수정</button>
                                         <button type="button" class="reward_btn reward_delete_btn"><img width="15" height="15" src="/resources/img/icon/delete_icon_red.svg"/> 삭제</button>
@@ -443,33 +453,14 @@
         </div>
     </div>
     <script>
+        $("#cancel_btn").on("click", () => {
+            $("#btn_box2").css("display", "none");
+            $("#btn_box1").css("display", "block");
+            rewardFormReset();
+        });
 
-        //미리보기
-        function readURL(input){
-            if (input.files && input.files[0]) {
-                let reader = new FileReader();
-                reader.onload = function (e) {
-                    $(input).closest('div').css("background-image", "url('" + e.target.result + "')");
-                    if($(input).closest('div').attr("id") === "title_img_box"){
-                        $(input).attr("name", "mainImage");
-                    } else{
-                        $(input).attr("name", "fundingImage");
-                    }
-                };
-                reader.readAsDataURL(input.files[0]);
-            }else{
-                let fileName = $(input).closest('div').data('uuid');
-
-                if($(input).closest('div').attr("id") === "title_img_box"){
-                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
-                } else{
-                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/fundingImage/" + fileName + "')");
-                }
-                $(input).removeAttr("name");
-            }
-        }
-
-        $(".reward_delete_btn").on("click", function(){
+        //리워드 삭제 버튼
+        $(document).on("click", ".reward_delete_btn", function(){
             let rewardCode = $(this).closest('.reward_box').data("code");
             console.log($(this).closest('.reward_box'));
             console.log(rewardCode);
@@ -477,11 +468,62 @@
             $.ajax({
                 url: window.location.pathname + "/reward?code=" + rewardCode,
                 method: "DELETE",
-                success: () => {},
-                error: () => {}
+                success: () => $(this).closest('.reward_box').remove(),
+                error: error => console.log(error)
             });
         });
 
+        //리워드 수정 버튼
+        $(document).on("click", "#reward_modify_submit_btn", function(){
+            let reward = {
+                rewardCode: $("#reward_form #reward_code").val(),
+                title: $("#reward_form #title").val(),
+                info: $("#reward_form #info").val(),
+                amount: Number($("#reward_form #amount").val()),
+                delivery: Number($("#reward_form #delivery").val()),
+                quantity: Number($("#reward_form #quantity").val())
+            }
+
+            $.ajax({
+                url: window.location.pathname + "/reward",
+                method: "PATCH",
+                data: JSON.stringify(reward),
+                contentType: "application/json",
+                success: result => {
+                    const selector = ".reward_box[data-code=" + result.data.rewardCode +"]";
+                    $(selector + " .amount").text(result.data.amount + "원");
+                    $(selector + " .info").text(result.data.info);
+                    $(selector + " .quantity").text("제한수량 " + result.data.quantity + "개");
+                    $(selector + " .title").text(result.data.title);
+                    $(selector + " .delivery").text(result.data.delivery);
+                },
+                error: error => console.log(error)
+            });
+        });
+
+        //리워드 수정 버튼
+        $(document).on("click", ".reward_modify_btn", function(){
+            let rewardCode = $(this).closest('.reward_box').data("code");
+            $.ajax({
+                url: window.location.pathname + "/reward?code=" + rewardCode,
+                method: "GET",
+                success: result => {
+                    console.log(result.data);
+                    $("#reward_form #reward_code").val(result.data.rewardCode);
+                    $("#reward_form #title").val(result.data.title);
+                    $("#reward_form #info").val(result.data.info);
+                    $("#reward_form #amount").val(result.data.amount);
+                    $("#reward_form #delivery").val(result.data.delivery);
+                    $("#reward_form #quantity").val(result.data.quantity);
+
+                    $("#btn_box2").css("display", "block");
+                    $("#btn_box1").css("display", "none");
+                },
+                error: error => console.log(error)
+            });
+        });
+
+        //리워드 등록 버튼
         $("#add_reward_btn").on("click", () => {
             let reward = {
                 title: $("#reward_form #title").val(),
@@ -491,16 +533,39 @@
                 quantity: Number($("#reward_form #quantity").val())
             }
 
-            console.log(reward);
-
             $.ajax({
                 url: window.location.pathname + "/reward",
                 method: "POST",
                 data: JSON.stringify(reward),
                 contentType: "application/json",
-                success: () => {},
-                error: () => {}
+                success: result => {
+                    let html = '<div data-code="' + result.data.rewardCode + '" class="reward_box">' +
+                                    '<div>'+ result.data.amount +'원</div>' +
+                                    '<div>' +
+                                        '<div>리워드명</div>' +
+                                        '<div>' + result.data.title + '</div>' +
+                                    '</div>' +
+                                    '<div>' + result.data.info + '</div>' +
+                                    '<div>' +
+                                        '<div>배송비</div>' +
+                                        '<div>' + result.data.delivery + '원</div>' +
+                                    '</div>' +
+                                    '<div>제한수량 ' + result.data.quantity + '개</div>' +
+                                    '<div>' +
+                                        '<button type="button" class="reward_btn reward_modify_btn"><img width="15" height="15" src="/resources/img/icon/modify_icon.svg"/> 수정</button>' +
+                                        '<button type="button" class="reward_btn reward_delete_btn"><img width="15" height="15" src="/resources/img/icon/delete_icon_red.svg"/> 삭제</button>' +
+                                    '</div>' +
+                                '</div>';
+
+                    $(".reward_container").append(html);
+                },
+                error: error => console.log(error)
             });
+        });
+
+        //리워드 초기화 버튼
+        $("#reset_reward_btn").on("click", () => {
+            rewardFormReset();
         });
 
         $(document).on('mouseenter', '.file_upload_box', function() {
@@ -521,6 +586,7 @@
         });
 
 
+        //왼쪽 사이드 메뉴 클릭 이벤트
         $("#side_menu > li:nth-child(1)").on("click", () => {
             changeForm("basicForm");
         });
@@ -559,6 +625,32 @@
             }
         });
 
+        // input file 추가
+        $("#add_input").on("click", () => {
+            let html = '<div class="funding_img_box">' +
+                           '<input onchange="readURL(this);" style="display: none" type="file" accept="image/jpeg, image/jpg, image/png">' +
+                           '<div class="file_upload_box">' +
+                                '<div style="display: none">' +
+                                    '<button class="update_icon" type="button">' +
+                                        '<img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경' +
+                                    '</button>' +
+                                    '<button class="delete_icon" type="button">' +
+                                        '<img width="15" height="15" src="/resources/img/icon/delete_icon_whtie.png"/>삭제' +
+                                    '</button>' +
+                                '</div>' +
+                           '</div>' +
+                       '</div>';
+
+            if($(".funding_img_box > input").length === 0){
+                $("#funding_img_wrap > div:last").before(html);
+            }
+
+            if($(".funding_img_box:last").prev().css("background-image") !== "none"){
+                $("#funding_img_wrap > div:last").before(html);
+            }
+        });
+
+
         function changeForm(name) {
             if (name === "basicForm") {
                 $("#menu_title").text("기본정보");
@@ -589,36 +681,44 @@
             }
         }
 
-        let inputCount = 1;
-        $("#add_input").on("click", () => {
-            let html = '<div class="funding_img_box">' +
-                           '<input onchange="readURL(this);" style="display: none" type="file" accept="image/jpeg, image/jpg, image/png">' +
-                           '<div class="file_upload_box">' +
-                                '<div style="display: none">' +
-                                    '<button class="update_icon" type="button">' +
-                                        '<img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경' +
-                                    '</button>' +
-                                    '<button class="delete_icon" type="button">' +
-                                        '<img width="15" height="15" src="/resources/img/icon/delete_icon_whtie.png"/>삭제' +
-                                    '</button>' +
-                                '</div>' +
-                           '</div>' +
-                       '</div>';
-
-            if($(".funding_img_box > input").length === 0){
-                $("#funding_img_wrap > div:last").before(html);
-            }
-
-            if($(".funding_img_box:last").prev().css("background-image") !== "none"){
-                $("#funding_img_wrap > div:last").before(html);
-            }
-        });
-
-
         function deleteImage(fileName){
             let html = '<input type="hidden" name="deleteImages" value="' + fileName + '">'
             if($("input[value='" + fileName +"']").length < 1)
                 $("#funding_img_wrap").append(html);
+        }
+
+        //미리보기
+        function readURL(input){
+            if (input.files && input.files[0]) {
+                let reader = new FileReader();
+                reader.onload = function (e) {
+                    $(input).closest('div').css("background-image", "url('" + e.target.result + "')");
+                    if($(input).closest('div').attr("id") === "title_img_box"){
+                        $(input).attr("name", "mainImage");
+                    } else{
+                        $(input).attr("name", "fundingImage");
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }else{
+                let fileName = $(input).closest('div').data('uuid');
+
+                if($(input).closest('div').attr("id") === "title_img_box"){
+                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
+                } else{
+                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/fundingImage/" + fileName + "')");
+                }
+                $(input).removeAttr("name");
+            }
+        }
+
+        function rewardFormReset(){
+            $("#reward_form #reward_code").val("");
+            $("#reward_form #title").val("");
+            $("#reward_form #info").val("");
+            $("#reward_form #amount").val("");
+            $("#reward_form #delivery").val("");
+            $("#reward_form #quantity").val("");
         }
     </script>
 </body>

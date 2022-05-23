@@ -1,10 +1,7 @@
 package com.funkit.controller.mypage.company;
 
-import com.funkit.model.JsonResponse;
 import com.funkit.model.Reward;
 import com.funkit.service.mypage.company.FundingService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,16 +15,24 @@ public class RewardApiController {
         this.fundingService = fundingService;
     }
 
+    @GetMapping
+    public ResponseEntity getReward(@RequestParam("code") int rewardCode){
+        return fundingService.getReward(rewardCode);
+    }
+
     @PostMapping
     public ResponseEntity addReward(@PathVariable int code, @RequestBody Reward reward){
         reward.setFundingCode(code);
-        fundingService.addReward(reward);
-        return new JsonResponse<>(HttpStatus.CREATED, "created reward").toResponseEntity();
+        return fundingService.addReward(reward);
     }
 
     @DeleteMapping
     public ResponseEntity deleteReward(@RequestParam("code") int rewardCode){
-        fundingService.deleteReward(rewardCode);
-        return new JsonResponse<>(HttpStatus.OK, "delete success").toResponseEntity();
+        return fundingService.deleteReward(rewardCode);
+    }
+
+    @PatchMapping
+    public  ResponseEntity updateReward(@RequestBody Reward reward){
+        return fundingService.updateReward(reward);
     }
 }

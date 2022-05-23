@@ -7,7 +7,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -92,12 +91,24 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public void addReward(Reward reward) {
+    public Reward addReward(Reward reward) {
         sql.insert("funding.insertReward", reward);
+        return sql.selectOne("funding.getReward", reward.getRewardCode());
     }
 
     @Override
     public void deleteReward(int rewardCode) {
         sql.delete("funding.deleteReward", rewardCode);
+    }
+
+    @Override
+    public Reward getReward(int rewardCode) {
+        return sql.selectOne("funding.getReward", rewardCode);
+    }
+
+    @Override
+    public Reward updateReward(Reward reward) {
+        sql.update("funding.updateReward", reward);
+        return sql.selectOne("funding.getReward", reward.getRewardCode());
     }
 }

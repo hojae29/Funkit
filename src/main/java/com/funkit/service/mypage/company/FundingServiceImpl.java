@@ -3,7 +3,10 @@ package com.funkit.service.mypage.company;
 import com.funkit.dao.mypage.company.FundingDao;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.JsonResponse;
 import com.funkit.model.Reward;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -91,13 +94,28 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void addReward(Reward reward) {
-        fundingDao.addReward(reward);
+    public ResponseEntity addReward(Reward reward) {
+        Reward item = fundingDao.addReward(reward);
+
+        return new JsonResponse<>(HttpStatus.CREATED, "reward created", item).toResponseEntity();
     }
 
     @Override
-    public void deleteReward(int rewardCode) {
+    public ResponseEntity deleteReward(int rewardCode) {
         fundingDao.deleteReward(rewardCode);
+        return new JsonResponse<>(HttpStatus.OK, "delete success").toResponseEntity();
+    }
+
+    @Override
+    public ResponseEntity getReward(int rewardCode) {
+        Reward reward = fundingDao.getReward(rewardCode);
+        return new JsonResponse<>(HttpStatus.OK, "ok", reward).toResponseEntity();
+    }
+
+    @Override
+    public ResponseEntity updateReward(Reward reward) {
+        Reward item = fundingDao.updateReward(reward);
+        return new JsonResponse<>(HttpStatus.OK, "ok", item).toResponseEntity();
     }
 
     public Image makeImage(MultipartFile file){

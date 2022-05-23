@@ -3,6 +3,7 @@ package com.funkit.service.mypage.company;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Reward;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,7 +17,11 @@ public interface FundingService {
 
     List<Funding<Image>> getFundingList(String id);
 
-    void addReward(Reward reward);
+    ResponseEntity addReward(Reward reward);
 
-    void deleteReward(int rewardCode);
+    ResponseEntity deleteReward(int rewardCode);
+
+    ResponseEntity getReward(int rewardCode);
+
+    ResponseEntity updateReward(Reward reward);
 }

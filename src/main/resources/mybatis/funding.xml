@@ -54,16 +54,25 @@
         WHERE funding_code=#{fundingCode}
     </select>
 
-    <insert id="insertReward">
+    <insert id="insertReward" useGeneratedKeys="true" keyProperty="rewardCode">
         INSERT INTO reward
         VALUES(null, #{fundingCode}, #{title}, #{info}, #{quantity}, #{amount}, #{delivery})
     </insert>
-
     <select id="getRewardList" resultType="Reward">
         SELECT *
         FROM reward
         WHERE funding_code=#{fundingCode}
     </select>
+    <select id="getReward" resultType="Reward">
+        SELECT *
+        FROM reward
+        WHERE reward_code=#{rewardCode}
+    </select>
+    <update id="updateReward">
+        UPDATE reward
+        SET title=#{title}, info=#{info}, quantity=#{quantity}, amount=#{amount}, delivery=#{delivery}
+        WHERE reward_code=#{rewardCode}
+    </update>
 
     <delete id="deleteReward">
         DELETE FROM reward

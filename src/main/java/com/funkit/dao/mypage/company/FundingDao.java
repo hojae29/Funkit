@@ -26,7 +26,11 @@ public interface FundingDao {
 
     List<Funding<Image>> getFundingList(String id);
 
-    void addReward(Reward reward);
+    Reward addReward(Reward reward);
 
     void deleteReward(int rewardCode);
+
+    Reward getReward(int rewardCode);
+
+    Reward updateReward(Reward reward);
 }
