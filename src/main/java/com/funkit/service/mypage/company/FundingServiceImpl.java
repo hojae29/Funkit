@@ -3,6 +3,7 @@ package com.funkit.service.mypage.company;
 import com.funkit.dao.mypage.company.FundingDao;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Reward;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -87,6 +88,16 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public List<Funding<Image>> getFundingList(String id) {
         return fundingDao.getFundingList(id);
+    }
+
+    @Override
+    public void addReward(Reward reward) {
+        fundingDao.addReward(reward);
+    }
+
+    @Override
+    public void deleteReward(int rewardCode) {
+        fundingDao.deleteReward(rewardCode);
     }
 
     public Image makeImage(MultipartFile file){

@@ -31,7 +31,7 @@
         INSERT INTO funding_image
         VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
     </insert>
-    <select id="getFundingImage" resultType="Image">
+    <select id="getFundingImageList" resultType="Image">
         SELECT *
         FROM funding_image
         WHERE funding_code=#{code}
@@ -53,5 +53,21 @@
         FROM funding
         WHERE funding_code=#{fundingCode}
     </select>
+
+    <insert id="insertReward">
+        INSERT INTO reward
+        VALUES(null, #{fundingCode}, #{title}, #{info}, #{quantity}, #{amount}, #{delivery})
+    </insert>
+
+    <select id="getRewardList" resultType="Reward">
+        SELECT *
+        FROM reward
+        WHERE funding_code=#{fundingCode}
+    </select>
+
+    <delete id="deleteReward">
+        DELETE FROM reward
+        WHERE reward_code=#{rewardCode}
+    </delete>
 
 </mapper>

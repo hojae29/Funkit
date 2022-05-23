@@ -2,6 +2,7 @@ package com.funkit.dao.mypage.company;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Reward;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
@@ -33,16 +34,16 @@ public class FundingDaoImpl implements FundingDao {
 
     @Override
     public Funding<Image> getFunding(int code) {
-        Funding<Image> funding = new Funding<>();
-        Image mainImage = new Image();
-        List<Image> fundingImage = new ArrayList<>();
 
-        funding = sql.selectOne("funding.getFundingByFundingCode", code);
-        mainImage = sql.selectOne("funding.getMainImage", code);
-        fundingImage = sql.selectList("funding.getFundingImage", code);
+        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
+        Image mainImage = sql.selectOne("funding.getMainImage", code);
+        List<Image> fundingImages = sql.selectList("funding.getFundingImageList", code);
+        List<Reward> rewards = sql.selectList("funding.getRewardList", code);
+
 
         funding.setMainImage(mainImage);
-        funding.setFundingImage(fundingImage);
+        funding.setFundingImage(fundingImages);
+        funding.setReward(rewards);
 
         return funding;
     }
@@ -88,5 +89,15 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public List<Funding<Image>> getFundingList(String id) {
         return sql.selectList("funding.getFundingListById", id);
+    }
+
+    @Override
+    public void addReward(Reward reward) {
+        sql.insert("funding.insertReward", reward);
+    }
+
+    @Override
+    public void deleteReward(int rewardCode) {
+        sql.delete("funding.deleteReward", rewardCode);
     }
 }

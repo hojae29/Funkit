@@ -206,7 +206,7 @@
             width:400px
         }
 
-        #reward_form button{
+        #reward_form_box button{
             padding: 4px 28px;
             background-color: white;
             border: 1px solid #ff7e00;
@@ -216,6 +216,64 @@
 
         #reward_form button:nth-child(1){
             margin-right: 10px;
+        }
+
+        .reward_box{
+            width: 230px;
+            height: 330px;
+            background: none;
+            padding: 8px;
+            border: 1px solid #E2E2E2;
+            margin-right: 20px;
+            margin-bottom: 20px;
+        }
+
+        .reward_container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .reward_box > div:nth-child(1){
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .reward_box > div:nth-child(2) div{
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .reward_box > div:nth-child(2) div:nth-child(2){
+            font-size: 14px;
+            color: black;
+        }
+
+        .reward_box > div:nth-child(3){
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .reward_box > div:nth-child(4){
+            font-size: 14px;
+            color: #888888;
+        }
+
+        .reward_box > div:nth-child(5){
+            font-size: 14px;
+            color: #ff7e00;
+        }
+
+        .reward_btn{
+            border: none;
+            color: red ;
+            margin-right: 10px;
+            padding: 4px 10px;
+            background: none;
+        }
+
+        .reward_btn:hover{
+            color: darkred;
         }
 
     </style>
@@ -294,7 +352,7 @@
                                                 <button class="update_icon" type="button">
                                                     <img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경
                                                 </button><button class="delete_icon" type="button">
-                                                    <img width="15" height="15" src="/resources/img/icon/delete_icon.png"/>삭제
+                                                    <img width="15" height="15" src="/resources/img/icon/delete_icon_whtie.png"/>삭제
                                                 </button>
                                             </div>
                                         </div>
@@ -324,7 +382,7 @@
                             <div><label>프로젝트 리워드 구성</label></div>
                             <div><p>프로젝트를 시작하기 위해서 최소 1개 이상의 리워드가 있어야 합니다.</p></div>
                         </div>
-                        <div>
+                        <div id="reward_form_box">
                             <div>
                                 <label>리워드 금액</label>
                                 <input class="text_input" type="text" id="amount">
@@ -349,6 +407,31 @@
                                 <button id="add_reward_btn" type="button">등록</button>
                                 <button type="button">초기화</button>
                             </div>
+                        </div>
+                        <div>
+                            <div><label>리워드 보기</label></div>
+                            <div><p>등록된 리워드 목록입니다.</p></div>
+                        </div>
+                        <div class="reward_container">
+                            <c:forEach var="reward" items="${funding.reward}">
+                                <div data-code="${reward.rewardCode}" class="reward_box">
+                                    <div>${reward.amount}원</div>
+                                    <div>
+                                        <div>리워드명</div>
+                                        <div>${reward.title}</div>
+                                    </div>
+                                    <div>${reward.info}</div>
+                                    <div>
+                                        <div>배송비</div>
+                                        <div>${reward.delivery}원</div>
+                                    </div>
+                                    <div>제한수량 ${reward.quantity}개</div>
+                                    <div>
+                                        <button type="button" class="reward_btn reward_modify_btn"><img width="15" height="15" src="/resources/img/icon/modify_icon.svg"/> 수정</button>
+                                        <button type="button" class="reward_btn reward_delete_btn"><img width="15" height="15" src="/resources/img/icon/delete_icon_red.svg"/> 삭제</button>
+                                    </div>
+                                </div>
+                            </c:forEach>
                         </div>
                     </form>
                 </div>
@@ -386,19 +469,32 @@
             }
         }
 
+        $(".reward_delete_btn").on("click", function(){
+            let rewardCode = $(this).closest('.reward_box').data("code");
+            console.log($(this).closest('.reward_box'));
+            console.log(rewardCode);
+
+            $.ajax({
+                url: window.location.pathname + "/reward?code=" + rewardCode,
+                method: "DELETE",
+                success: () => {},
+                error: () => {}
+            });
+        });
+
         $("#add_reward_btn").on("click", () => {
             let reward = {
                 title: $("#reward_form #title").val(),
                 info: $("#reward_form #info").val(),
-                amount: $("#reward_form #amount").val(),
-                delivery: $("#reward_form #delivery").val(),
-                quantity: $("#reward_form #quantity").val()
+                amount: Number($("#reward_form #amount").val()),
+                delivery: Number($("#reward_form #delivery").val()),
+                quantity: Number($("#reward_form #quantity").val())
             }
 
             console.log(reward);
 
             $.ajax({
-                url: window.location.pathname + "/add-reward",
+                url: window.location.pathname + "/reward",
                 method: "POST",
                 data: JSON.stringify(reward),
                 contentType: "application/json",
@@ -503,7 +599,7 @@
                                         '<img width="15" height="15" src="/resources/img/icon/upload-icon.png"/>변경' +
                                     '</button>' +
                                     '<button class="delete_icon" type="button">' +
-                                        '<img width="15" height="15" src="/resources/img/icon/delete_icon.png"/>삭제' +
+                                        '<img width="15" height="15" src="/resources/img/icon/delete_icon_whtie.png"/>삭제' +
                                     '</button>' +
                                 '</div>' +
                            '</div>' +

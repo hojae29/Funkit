@@ -56,8 +56,5 @@ public class FundingController {
         fundingService.saveFunding(funding);
     }
 
-    @PostMapping("/{code}/add-reward")
-    public void addReward(@RequestBody Reward reward, @PathVariable String code){
-        System.out.println(reward);
-    }
+
 }
