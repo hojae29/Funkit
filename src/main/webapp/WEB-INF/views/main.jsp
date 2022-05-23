@@ -27,7 +27,7 @@
     <div>
         <jsp:include page="header.jsp"/>
         <div class="main_con">
-            <div id="rank_banner">
+            <%--<div id="rank_banner">
                 <div id="slideShow">
                     <ul class="slides img-box">
                         <li>
@@ -45,7 +45,7 @@
                 <div class="recipe_rank">
                     <!-- 레시피 랭킹 -->
                 </div>
-            </div>
+            </div>--%>
             <div class="now_info">
                 <div class="con_title">
                     <p class="color_tit">지금</p>

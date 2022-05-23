@@ -12,8 +12,8 @@
     </insert>
 
     <insert id="mainImg">
-        INSERT INTO recipe_main_image(main_image_code,recipe_code)
-        VALUES(NULL,#{recipeCode});
+        INSERT INTO recipe_main_image
+        VALUES(NULL,#{recipeCode},#{fileName},#{fileSize});
     </insert>
 
     <delete id="delete">

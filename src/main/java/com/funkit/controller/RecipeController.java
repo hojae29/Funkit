@@ -39,17 +39,23 @@ public class RecipeController {
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
 
-        String uploadMain = "D:\\upload\\recipe";
+        /*String uploadMain = "D:\\upload\\recipe";
 
         var recipeMain = new Recipe();
 
         int recipeCode = service.addImg(recipeMain);
 
-        File imgPath = new File(uploadMain + recipeCode);
+       try{
+           new File(uploadMain + recipeCode).mkdirs();
+           new File(uploadMain + recipeCode + "\\cooking").mkdir();
+       }catch (Exception e){
+           e.getStackTrace();
+       }*/
 
-        if(imgPath.exists() == false){
+
+        /*if(imgPath.exists() == false){
             imgPath.mkdirs();
-        }
+        }*/
 
         service.add(recipe);
 
