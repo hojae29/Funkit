@@ -3,7 +3,9 @@ package com.funkit.dao.funding;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Reward;
+import com.funkit.util.Pager;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -86,8 +88,21 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public List<Funding<Image>> getFundingListById(String id) {
-        System.out.println(sql.selectList("funding.getFundingListById", id));
-        return sql.selectList("funding.getFundingListById", id);
+    public List<Funding<Image>> getFundingListById(String id, Pager pager) {
+        Map map = new HashMap();
+        map.put("id", id);
+        map.put("pager", pager);
+
+        return sql.selectList("funding.getFundingListById", map);
+    }
+
+    @Override
+    public int total(String id) {
+        return sql.selectOne("funding.total", id);
+    }
+
+    @Override
+    public void deleteFunding(int code) {
+        sql.delete("funding.deleteFunding", code);
     }
 }

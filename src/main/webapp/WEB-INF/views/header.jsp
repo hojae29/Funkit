@@ -31,7 +31,7 @@
                                 <li><button id="register_btn">회원가입</button></li>
                             </c:if>
                             <c:if test="${sessionScope.member != null}">
-                                <li><a href="/myfunkit/">${member.id}님</a></li>
+                                <li><a href="/myfunkit/">${member.code == 20 ? member.corporateName : member.name}님</a></li>
                                 <li><a href="/logout">로그아웃</a></li>
                             </c:if>
                         </ul>

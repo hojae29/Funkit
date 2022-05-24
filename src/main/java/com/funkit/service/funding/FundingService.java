@@ -2,7 +2,7 @@ package com.funkit.service.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
-import com.funkit.model.Reward;
+import com.funkit.util.Pager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,6 +15,7 @@ public interface FundingService {
 
     Funding<Image> getFundingByFundingCode(int code);
 
-    List<Funding<Image>> getFundingListById(String id);
+    List<Funding<Image>> getFundingListById(String id, Pager pager);
 
+    ResponseEntity deleteFunding(int code);
 }

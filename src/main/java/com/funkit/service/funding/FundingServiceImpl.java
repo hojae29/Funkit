@@ -3,6 +3,10 @@ package com.funkit.service.funding;
 import com.funkit.dao.funding.FundingDao;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.JsonResponse;
+import com.funkit.util.Pager;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -85,8 +89,17 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public List<Funding<Image>> getFundingListById(String id) {
-        return fundingDao.getFundingListById(id);
+    public List<Funding<Image>> getFundingListById(String id, Pager pager) {
+
+        pager.setTotal(fundingDao.total(id));
+
+        return fundingDao.getFundingListById(id, pager);
+    }
+
+    @Override
+    public ResponseEntity deleteFunding(int code) {
+        fundingDao.deleteFunding(code);
+        return new JsonResponse<>(HttpStatus.OK, "delete ok").toResponseEntity();
     }
 
     public Image makeImage(MultipartFile file){

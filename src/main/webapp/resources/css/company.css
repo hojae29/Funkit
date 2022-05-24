@@ -130,6 +130,33 @@
 .contents_box{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
     gap: 20px;
+}
+
+#pagination{
+    display: flex;
+    justify-content: center;
+    margin: 30px 0px;
+}
+
+#pagination button{
+    width: 35px;
+    height: 35px;
+    border: none;
+    background: none;
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0px 4px;
+}
+
+#pagination button:hover{
+    color:#ff7e00;
+    font-weight: bold;
+}
+
+.pagination_active {
+    color:#ff7e00;
+    font-weight: bold !important;
 }
 
