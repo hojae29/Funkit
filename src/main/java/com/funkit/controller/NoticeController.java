@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/notice")
 public class NoticeController {
     final String path = "notice/";
+
     @Autowired
     NoticeService service;
 

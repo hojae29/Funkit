@@ -18,6 +18,15 @@ public class Funding<T> {
 
     private T mainImage;
     private List<T> fundingImage;
+    private List<Reward> reward;
+
+    public List<Reward> getReward() {
+        return reward;
+    }
+
+    public void setReward(List<Reward> reward) {
+        this.reward = reward;
+    }
 
     private List<String> deleteImages;
 
@@ -133,6 +142,7 @@ public class Funding<T> {
                 ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
                 ", fundingImage=" + fundingImage +
+                ", reward=" + reward +
                 ", deleteImages=" + deleteImages +
                 '}';
     }

@@ -1,6 +1,6 @@
-package com.funkit.service;
+package com.funkit.service.funding;
 
-import com.funkit.dao.FundingDao;
+import com.funkit.dao.funding.FundingDao;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import org.springframework.stereotype.Service;
@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -79,8 +80,13 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public Funding<Image> getFunding(int code) {
-        return fundingDao.getFunding(code);
+    public Funding<Image> getFundingByFundingCode(int code) {
+        return fundingDao.getFundingByFundingCode(code);
+    }
+
+    @Override
+    public List<Funding<Image>> getFundingListById(String id) {
+        return fundingDao.getFundingListById(id);
     }
 
     public Image makeImage(MultipartFile file){

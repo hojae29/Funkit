@@ -1,6 +1,6 @@
-package com.funkit.service;
+package com.funkit.service.sign;
 
-import com.funkit.dao.LoginDao;
+import com.funkit.dao.sign.LoginDao;
 import com.funkit.exception.CustomException;
 import com.funkit.exception.ErrorCode;
 import com.funkit.model.JsonResponse;

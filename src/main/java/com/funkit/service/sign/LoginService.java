@@ -1,4 +1,4 @@
-package com.funkit.service;
+package com.funkit.service.sign;
 
 import com.funkit.model.Member;
 import org.springframework.http.ResponseEntity;

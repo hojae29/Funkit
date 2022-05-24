@@ -21,7 +21,7 @@
             background: #efefef;
             display: flex;
             justify-content: center;
-
+            margin-bottom: 60px;
         }
         .container{
             width:100%;
@@ -47,36 +47,65 @@
             align-content: center;
             align-items: center;
         }
-        .menu_box a{
+        .profile_menu_box a{
             font-size: 14px;
             color: #888888;
             text-decoration: none;
         }
-        .menu_box a:nth-child(2){
+        .profile_menu_box a:nth-child(2){
             margin-left: 16px;
         }
         .mypage_bottom{
             width: 100%;
             display: flex;
             justify-content: center;
-
+            flex-direction: column;
+            align-items: center;
         }
-        .title_box{
+
+        .mypage_bottom > div{
             width: 780px;
+        }
+
+        .title_box{
             display: flex;
+            align-items: center;
             justify-content: space-between;
         }
 
-        .add_project_btn{
-            border: 1px solid #ff7e00;
-            height: 30px;
-            background: none;
-            padding: 5px;
-            border-radius: 5px;
-        }
-        .add_project_btn > a{
+        .title_box h1{
             color: #ff7e00;
-            font-size: 14px;
+        }
+
+        .add_project_btn{
+            border: 1px solid #888888;
+            height: 35px;
+            width: 140px;
+            background: none;
+        }
+
+        .add_project_btn > a{
+            color: #888888;
+            font-size: 16px;
+            font-weight: 400;
+        }
+
+        .menu_box{
+            margin-top: 20px;
+        }
+
+        .menu_box button{
+            color: #888888;
+            font-size: 16px;
+            padding: 8px 16px;
+            border: none;
+            background: none;
+            margin-right: 10px;
+        }
+
+        .menu_box button:nth-child(1){
+            color: black;
+            border-bottom: 2px solid #888888;
         }
 
     </style>
@@ -93,7 +122,7 @@
                         <p>기업회원</p>
                     </div>
                 </div>
-                <div class="menu_box">
+                <div class="profile_menu_box">
                     <a href="">회원정보 수정</a>
                 </div>
             </div>
@@ -102,10 +131,21 @@
             <div class="title_box">
                 <div><h1>프로젝트 관리</h1></div>
                 <div>
-                    <button class="add_project_btn"><a href="funding/make">프로젝트 개설하기</a></button>
+                    <button class="add_project_btn"><a href=/myfunkit/company/funding/make>프로젝트 개설하기</a></button>
                 </div>
             </div>
-            <div>
+            <div class="menu_box">
+                <div>
+                    <div>
+                        <button>펀딩</button>
+                        <button>스토어</button>
+                    </div>
+                </div>
+            </div>
+            <div class="contents_box">
+                <c:forEach var="item" items="${funding}">
+                    <div><a href="/myfunkit/company/funding/${item.fundingCode}">${item.title}</a></div>
+                </c:forEach>
             </div>
         </div>
     </div>

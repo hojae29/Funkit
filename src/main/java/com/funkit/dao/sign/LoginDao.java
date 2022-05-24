@@ -1,4 +1,4 @@
-package com.funkit.dao;
+package com.funkit.dao.sign;
 
 import com.funkit.model.Member;
 

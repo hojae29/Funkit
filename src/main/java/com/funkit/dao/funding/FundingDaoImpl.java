@@ -1,12 +1,12 @@
-package com.funkit.dao;
+package com.funkit.dao.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Reward;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,17 +32,17 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public Funding<Image> getFunding(int code) {
-        Funding<Image> funding = new Funding<>();
-        Image mainImage = new Image();
-        List<Image> fundingImage = new ArrayList<>();
+    public Funding<Image> getFundingByFundingCode(int code) {
 
-        funding = sql.selectOne("funding.getFunding", code);
-        mainImage = sql.selectOne("funding.getMainImage", code);
-        fundingImage = sql.selectList("funding.getFundingImage", code);
+        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
+        Image mainImage = sql.selectOne("funding.getMainImage", code);
+        List<Image> fundingImages = sql.selectList("funding.getFundingImageList", code);
+        List<Reward> rewards = sql.selectList("reward.getRewardList", code);
+
 
         funding.setMainImage(mainImage);
-        funding.setFundingImage(fundingImage);
+        funding.setFundingImage(fundingImages);
+        funding.setReward(rewards);
 
         return funding;
     }
@@ -83,5 +83,10 @@ public class FundingDaoImpl implements FundingDao {
         map.put("image", image);
 
         sql.update("funding.updateMainImage", map);
+    }
+
+    @Override
+    public List<Funding<Image>> getFundingListById(String id) {
+        return sql.selectList("funding.getFundingListById", id);
     }
 }

@@ -1,7 +1,8 @@
-package com.funkit.dao;
+package com.funkit.dao.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Reward;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface FundingDao {
 
     void saveFunding(Funding<MultipartFile> funding);
 
-    Funding<Image> getFunding(int code);
+    Funding<Image> getFundingByFundingCode(int code);
 
     void setFundingImage(int fundingCode, Image image);
 
@@ -22,4 +23,7 @@ public interface FundingDao {
     void insertMainImage(int fundingCode, Image image);
 
     void updateMainImage(int fundingCode, Image image);
+
+    List<Funding<Image>> getFundingListById(String id);
+
 }
