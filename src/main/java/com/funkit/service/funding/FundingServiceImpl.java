@@ -102,6 +102,11 @@ public class FundingServiceImpl implements FundingService {
         return new JsonResponse<>(HttpStatus.OK, "delete ok").toResponseEntity();
     }
 
+    @Override
+    public void fundingApprovalReq(int code, int status) {
+        fundingDao.fundingApprovalReq(code, status);
+    }
+
     public Image makeImage(MultipartFile file){
         UUID uuid = UUID.randomUUID();
 

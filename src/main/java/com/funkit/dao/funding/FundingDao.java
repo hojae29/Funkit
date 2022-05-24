@@ -3,7 +3,6 @@ package com.funkit.dao.funding;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.util.Pager;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -30,4 +29,6 @@ public interface FundingDao {
     int total(String id);
 
     void deleteFunding(int code);
+
+    void fundingApprovalReq(int code, int status);
 }

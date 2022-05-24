@@ -20,12 +20,12 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/myfunkit/company/funding")
-public class FundingController {
+public class CompanyFundingController {
 
     final FundingService fundingService;
     final RewardService rewardService;
 
-    public FundingController(FundingService fundingService, RewardService rewardService) {
+    public CompanyFundingController(FundingService fundingService, RewardService rewardService) {
         this.fundingService = fundingService;
         this.rewardService = rewardService;
     }
@@ -68,6 +68,13 @@ public class FundingController {
         return fundingService.deleteFunding(code);
     }
 
+    @RequestMapping("/{code}/approval")
+    public String fundingApprovalReq(@PathVariable int code, @RequestParam("status") int status){
+        fundingService.fundingApprovalReq(code, status);
+
+        return "redirect:/myfunkit/company";
+    }
+
     @ResponseBody
     @GetMapping("")
     public Map pagination(HttpSession session, Pager pager){
@@ -83,4 +90,6 @@ public class FundingController {
 
         return map;
     }
+
+
 }

@@ -3,8 +3,8 @@
 
 <mapper namespace="funding">
     <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
-        INSERT INTO funding(funding_code, id, exp_date)
-        VALUES(null, #{id}, NOW());
+        INSERT INTO funding(funding_code, id, exp_date, status_code)
+        VALUES(null, #{id}, NOW(), 10);
     </insert>
     <update id="saveFunding">
         UPDATE funding
@@ -15,6 +15,11 @@
         DELETE FROM funding
         WHERE funding_code=#{fundingCode}
     </delete>
+    <update id="updateFundingStatus">
+        UPDATE funding
+        SET status_code=#{status}
+        WHERE funding_code=#{code}
+    </update>
 
     <insert id="insertMainImage">
         INSERT INTO funding_main_image
@@ -63,5 +68,7 @@
         FROM funding
         WHERE id=#{id};
     </select>
+
+
 
 </mapper>

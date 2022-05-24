@@ -18,4 +18,6 @@ public interface FundingService {
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
     ResponseEntity deleteFunding(int code);
+
+    void fundingApprovalReq(int code, int status);
 }

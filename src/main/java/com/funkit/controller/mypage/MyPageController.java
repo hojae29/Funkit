@@ -31,7 +31,7 @@ public class MyPageController {
             case 20 : {
                 return "redirect:/myfunkit/company";
             }
-            case 30 : return "redirect:/myfunkit/manager";
+            case 30 : return "redirect:/mgr";
             default : throw new CustomException(ErrorCode.WRONG_ACCESS);
         }
     }

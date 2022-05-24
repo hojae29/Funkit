@@ -5,7 +5,6 @@ import com.funkit.model.Image;
 import com.funkit.model.Reward;
 import com.funkit.util.Pager;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -104,5 +103,14 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public void deleteFunding(int code) {
         sql.delete("funding.deleteFunding", code);
+    }
+
+    @Override
+    public void fundingApprovalReq(int code, int status) {
+        Map map = new HashMap();
+        map.put("code", code);
+        map.put("status", status);
+
+        sql.update("funding.updateFundingStatus", map);
     }
 }
