@@ -13,39 +13,41 @@
     </update>
 
     <insert id="insertMainImage">
-        INSERT INTO main_image
+        INSERT INTO funding_main_image
         VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
     </insert>
     <update id="updateMainImage">
-        UPDATE main_image
+        UPDATE funding_main_image
         SET file_name=#{image.fileName}, file_size=#{image.fileSize}
         WHERE funding_code = #{fundingCode}
     </update>
     <select id="getMainImage" resultType="Image">
         SELECT *
-        FROM main_image
+        FROM funding_main_image
         WHERE funding_code=#{code}
     </select>
 
-    <insert id="insertFundingImage">
-        INSERT INTO funding_image
+    <insert id="insertInfoImage">
+        INSERT INTO funding_info_image
         VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
     </insert>
-    <select id="getFundingImageList" resultType="Image">
+    <select id="getInfoImageList" resultType="Image">
         SELECT *
-        FROM funding_image
+        FROM funding_info_image
         WHERE funding_code=#{code}
         ORDER BY code;
     </select>
-    <delete id="deleteFundingImage">
-        DELETE FROM funding_image
+    <delete id="deleteInfoImage">
+        DELETE FROM funding_info_image
         WHERE file_name = #{fileName}
     </delete>
 
     <select id="getFundingListById" resultType="Funding">
         SELECT *
-        FROM funding
-        WHERE id=#{id}
+        FROM funding, funding_main_image AS main_image , funding_info_image AS info_image
+        WHERE id=#{id} AND
+            funding.funding_code = main_image.funding_code AND
+            funding.funding_code = info_image.funding_code;
     </select>
     <select id="getFundingByFundingCode" resultType="Funding">
         SELECT *

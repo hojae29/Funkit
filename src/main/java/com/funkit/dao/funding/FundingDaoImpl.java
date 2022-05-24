@@ -36,29 +36,29 @@ public class FundingDaoImpl implements FundingDao {
 
         Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
         Image mainImage = sql.selectOne("funding.getMainImage", code);
-        List<Image> fundingImages = sql.selectList("funding.getFundingImageList", code);
+        List<Image> infoImages = sql.selectList("funding.getInfoImageList", code);
         List<Reward> rewards = sql.selectList("reward.getRewardList", code);
 
 
         funding.setMainImage(mainImage);
-        funding.setFundingImage(fundingImages);
+        funding.setInfoImage(infoImages);
         funding.setReward(rewards);
 
         return funding;
     }
 
     @Override
-    public void setFundingImage(int fundingCode, Image image) {
+    public void setInfoImage(int fundingCode, Image image) {
         Map map = new HashMap();
         map.put("fundingCode", fundingCode);
         map.put("image", image);
-        sql.insert("funding.insertFundingImage", map);
+        sql.insert("funding.insertInfoImage", map);
     }
 
     @Override
-    public void deleteFundingImage(List<String> deleteImages) {
+    public void deleteInfoImage(List<String> deleteImages) {
         for(String fileName : deleteImages){
-            sql.delete("funding.deleteFundingImage", fileName);
+            sql.delete("funding.deleteInfoImage", fileName);
         }
     }
 
@@ -87,6 +87,7 @@ public class FundingDaoImpl implements FundingDao {
 
     @Override
     public List<Funding<Image>> getFundingListById(String id) {
+        System.out.println(sql.selectList("funding.getFundingListById", id));
         return sql.selectList("funding.getFundingListById", id);
     }
 }

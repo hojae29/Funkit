@@ -35,7 +35,7 @@ public class FundingController {
         try{
             new File("d:/upload/" + code).mkdirs();
             new File("d:/upload/" + code + "/mainImage").mkdir();
-            new File("d:/upload/" + code + "/fundingImage").mkdir();
+            new File("d:/upload/" + code + "/infoImage").mkdir();
         } catch(Exception e){
             e.getStackTrace();
         }
