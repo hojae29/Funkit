@@ -31,7 +31,7 @@ public class RecipeServiceImpl implements RecipeService{
         dao.delete(recipeCode);
     }
 
-   /* @Override
+  /*  @Override
     public int addImg(Recipe recipeMain) {
         return dao.addImg(recipeMain);
     }*/

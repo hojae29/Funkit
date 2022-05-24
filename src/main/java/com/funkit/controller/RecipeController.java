@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -40,13 +38,23 @@ public class RecipeController {
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
 
+        String uploadMain = "D:\\upload\\recipe";
 
+        File uploadPath = new File(uploadMain);
+        if(uploadPath.exists() == false){
+            uploadPath.mkdirs();
+        }
+/*
+        for(MultipartFile multipartFile : upload){
+            String uploadFileName = multipartFile.getOriginalFilename();
+        }
 
-        /*String uploadMain = "D:\\upload\\recipe";
+        uploadFileName = uploadFileName.substring*/
 
-        var recipeMain = new Recipe();
+       /* var recipeMain = new Recipe();
 
         int recipeCode = service.addImg(recipeMain);
+
 
        try{
            new File(uploadMain + recipeCode).mkdirs();

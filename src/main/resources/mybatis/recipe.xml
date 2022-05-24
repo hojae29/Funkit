@@ -11,10 +11,10 @@
         VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes})
     </insert>
 
-    <!--<insert id="mainImg">
+    <insert id="mainImg">
         INSERT INTO recipe_main_image
-        VALUES(NULL,#{recipeCode},#{fileName},#{fileSize});
-    </insert>-->
+        VALUES(NULL,#{recipeCode},#{imgae.fileName},#{image.fileSize});
+    </insert>
 
     <delete id="delete">
         DELETE FROM recipe
