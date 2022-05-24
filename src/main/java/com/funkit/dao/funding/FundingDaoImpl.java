@@ -37,7 +37,7 @@ public class FundingDaoImpl implements FundingDao {
         Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
         Image mainImage = sql.selectOne("funding.getMainImage", code);
         List<Image> fundingImages = sql.selectList("funding.getFundingImageList", code);
-        List<Reward> rewards = sql.selectList("funding.getRewardList", code);
+        List<Reward> rewards = sql.selectList("reward.getRewardList", code);
 
 
         funding.setMainImage(mainImage);
