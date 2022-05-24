@@ -17,7 +17,7 @@ public class Funding<T> {
     private String introduction;
 
     private T mainImage;
-    private List<T> fundingImage;
+    private List<T> infoImage;
     private List<Reward> reward;
 
     public List<Reward> getReward() {
@@ -46,12 +46,12 @@ public class Funding<T> {
         this.mainImage = mainImage;
     }
 
-    public List<T> getFundingImage() {
-        return fundingImage;
+    public List<T> getInfoImage() {
+        return infoImage;
     }
 
-    public void setFundingImage(List<T> fundingImage) {
-        this.fundingImage = fundingImage;
+    public void setInfoImage(List<T> infoImage) {
+        this.infoImage = infoImage;
     }
 
     public int getFundingCode() {
@@ -141,7 +141,7 @@ public class Funding<T> {
                 ", status='" + status + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
-                ", fundingImage=" + fundingImage +
+                ", infoImage=" + infoImage +
                 ", reward=" + reward +
                 ", deleteImages=" + deleteImages +
                 '}';

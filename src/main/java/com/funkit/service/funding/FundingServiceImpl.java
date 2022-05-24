@@ -29,11 +29,11 @@ public class FundingServiceImpl implements FundingService {
     public void saveFunding(Funding<MultipartFile> funding) {
         int fundingCode = funding.getFundingCode();
         var mainImage = funding.getMainImage();
-        var fundingImage = funding.getFundingImage();
+        var infoImage = funding.getInfoImage();
         var deleteImages = funding.getDeleteImages();
 
         String mainImgPath = "d:/upload/" + fundingCode + "/mainImage/";
-        String fundingImgPath = "d:/upload/" + fundingCode + "/fundingImage/";
+        String fundingImgPath = "d:/upload/" + fundingCode + "/infoImage/";
 
         fundingDao.saveFunding(funding);
 
@@ -56,8 +56,8 @@ public class FundingServiceImpl implements FundingService {
             }
         }
 
-        if(fundingImage != null && !fundingImage.isEmpty()){
-            for (MultipartFile file : funding.getFundingImage()){
+        if(infoImage != null && !infoImage.isEmpty()){
+            for (MultipartFile file : funding.getInfoImage()){
                 var image = makeImage(file);
 
                 try {
@@ -66,7 +66,7 @@ public class FundingServiceImpl implements FundingService {
                     throw new RuntimeException(e);
                 }
 
-                fundingDao.setFundingImage(funding.getFundingCode(), image);
+                fundingDao.setInfoImage(funding.getFundingCode(), image);
             }
         }
 
@@ -75,7 +75,7 @@ public class FundingServiceImpl implements FundingService {
                 File file = new File(fundingImgPath + fileName);
                 file.delete();
             }
-            fundingDao.deleteFundingImage(funding.getDeleteImages());
+            fundingDao.deleteInfoImage(funding.getDeleteImages());
         }
     }
 

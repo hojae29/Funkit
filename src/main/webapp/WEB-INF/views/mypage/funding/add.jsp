@@ -153,7 +153,7 @@
             padding-left: 10px;
         }
 
-        .funding_img_box{
+        .info_img_box{
             width: 180px;
             height:120px;
             border: 1px solid #cccccc;
@@ -163,7 +163,7 @@
             position: relative;
         }
 
-        #funding_img_wrap{
+        #info_img_wrap{
             display: flex;
             flex-wrap: wrap;
             flex-direction: row;
@@ -340,9 +340,9 @@
                             <div>
                                 <div><label>이미지 등록</label></div>
                                 <div><p>프로젝트의 이미지를 등록해주세요</p></div>
-                                <div id="funding_img_wrap">
-                                <c:forEach var="image" items="${funding.fundingImage}">
-                                    <div data-uuid="${image.fileName}" class="funding_img_box" style="background-image: url('/upload/${funding.fundingCode}/fundingImage/${image.fileName}')">
+                                <div id="info_img_wrap">
+                                <c:forEach var="image" items="${funding.infoImage}">
+                                    <div data-uuid="${image.fileName}" class="info_img_box" style="background-image: url('/upload/${funding.fundingCode}/infoImage/${image.fileName}')">
                                         <input style="display: none"
                                                type="file"
                                                accept="image/jpeg, image/jpg, image/png"
@@ -358,7 +358,7 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                                    <div class="funding_img_box" style="display: flex;align-items: center;justify-content: center;">
+                                    <div class="info_img_box" style="display: flex;align-items: center;justify-content: center;">
                                         <button type="button" id="add_input" style="background: none;border: none;">
                                             <img src="/resources/img/icon/add_icon.svg">
                                         </button>
@@ -581,8 +581,8 @@
         });
 
         $(document).on("click", ".delete_icon", function(){
-            deleteImage($(this).closest('.funding_img_box').data("uuid"));
-            $(this).closest('.funding_img_box').remove();
+            deleteImage($(this).closest('.info_img_box').data("uuid"));
+            $(this).closest('.info_img_box').remove();
         });
 
 
@@ -627,7 +627,7 @@
 
         // input file 추가
         $("#add_input").on("click", () => {
-            let html = '<div class="funding_img_box">' +
+            let html = '<div class="info_img_box">' +
                            '<input onchange="readURL(this);" style="display: none" type="file" accept="image/jpeg, image/jpg, image/png">' +
                            '<div class="file_upload_box">' +
                                 '<div style="display: none">' +
@@ -641,12 +641,12 @@
                            '</div>' +
                        '</div>';
 
-            if($(".funding_img_box > input").length === 0){
-                $("#funding_img_wrap > div:last").before(html);
+            if($(".info_img_box > input").length === 0){
+                $("#info_img_wrap > div:last").before(html);
             }
 
-            if($(".funding_img_box:last").prev().css("background-image") !== "none"){
-                $("#funding_img_wrap > div:last").before(html);
+            if($(".info_img_box:last").prev().css("background-image") !== "none"){
+                $("#info_img_wrap > div:last").before(html);
             }
         });
 
@@ -684,7 +684,7 @@
         function deleteImage(fileName){
             let html = '<input type="hidden" name="deleteImages" value="' + fileName + '">'
             if($("input[value='" + fileName +"']").length < 1)
-                $("#funding_img_wrap").append(html);
+                $("#info_img_wrap").append(html);
         }
 
         //미리보기
@@ -696,7 +696,7 @@
                     if($(input).closest('div').attr("id") === "title_img_box"){
                         $(input).attr("name", "mainImage");
                     } else{
-                        $(input).attr("name", "fundingImage");
+                        $(input).attr("name", "infoImage");
                     }
                 };
                 reader.readAsDataURL(input.files[0]);
@@ -706,7 +706,7 @@
                 if($(input).closest('div').attr("id") === "title_img_box"){
                     $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
                 } else{
-                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/fundingImage/" + fileName + "')");
+                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/infoImage/" + fileName + "')");
                 }
                 $(input).removeAttr("name");
             }
