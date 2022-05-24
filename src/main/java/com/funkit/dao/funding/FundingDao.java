@@ -1,4 +1,4 @@
-package com.funkit.dao.mypage.company;
+package com.funkit.dao.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
@@ -12,7 +12,7 @@ public interface FundingDao {
 
     void saveFunding(Funding<MultipartFile> funding);
 
-    Funding<Image> getFunding(int code);
+    Funding<Image> getFundingByFundingCode(int code);
 
     void setFundingImage(int fundingCode, Image image);
 
@@ -24,13 +24,6 @@ public interface FundingDao {
 
     void updateMainImage(int fundingCode, Image image);
 
-    List<Funding<Image>> getFundingList(String id);
+    List<Funding<Image>> getFundingListById(String id);
 
-    Reward addReward(Reward reward);
-
-    void deleteReward(int rewardCode);
-
-    Reward getReward(int rewardCode);
-
-    Reward updateReward(Reward reward);
 }

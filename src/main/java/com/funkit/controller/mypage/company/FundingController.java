@@ -3,8 +3,8 @@ package com.funkit.controller.mypage.company;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Member;
-import com.funkit.model.Reward;
-import com.funkit.service.mypage.company.FundingService;
+import com.funkit.service.funding.FundingService;
+import com.funkit.service.funding.RewardService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +14,15 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 
 @Controller
-@RequestMapping("/myfunkit/funding")
+@RequestMapping("/myfunkit/company/funding")
 public class FundingController {
 
     final FundingService fundingService;
+    final RewardService rewardService;
 
-    public FundingController(FundingService fundingService) {
+    public FundingController(FundingService fundingService, RewardService rewardService) {
         this.fundingService = fundingService;
+        this.rewardService = rewardService;
     }
 
     @RequestMapping("/make")
@@ -43,7 +45,7 @@ public class FundingController {
 
     @GetMapping("/{code}")
     public String moveMakeFundingPage(@PathVariable int code, Model model){
-        Funding<Image> funding = fundingService.getFunding(code);
+        Funding<Image> funding = fundingService.getFundingByFundingCode(code);
         model.addAttribute("funding", funding);
         return "/mypage/funding/add";
     }
@@ -55,6 +57,4 @@ public class FundingController {
         System.out.println("funding  : " + funding);
         fundingService.saveFunding(funding);
     }
-
-
 }

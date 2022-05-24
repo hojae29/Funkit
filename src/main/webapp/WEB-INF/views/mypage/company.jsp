@@ -131,7 +131,7 @@
             <div class="title_box">
                 <div><h1>프로젝트 관리</h1></div>
                 <div>
-                    <button class="add_project_btn"><a href="funding/make">프로젝트 개설하기</a></button>
+                    <button class="add_project_btn"><a href=/myfunkit/company/funding/make>프로젝트 개설하기</a></button>
                 </div>
             </div>
             <div class="menu_box">
@@ -144,7 +144,7 @@
             </div>
             <div class="contents_box">
                 <c:forEach var="item" items="${funding}">
-                    <div><a href="/myfunkit/funding/${item.fundingCode}">${item.title}</a></div>
+                    <div><a href="/myfunkit/company/funding/${item.fundingCode}">${item.title}</a></div>
                 </c:forEach>
             </div>
         </div>

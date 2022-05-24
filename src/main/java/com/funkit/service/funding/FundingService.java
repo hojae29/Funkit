@@ -1,4 +1,4 @@
-package com.funkit.service.mypage.company;
+package com.funkit.service.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
@@ -13,15 +13,8 @@ public interface FundingService {
 
     void saveFunding(Funding<MultipartFile> funding);
 
-    Funding<Image> getFunding(int code);
+    Funding<Image> getFundingByFundingCode(int code);
 
-    List<Funding<Image>> getFundingList(String id);
+    List<Funding<Image>> getFundingListById(String id);
 
-    ResponseEntity addReward(Reward reward);
-
-    ResponseEntity deleteReward(int rewardCode);
-
-    ResponseEntity getReward(int rewardCode);
-
-    ResponseEntity updateReward(Reward reward);
 }

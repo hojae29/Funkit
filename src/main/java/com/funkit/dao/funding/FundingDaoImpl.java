@@ -1,4 +1,4 @@
-package com.funkit.dao.mypage.company;
+package com.funkit.dao.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
@@ -32,7 +32,7 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public Funding<Image> getFunding(int code) {
+    public Funding<Image> getFundingByFundingCode(int code) {
 
         Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
         Image mainImage = sql.selectOne("funding.getMainImage", code);
@@ -86,29 +86,7 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public List<Funding<Image>> getFundingList(String id) {
+    public List<Funding<Image>> getFundingListById(String id) {
         return sql.selectList("funding.getFundingListById", id);
-    }
-
-    @Override
-    public Reward addReward(Reward reward) {
-        sql.insert("funding.insertReward", reward);
-        return sql.selectOne("funding.getReward", reward.getRewardCode());
-    }
-
-    @Override
-    public void deleteReward(int rewardCode) {
-        sql.delete("funding.deleteReward", rewardCode);
-    }
-
-    @Override
-    public Reward getReward(int rewardCode) {
-        return sql.selectOne("funding.getReward", rewardCode);
-    }
-
-    @Override
-    public Reward updateReward(Reward reward) {
-        sql.update("funding.updateReward", reward);
-        return sql.selectOne("funding.getReward", reward.getRewardCode());
     }
 }

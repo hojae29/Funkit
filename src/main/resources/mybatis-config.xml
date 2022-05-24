@@ -14,6 +14,7 @@
         <mapper resource="mybatis/login.xml"/>
         <mapper resource="mybatis/recipe.xml"/>
         <mapper resource="mybatis/funding.xml"/>
+        <mapper resource="mybatis/reward.xml"/>
         <mapper resource="mybatis/notice.xml"/>
         <mapper resource="mybatis/recipe.xml"/>   
     </mappers>
