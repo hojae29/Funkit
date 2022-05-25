@@ -93,7 +93,7 @@
                             <div>
                                 <p id="add_cooking">조리과정</p>
                             </div>
-                            <%--<div class="orders_mar">
+                            <div class="orders_mar">
                                 <div id="orderNo_1" class="order_count">
                                     <div class="label_area">
                                         <labe class="cooking_orders">1</labe>
@@ -114,7 +114,7 @@
                                     <a href="javascript:void(0)" class="button_PnM" onclick="add_order();">&#43;</a>
                                     <a href="javascript:void(0)" class="button_PnM" onclick="del_order();">&#45;</a>
                                 </div>
-                            </div>--%>
+                            </div>
                             <div class="orders_mar">
                                 <div id="sub_btn">
                                     <button>등록</button>
