@@ -51,10 +51,10 @@
         WHERE file_name = #{fileName}
     </delete>
 
-    <select id="getFundingListById" resultType="Funding">
-        SELECT *
-        FROM funding
-        WHERE id=#{id}
+    <select id="getFundingListById" resultMap="fundingResultMap">
+        SELECT f.funding_code, id, status, title, reg_date, exp_date, target_amount, cml_amount, introduction, code, file_name, file_size
+        FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code, funding_status s
+        WHERE f.status_code = s.status_code AND id=#{id}
         ORDER BY funding_code DESC
         LIMIT #{pager.offset}, #{pager.perPage}
     </select>
@@ -69,6 +69,21 @@
         WHERE id=#{id};
     </select>
 
-
+    <resultMap id="fundingResultMap" type="Funding">
+        <id property="fundingCode" column="funding_code"/>
+        <id property="id" column="id"/>
+        <id property="status" column="status"/>
+        <id property="title" column="title"/>
+        <id property="regDate" column="reg_date"/>
+        <id property="expDate" column="exp_date"/>
+        <id property="targetAmount" column="target_amount"/>
+        <id property="cmlAmount" column="aml_amount"/>
+        <id property="introduction" column="introduction"/>
+        <association property="mainImage"  javaType="Image" >
+            <result property="code" column="code" />
+            <result property="fileName" column="file_name"/>
+            <result property="fileSize" column="file_size"/>
+        </association>
+    </resultMap>
 
 </mapper>

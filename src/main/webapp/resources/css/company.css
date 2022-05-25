@@ -103,6 +103,7 @@
     height: 130px;
     margin-bottom: 4px;
     margin-top: 8px;
+    background-size: cover;
 }
 
 .funding_title{

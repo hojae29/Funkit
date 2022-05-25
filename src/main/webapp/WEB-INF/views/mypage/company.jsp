@@ -48,10 +48,10 @@
                 <div class="contents_box">
                     <c:forEach var="item" items="${funding}">
                         <div class="funding_box">
-                            <div class="status_text">${item.statusCode}</div>
+                            <div class="status_text">${item.status}</div>
                             <div class="img_box" style="background-image: url('/upload/${item.fundingCode}/mainImage/${item.mainImage.fileName}')"></div>
                             <div>
-                                <p class="funding_title">${item.title == null ? "제작중인 프로젝트" : item.title}</p></div>
+                                <p class="funding_title">${item.title == null || item.title == "" ? "제작중인 프로젝트" : item.title}</p></div>
                             <div class="button_box">
                                 <button><a href="/myfunkit/company/funding/${item.fundingCode}">수정</a></button>
                                 <button data-code="${item.fundingCode}" id="delete_funding_btn">삭제</button>

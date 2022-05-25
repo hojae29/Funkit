@@ -13,7 +13,7 @@ public class Funding<T> {
     private String id;
     private String title;
 
-    private int statusCode;
+    private String status;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date regDate;
@@ -128,11 +128,30 @@ public class Funding<T> {
         this.introduction = introduction;
     }
 
-    public int getStatusCode() {
-        return statusCode;
+    public String getStatus() {
+        return status;
     }
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Funding{" +
+                "fundingCode=" + fundingCode +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
+                ", regDate=" + regDate +
+                ", expDate=" + expDate +
+                ", targetAmount=" + targetAmount +
+                ", cmlAmount=" + cmlAmount +
+                ", introduction='" + introduction + '\'' +
+                ", mainImage=" + mainImage +
+                ", infoImage=" + infoImage +
+                ", reward=" + reward +
+                ", deleteImages=" + deleteImages +
+                '}';
     }
 }
