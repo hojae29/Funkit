@@ -51,14 +51,14 @@
                                         <p>태그</p>
                                     </div>
                                     <div class="tag_sty">
-                                        <p>태그태그</p>
+                                        <p>태그</p>
                                     </div>
                                 </div>
                             </div>
                             <div id="sub_info">
                                 <div id="time_area">
                                     <div>
-                                        <img src="time.PNG">
+                                        <img src="/resources/img/recipe/time.PNG">
                                     </div>
                                     <div id="time_txt">
                                         <div>
@@ -72,7 +72,7 @@
                                 <div>
                                     <div class="sub_order">
                                         <div>
-                                            <img src="like.PNG">
+                                            <img src="/resources/img/recipe/love.PNG">
                                         </div>
                                         <div>
                                             <p>관심수</p>
@@ -83,7 +83,7 @@
                                     </div>
                                     <div class="sub_order">
                                         <div>
-                                            <img src="view.PNG">
+                                            <img src="/resources/img/recipe/view.PNG">
                                         </div>
                                         <div>
                                             <p>조회수</p>
@@ -94,7 +94,7 @@
                                     </div>
                                     <div class="sub_order">
                                         <div>
-                                            <img src="link.PNG">
+                                            <img src="/resources/img/recipe/link.PNG">
                                         </div>
                                         <div>
                                             <p>링크 복사하기</p>
@@ -171,7 +171,7 @@
                         </div>
                         <div class="order_area">
                             <div class="num_area">
-                                <p>1</p>
+                                <p>2</p>
                             </div>
                             <div class="order_info_area">
                                 <p>조리과정입니다.</p>
@@ -182,7 +182,7 @@
                         </div>
                         <div class="order_area">
                             <div class="num_area">
-                                <p>1</p>
+                                <p>3</p>
                             </div>
                             <div class="order_info_area">
                                 <p>조리과정입니다.</p>

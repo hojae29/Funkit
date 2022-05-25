@@ -80,4 +80,8 @@ public class RecipeController {
 
         return "redirect:../list";
     }
+    @GetMapping("/view")
+    public String view(){
+        return path + "view";
+    }
 }
