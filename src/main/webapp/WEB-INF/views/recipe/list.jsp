@@ -10,54 +10,84 @@
 <html>
 <head>
     <title>FunKit Recipe</title>
-
-    <link rel="stylesheet" href="/resources/css/header/header.css"/>
+    <link rel="stylesheet" href="/resources/css/recipe/recipe.css"/>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
 </head>
 <body>
     <div>
-        <nav>
-            <div class="nav">
-                <div class="nav_top">
-                    <div class="nav_left">
-                        <a href="/"><p class="logo">FunKit</p></a>
-                    </div>
-                    <div>
-                        <button class="add_recipe">레시피 등록</button>
-                        <ul class="nav_top_user">
-                            <li>
-                                <button id="login_btn">로그인</button>
-                            </li>
-                            <li>
-                                <button id="register_btn">회원가입</button>
-                            </li>
-                        </ul>
-                    </div>
+        <jsp:include page="../header.jsp"/>
+        <div id="recipe_area">
+            <div id="recipe_banner">
+                <img src="/resources/img/recipe/recipe_banner.png">
+            </div>
+            <div id="title_area">
+                <p>레시피</p>
+                &nbsp;
+                <p id="recipe_tit">태그</p>
+            </div>
+            <div>
+                <div>
+                    <ul id="tag_area">
+                        <li>
+                            <a>전체</a>
+                        </li>
+                        <li>
+                            <a>한식</a>
+                        </li>
+                        <li>
+                            <a>중식</a>
+                        </li>
+                        <li>
+                            <a>양식</a>
+                        </li>
+                        <li>
+                            <a>디저트</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="nav_bottom">
-                    <div class="nav_contents">
-                        <ul>
-                            <li>홈</li>
-                            <li><a href="">레시피</a></li>
-                            <li>펀딩</li>
-                            <li>랭킹</li>
-                            <li>스토어</li>
-                            <li>더보기</li>
-                        </ul>
-                    </div>
-                    <div class="nav_search">
-                        <input type="text" placeholder="검색하기">
+            </div>
+            <div id="grid_area">
+                <div id="grid_contents">
+                    <div class="card_area" onclick="location.href='http://localhost:8181/recipe/view'">
+                        <div>
+                            <a>
+                                <div class="preview_area">
+                                    <img src="/resources/img/recipe/test.jpeg">
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <div class="card_text">
+                                <div class="card_tit_area" >
+                                    <p class="card_tit">매콤 달콤 바삭! 맛있는 칠리 새우</p>
+                                    <img src="/resources/img/recipe/good.PNG">
+                                </div>
+                                <div class="card_sub">
+                                    <div class="card_tag">
+                                        <ul>
+                                            <li>중식</li>
+                                            <li>튀김</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="view_area">
+                                            <p>조회수</p>
+                                            &nbsp;
+                                            <p>700</p>
+                                        </div>
+                                        <div class="like_area">
+                                            <img src="/resources/img/recipe/like.PNG">
+                                            &nbsp;
+                                            <p>546</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </nav>
-    </div>
-    <div>
-        <c:if test="${list.size() < 1}">
-            <div>등록된 레시피가 없습니다</div>
-        </c:if>
-        <c:forEach items="${list}" var="item">
-            <div>${item.title}</div>
-        </c:forEach>
+        </div>
     </div>
 </body>
 </html>

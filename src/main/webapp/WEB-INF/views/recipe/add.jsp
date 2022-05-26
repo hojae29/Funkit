@@ -9,56 +9,10 @@
 <html>
 <head>
     <title>레시피 등록하기</title>
-
-    <link rel="stylesheet" href="/resources/css/header/header.css"/>
-    <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
-    <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
-    <script src="/resources/js/recipe/recipe-order.js"></script>
-    <script src="/resources/js/recipe/main-img.js"></script>
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
-
 </head>
 <body>
     <div>
-        <nav>
-            <div class="nav">
-                <div class="nav_top">
-                    <div class="nav_left">
-                        <p class="logo">FunKit</p>
-                    </div>
-                    <div>
-                        <ul class="nav_top_user">
-                            <li>
-                                <button class="add_recipe">레시피 등록</button>
-                            </li>
-                            <li>
-                                <a href="">로그인</a>
-                            </li>
-                            <li>
-                                <a href="">회원가입</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="nav_bottom">
-                    <div class="nav_contents">
-                        <ul>
-                            <li>홈</li>
-                            <li>레시피</li>
-                            <li>펀딩</li>
-                            <li>랭킹</li>
-                            <li>스토어</li>
-                            <li>더보기</li>
-                        </ul>
-                    </div>
-                    <form>
-                        <div class="nav_search">
-                            <input type="text" placeholder="검색하기">
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </nav>
+        <jsp:include page="../header.jsp"/>
         <div id="content_mar">
             <div id="add_box">
                 <div>
@@ -70,7 +24,7 @@
                                     <label>제목</label>
                                 </div>
                                 <div class="align_input">
-                                    <input type="text" name="title" id="menu_title" class="mid_text">
+                                    <input type="text" name="title" id="title" class="mid_text">
                                 </div>
                             </div>
                             <div class="align_info">
@@ -124,7 +78,8 @@
                                         <label>대표<br>이미지</label>
                                     </div>
                                     <div>
-                                        <input type="file" accept="image/*" onchange="mainImg(this)"><span id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
+                                        <input type="file" accept="image/*" onchange="mainPreview(this)" id="img" name="mainImage">
+                                        <span id="img_size_info">*미리보기 사이즈는 600 x 400 입니다.</span>
                                         <br>
                                         <div>
                                             <img id="preview" />
@@ -144,9 +99,11 @@
                                         <labe class="cooking_orders">1</labe>
                                     </div>
                                     <div class="img_button">
-                                        <label for="img_input_1">이미지 업로드</label>
+                                        <a href="javascript:void(0)" onclick="fileUpload(1)">
+                                            <img src="/resources/img/recipe/default.png" id="order_img_1" />
+                                        </a>
                                     </div>
-                                    <input type="file" accept="image/*" class="img_input" id="img_input_1">
+                                    <input type="file" class="img_input" id="img_input_1" accept="image/*">
                                     <div>
                                         <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>
                                     </div>
@@ -159,9 +116,9 @@
                                 </div>
                             </div>
                             <div class="orders_mar">
-                                <div class="button_area">
-                                    <button class="button_">등록</button>
-                                    <button>취소</button>
+                                <div id="sub_btn">
+                                    <button>등록</button>
+                                    <a href="javascript:history.back();"><button type="button">취소</button></a>
                                 </div>
                             </div>
                         </div>
@@ -170,5 +127,29 @@
             </div>
         </div>
     </div>
+    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
+    <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/resources/js/recipe/main-img.js"></script>
+    <script src="/resources/js/recipe/recipe-order.js"></script>
+    <script src="/resources/js/recipe/multi-img.js"></script>
+    <script>
+        $("#submit_btn").on("click", () => {
+            let formData = new FormData($("#form_area")[0]);
+
+            $.ajax({
+                url: window.location.pathname,
+                type: "POST",
+                enctype: 'multipart/form-data',
+                data: formData,
+                processData: false,
+                contentType: false,
+                cache: false,
+                success: function (result) { },
+                error: function (e) { }
+            });
+        });
+    </script>
 </body>
 </html>

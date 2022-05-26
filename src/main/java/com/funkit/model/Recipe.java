@@ -2,7 +2,7 @@ package com.funkit.model;
 
 import java.util.Date;
 
-public class Recipe {
+public class Recipe<T> {
     private int recipeCode;
     private String id;
     private String title;
@@ -12,8 +12,17 @@ public class Recipe {
     private int like;
     private int view;
     private String ingredients;
-
     private int takes;
+
+    private T mainImage;
+
+    public T getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(T mainImage) {
+        this.mainImage = mainImage;
+    }
 
     public int getTakes() {
         return takes;
@@ -93,5 +102,21 @@ public class Recipe {
 
     public void setView(int view) {
         this.view = view;
+    }
+
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "recipeCode=" + recipeCode +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", intro='" + intro + '\'' +
+                ", regDate=" + regDate +
+                ", updateDate=" + updateDate +
+                ", like=" + like +
+                ", view=" + view +
+                ", ingredients='" + ingredients + '\'' +
+                ", takes=" + takes +
+                '}';
     }
 }

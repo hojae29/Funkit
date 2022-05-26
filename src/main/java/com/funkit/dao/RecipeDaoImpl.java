@@ -19,12 +19,16 @@ public class RecipeDaoImpl implements RecipeDao{
     }
 
     @Override
-    public void add(Recipe recipe) {
+    public int add(Recipe recipe) {
+
         sql.insert("recipe.add",recipe);
+
+        return recipe.getRecipeCode();
     }
 
     @Override
     public void delete(int recipeCode) {
         sql.delete("recipe.delete",recipeCode);
     }
+
 }

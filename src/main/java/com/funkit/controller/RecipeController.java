@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.util.List;
 
 @Controller
@@ -18,7 +20,7 @@ public class RecipeController {
     @Autowired
     RecipeService service;
 
-    @GetMapping("/list")
+    @GetMapping({"","/list"})
     public String list(Model model){
         List<Recipe> list = service.list();
 
@@ -26,15 +28,24 @@ public class RecipeController {
 
         return path + "list";
     }
+
     @GetMapping("/add")
     public String add(){
 
         return path+"add";
     }
     @PostMapping("/add")
-    public String add(Recipe recipe){
+    public String add(@SessionAttribute Member member, Recipe<MultipartFile> recipe){
+        recipe.setId(member.getId());//session에서 id값 가져오기
 
-        service.add(recipe);
+        String uploadMain = "D:\\upload\\recipe";
+
+        int recipeCode = service.add(recipe);
+
+        File uploadPath = new File(uploadMain + "\\" + recipeCode);
+        if(uploadPath.exists() == false){
+            uploadPath.mkdirs();
+        }
 
         return "redirect:list";
     }
@@ -43,5 +54,9 @@ public class RecipeController {
         service.delete(recipeCode);
 
         return "redirect:../list";
+    }
+    @GetMapping("/view")
+    public String view(){
+        return path + "view";
     }
 }

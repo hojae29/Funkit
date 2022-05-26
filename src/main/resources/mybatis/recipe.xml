@@ -6,9 +6,14 @@
         SELECT * FROM RECIPE
     </select>
 
-    <insert id="add">
+    <insert id="add" useGeneratedKeys="true" keyProperty="recipeCode">
         INSERT INTO recipe(recipe_code, title, id, reg_date,intro,ingredients,takes)
         VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes})
+    </insert>
+
+    <insert id="mainImg">
+        INSERT INTO recipe_main_image
+        VALUES(NULL,#{recipeCode},#{imgae.fileName},#{image.fileSize});
     </insert>
 
     <delete id="delete">

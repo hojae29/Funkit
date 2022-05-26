@@ -1,0 +1,16 @@
+
+        .main_con{
+            width:1200px;
+            margin:0 auto;
+        }
+        .recipe_rank{
+            width:330px;
+            height:400px;
+            /* background-color:gray; */
+        }
+        #rank_banner{
+            height:480px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }

@@ -7,7 +7,9 @@ import java.util.List;
 public interface RecipeDao {
     List<Recipe> list();
 
-    void add(Recipe recipe);
+    int add(Recipe recipe);
 
     void delete(int recipeCode);
+
+/*    int addImg(Recipe recipeMain);*/
 }
