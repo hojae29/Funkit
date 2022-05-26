@@ -20,4 +20,9 @@ public class ManagerDaoImpl implements ManagerDao{
     public List<Funding> getApprovalReqFundingList() {
         return sql.selectList("manager.getApprovalReqFundingList");
     }
+
+    @Override
+    public void fundingApproval(int code) {
+        sql.update("manager.fundingApproval", code);
+    }
 }

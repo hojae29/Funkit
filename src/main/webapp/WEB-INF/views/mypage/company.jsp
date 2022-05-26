@@ -10,7 +10,7 @@
 <html>
 <head>
     <title>펀키트</title>
-    <link rel="stylesheet" href="/resources/css/company.css"/>
+    <link rel="stylesheet" href="/resources/css/mypage/company.css"/>
 </head>
 <body>
     <jsp:include page="../header.jsp"/>

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface ManagerDao {
     List<Funding> getApprovalReqFundingList();
+
+    void fundingApproval(int code);
 }

@@ -11,7 +11,7 @@
 <head>
     <title>FunKit Recipe</title>
 
-    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/header/header.css"/>
 </head>
 <body>
     <div>

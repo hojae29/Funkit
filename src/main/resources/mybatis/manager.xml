@@ -7,4 +7,10 @@
         FROM funding
         WHERE status_code=20
     </select>
+
+    <update id="fundingApproval">
+        UPDATE funding
+        SET status_code=30
+        WHERE funding_code=#{code}
+    </update>
 </mapper>

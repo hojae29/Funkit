@@ -12,7 +12,10 @@
 </head>
 <body>
     <h1>관리자페이지</h1>
-    <a href="/mgr/funding">펀딩승인 관리</a>
-    <a href="/mgr/member">기업회원 가입요청 관리</a>
+    <ul>
+        <li><a href="/mgr/funding">펀딩승인 관리</a></li>
+        <li><a href="/mgr/member">가입요청 관리</a></li>
+        <li><a href="/mgr/notice">공지사항 관리</a></li>
+    </ul>
 </body>
 </html>

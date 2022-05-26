@@ -1,0 +1,97 @@
+.title_img_box{
+    margin: 25px auto;
+    width: 1180px;
+    height: 400px;
+    background-color: #cccccc;
+}
+
+.sub_title{
+    font-size:24px;
+    font-weight: 500;
+    margin-bottom:8px;
+}
+
+.card_box{
+    width: 180px;
+    height: 180px;
+    background-color: #cccccc;
+    border-radius: 10px;
+}
+
+.card_box_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.planning_container{
+    width:1180px;
+    margin: 0 auto 25 auto;
+}
+
+.tag_container{
+    width:1180px;
+    margin: 0 auto 25 auto;
+}
+
+.search_box{
+    width: 230px;
+    border-bottom: 1px solid #888888;
+}
+
+#search_input{
+    width: 230px;
+    height: 30px;
+    border: none;
+}
+
+.tag_sub_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag_text{
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.funding_container{
+    width: 1180px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 55px;
+}
+
+.funding_item{
+    height: 400px;
+}
+
+.funding_img_box{
+    border-radius: 5px;
+    height: 240px;
+    background-color: #cccccc;
+    margin-bottom: 4px;
+}
+
+.funding_title{
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.funding_percentage{
+    display: flex;
+    justify-content: flex-end;
+    font-size:26px;
+    font-weight: bold;
+    color: #FF7E00;
+}
+
+.amount_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.amount_container p{
+    color: #cccccc;
+}

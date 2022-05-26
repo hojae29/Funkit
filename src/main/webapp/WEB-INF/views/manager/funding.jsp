@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>펀키트</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
     <table>
@@ -24,16 +25,28 @@
         <tbody>
         <c:forEach var="item" items="${list}">
             <tr>
-                <td>${item.fundingCode}</td>
+                <td class="funding_code">${item.fundingCode}</td>
                 <td>${item.title}</td>
                 <td>${item.id}</td>
                 <td>
-                    <button>승인</button>
+                    <button id="approval_btn">승인</button>
                     <button>거절</button>
                 </td>
             </tr>
         </c:forEach>
         </tbody>
     </table>
+    <script>
+        $("#approval_btn").on("click", function(){
+            let code = $(this).closest("td").siblings('.funding_code').text();
+
+            $.ajax({
+                url: window.location.pathname + "/" + code,
+                method: "PATCH",
+                success: result => window.location.reload(),
+                error: error => console.log(error)
+            });
+        });
+    </script>
 </body>
 </html>
