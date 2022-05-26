@@ -31,9 +31,4 @@ public class RecipeDaoImpl implements RecipeDao{
         sql.delete("recipe.delete",recipeCode);
     }
 
-/*    @Override
-    public int addImg(Recipe recipeMain) {
-        sql.insert("recipe.mainImg",recipeMain.getRecipeCode());
-        return recipeMain.getRecipeCode();
-    }*/
 }
