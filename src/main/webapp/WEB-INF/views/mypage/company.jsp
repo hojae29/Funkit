@@ -81,6 +81,7 @@
             </div>
         </div>
     </div>
+    <jsp:include page="../footer.jsp"/>
     <script src="/resources/js/mypage/company.js"></script>
 </body>
 </html>
