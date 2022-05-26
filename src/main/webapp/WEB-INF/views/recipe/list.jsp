@@ -85,9 +85,86 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="card_area" onclick="location.href='http://localhost:8181/recipe/view'">
+                        <div>
+                            <a>
+                                <div class="preview_area">
+                                    <img src="/resources/img/recipe/test.jpeg">
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <div class="card_text">
+                                <div class="card_tit_area" >
+                                    <p class="card_tit">매콤 달콤 바삭! 맛있는 칠리 새우</p>
+                                    <img src="/resources/img/recipe/good.PNG">
+                                </div>
+                                <div class="card_sub">
+                                    <div class="card_tag">
+                                        <ul>
+                                            <li>중식</li>
+                                            <li>튀김</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="view_area">
+                                            <p>조회수</p>
+                                            &nbsp;
+                                            <p>700</p>
+                                        </div>
+                                        <div class="like_area">
+                                            <img src="/resources/img/recipe/like.PNG">
+                                            &nbsp;
+                                            <p>546</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card_area" onclick="location.href='http://localhost:8181/recipe/view'">
+                        <div>
+                            <a>
+                                <div class="preview_area">
+                                    <img src="/resources/img/recipe/test.jpeg">
+                                </div>
+                            </a>
+                        </div>
+                        <div>
+                            <div class="card_text">
+                                <div class="card_tit_area" >
+                                    <p class="card_tit">매콤 달콤 바삭! 맛있는 칠리 새우</p>
+                                    <img src="/resources/img/recipe/good.PNG">
+                                </div>
+                                <div class="card_sub">
+                                    <div class="card_tag">
+                                        <ul>
+                                            <li>중식</li>
+                                            <li>튀김</li>
+                                        </ul>
+                                    </div>
+                                    <div>
+                                        <div class="view_area">
+                                            <p>조회수</p>
+                                            &nbsp;
+                                            <p>700</p>
+                                        </div>
+                                        <div class="like_area">
+                                            <img src="/resources/img/recipe/like.PNG">
+                                            &nbsp;
+                                            <p>546</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        <jsp:include page="../footer.jsp"/>
     </div>
 </body>
 </html>

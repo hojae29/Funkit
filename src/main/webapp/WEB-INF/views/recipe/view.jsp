@@ -37,21 +37,13 @@
                         </div>
                         <dvi id="position_bottom">
                             <div id="tag_area">
-                                <div id="tag_grid">
-                                    <div class="tag_sty">
-                                        <p>태그</p>
-                                    </div>
-                                    <div class="tag_sty">
-                                        <p>태그</p>
-                                    </div>
-                                    <div class="tag_sty">
-                                        <p>태그</p>
-                                    </div>
-                                    <div class="tag_sty">
-                                        <p>태그</p>
-                                    </div>
-                                    <div class="tag_sty">
-                                        <p>태그</p>
+                                <div id="tag_div">
+                                    <div>
+                                        <ul id="tag_sty">
+                                            <li>태그</li>
+                                            <li>태그</li>
+                                            <li>태그</li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
@@ -195,6 +187,7 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="../footer.jsp"/>
     </div>
 </body>
 </html>

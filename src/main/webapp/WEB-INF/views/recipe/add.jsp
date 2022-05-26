@@ -126,6 +126,7 @@
                 </div>
             </div>
         </div>
+        <jsp:include page="../footer.jsp"/>
     </div>
     <link rel="stylesheet" href="/resources/css/header.css"/>
     <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
@@ -135,7 +136,7 @@
     <script src="/resources/js/recipe/recipe-order.js"></script>
     <script src="/resources/js/recipe/multi-img.js"></script>
     <script>
-        $("#submit_btn").on("click", () => {
+        /*$("#submit_btn").on("click", () => {
             let formData = new FormData($("#form_area")[0]);
 
             $.ajax({
@@ -149,7 +150,7 @@
                 success: function (result) { },
                 error: function (e) { }
             });
-        });
+        });*/
     </script>
 </body>
 </html>

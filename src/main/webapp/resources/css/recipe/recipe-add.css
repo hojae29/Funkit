@@ -1,13 +1,13 @@
 #add_box{
     margin: 0 auto;
-    width:1180px;
+    width:960px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
 }
 #add_recipe{
     padding-top:65px;
-    font-size:36pt;
+    font-size:36px;
     font-weight: bold;
     text-align: center;
 }
@@ -49,7 +49,7 @@
     align-items: center;
 }
 #form_area{
-    width:700px;
+    width:750px;
 }
 .sel_area{
     width:600px;

@@ -46,7 +46,9 @@ public class RecipeController {
         if(uploadPath.exists() == false){
             uploadPath.mkdirs();
         }
+   /* for(MultipartFile multipartFile : ){
 
+    }*/
         return "redirect:list";
     }
     @GetMapping("/view/delete/{recipeCode}")
