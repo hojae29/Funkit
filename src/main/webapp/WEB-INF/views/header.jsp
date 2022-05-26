@@ -7,27 +7,31 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-    <div>
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/resources/css/header/header.css"/>
+    <link rel="stylesheet" href="/resources/css/header/modal.css"/>
+    <link rel="stylesheet" href="/resources/css/main.css">
+    <header>
         <nav>
             <div class="nav">
                 <div class="nav_top">
                     <div class="nav_left">
-                        <a href="/"><p class="logo">FunKit</p></a>
+                        <a href="/">
+                            <p class="logo" style="display: flex;align-items: center;">
+                                <img src="/resources/img/logo.png" width="35" height="35"/>펀키트
+                            </p>
+                        </a>
                     </div>
                     <div>
-                        <button class="add_recipe"><a href="/recipe/add" style="color:white">레시피 등록</a></button>
+                        <button class="add_recipe">레시피 등록</button>
                         <ul class="nav_top_user">
                             <c:if test="${sessionScope.member == null}">
                                 <li><button id="login_btn">로그인</button></li>
                                 <li><button id="register_btn">회원가입</button></li>
                             </c:if>
                             <c:if test="${sessionScope.member != null}">
-                                <li><a href="/myfunkit/">${member.id}님</a></li>
+                                <li><a href="/myfunkit/">${member.code == 20 ? member.corporateName : member.name}님</a></li>
                                 <li><a href="/logout">로그아웃</a></li>
                             </c:if>
                         </ul>
@@ -37,11 +41,11 @@
                     <div class="nav_contents">
                         <ul>
                             <li>홈</li>
-                            <li><a href="http://localhost:8181/recipe/">레시피</a></li>
-                            <li><a href="/funding/">펀딩</a></li>
+                            <li>레시피</li>
+                            <li><a href="/funding">펀딩</a></li>
                             <li>랭킹</li>
                             <li>스토어</li>
-                            <li>더보기</li>
+                            <li><a href="/notice">공지사항</a></li>
                         </ul>
                     </div>
                     <div class="nav_search">
@@ -50,9 +54,9 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </header>
     <!-- 로그인/회원가입 modal -->
-    <div id="modal" class="modal_overlay">
+    <header id="modal" class="modal_overlay">
         <div style="position: absolute;">
             <div class="modal_close">
                 <button id="modal_close">
@@ -64,7 +68,11 @@
             </div>
             <div class="modal_window">
                 <div class="modal_top" style="margin: 0;">
-                    <div>Funkit</div>
+                    <div>
+                        <p class="logo" style="display: flex;align-items: center; justify-content: center;">
+                            <img src="/resources/img/logo.png" width="35" height="35"/>펀키트
+                        </p>
+                    </div>
                     <div>
                         <button id="modal_login_btn">로그인</button>
                         <button id="modal_register_btn">회원가입</button>
@@ -137,18 +145,11 @@
                     </form>
                 </div>
                 <div>
-                    <button type="button" class="submit_btn" id="submit_register_form" disabled>회원가입</button>
+                    <button type="button" class="submit_btn" id="submit_register_form" style="cursor: default" disabled>회원가입</button>
                     <button type="button" class="submit_btn" id="submit_login_form">로그인</button>
                     <button type="button" class="submit_btn" id="check_token_btn">인증하기</button>
                 </div>
             </div>
         </div>
-    </div>
-    <link rel="stylesheet" href="/resources/css/header.css"/>
-    <link rel="stylesheet" href="/resources/css/modal.css"/>
-    <link rel="stylesheet" href="/resources/css/main.css">
-    <!-- jQuery CDN -->
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    </header>
     <script src="/resources/js/header.js"></script>
-</body>
-</html>

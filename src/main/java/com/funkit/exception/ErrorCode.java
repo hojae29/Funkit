@@ -9,6 +9,7 @@ import static org.springframework.http.HttpStatus.CONFLICT;
 public enum ErrorCode {
     /* 400 BAD_REQUEST */
     LOGIN_FAIL(BAD_REQUEST, "로그인 실패"),
+    WRONG_ACCESS(BAD_REQUEST, "잘못된 접근입니다"),
 
     /* 401 UNAUTHORIZED */
 

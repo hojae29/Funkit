@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="funding">
+    <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
+        INSERT INTO funding(funding_code, id, exp_date, status_code)
+        VALUES(null, #{id}, NOW(), 10);
+    </insert>
+    <update id="saveFunding">
+        UPDATE funding
+        SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}
+        WHERE funding_code = #{fundingCode}
+    </update>
+    <delete id="deleteFunding">
+        DELETE FROM funding
+        WHERE funding_code=#{fundingCode}
+    </delete>
+    <update id="updateFundingStatus">
+        UPDATE funding
+        SET status_code=#{status}
+        WHERE funding_code=#{code}
+    </update>
+
+    <insert id="insertMainImage">
+        INSERT INTO funding_main_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+    <update id="updateMainImage">
+        UPDATE funding_main_image
+        SET file_name=#{image.fileName}, file_size=#{image.fileSize}
+        WHERE funding_code = #{fundingCode}
+    </update>
+    <select id="getMainImage" resultType="Image">
+        SELECT *
+        FROM funding_main_image
+        WHERE funding_code=#{code}
+    </select>
+
+    <insert id="insertInfoImage">
+        INSERT INTO funding_info_image
+        VALUES(null, #{fundingCode}, #{image.fileName}, #{image.fileSize})
+    </insert>
+    <select id="getInfoImageList" resultType="Image">
+        SELECT *
+        FROM funding_info_image
+        WHERE funding_code=#{code}
+        ORDER BY code;
+    </select>
+    <delete id="deleteInfoImage">
+        DELETE FROM funding_info_image
+        WHERE file_name = #{fileName}
+    </delete>
+
+    <select id="getFundingListById" resultMap="fundingResultMap">
+        SELECT f.funding_code, id, status, title, reg_date, exp_date, target_amount, cml_amount, introduction, code, file_name, file_size
+        FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code, funding_status s
+        WHERE f.status_code = s.status_code AND id=#{id}
+        ORDER BY funding_code DESC
+        LIMIT #{pager.offset}, #{pager.perPage}
+    </select>
+    <select id="getFundingByFundingCode" resultType="Funding">
+        SELECT *
+        FROM funding
+        WHERE funding_code=#{fundingCode}
+    </select>
+    <select id="total" resultType="Integer">
+        SELECT COUNT(*)
+        FROM funding
+        WHERE id=#{id};
+    </select>
+
+    <resultMap id="fundingResultMap" type="Funding">
+        <id property="fundingCode" column="funding_code"/>
+        <id property="id" column="id"/>
+        <id property="status" column="status"/>
+        <id property="title" column="title"/>
+        <id property="regDate" column="reg_date"/>
+        <id property="expDate" column="exp_date"/>
+        <id property="targetAmount" column="target_amount"/>
+        <id property="cmlAmount" column="aml_amount"/>
+        <id property="introduction" column="introduction"/>
+        <association property="mainImage"  javaType="Image" >
+            <result property="code" column="code" />
+            <result property="fileName" column="file_name"/>
+            <result property="fileSize" column="file_size"/>
+        </association>
+    </resultMap>
+
+</mapper>
