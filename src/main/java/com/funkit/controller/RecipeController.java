@@ -35,42 +35,17 @@ public class RecipeController {
         return path+"add";
     }
     @PostMapping("/add")
-    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
+    public String add(@SessionAttribute Member member, Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
 
         String uploadMain = "D:\\upload\\recipe";
 
-        File uploadPath = new File(uploadMain);
+        int recipeCode = service.add(recipe);
+
+        File uploadPath = new File(uploadMain + "\\" + recipeCode);
         if(uploadPath.exists() == false){
             uploadPath.mkdirs();
         }
-/*
-        for(MultipartFile multipartFile : upload){
-            String uploadFileName = multipartFile.getOriginalFilename();
-        }
-
-        uploadFileName = uploadFileName.substring*/
-
-       /* var recipeMain = new Recipe();
-
-        int recipeCode = service.addImg(recipeMain);
-
-
-       try{
-           new File(uploadMain + recipeCode).mkdirs();
-           new File(uploadMain + recipeCode + "\\cooking").mkdir();
-       }catch (Exception e){
-           e.getStackTrace();
-       }*/
-
-
-        /*if(imgPath.exists() == false){
-            imgPath.mkdirs();
-        }*/
-
-        service.add(recipe);
-
-
 
         return "redirect:list";
     }

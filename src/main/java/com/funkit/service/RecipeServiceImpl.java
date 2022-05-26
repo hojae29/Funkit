@@ -20,10 +20,8 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public void add(Recipe recipe) {
-        dao.add(recipe);
-
-
+    public int add(Recipe recipe) {
+        return dao.add(recipe);
     }
 
     @Override

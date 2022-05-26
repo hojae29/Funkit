@@ -7,7 +7,7 @@ import java.util.List;
 public interface RecipeService {
     List<Recipe> list();
 
-    void add(Recipe recipe);
+    int add(Recipe recipe);
 
     void delete(int recipeCode);
 
