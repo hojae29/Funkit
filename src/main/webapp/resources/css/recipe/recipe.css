@@ -48,7 +48,6 @@
     border-radius: 5px;
 }
 .card_area{
-    cursor: pointer;
     width:356px;
     height:403px;
     box-shadow:4px 8px 8px #cccccc;
@@ -60,7 +59,23 @@
 
 }
 .card_tag{
+    width:250px;
     display: flex;
+}
+.card_tag li{
+    padding:0 7px 0 7px;
+    font-size: 12pt;
+    margin-right:10px;
+    min-width: 30px;
+    width:fit-content;
+    height:30px;
+    color:#ff7e00;
+    border: 1px solid #ff7e00;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.card_tag ul{
+    display:flex;
 }
 .card_text{
     margin:10px;
