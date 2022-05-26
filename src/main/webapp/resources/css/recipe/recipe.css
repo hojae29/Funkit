@@ -92,6 +92,6 @@
 #grid_contents{
     display: grid;
     grid-template-columns: repeat(3,calc(33.33333%));
-    justify-items: center;
     grid-row-gap: 40px;
+    grid-column-gap: 20px;
 }
