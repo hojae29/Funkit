@@ -24,7 +24,7 @@
                         </a>
                     </div>
                     <div>
-                        <button class="add_recipe">레시피 등록</button>
+                        <a href="/recipe/add"><button class="add_recipe" >레시피 등록</button></a>
                         <ul class="nav_top_user">
                             <c:if test="${sessionScope.member == null}">
                                 <li><button id="login_btn">로그인</button></li>
