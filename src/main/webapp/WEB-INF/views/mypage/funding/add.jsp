@@ -43,14 +43,12 @@
         }
 
         #approval_btn{
-            height: 30px;
-            width: 110px;
-            padding:5px;
+            padding:6px 25px;
             border: none;
             background: #ff7e00;
             color: white;
             border-radius: 5px;
-            font-size: 14px;
+            font-size: 16px;
         }
 
         .bottom_box{
@@ -288,7 +286,7 @@
                     <h1>${member.corporateName}님의 프로젝트</h1>
                 </div>
                 <div class="menu_box">
-                    <button id="approval_btn">승인 요청하기</button>
+                    <button id="approval_btn"><a style="font-size: 16px;color: white;" href="${funding.fundingCode}/approval?status=20">승인 요청하기</a></button>
                 </div>
             </div>
         </div>

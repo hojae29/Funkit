@@ -10,7 +10,7 @@
 <head>
     <title>레시피 등록하기</title>
 
-    <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/header/header.css"/>
     <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
     <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
     <script src="/resources/js/recipe/recipe-order.js"></script>

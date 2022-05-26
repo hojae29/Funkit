@@ -2,6 +2,7 @@ package com.funkit.dao.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.util.Pager;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -23,6 +24,11 @@ public interface FundingDao {
 
     void updateMainImage(int fundingCode, Image image);
 
-    List<Funding<Image>> getFundingListById(String id);
+    List<Funding<Image>> getFundingListById(String id, Pager pager);
 
+    int total(String id);
+
+    void deleteFunding(int code);
+
+    void fundingApprovalReq(int code, int status);
 }

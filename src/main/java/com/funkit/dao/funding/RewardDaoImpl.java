@@ -16,7 +16,7 @@ public class RewardDaoImpl implements RewardDao{
     @Override
     public Reward addReward(Reward reward) {
         sql.insert("reward.insertReward", reward);
-        return sql.selectOne("funding.getReward", reward.getRewardCode());
+        return sql.selectOne("reward.getReward", reward.getRewardCode());
     }
 
     @Override

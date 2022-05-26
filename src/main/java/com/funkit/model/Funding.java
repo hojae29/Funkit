@@ -1,5 +1,8 @@
 package com.funkit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -9,11 +12,16 @@ public class Funding<T> {
     private int fundingCode;
     private String id;
     private String title;
+
+    private String status;
+
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date regDate;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date expDate;
+
     private Long targetAmount;
     private Long cmlAmount;
-    private String status;
     private String introduction;
 
     private T mainImage;
@@ -112,14 +120,6 @@ public class Funding<T> {
         this.cmlAmount = cmlAmount;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getIntroduction() {
         return introduction;
     }
@@ -128,17 +128,25 @@ public class Funding<T> {
         this.introduction = introduction;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Funding{" +
                 "fundingCode=" + fundingCode +
                 ", id='" + id + '\'' +
                 ", title='" + title + '\'' +
+                ", status='" + status + '\'' +
                 ", regDate=" + regDate +
                 ", expDate=" + expDate +
                 ", targetAmount=" + targetAmount +
                 ", cmlAmount=" + cmlAmount +
-                ", status='" + status + '\'' +
                 ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
                 ", infoImage=" + infoImage +

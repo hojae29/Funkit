@@ -3,13 +3,22 @@
 
 <mapper namespace="funding">
     <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
-        INSERT INTO funding(funding_code, id, exp_date)
-        VALUES(null, #{id}, NOW());
+        INSERT INTO funding(funding_code, id, exp_date, status_code)
+        VALUES(null, #{id}, NOW(), 10);
     </insert>
     <update id="saveFunding">
         UPDATE funding
         SET title=#{title}, reg_date=#{regDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}
         WHERE funding_code = #{fundingCode}
+    </update>
+    <delete id="deleteFunding">
+        DELETE FROM funding
+        WHERE funding_code=#{fundingCode}
+    </delete>
+    <update id="updateFundingStatus">
+        UPDATE funding
+        SET status_code=#{status}
+        WHERE funding_code=#{code}
     </update>
 
     <insert id="insertMainImage">
@@ -42,17 +51,39 @@
         WHERE file_name = #{fileName}
     </delete>
 
-    <select id="getFundingListById" resultType="Funding">
-        SELECT *
-        FROM funding, funding_main_image AS main_image , funding_info_image AS info_image
-        WHERE id=#{id} AND
-            funding.funding_code = main_image.funding_code AND
-            funding.funding_code = info_image.funding_code;
+    <select id="getFundingListById" resultMap="fundingResultMap">
+        SELECT f.funding_code, id, status, title, reg_date, exp_date, target_amount, cml_amount, introduction, code, file_name, file_size
+        FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code, funding_status s
+        WHERE f.status_code = s.status_code AND id=#{id}
+        ORDER BY funding_code DESC
+        LIMIT #{pager.offset}, #{pager.perPage}
     </select>
     <select id="getFundingByFundingCode" resultType="Funding">
         SELECT *
         FROM funding
         WHERE funding_code=#{fundingCode}
     </select>
+    <select id="total" resultType="Integer">
+        SELECT COUNT(*)
+        FROM funding
+        WHERE id=#{id};
+    </select>
+
+    <resultMap id="fundingResultMap" type="Funding">
+        <id property="fundingCode" column="funding_code"/>
+        <id property="id" column="id"/>
+        <id property="status" column="status"/>
+        <id property="title" column="title"/>
+        <id property="regDate" column="reg_date"/>
+        <id property="expDate" column="exp_date"/>
+        <id property="targetAmount" column="target_amount"/>
+        <id property="cmlAmount" column="aml_amount"/>
+        <id property="introduction" column="introduction"/>
+        <association property="mainImage"  javaType="Image" >
+            <result property="code" column="code" />
+            <result property="fileName" column="file_name"/>
+            <result property="fileSize" column="file_size"/>
+        </association>
+    </resultMap>
 
 </mapper>

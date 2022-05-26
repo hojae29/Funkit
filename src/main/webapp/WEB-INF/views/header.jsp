@@ -9,10 +9,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/resources/css/header.css"/>
-    <link rel="stylesheet" href="/resources/css/modal.css"/>
+    <link rel="stylesheet" href="/resources/css/header/header.css"/>
+    <link rel="stylesheet" href="/resources/css/header/modal.css"/>
     <link rel="stylesheet" href="/resources/css/main.css">
-    <div>
+    <header>
         <nav>
             <div class="nav">
                 <div class="nav_top">
@@ -31,7 +31,7 @@
                                 <li><button id="register_btn">회원가입</button></li>
                             </c:if>
                             <c:if test="${sessionScope.member != null}">
-                                <li><a href="/myfunkit/">${member.id}님</a></li>
+                                <li><a href="/myfunkit/">${member.code == 20 ? member.corporateName : member.name}님</a></li>
                                 <li><a href="/logout">로그아웃</a></li>
                             </c:if>
                         </ul>
@@ -42,7 +42,7 @@
                         <ul>
                             <li>홈</li>
                             <li>레시피</li>
-                            <li><a href="/funding/">펀딩</a></li>
+                            <li><a href="/funding">펀딩</a></li>
                             <li>랭킹</li>
                             <li>스토어</li>
                             <li><a href="/notice">공지사항</a></li>
@@ -54,9 +54,9 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </header>
     <!-- 로그인/회원가입 modal -->
-    <div id="modal" class="modal_overlay">
+    <header id="modal" class="modal_overlay">
         <div style="position: absolute;">
             <div class="modal_close">
                 <button id="modal_close">
@@ -151,5 +151,5 @@
                 </div>
             </div>
         </div>
-    </div>
+    </header>
     <script src="/resources/js/header.js"></script>
