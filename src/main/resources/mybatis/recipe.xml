@@ -20,4 +20,16 @@
         DELETE FROM recipe
         where recipe_code=#{recipeCode}
     </delete>
+
+    <select id="getRecipeCode" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
+    <select id="checkCode" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
 </mapper>

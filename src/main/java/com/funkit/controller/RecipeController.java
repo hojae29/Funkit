@@ -1,5 +1,6 @@
 package com.funkit.controller;
 
+import com.funkit.model.Image;
 import com.funkit.model.Member;
 import com.funkit.model.Recipe;
 import com.funkit.service.RecipeService;
@@ -15,6 +16,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/recipe")
 public class RecipeController {
+
     final String path = "recipe/";
 
     @Autowired
@@ -29,26 +31,34 @@ public class RecipeController {
         return path + "list";
     }
 
-    @GetMapping("/add")
-    public String add(){
-
-        return path+"add";
-    }
-    @PostMapping("/add")
-    public String add(@SessionAttribute Member member, Recipe<MultipartFile> recipe){
+    @RequestMapping("/add")
+    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
         recipe.setId(member.getId());//session에서 id값 가져오기
 
-        String uploadMain = "D:\\upload\\recipe";
+        String uploadMain = "D:/upload/recipe";
 
         int recipeCode = service.add(recipe);
 
-        File uploadPath = new File(uploadMain + "\\" + recipeCode);
+        File uploadPath = new File(uploadMain + "/" + recipeCode);
+
         if(uploadPath.exists() == false){
             uploadPath.mkdirs();
+            new File(uploadPath + "/mainImage").mkdirs();
+            new File(uploadPath + "/cookImage").mkdirs();
         }
-   /* for(MultipartFile multipartFile : ){
+        return "redirect:add/" + recipeCode;
+    }
 
-    }*/
+    @GetMapping("/add/{recipeCode}")
+    public String add(@PathVariable int recipeCode,Model model){
+        Recipe<Image> recipe = service.getRecipeCode(recipeCode);
+        model.addAttribute("recipe",recipe);
+
+        return path + "add";
+    }
+    @PostMapping("/add/{recipeCode}")
+    public String add(@PathVariable int recipeCode,Recipe<MultipartFile> recipe){
+
         return "redirect:list";
     }
     @GetMapping("/view/delete/{recipeCode}")
@@ -60,5 +70,23 @@ public class RecipeController {
     @GetMapping("/view")
     public String view(){
         return path + "view";
+    }
+
+    @PostMapping("/uploadAjaxAction/{recipeCode}")
+    public void uploadAjaxAction(@PathVariable int recipeCode,MultipartFile mainImage,Recipe<MultipartFile> recipe){
+
+        recipe.setRecipeCode(recipeCode);
+
+        String uploadMainPath = "D:/upload/recipe/" +  "/mainImage";
+
+        String uploadFileName = mainImage.getOriginalFilename();
+
+        File saveFile = new File(uploadMainPath,uploadFileName);
+
+        try{
+            mainImage.transferTo(saveFile);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

@@ -1,6 +1,8 @@
 package com.funkit.dao;
 
+import com.funkit.model.Image;
 import com.funkit.model.Recipe;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -11,5 +13,6 @@ public interface RecipeDao {
 
     void delete(int recipeCode);
 
-/*    int addImg(Recipe recipeMain);*/
+    Recipe<Image> getRecipeCode(int recipeCode);
+
 }

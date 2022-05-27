@@ -33,17 +33,17 @@ function mainPreview(input) {
             document.getElementById("preview").src="";
     }
     let formData = new FormData();
-    let fileInput = $('input[name="mainImg"]');
+    let fileInput = $('input[name="mainImage"]');
     let fileList = fileInput[0].files;
     let fileObj = fileList[0];
 
     if(!fileCheck(fileObj.size)){
         return false;
     }
-    formData.append("mainImg",fileObj);
+    formData.append("mainImage",fileObj);
 
     $.ajax({
-        url:'/admin/uploadAjaxAction',
+        url:'/recipe/uploadAjaxAction',
         processData : false,
         contentType : false,
         data : formData,

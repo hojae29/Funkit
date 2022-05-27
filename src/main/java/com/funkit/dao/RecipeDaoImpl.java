@@ -1,9 +1,11 @@
 package com.funkit.dao;
 
+import com.funkit.model.Image;
 import com.funkit.model.Recipe;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -29,6 +31,13 @@ public class RecipeDaoImpl implements RecipeDao{
     @Override
     public void delete(int recipeCode) {
         sql.delete("recipe.delete",recipeCode);
+    }
+
+    @Override
+    public Recipe<Image> getRecipeCode(int recipeCode) {
+        Recipe<Image> recipe = sql.selectOne("recipe.getRecipeCode",recipeCode);
+
+        return recipe;
     }
 
 }
