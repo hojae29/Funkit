@@ -3,6 +3,8 @@ package com.funkit.controller.mypage.company;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Member;
+import com.funkit.model.Tag;
+import com.funkit.service.TagService;
 import com.funkit.service.funding.FundingService;
 import com.funkit.service.funding.RewardService;
 import com.funkit.util.Pager;
@@ -24,10 +26,12 @@ public class CompanyFundingController {
 
     final FundingService fundingService;
     final RewardService rewardService;
+    final TagService tagService;
 
-    public CompanyFundingController(FundingService fundingService, RewardService rewardService) {
+    public CompanyFundingController(FundingService fundingService, RewardService rewardService, TagService tagService) {
         this.fundingService = fundingService;
         this.rewardService = rewardService;
+        this.tagService = tagService;
     }
 
     @RequestMapping("/make")
@@ -51,7 +55,11 @@ public class CompanyFundingController {
     @GetMapping("/{code}")
     public String moveMakeFundingPage(@PathVariable int code, Model model){
         Funding<Image> funding = fundingService.getFundingByFundingCode(code);
+        List<Tag> tagList = tagService.getTagList();
+
         model.addAttribute("funding", funding);
+        model.addAttribute("tagList", tagList);
+
         return "/mypage/funding/add";
     }
 
@@ -59,7 +67,9 @@ public class CompanyFundingController {
     public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding){
         funding.setFundingCode(code);
 
-        System.out.println("funding  : " + funding);
+        for(Integer item : funding.getTags())
+            System.out.println(item);
+
         fundingService.saveFunding(funding);
     }
 

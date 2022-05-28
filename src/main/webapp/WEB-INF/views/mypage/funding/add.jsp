@@ -274,6 +274,51 @@
             color: darkred;
         }
 
+        .tag_box{
+            border: none;
+            background: #ff7e00;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        #tag_list_box{
+            margin-top: 8px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .tag_delete_btn{
+            background: none;
+            border:none;
+            color: white;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        #tag_add_btn{
+            height: 30px;
+            width: 60px;
+            font-size: 14px;
+            background: none;
+            border: 1px solid #ff7e00;
+            border-radius: 5px;
+            margin-left: 8px;
+            color: #ff7e00;
+        }
+
+        #tag_select{
+            width: 70px;
+            height: 30px;
+            border: 1px solid #cccccc;
+            background: white;
+        }
+
     </style>
 </head>
 <body>
@@ -319,6 +364,20 @@
                                 <div>
                                     <input class="date_input" name="startDate" type="date" value="<fmt:formatDate value="${funding.startDate}" pattern="yyyy-MM-dd"/>">
                                     <input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>">
+                                </div>
+                            </div>
+                            <div>
+                                <div><label>태그선택</label></div>
+                                <div><p>태그를 선택해주세요</p></div>
+                                <div>
+                                    <select id="tag_select">
+                                        <c:forEach var="tag" items="${tagList}">
+                                            <option value="${tag.tagCode}">${tag.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <button type="button" id="tag_add_btn">추가</button>
+                                </div>
+                                <div id="tag_list_box">
                                 </div>
                             </div>
                             <div>
@@ -417,7 +476,6 @@
                                     <button id="cancel_btn" type="button">취소</button>
                                 </div>
                             </div>
-
                         </div>
                         <div>
                             <div><label>리워드 보기</label></div>
@@ -454,6 +512,20 @@
         </div>
     </div>
     <script>
+        $("#tag_add_btn").on("click", () => {
+            let html = '<div class="tag_box">' + $("#tag_select option:checked").text() +
+                            '<button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>' +
+                            '<input type="hidden" name="tags" value="' + $("#tag_select").val() + '">' +
+                        '</div>';
+
+            if($("#tag_list_box input[value=" + $("#tag_select").val() + "]").length < 1)
+                $("#tag_list_box").append(html);
+        });
+
+        $(document).on("click", ".tag_delete_btn", function(){
+           $(this).closest('.tag_box').remove();
+        });
+
         $("#cancel_btn").on("click", () => {
             $("#btn_box2").css("display", "none");
             $("#btn_box1").css("display", "block");

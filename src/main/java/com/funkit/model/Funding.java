@@ -27,39 +27,8 @@ public class Funding<T> {
     private List<T> infoImage;
     private List<Reward> reward;
 
-    public List<Reward> getReward() {
-        return reward;
-    }
-
-    public void setReward(List<Reward> reward) {
-        this.reward = reward;
-    }
-
     private List<String> deleteImages;
-
-    public List<String> getDeleteImages() {
-        return deleteImages;
-    }
-
-    public void setDeleteImages(List<String> deleteImages) {
-        this.deleteImages = deleteImages;
-    }
-
-    public T getMainImage() {
-        return mainImage;
-    }
-
-    public void setMainImage(T mainImage) {
-        this.mainImage = mainImage;
-    }
-
-    public List<T> getInfoImage() {
-        return infoImage;
-    }
-
-    public void setInfoImage(List<T> infoImage) {
-        this.infoImage = infoImage;
-    }
+    private List<Integer> tags;
 
     public int getFundingCode() {
         return fundingCode;
@@ -85,22 +54,20 @@ public class Funding<T> {
         this.title = title;
     }
 
-    public Date getStartDate() {
-        return startDate;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setStartDate(String startDate) throws ParseException {
-        var formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.startDate = formatter.parse(startDate);
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
-    public Date getExpDate() {
-        return expDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setExpDate(String expDate) throws ParseException {
-        var formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.expDate = formatter.parse(expDate);
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getTargetAmount() {
@@ -119,40 +86,62 @@ public class Funding<T> {
         this.cmlAmount = cmlAmount;
     }
 
-    public String getStatus() {
-        return status;
+    public T getMainImage() {
+        return mainImage;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setMainImage(T mainImage) {
+        this.mainImage = mainImage;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public List<T> getInfoImage() {
+        return infoImage;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setInfoImage(List<T> infoImage) {
+        this.infoImage = infoImage;
     }
 
+    public List<Reward> getReward() {
+        return reward;
+    }
 
-    @Override
-    public String toString() {
-        return "Funding{" +
-                "fundingCode=" + fundingCode +
-                ", id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", introduction='" + introduction + '\'' +
-                ", status='" + status + '\'' +
-                ", regDate=" + startDate +
-                ", expDate=" + expDate +
-                ", targetAmount=" + targetAmount +
-                ", cmlAmount=" + cmlAmount +
-                ", mainImage=" + mainImage +
-                ", infoImage=" + infoImage +
-                ", reward=" + reward +
-                ", deleteImages=" + deleteImages +
-                '}';
+    public void setReward(List<Reward> reward) {
+        this.reward = reward;
+    }
+
+    public List<String> getDeleteImages() {
+        return deleteImages;
+    }
+
+    public void setDeleteImages(List<String> deleteImages) {
+        this.deleteImages = deleteImages;
+    }
+
+    public List<Integer> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Integer> tags) {
+        this.tags = tags;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) throws ParseException {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.startDate = formatter.parse(startDate);
+    }
+
+    public Date getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(String expDate) throws ParseException {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.expDate = formatter.parse(expDate);
     }
 
     public int getDDay() throws ParseException {
