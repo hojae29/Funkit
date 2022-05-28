@@ -42,35 +42,33 @@ public class FundingServiceImpl implements FundingService {
         fundingDao.saveFunding(funding);
 
         if(mainImage != null && !mainImage.isEmpty()){
-            var image = makeImage(funding.getMainImage());
+            var image = makeImage(funding.getMainImage(), "/upload/" + fundingCode + "/mainImage/");
 
             try {
-                funding.getMainImage().transferTo(new File(mainImgPath + image.getFileName()));
+                funding.getMainImage().transferTo(new File(mainImgPath + image.getName()));
+                var item = fundingDao.getMainImage(fundingCode);
+                if(item == null) {
+                    fundingDao.insertMainImage(fundingCode, image);
+                } else{
+                    fundingDao.updateMainImage(fundingCode, image);
+                    File file = new File(mainImgPath + item.getName());
+                    file.delete();
+                }
             } catch (IOException e) {
                 throw new RuntimeException(e);
-            }
-
-            var item = fundingDao.getMainImage(fundingCode);
-            if(item == null) {
-                fundingDao.insertMainImage(fundingCode, image);
-            } else{
-                fundingDao.updateMainImage(fundingCode, image);
-                File file = new File(mainImgPath + item.getFileName());
-                file.delete();
             }
         }
 
         if(infoImage != null && !infoImage.isEmpty()){
             for (MultipartFile file : funding.getInfoImage()){
-                var image = makeImage(file);
+                var image = makeImage(file, "/upload/" + fundingCode + "/infoImage/");
 
                 try {
-                    file.transferTo(new File(fundingImgPath + image.getFileName()));
+                    file.transferTo(new File(fundingImgPath + image.getName()));
+                    fundingDao.setInfoImage(funding.getFundingCode(), image);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-
-                fundingDao.setInfoImage(funding.getFundingCode(), image);
             }
         }
 
@@ -86,6 +84,11 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public Funding<Image> getFundingByFundingCode(int code) {
         return fundingDao.getFundingByFundingCode(code);
+    }
+
+    @Override
+    public List<Funding<Image>> getFundingList() {
+        return fundingDao.getFundingList();
     }
 
     @Override
@@ -107,12 +110,13 @@ public class FundingServiceImpl implements FundingService {
         fundingDao.fundingApprovalReq(code, status);
     }
 
-    public Image makeImage(MultipartFile file){
+    public Image makeImage(MultipartFile file, String location){
         UUID uuid = UUID.randomUUID();
 
         Image image = new Image();
-        image.setFileName(uuid + ".png");
-        image.setFileSize(file.getSize());
+        image.setName(uuid + ".png");
+        image.setSize(file.getSize());
+        image.setLocation(location);
 
         return image;
     }

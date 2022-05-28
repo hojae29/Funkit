@@ -238,15 +238,15 @@ $("#submit_register_form").on("click", () => {
         email: $("#email").val(),
         phone: $("#phone").val(),
         corporateName: $("#corporate_name").val(),
-        code: null
+        typeCode: null
     }
 
     //개인/기업 회원 구분
     if($("#register_type").text() === "company"){
-        member.code = 20;
+        member.typeCode = 20;
         registerAjax(member);
     } else if($("#register_type").text() === "individual"){
-        member.code = 10;
+        member.typeCode = 10;
         //인증번호 입력 탭으로 이동 및 인증번호 발송
         changeTab("check_email");
         $.ajax({

@@ -11,7 +11,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/resources/css/header/header.css"/>
     <link rel="stylesheet" href="/resources/css/header/modal.css"/>
-    <link rel="stylesheet" href="/resources/css/main.css">
     <header>
         <nav>
             <div class="nav">
@@ -31,7 +30,7 @@
                                 <li><button id="register_btn">회원가입</button></li>
                             </c:if>
                             <c:if test="${sessionScope.member != null}">
-                                <li><a href="/myfunkit/">${member.code == 20 ? member.corporateName : member.name}님</a></li>
+                                <li><a href="/myfunkit/">${member.typeCode == 20 ? member.corporateName : member.name}님</a></li>
                                 <li><a href="/logout">로그아웃</a></li>
                             </c:if>
                         </ul>

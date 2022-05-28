@@ -316,12 +316,15 @@
                             <div>
                                 <div><label>진행기간</label></div>
                                 <div><p>프로젝트 진행기간을 설정해주세요</p></div>
-                                <div><input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>"></div>
+                                <div>
+                                    <input class="date_input" name="startDate" type="date" value="<fmt:formatDate value="${funding.startDate}" pattern="yyyy-MM-dd"/>">
+                                    <input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>">
+                                </div>
                             </div>
                             <div>
                                 <div><label>대표 이미지</label></div>
                                 <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                                <div id="title_img_box" data-uuid="${funding.mainImage.fileName}" style="background-image: url('/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}')">
+                                <div id="title_img_box" data-uuid="${funding.mainImage.name}" style="background-image: url('${funding.mainImage.location}${funding.mainImage.name}')">
                                     <input type="file" accept="image/jpeg, image/jpg, image/png" style="display: none" onchange="readURL(this);">
                                     <div class="file_upload_box">
                                         <div style="display: none">
@@ -340,7 +343,7 @@
                                 <div><p>프로젝트의 이미지를 등록해주세요</p></div>
                                 <div id="info_img_wrap">
                                 <c:forEach var="image" items="${funding.infoImage}">
-                                    <div data-uuid="${image.fileName}" class="info_img_box" style="background-image: url('/upload/${funding.fundingCode}/infoImage/${image.fileName}')">
+                                    <div data-uuid="${image.name}" class="info_img_box" style="background-image: url('${image.location}${image.name}')">
                                         <input style="display: none"
                                                type="file"
                                                accept="image/jpeg, image/jpg, image/png"
@@ -702,7 +705,7 @@
                 let fileName = $(input).closest('div').data('uuid');
 
                 if($(input).closest('div').attr("id") === "title_img_box"){
-                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
+                    $(input).closest('div').css("background-image", "url('${funding.mainImage.location}${funding.mainImage.name}')");
                 } else{
                     $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/infoImage/" + fileName + "')");
                 }

@@ -22,7 +22,7 @@ public class Member {
     )
     private String passwd;
 
-    private int code;
+    private int typeCode;
 
     @NotEmpty(message = "*이름은 필수사항입니다")
     private String name;
@@ -113,11 +113,11 @@ public class Member {
         this.corporateName = corporateName;
     }
 
-    public int getCode() {
-        return code;
+    public int getTypeCode() {
+        return typeCode;
     }
 
-    public void setCode(int code) {
-        this.code = code;
+    public void setTypeCode(int typeCode) {
+        this.typeCode = typeCode;
     }
 }

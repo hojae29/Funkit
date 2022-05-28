@@ -1,7 +1,6 @@
 package com.funkit.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,17 +11,17 @@ public class Funding<T> {
     private int fundingCode;
     private String id;
     private String title;
+    private String introduction;
 
     private String status;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
-    private Date regDate;
+    private Date startDate;
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date expDate;
 
     private Long targetAmount;
     private Long cmlAmount;
-    private String introduction;
 
     private T mainImage;
     private List<T> infoImage;
@@ -86,13 +85,13 @@ public class Funding<T> {
         this.title = title;
     }
 
-    public Date getRegDate() {
-        return regDate;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setRegDate(String regDate) throws ParseException {
+    public void setStartDate(String startDate) throws ParseException {
         var formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.regDate = formatter.parse(regDate);
+        this.startDate = formatter.parse(startDate);
     }
 
     public Date getExpDate() {
@@ -120,14 +119,6 @@ public class Funding<T> {
         this.cmlAmount = cmlAmount;
     }
 
-    public String getIntroduction() {
-        return introduction;
-    }
-
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
-    }
-
     public String getStatus() {
         return status;
     }
@@ -136,22 +127,45 @@ public class Funding<T> {
         this.status = status;
     }
 
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
+    }
+
+
     @Override
     public String toString() {
         return "Funding{" +
                 "fundingCode=" + fundingCode +
                 ", id='" + id + '\'' +
                 ", title='" + title + '\'' +
+                ", introduction='" + introduction + '\'' +
                 ", status='" + status + '\'' +
-                ", regDate=" + regDate +
+                ", regDate=" + startDate +
                 ", expDate=" + expDate +
                 ", targetAmount=" + targetAmount +
                 ", cmlAmount=" + cmlAmount +
-                ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
                 ", infoImage=" + infoImage +
                 ", reward=" + reward +
                 ", deleteImages=" + deleteImages +
                 '}';
     }
+
+    public int getDDay() throws ParseException {
+        String todayFm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())); // 오늘날짜
+        var dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date(dateFormat.parse(todayFm).getTime());
+
+        long calculate = expDate.getTime() - today.getTime();
+
+        int Ddays = (int) (calculate / ( 24*60*60*1000));
+        System.out.println("두 날짜 차이일 : " + Ddays);
+
+        return Ddays;
+    }
+
 }

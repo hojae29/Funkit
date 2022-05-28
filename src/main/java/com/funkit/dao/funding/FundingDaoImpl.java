@@ -87,6 +87,11 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
+    public List<Funding<Image>> getFundingList() {
+        return sql.selectList("funding.getFundingList");
+    }
+
+    @Override
     public List<Funding<Image>> getFundingListById(String id, Pager pager) {
         Map map = new HashMap();
         map.put("id", id);

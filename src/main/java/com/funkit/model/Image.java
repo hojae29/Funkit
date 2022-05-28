@@ -2,24 +2,9 @@ package com.funkit.model;
 
 public class Image {
     private int code;
-    private String fileName;
-    private long fileSize;
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public long getFileSize() {
-        return fileSize;
-    }
-
-    public void setFileSize(long fileSize) {
-        this.fileSize = fileSize;
-    }
+    private String name;
+    private long size;
+    private String location;
 
     public int getCode() {
         return code;
@@ -29,12 +14,27 @@ public class Image {
         this.code = code;
     }
 
-    @Override
-    public String toString() {
-        return "Image{" +
-                "code=" + code +
-                ", fileName='" + fileName + '\'' +
-                ", fileSize=" + fileSize +
-                '}';
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 }

@@ -22,7 +22,7 @@ public class MyPageController {
     @RequestMapping("/")
     public String myPage(HttpSession session){
         Member member = (Member) session.getAttribute("member");
-        int type = member.getCode();
+        int type = member.getTypeCode();
 
         switch(type){
             case 10 : {
