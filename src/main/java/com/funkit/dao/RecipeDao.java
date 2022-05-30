@@ -10,10 +10,11 @@ import java.util.List;
 public interface RecipeDao {
     List<Recipe> list();
 
-    int add(Recipe recipe);
+    int getCode(Recipe recipe);
 
     void delete(int recipeCode);
 
     Recipe<Image> getRecipeCode(int recipeCode);
 
+    void add(Recipe<MultipartFile> recipe);
 }

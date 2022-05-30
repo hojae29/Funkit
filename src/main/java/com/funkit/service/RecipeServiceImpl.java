@@ -23,8 +23,8 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public int add(Recipe recipe) {
-        return dao.add(recipe);
+    public int getCode(Recipe recipe) {
+        return dao.getCode(recipe);
     }
 
     @Override
@@ -35,6 +35,11 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public Recipe<Image> getRecipeCode(int recipeCode) {
         return dao.getRecipeCode(recipeCode);
+    }
+
+    @Override
+    public void add(Recipe<MultipartFile> recipe) {
+        dao.add(recipe);
     }
 
 

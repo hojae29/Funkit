@@ -38,18 +38,14 @@ public class RecipeController {
     }
 
     @RequestMapping("/add")
-    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe,Model model){
-        //tag list 가져오기
-        List<Tag> tag = tagService.tagList();
-
-        model.addAttribute("tag",tag);
+    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
 
         recipe.setId(member.getId());//session에서 id값 가져오기
 
         //레시피 코드 별 디렉토리 생성
         String uploadMain = "D:/upload/recipe";
 
-        int recipeCode = service.add(recipe);
+        int recipeCode = service.getCode(recipe);
 
         File uploadPath = new File(uploadMain + "/" + recipeCode);
 
@@ -63,6 +59,10 @@ public class RecipeController {
 
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
+        //tag list 가져오기
+        List<Tag> tag = tagService.tagList();
+
+        model.addAttribute("tag",tag);
 
         Recipe<Image> recipe = service.getRecipeCode(recipeCode);
 
@@ -73,8 +73,9 @@ public class RecipeController {
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Recipe<MultipartFile> recipe){
+        service.add(recipe);
 
-        return "redirect:list";
+        return "redirect:../list";
     }
 
     @GetMapping("/view/delete/{recipeCode}")

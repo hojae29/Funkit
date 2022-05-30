@@ -1,14 +1,13 @@
 let maxSize = 1048576; //1MB
 
 function mainPreview(input) {
+
     var file_kind = input.value.lastIndexOf('.');
     var file_name = input.value.substring(file_kind+1,input.length);
     var file_type = file_name.toLowerCase();
     var check_file_type=new Array();
 
     check_file_type=['jpg','gif','png','jpeg','bmp','tif'];
-
-
 
     if(check_file_type.indexOf(file_type)==-1) {
         alert('이미지 파일만 선택할 수 있습니다');
@@ -42,14 +41,10 @@ function mainPreview(input) {
     }
     formData.append("mainImage",fileObj);
 
-    //`${recipeCode}`
-
-    //let postPath = '/recipe/uploadAjaxAction/'${recipeCode};
-
-    console.log(postPath);
+    console.log("recipe" +recipeCode);
 
     $.ajax({
-        url:postPath,
+        url:'/recipe/uploadAjaxAction/' + recipeCode,
         processData : false,
         contentType : false,
         data : formData,

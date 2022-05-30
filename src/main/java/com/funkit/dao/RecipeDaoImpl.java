@@ -6,6 +6,7 @@ import com.funkit.model.Tag;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class RecipeDaoImpl implements RecipeDao{
     }
 
     @Override
-    public int add(Recipe recipe) {
+    public int getCode(Recipe recipe) {
 
         sql.insert("recipe.add",recipe);
 
@@ -38,6 +39,11 @@ public class RecipeDaoImpl implements RecipeDao{
         Recipe<Image> recipe = sql.selectOne("recipe.getRecipeCode",recipeCode);
 
         return recipe;
+    }
+
+    @Override
+    public void add(Recipe<MultipartFile> recipe) {
+        sql.update("recipe.addUpdate",recipe);
     }
 
 }
