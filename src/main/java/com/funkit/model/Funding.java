@@ -26,9 +26,17 @@ public class Funding<T> {
     private T mainImage;
     private List<T> infoImage;
     private List<Reward> reward;
+    private List<Tag> tags;
 
     private List<String> deleteImages;
-    private List<Integer> tags;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
 
     public int getFundingCode() {
         return fundingCode;
@@ -118,14 +126,6 @@ public class Funding<T> {
         this.deleteImages = deleteImages;
     }
 
-    public List<Integer> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Integer> tags) {
-        this.tags = tags;
-    }
-
     public Date getStartDate() {
         return startDate;
     }
@@ -157,4 +157,23 @@ public class Funding<T> {
         return Ddays;
     }
 
+    @Override
+    public String toString() {
+        return "Funding{" +
+                "fundingCode=" + fundingCode +
+                ", id='" + id + '\'' +
+                ", title='" + title + '\'' +
+                ", introduction='" + introduction + '\'' +
+                ", status='" + status + '\'' +
+                ", startDate=" + startDate +
+                ", expDate=" + expDate +
+                ", targetAmount=" + targetAmount +
+                ", cmlAmount=" + cmlAmount +
+                ", mainImage=" + mainImage +
+                ", infoImage=" + infoImage +
+                ", reward=" + reward +
+                ", tags=" + tags +
+                ", deleteImages=" + deleteImages +
+                '}';
+    }
 }

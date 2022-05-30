@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,13 +65,17 @@ public class CompanyFundingController {
     }
 
     @PostMapping("/{code}")
-    public void saveFunding(@PathVariable int code, Funding<MultipartFile> funding){
+    public ResponseEntity saveFunding(@PathVariable int code, Funding<MultipartFile> funding,
+                                      @RequestParam(value="tagCode", required=false) List<Integer> tagCode){
+        List<Tag> tagList = new ArrayList<>();
+        if(tagCode != null){
+            for(var index : tagCode)
+                tagList.add(new Tag(index));
+            funding.setTags(tagList);
+        }
         funding.setFundingCode(code);
 
-        for(Integer item : funding.getTags())
-            System.out.println(item);
-
-        fundingService.saveFunding(funding);
+        return fundingService.saveFunding(funding);
     }
 
     @DeleteMapping("/{code}")

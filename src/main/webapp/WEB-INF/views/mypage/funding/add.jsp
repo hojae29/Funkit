@@ -378,6 +378,12 @@
                                     <button type="button" id="tag_add_btn">추가</button>
                                 </div>
                                 <div id="tag_list_box">
+                                    <c:forEach var="tag" items="${funding.tags}">
+                                        <div class="tag_box">${tag.name}
+                                            <button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>
+                                            <input type="hidden" name="tagCode" value="${tag.tagCode}">
+                                        </div>
+                                    </c:forEach>
                                 </div>
                             </div>
                             <div>
@@ -515,7 +521,7 @@
         $("#tag_add_btn").on("click", () => {
             let html = '<div class="tag_box">' + $("#tag_select option:checked").text() +
                             '<button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>' +
-                            '<input type="hidden" name="tags" value="' + $("#tag_select").val() + '">' +
+                            '<input type="hidden" name="tagCode" value="' + $("#tag_select").val() + '">' +
                         '</div>';
 
             if($("#tag_list_box input[value=" + $("#tag_select").val() + "]").length < 1)

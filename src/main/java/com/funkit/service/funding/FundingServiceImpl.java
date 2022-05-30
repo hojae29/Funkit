@@ -30,7 +30,7 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void saveFunding(Funding<MultipartFile> funding) {
+    public ResponseEntity saveFunding(Funding<MultipartFile> funding) {
         int fundingCode = funding.getFundingCode();
         var mainImage = funding.getMainImage();
         var infoImage = funding.getInfoImage();
@@ -79,6 +79,8 @@ public class FundingServiceImpl implements FundingService {
             }
             fundingDao.deleteInfoImage(funding.getDeleteImages());
         }
+
+        return new JsonResponse<>(HttpStatus.OK, "save success").toResponseEntity();
     }
 
     @Override
