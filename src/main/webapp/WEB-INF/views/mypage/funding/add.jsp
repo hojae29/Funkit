@@ -688,8 +688,8 @@
                 processData: false,
                 contentType: false,
                 cache: false,
-                success: function (result) { },
-                error: function (e) { }
+                success: result => alert("저장되었습니다"),
+                error: error => alert(error.message)
             });
         });
 

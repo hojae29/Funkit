@@ -77,7 +77,6 @@
 .funding_title{
     font-size: 16px;
     font-weight: 500;
-    margin-bottom: 4px;
 }
 
 .funding_percentage{
@@ -95,4 +94,13 @@
 
 .amount_container p{
     color: #cccccc;
+}
+
+.tag_icon{
+    margin-right: 5px;
+}
+
+.funding_title_container{
+    margin-bottom: 4px;
+    height: 50px
 }

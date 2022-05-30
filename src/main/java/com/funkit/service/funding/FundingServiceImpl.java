@@ -42,7 +42,7 @@ public class FundingServiceImpl implements FundingService {
         fundingDao.saveFunding(funding);
 
         if(mainImage != null && !mainImage.isEmpty()){
-            var image = makeImage(funding.getMainImage(), "/upload/" + fundingCode + "/mainImage/");
+            var image = makeImage(funding.getMainImage(), "/upload/funding/" + fundingCode + "/mainImage/");
 
             try {
                 funding.getMainImage().transferTo(new File(mainImgPath + image.getName()));
@@ -61,7 +61,7 @@ public class FundingServiceImpl implements FundingService {
 
         if(infoImage != null && !infoImage.isEmpty()){
             for (MultipartFile file : funding.getInfoImage()){
-                var image = makeImage(file, "/upload/" + fundingCode + "/infoImage/");
+                var image = makeImage(file, "/upload/funding/" + fundingCode + "/infoImage/");
 
                 try {
                     file.transferTo(new File(fundingImgPath + image.getName()));
@@ -110,6 +110,11 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public void fundingApprovalReq(int code, int status) {
         fundingDao.fundingApprovalReq(code, status);
+    }
+
+    @Override
+    public Funding getFunding(int fundingCode) {
+        return fundingDao.getFunding(fundingCode);
     }
 
     public Image makeImage(MultipartFile file, String location){

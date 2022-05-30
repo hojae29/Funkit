@@ -34,4 +34,5 @@ public interface FundingDao {
 
     void fundingApprovalReq(int code, int status);
 
+    Funding getFunding(int fundingCode);
 }
