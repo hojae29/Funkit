@@ -107,6 +107,8 @@ public class RecipeController {
 
         String uploadMainPath = "D:/upload/recipe/" +recipeCode + "/mainImage/";
 
+        long fileSize = mainImage.getSize();
+
         String uploadFileName = mainImage.getOriginalFilename();
 
         String uuid = UUID.randomUUID().toString();
@@ -125,6 +127,7 @@ public class RecipeController {
         map.put("recipeCode",recipeCode);
         map.put("fileName",uploadFileName);
         map.put("location",uploadMainPath);
+        map.put("fileSize",fileSize);
 
         mainService.addMainImgName(map);
 

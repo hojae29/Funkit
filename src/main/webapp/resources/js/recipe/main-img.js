@@ -39,6 +39,7 @@ function mainPreview(input) {
     if(!fileCheck(fileObj.size)){
         return false;
     }
+
     formData.append("mainImage",fileObj);
 
     $.ajax({
