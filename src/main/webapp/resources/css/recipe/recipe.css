@@ -4,7 +4,7 @@
     margin-top:20px;
 }
 #recipe_banner img{
-    width:960px;
+    width:1000px;
     height:400px;
     object-fit: cover;
 }
@@ -47,7 +47,6 @@ img{
     margin-top:50px;
 }
 .preview_area{
-    width:300px;
     height:200px;
 }
 .preview_area img{
@@ -57,8 +56,8 @@ img{
     object-fit: cover;
 }
 .card_area{
-    width:300px;
-    height:370px;
+    width:270px;
+    height:350px;
     box-shadow:4px 8px 8px #cccccc;
     border-radius: 5px;
 }
@@ -69,7 +68,7 @@ img{
 
 }
 .card_tag{
-    width:200px;
+    width:180px;
     display: flex;
 }
 .card_tag li{
@@ -100,13 +99,15 @@ img{
 }
 .view_area{
     display:flex;
+    font-size:14px;
 }
 .card_sub{
     display:flex;
-    margin-top:20px;
+    margin-top:10px;
     justify-content: space-between;
 }
 .like_area{
+    font-size:14px;
     display: flex;
     justify-content: space-between;
 }
@@ -116,7 +117,6 @@ img{
 }
 #grid_contents{
     display: grid;
-    grid-template-columns: repeat(3,calc(33.33333%));
+    grid-template-columns: repeat(3,calc(33%));
     grid-row-gap: 40px;
-    grid-column-gap: 10px;
 }
