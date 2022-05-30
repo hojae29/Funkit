@@ -274,6 +274,51 @@
             color: darkred;
         }
 
+        .tag_box{
+            border: none;
+            background: #ff7e00;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        #tag_list_box{
+            margin-top: 8px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+        }
+
+        .tag_delete_btn{
+            background: none;
+            border:none;
+            color: white;
+            font-weight: bold;
+            margin-left: 5px;
+        }
+
+        #tag_add_btn{
+            height: 30px;
+            width: 60px;
+            font-size: 14px;
+            background: none;
+            border: 1px solid #ff7e00;
+            border-radius: 5px;
+            margin-left: 8px;
+            color: #ff7e00;
+        }
+
+        #tag_select{
+            width: 70px;
+            height: 30px;
+            border: 1px solid #cccccc;
+            background: white;
+        }
+
     </style>
 </head>
 <body>
@@ -316,12 +361,35 @@
                             <div>
                                 <div><label>진행기간</label></div>
                                 <div><p>프로젝트 진행기간을 설정해주세요</p></div>
-                                <div><input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>"></div>
+                                <div>
+                                    <input class="date_input" name="startDate" type="date" value="<fmt:formatDate value="${funding.startDate}" pattern="yyyy-MM-dd"/>">
+                                    <input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>">
+                                </div>
+                            </div>
+                            <div>
+                                <div><label>태그선택</label></div>
+                                <div><p>태그를 선택해주세요</p></div>
+                                <div>
+                                    <select id="tag_select">
+                                        <c:forEach var="tag" items="${tagList}">
+                                            <option value="${tag.tagCode}">${tag.name}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <button type="button" id="tag_add_btn">추가</button>
+                                </div>
+                                <div id="tag_list_box">
+                                    <c:forEach var="tag" items="${funding.tags}">
+                                        <div class="tag_box">${tag.name}
+                                            <button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>
+                                            <input type="hidden" name="tagCode" value="${tag.tagCode}">
+                                        </div>
+                                    </c:forEach>
+                                </div>
                             </div>
                             <div>
                                 <div><label>대표 이미지</label></div>
                                 <div><p>프로젝트의 대표 이미지를 등록해주세요</p></div>
-                                <div id="title_img_box" data-uuid="${funding.mainImage.fileName}" style="background-image: url('/upload/${funding.fundingCode}/mainImage/${funding.mainImage.fileName}')">
+                                <div id="title_img_box" data-uuid="${funding.mainImage.name}" style="background-image: url('${funding.mainImage.location}${funding.mainImage.name}')">
                                     <input type="file" accept="image/jpeg, image/jpg, image/png" style="display: none" onchange="readURL(this);">
                                     <div class="file_upload_box">
                                         <div style="display: none">
@@ -340,7 +408,7 @@
                                 <div><p>프로젝트의 이미지를 등록해주세요</p></div>
                                 <div id="info_img_wrap">
                                 <c:forEach var="image" items="${funding.infoImage}">
-                                    <div data-uuid="${image.fileName}" class="info_img_box" style="background-image: url('/upload/${funding.fundingCode}/infoImage/${image.fileName}')">
+                                    <div data-uuid="${image.name}" class="info_img_box" style="background-image: url('${image.location}${image.name}')">
                                         <input style="display: none"
                                                type="file"
                                                accept="image/jpeg, image/jpg, image/png"
@@ -414,7 +482,6 @@
                                     <button id="cancel_btn" type="button">취소</button>
                                 </div>
                             </div>
-
                         </div>
                         <div>
                             <div><label>리워드 보기</label></div>
@@ -451,6 +518,20 @@
         </div>
     </div>
     <script>
+        $("#tag_add_btn").on("click", () => {
+            let html = '<div class="tag_box">' + $("#tag_select option:checked").text() +
+                            '<button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>' +
+                            '<input type="hidden" name="tagCode" value="' + $("#tag_select").val() + '">' +
+                        '</div>';
+
+            if($("#tag_list_box input[value=" + $("#tag_select").val() + "]").length < 1)
+                $("#tag_list_box").append(html);
+        });
+
+        $(document).on("click", ".tag_delete_btn", function(){
+           $(this).closest('.tag_box').remove();
+        });
+
         $("#cancel_btn").on("click", () => {
             $("#btn_box2").css("display", "none");
             $("#btn_box1").css("display", "block");
@@ -702,7 +783,7 @@
                 let fileName = $(input).closest('div').data('uuid');
 
                 if($(input).closest('div').attr("id") === "title_img_box"){
-                    $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/mainImage/" + fileName + "')");
+                    $(input).closest('div').css("background-image", "url('${funding.mainImage.location}${funding.mainImage.name}')");
                 } else{
                     $(input).closest('div').css("background-image", "url('/upload/${funding.fundingCode}/infoImage/" + fileName + "')");
                 }

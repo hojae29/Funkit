@@ -3,8 +3,8 @@
 
 <mapper namespace="login">
     <insert id="individualRegister">
-        INSERT INTO member(id, passwd, name, email, phone, corporate_name, code)
-        VALUES(#{id}, #{passwd}, #{name}, #{email}, #{phone}, #{corporateName}, #{code})
+        INSERT INTO member(id, passwd, name, email, phone, corporate_name, type_code)
+        VALUES(#{id}, #{passwd}, #{name}, #{email}, #{phone}, #{corporateName}, #{typeCode})
     </insert>
 
     <select id="item" resultType="Member">

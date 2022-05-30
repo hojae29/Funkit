@@ -1,7 +1,7 @@
 .title_img_box{
     margin: 25px auto;
-    width: 1180px;
-    height: 400px;
+    width: 1000px;
+    height: 350px;
     background-color: #cccccc;
 }
 
@@ -12,8 +12,8 @@
 }
 
 .card_box{
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
     background-color: #cccccc;
     border-radius: 10px;
 }
@@ -24,13 +24,13 @@
 }
 
 .planning_container{
-    width:1180px;
-    margin: 0 auto 25 auto;
+    width:1000px;
+    margin: 0px auto 25px auto;
 }
 
 .tag_container{
-    width:1180px;
-    margin: 0 auto 25 auto;
+    width:1000px;
+    margin: 0px auto 25px auto;
 }
 
 .search_box{
@@ -55,26 +55,27 @@
 }
 
 .funding_container{
-    width: 1180px;
+    width: 1000px;
     margin: 0 auto;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 55px;
+    gap: 20px;
 }
 
 .funding_item{
-    height: 400px;
+    height: 360px;
 }
 
 .funding_img_box{
     border-radius: 5px;
-    height: 240px;
+    height: 200px;
     background-color: #cccccc;
     margin-bottom: 4px;
+    background-size: cover;
 }
 
 .funding_title{
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 500;
     margin-bottom: 4px;
 }

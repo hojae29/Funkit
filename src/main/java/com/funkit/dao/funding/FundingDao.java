@@ -24,6 +24,8 @@ public interface FundingDao {
 
     void updateMainImage(int fundingCode, Image image);
 
+    List<Funding<Image>> getFundingList();
+
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
     int total(String id);
@@ -31,4 +33,5 @@ public interface FundingDao {
     void deleteFunding(int code);
 
     void fundingApprovalReq(int code, int status);
+
 }

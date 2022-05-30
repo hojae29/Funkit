@@ -1,7 +1,6 @@
 package com.funkit.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -12,54 +11,31 @@ public class Funding<T> {
     private int fundingCode;
     private String id;
     private String title;
+    private String introduction;
 
     private String status;
 
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
-    private Date regDate;
+    private Date startDate;
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date expDate;
 
     private Long targetAmount;
     private Long cmlAmount;
-    private String introduction;
 
     private T mainImage;
     private List<T> infoImage;
     private List<Reward> reward;
-
-    public List<Reward> getReward() {
-        return reward;
-    }
-
-    public void setReward(List<Reward> reward) {
-        this.reward = reward;
-    }
+    private List<Tag> tags;
 
     private List<String> deleteImages;
 
-    public List<String> getDeleteImages() {
-        return deleteImages;
+    public List<Tag> getTags() {
+        return tags;
     }
 
-    public void setDeleteImages(List<String> deleteImages) {
-        this.deleteImages = deleteImages;
-    }
-
-    public T getMainImage() {
-        return mainImage;
-    }
-
-    public void setMainImage(T mainImage) {
-        this.mainImage = mainImage;
-    }
-
-    public List<T> getInfoImage() {
-        return infoImage;
-    }
-
-    public void setInfoImage(List<T> infoImage) {
-        this.infoImage = infoImage;
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 
     public int getFundingCode() {
@@ -86,22 +62,20 @@ public class Funding<T> {
         this.title = title;
     }
 
-    public Date getRegDate() {
-        return regDate;
+    public String getIntroduction() {
+        return introduction;
     }
 
-    public void setRegDate(String regDate) throws ParseException {
-        var formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.regDate = formatter.parse(regDate);
+    public void setIntroduction(String introduction) {
+        this.introduction = introduction;
     }
 
-    public Date getExpDate() {
-        return expDate;
+    public String getStatus() {
+        return status;
     }
 
-    public void setExpDate(String expDate) throws ParseException {
-        var formatter = new SimpleDateFormat("yyyy-MM-dd");
-        this.expDate = formatter.parse(expDate);
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Long getTargetAmount() {
@@ -120,20 +94,67 @@ public class Funding<T> {
         this.cmlAmount = cmlAmount;
     }
 
-    public String getIntroduction() {
-        return introduction;
+    public T getMainImage() {
+        return mainImage;
     }
 
-    public void setIntroduction(String introduction) {
-        this.introduction = introduction;
+    public void setMainImage(T mainImage) {
+        this.mainImage = mainImage;
     }
 
-    public String getStatus() {
-        return status;
+    public List<T> getInfoImage() {
+        return infoImage;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setInfoImage(List<T> infoImage) {
+        this.infoImage = infoImage;
+    }
+
+    public List<Reward> getReward() {
+        return reward;
+    }
+
+    public void setReward(List<Reward> reward) {
+        this.reward = reward;
+    }
+
+    public List<String> getDeleteImages() {
+        return deleteImages;
+    }
+
+    public void setDeleteImages(List<String> deleteImages) {
+        this.deleteImages = deleteImages;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) throws ParseException {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.startDate = formatter.parse(startDate);
+    }
+
+    public Date getExpDate() {
+        return expDate;
+    }
+
+    public void setExpDate(String expDate) throws ParseException {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.expDate = formatter.parse(expDate);
+    }
+
+    public int getDDay() throws ParseException {
+        String todayFm = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis())); // 오늘날짜
+        var dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date today = new Date(dateFormat.parse(todayFm).getTime());
+
+        long calculate = expDate.getTime() - today.getTime();
+
+        int Ddays = (int) (calculate / ( 24*60*60*1000));
+        System.out.println("두 날짜 차이일 : " + Ddays);
+
+        return Ddays;
     }
 
     @Override
@@ -142,15 +163,16 @@ public class Funding<T> {
                 "fundingCode=" + fundingCode +
                 ", id='" + id + '\'' +
                 ", title='" + title + '\'' +
+                ", introduction='" + introduction + '\'' +
                 ", status='" + status + '\'' +
-                ", regDate=" + regDate +
+                ", startDate=" + startDate +
                 ", expDate=" + expDate +
                 ", targetAmount=" + targetAmount +
                 ", cmlAmount=" + cmlAmount +
-                ", introduction='" + introduction + '\'' +
                 ", mainImage=" + mainImage +
                 ", infoImage=" + infoImage +
                 ", reward=" + reward +
+                ", tags=" + tags +
                 ", deleteImages=" + deleteImages +
                 '}';
     }

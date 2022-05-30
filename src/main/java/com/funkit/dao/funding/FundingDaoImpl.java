@@ -3,6 +3,7 @@ package com.funkit.dao.funding;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Reward;
+import com.funkit.model.Tag;
 import com.funkit.util.Pager;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,15 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public void saveFunding(Funding<MultipartFile> funding) {
         sql.update("funding.saveFunding", funding);
+        sql.delete("tag.deleteFundingTag", funding);
+        if(funding.getTags() != null){
+            for(var tag : funding.getTags()){
+                Map map = new HashMap();
+                map.put("fundingCode", funding.getFundingCode());
+                map.put("tag", tag);
+                sql.insert("tag.setFundingTag", map);
+            }
+        }
     }
 
     @Override
@@ -39,11 +49,13 @@ public class FundingDaoImpl implements FundingDao {
         Image mainImage = sql.selectOne("funding.getMainImage", code);
         List<Image> infoImages = sql.selectList("funding.getInfoImageList", code);
         List<Reward> rewards = sql.selectList("reward.getRewardList", code);
+        List<Tag> tagList = sql.selectList("tag.getTagListByFundingCode", code);
 
 
         funding.setMainImage(mainImage);
         funding.setInfoImage(infoImages);
         funding.setReward(rewards);
+        funding.setTags(tagList);
 
         return funding;
     }
@@ -84,6 +96,11 @@ public class FundingDaoImpl implements FundingDao {
         map.put("image", image);
 
         sql.update("funding.updateMainImage", map);
+    }
+
+    @Override
+    public List<Funding<Image>> getFundingList() {
+        return sql.selectList("funding.getFundingList");
     }
 
     @Override
