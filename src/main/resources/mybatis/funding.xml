@@ -18,7 +18,7 @@
     <update id="updateFundingStatus">
         UPDATE funding
         SET status_code=#{status}
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
     </update>
 
     <insert id="insertMainImage">
@@ -33,7 +33,7 @@
     <select id="getMainImage" resultType="Image">
         SELECT *
         FROM funding_main_image
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
     </select>
 
     <insert id="insertInfoImage">
@@ -43,7 +43,7 @@
     <select id="getInfoImageList" resultType="Image">
         SELECT *
         FROM funding_info_image
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
         ORDER BY code;
     </select>
     <delete id="deleteInfoImage">
@@ -51,11 +51,6 @@
         WHERE name = #{name}
     </delete>
 
-    <select id="getFunding" resultType="Funding">
-        SELECT *
-        FROM funding
-        WHERE funding_code=#{fundingCode}
-    </select>
     <select id="getFundingList" resultMap="fundingResultMap">
         SELECT f.funding_code, id, title, start_date, exp_date, target_amount, cml_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name
         FROM funding f, funding_main_image fmi, funding_tag ft, tag t

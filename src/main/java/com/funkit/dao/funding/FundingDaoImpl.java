@@ -43,14 +43,13 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public Funding<Image> getFundingByFundingCode(int code) {
+    public Funding<Image> getFundingByFundingCode(int fundingCode) {
 
-        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
-        Image mainImage = sql.selectOne("funding.getMainImage", code);
-        List<Image> infoImages = sql.selectList("funding.getInfoImageList", code);
-        List<Reward> rewards = sql.selectList("reward.getRewardList", code);
-        List<Tag> tagList = sql.selectList("tag.getTagListByFundingCode", code);
-
+        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", fundingCode);
+        Image mainImage = sql.selectOne("funding.getMainImage", fundingCode);
+        List<Image> infoImages = sql.selectList("funding.getInfoImageList", fundingCode);
+        List<Reward> rewards = sql.selectList("reward.getRewardList", fundingCode);
+        List<Tag> tagList = sql.selectList("tag.getTagListByFundingCode", fundingCode);
 
         funding.setMainImage(mainImage);
         funding.setInfoImage(infoImages);
@@ -118,21 +117,16 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public void deleteFunding(int code) {
-        sql.delete("funding.deleteFunding", code);
+    public void deleteFunding(int fundingCode) {
+        sql.delete("funding.deleteFunding", fundingCode);
     }
 
     @Override
-    public void fundingApprovalReq(int code, int status) {
+    public void fundingApprovalReq(int fundingCode, int status) {
         Map map = new HashMap();
-        map.put("code", code);
+        map.put("fundingCode", fundingCode);
         map.put("status", status);
 
         sql.update("funding.updateFundingStatus", map);
-    }
-
-    @Override
-    public Funding getFunding(int fundingCode) {
-        return sql.selectOne("funding.getFunding", fundingCode);
     }
 }

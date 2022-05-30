@@ -20,6 +20,6 @@
     <select id="getTagListByFundingCode" resultType="Tag">
         SELECT t.tag_code, name
         FROM funding_tag ft, tag t
-        WHERE funding_code=#{code} AND ft.tag_code = t.tag_code
+        WHERE funding_code=#{fundingCode} AND ft.tag_code = t.tag_code
     </select>
 </mapper>

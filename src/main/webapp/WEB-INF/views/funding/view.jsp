@@ -1,4 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Student
@@ -7,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>펀키트</title>
@@ -32,10 +33,9 @@
             <div class="swiper">
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper">
-                    <!-- Slides -->
-                    <div class="swiper-slide"><img class="info_img" src="/1.png"/></div>
-                    <div class="swiper-slide"><img class="info_img" src="/2.jpg"/></div>
-                    <div class="swiper-slide"><img class="info_img" src="/3.jpg"/></div>
+                    <c:forEach var="image" items="${funding.infoImage}">
+                        <div class="swiper-slide"><img class="info_img" src="${image.location}${image.name}"/></div>
+                    </c:forEach>
                 </div>
                 <!-- If we need pagination -->
                 <div class="swiper-pagination"></div>
@@ -61,8 +61,8 @@
             <div>
                 <p class="info_label">남은기간</p>
                 <div style="display: flex; align-items: flex-end;">
-                    <h2>D-15</h2>
-                    <P class="end_date_text">2022.06.17 종료</P>
+                    <h2>D-${funding.DDay}</h2>
+                    <P class="end_date_text"><fmt:formatDate value="${funding.expDate}" pattern="yyyy.MM.dd"/> 종료</P>
                 </div>
             </div>
             <div>

@@ -84,8 +84,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public Funding<Image> getFundingByFundingCode(int code) {
-        return fundingDao.getFundingByFundingCode(code);
+    public Funding<Image> getFundingByFundingCode(int fundingCode) {
+        return fundingDao.getFundingByFundingCode(fundingCode);
     }
 
     @Override
@@ -108,13 +108,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void fundingApprovalReq(int code, int status) {
-        fundingDao.fundingApprovalReq(code, status);
-    }
-
-    @Override
-    public Funding getFunding(int fundingCode) {
-        return fundingDao.getFunding(fundingCode);
+    public void fundingApprovalReq(int fundingCode, int status) {
+        fundingDao.fundingApprovalReq(fundingCode, status);
     }
 
     public Image makeImage(MultipartFile file, String location){
