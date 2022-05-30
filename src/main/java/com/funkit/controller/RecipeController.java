@@ -4,6 +4,7 @@ import com.funkit.model.Image;
 import com.funkit.model.Member;
 import com.funkit.model.Recipe;
 import com.funkit.model.Tag;
+import com.funkit.service.RecipeMainImgService;
 import com.funkit.service.RecipeService;
 import com.funkit.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Controller
@@ -27,6 +30,9 @@ public class RecipeController {
 
     @Autowired
     TagService tagService;
+
+    @Autowired
+    RecipeMainImgService mainService;
 
     @GetMapping({"","/list"})
     public String list(Model model){
@@ -46,6 +52,8 @@ public class RecipeController {
         String uploadMain = "D:/upload/recipe";
 
         int recipeCode = service.getCode(recipe);
+
+        mainService.createImg(recipeCode);
 
         File uploadPath = new File(uploadMain + "/" + recipeCode);
 
@@ -73,6 +81,8 @@ public class RecipeController {
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Recipe<MultipartFile> recipe){
+        service.getRecipeCode(recipeCode);
+
         service.add(recipe);
 
         return "redirect:../list";
@@ -110,6 +120,15 @@ public class RecipeController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+        Map map = new HashMap();
+        map.put("recipeCode",recipeCode);
+        map.put("fileName",uploadFileName);
+        map.put("location",uploadMainPath);
+
+        mainService.addMainImgName(map);
+
+
 
     }
 

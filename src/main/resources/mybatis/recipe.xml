@@ -7,8 +7,8 @@
     </select>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="recipeCode">
-        INSERT INTO recipe(recipe_code, title, id, reg_date,intro,ingredients,takes)
-        VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes})
+        INSERT INTO recipe(recipe_code, id, reg_date)
+        VALUES (NULL, #{id}, NOW())
     </insert>
 
     <update id="addUpdate">
@@ -16,10 +16,6 @@
         SET title=#{title},reg_date=NOW(),intro=#{intro},ingredients=#{ingredients},takes=#{takes}
         WHERE recipe_code=#{recipeCode}
     </update>
-    <insert id="mainImg">
-        INSERT INTO recipe_main_image
-        VALUES(NULL,#{recipeCode},#{imgae.fileName},#{image.fileSize});
-    </insert>
 
     <delete id="delete">
         DELETE FROM recipe

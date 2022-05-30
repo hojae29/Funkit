@@ -41,8 +41,6 @@ function mainPreview(input) {
     }
     formData.append("mainImage",fileObj);
 
-    console.log("recipe" +recipeCode);
-
     $.ajax({
         url:'/recipe/uploadAjaxAction/' + recipeCode,
         processData : false,
