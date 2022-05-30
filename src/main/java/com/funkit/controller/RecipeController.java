@@ -5,6 +5,7 @@ import com.funkit.model.Member;
 import com.funkit.model.Recipe;
 import com.funkit.model.Tag;
 import com.funkit.service.RecipeService;
+import com.funkit.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,9 @@ public class RecipeController {
     @Autowired
     RecipeService service;
 
+    @Autowired
+    TagService tagService;
+
     @GetMapping({"","/list"})
     public String list(Model model){
         List<Recipe> list = service.list();
@@ -36,7 +40,7 @@ public class RecipeController {
     @RequestMapping("/add")
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe,Model model){
         //tag list 가져오기
-        List<Tag> tag = service.tag();
+        List<Tag> tag = tagService.tagList();
 
         model.addAttribute("tag",tag);
 

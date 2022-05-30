@@ -40,9 +40,4 @@ public class RecipeDaoImpl implements RecipeDao{
         return recipe;
     }
 
-    @Override
-    public List<Tag> tag() {
-        return sql.selectList("tag.tag");
-    }
-
 }

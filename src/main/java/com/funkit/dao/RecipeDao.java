@@ -16,5 +16,4 @@ public interface RecipeDao {
 
     Recipe<Image> getRecipeCode(int recipeCode);
 
-    List<Tag> tag();
 }

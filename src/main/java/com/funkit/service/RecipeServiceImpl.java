@@ -37,10 +37,5 @@ public class RecipeServiceImpl implements RecipeService{
         return dao.getRecipeCode(recipeCode);
     }
 
-    @Override
-    public List<Tag> tag() {
-        return dao.tag();
-    }
-
 
 }
