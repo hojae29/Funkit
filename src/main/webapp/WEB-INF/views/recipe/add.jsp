@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>레시피 등록하기</title>
@@ -37,13 +38,41 @@
                             </div>
                             <div class="align_info">
                                 <div class="label_area">
-                                    <label>카테고리</label>
+                                    <label>태그</label>
                                 </div>
                                 <div class="sel_area">
                                     <div>
-                                        <select name="category">
-                                            <option selected="selected">선택</option>
-                                        </select>
+                                        <button type="button" id="modal_btn">태그 선택하기</button>
+                                        <div class="modal_background"></div>
+                                        <div class="modal_wrap">
+                                            <div>
+                                                <div id="modal_header">
+                                                    <div id="modal_tit">
+                                                        <p>태그 선택</p>
+                                                    </div>
+                                                    <div class="tag_close">
+                                                        <button id="close_btn" type="button">닫기</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <div id="modal_contents">
+                                                    <div id="select_area">
+                                                        <input type="text" name="tag" placeholder="태그를 입력해주세요.">
+                                                    </div>
+                                                    <div id="tag_area">
+                                                        <ul>
+                                                            <c:forEach var="tag" items="${tag}">
+                                                                <li>${tag.name}</li>
+                                                            </c:forEach>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div>
+
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                     <div>
 
@@ -129,14 +158,16 @@
         <jsp:include page="../footer.jsp"/>
     </div>
     <link rel="stylesheet" href="/resources/css/header.css"/>
+    <link rel="stylesheet" href="/resources/css/recipe/recipe-modal.css">
     <link rel="stylesheet" href="/resources/css/recipe/recipe-add.css">
     <link rel="stylesheet" href="/resources/css/recipe/cooking-add.css">
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/resources/js/recipe/recipe-modal.js"></script>
     <script src="/resources/js/recipe/main-img.js"></script>
     <script src="/resources/js/recipe/recipe-order.js"></script>
     <script src="/resources/js/recipe/multi-img.js"></script>
     <script>
-        /*$("#submit_btn").on("click", () => {
+/*        $("#submit_btn").on("click", () => {
             let formData = new FormData($("#form_area")[0]);
 
             $.ajax({

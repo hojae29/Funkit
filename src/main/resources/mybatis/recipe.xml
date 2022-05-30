@@ -32,4 +32,5 @@
         FROM recipe
         WHERE recipe_code=#{recipeCode}
     </select>
+
 </mapper>

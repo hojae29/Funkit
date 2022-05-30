@@ -23,14 +23,14 @@ function mainPreview(input) {
         return false;
 
     }
-        if(input.files && input.files[0]){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                document.getElementById("preview").src = e.target.result;
-            };
-            reader.readAsDataURL(input.files[0]);
-        }else{
-            document.getElementById("preview").src="";
+    if(input.files && input.files[0]){
+        var reader = new FileReader();
+        reader.onload = function(e){
+            document.getElementById("preview").src = e.target.result;
+        };
+        reader.readAsDataURL(input.files[0]);
+    }else{
+        document.getElementById("preview").src="";
     }
     let formData = new FormData();
     let fileInput = $('input[name="mainImage"]');
@@ -42,8 +42,14 @@ function mainPreview(input) {
     }
     formData.append("mainImage",fileObj);
 
+    //`${recipeCode}`
+
+    //let postPath = '/recipe/uploadAjaxAction/'${recipeCode};
+
+    console.log(postPath);
+
     $.ajax({
-        url:'/recipe/uploadAjaxAction',
+        url:postPath,
         processData : false,
         contentType : false,
         data : formData,

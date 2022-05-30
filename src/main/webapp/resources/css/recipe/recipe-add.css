@@ -1,6 +1,6 @@
 #add_box{
     margin: 0 auto;
-    width:960px;
+    width:1000px;
     border-radius: 10px;
     display: flex;
     justify-content: center;
@@ -18,14 +18,9 @@
     margin-top:50px;
     font-size: 14pt;
 }
-#recipe_info div{
-    margin-top:15px;
-}
-
 #recipe_info div label{
     width:80px;
     text-align: right;
-
 }
 .long_text{
     border-radius: 5px;
@@ -47,6 +42,7 @@
 .align_info{
     display: flex;
     align-items: center;
+    margin-top:15px;
 }
 #form_area{
     width:750px;
@@ -94,8 +90,16 @@ textarea{
     border:none;
     background-color: white;
     border-radius: 5px;
+    object-fit: cover;
 }
 #img_size_info{
     font-size: 10pt;
     color:red;
+}
+#tag_select{
+    width:100px;
+    height:35px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
 }

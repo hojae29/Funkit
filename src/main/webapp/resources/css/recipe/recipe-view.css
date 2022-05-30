@@ -9,7 +9,7 @@ a{
 }
 #all{
     margin:0 auto;
-    width:960px;
+    width:1000px;
 }
 #writer_id{
     margin-top:30px;
@@ -31,8 +31,8 @@ a{
 }
 #info_area{
     height:510px;
-     width:300px;
-     position:relative;
+    width:300px;
+    position:relative;
 }
 #intro{
     margin-top:40px;
@@ -49,7 +49,7 @@ a{
     bottom:0;
 }
 #like_btn{
-    display:flex;    
+    display:flex;
     justify-content: center;
     align-items: center;
     color:#FF7E00;
@@ -163,11 +163,11 @@ a{
     height:200px;
 }
 .order_img_area{
-    width:250px; 
+    width:250px;
     height:200px;
 }
 .order_img_area img{
     border-radius: 5px;
-    width:250px; 
+    width:250px;
     height:200px;
 }

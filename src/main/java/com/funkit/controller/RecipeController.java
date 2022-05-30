@@ -3,6 +3,7 @@ package com.funkit.controller;
 import com.funkit.model.Image;
 import com.funkit.model.Member;
 import com.funkit.model.Recipe;
+import com.funkit.model.Tag;
 import com.funkit.service.RecipeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/recipe")
@@ -32,9 +34,15 @@ public class RecipeController {
     }
 
     @RequestMapping("/add")
-    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
+    public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe,Model model){
+        //tag list 가져오기
+        List<Tag> tag = service.tag();
+
+        model.addAttribute("tag",tag);
+
         recipe.setId(member.getId());//session에서 id값 가져오기
 
+        //레시피 코드 별 디렉토리 생성
         String uploadMain = "D:/upload/recipe";
 
         int recipeCode = service.add(recipe);
@@ -51,35 +59,44 @@ public class RecipeController {
 
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
+
         Recipe<Image> recipe = service.getRecipeCode(recipeCode);
+
         model.addAttribute("recipe",recipe);
 
         return path + "add";
     }
+
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Recipe<MultipartFile> recipe){
 
         return "redirect:list";
     }
+
     @GetMapping("/view/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){
         service.delete(recipeCode);
 
         return "redirect:../list";
     }
+
     @GetMapping("/view")
     public String view(){
         return path + "view";
     }
 
     @PostMapping("/uploadAjaxAction/{recipeCode}")
-    public void uploadAjaxAction(@PathVariable int recipeCode,MultipartFile mainImage,Recipe<MultipartFile> recipe){
+    public void uploadAjaxAction(@PathVariable int recipeCode ,MultipartFile mainImage){
+        //이미지 첨부시 ajax로 해당 디렉토리에 이미지 파일 저장
+        service.getRecipeCode(recipeCode);
 
-        recipe.setRecipeCode(recipeCode);
-
-        String uploadMainPath = "D:/upload/recipe/" +  "/mainImage";
+        String uploadMainPath = "D:/upload/recipe/" +recipeCode + "/mainImage/";
 
         String uploadFileName = mainImage.getOriginalFilename();
+
+        String uuid = UUID.randomUUID().toString();
+
+        uploadFileName = uuid + "_" + uploadFileName;
 
         File saveFile = new File(uploadMainPath,uploadFileName);
 
@@ -88,5 +105,7 @@ public class RecipeController {
         }catch (Exception e){
             e.printStackTrace();
         }
+
     }
+
 }

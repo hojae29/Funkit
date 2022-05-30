@@ -5,6 +5,16 @@ public class Image {
     private String fileName;
     private long fileSize;
 
+    private String location;
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
     public String getFileName() {
         return fileName;
     }
