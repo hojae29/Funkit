@@ -13,7 +13,7 @@
 
     <update id="addUpdate">
         UPDATE recipe
-        SET title=#{title},reg_date=NOW(),intro=#{intro},ingredients=#{ingredients},takes=#{takes}
+        SET title=#{title},reg_date=NOW(),intro=#{intro},takes=#{takes}
         WHERE recipe_code=#{recipeCode}
     </update>
 

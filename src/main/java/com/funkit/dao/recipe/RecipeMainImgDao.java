@@ -1,4 +1,4 @@
-package com.funkit.dao;
+package com.funkit.dao.recipe;
 
 import java.util.Map;
 

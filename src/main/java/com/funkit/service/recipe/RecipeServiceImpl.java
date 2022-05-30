@@ -1,9 +1,8 @@
-package com.funkit.service;
+package com.funkit.service.recipe;
 
-import com.funkit.dao.RecipeDao;
+import com.funkit.dao.recipe.RecipeDao;
 import com.funkit.model.Image;
-import com.funkit.model.Recipe;
-import com.funkit.model.Tag;
+import com.funkit.model.recipe.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

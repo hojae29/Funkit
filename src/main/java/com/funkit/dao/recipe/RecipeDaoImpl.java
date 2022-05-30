@@ -1,8 +1,7 @@
-package com.funkit.dao;
+package com.funkit.dao.recipe;
 
 import com.funkit.model.Image;
-import com.funkit.model.Recipe;
-import com.funkit.model.Tag;
+import com.funkit.model.recipe.Recipe;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

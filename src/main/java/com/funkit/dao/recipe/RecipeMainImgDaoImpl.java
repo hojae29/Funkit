@@ -1,4 +1,4 @@
-package com.funkit.dao;
+package com.funkit.dao.recipe;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
-package com.funkit.service;
+package com.funkit.service.recipe;
 
-import com.funkit.dao.RecipeMainImgDao;
+import com.funkit.dao.recipe.RecipeMainImgDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

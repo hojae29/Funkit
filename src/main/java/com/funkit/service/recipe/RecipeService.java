@@ -1,13 +1,12 @@
-package com.funkit.dao;
+package com.funkit.service.recipe;
 
 import com.funkit.model.Image;
-import com.funkit.model.Recipe;
-import com.funkit.model.Tag;
+import com.funkit.model.recipe.Recipe;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
-public interface RecipeDao {
+public interface RecipeService {
     List<Recipe> list();
 
     int getCode(Recipe recipe);

@@ -1,4 +1,4 @@
-package com.funkit.service;
+package com.funkit.service.recipe;
 
 import java.util.Map;
 

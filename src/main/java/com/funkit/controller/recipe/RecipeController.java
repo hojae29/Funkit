@@ -1,11 +1,10 @@
-package com.funkit.controller;
+package com.funkit.controller.recipe;
 
-import com.funkit.model.Image;
-import com.funkit.model.Member;
-import com.funkit.model.Recipe;
-import com.funkit.model.Tag;
-import com.funkit.service.RecipeMainImgService;
-import com.funkit.service.RecipeService;
+import com.funkit.model.*;
+import com.funkit.model.recipe.Ingredients;
+import com.funkit.model.recipe.Recipe;
+import com.funkit.service.recipe.RecipeMainImgService;
+import com.funkit.service.recipe.RecipeService;
 import com.funkit.service.TagService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,6 +32,9 @@ public class RecipeController {
 
     @Autowired
     RecipeMainImgService mainService;
+
+    @Autowired
+    IngredientsService ingService;
 
     @GetMapping({"","/list"})
     public String list(Model model){
@@ -80,10 +82,12 @@ public class RecipeController {
     }
 
     @PostMapping("/add/{recipeCode}")
-    public String add(@PathVariable int recipeCode,Recipe<MultipartFile> recipe){
+    public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe, Ingredients ingredients){
         service.getRecipeCode(recipeCode);
 
         service.add(recipe);
+
+        ingService.addIng(ingredients);
 
         return "redirect:../list";
     }
