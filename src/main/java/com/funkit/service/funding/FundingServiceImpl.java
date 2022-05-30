@@ -36,8 +36,8 @@ public class FundingServiceImpl implements FundingService {
         var infoImage = funding.getInfoImage();
         var deleteImages = funding.getDeleteImages();
 
-        String mainImgPath = "d:/upload/funding" + fundingCode + "/mainImage/";
-        String fundingImgPath = "d:/upload/funding" + fundingCode + "/infoImage/";
+        String mainImgPath = "d:/upload/funding/" + fundingCode + "/mainImage/";
+        String fundingImgPath = "d:/upload/funding/" + fundingCode + "/infoImage/";
 
         fundingDao.saveFunding(funding);
 

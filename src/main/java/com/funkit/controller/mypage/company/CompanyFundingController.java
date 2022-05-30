@@ -43,9 +43,9 @@ public class CompanyFundingController {
         int code = fundingService.makeFunding(funding);
 
         try{
-            new File("d:/upload/" + code).mkdirs();
-            new File("d:/upload/" + code + "/mainImage").mkdir();
-            new File("d:/upload/" + code + "/infoImage").mkdir();
+            new File("d:/upload/funding/" + code).mkdirs();
+            new File("d:/upload/funding/" + code + "/mainImage").mkdir();
+            new File("d:/upload/funding/" + code + "/infoImage").mkdir();
         } catch(Exception e){
             e.getStackTrace();
         }
