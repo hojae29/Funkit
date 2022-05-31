@@ -69,7 +69,7 @@
                 <h2>312명이 펀딩중</h2>
             </div>
             <div>
-                <button type="button" class="funding_btn">펀딩하기</button>
+                <a href="/funding/${funding.fundingCode}/order?step=1"><button type="button" id="funding_btn">펀딩하기</button></a>
             </div>
             <div>
                 <p class="maker_info_text">메이커 정보</p>
@@ -81,5 +81,7 @@
     </div>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/funding/view.js"></script>
+    <script>
+    </script>
 </body>
 </html>
