@@ -36,13 +36,13 @@ public class FundingServiceImpl implements FundingService {
         var infoImage = funding.getInfoImage();
         var deleteImages = funding.getDeleteImages();
 
-        String mainImgPath = "d:/upload/" + fundingCode + "/mainImage/";
-        String fundingImgPath = "d:/upload/" + fundingCode + "/infoImage/";
+        String mainImgPath = "d:/upload/funding/" + fundingCode + "/mainImage/";
+        String fundingImgPath = "d:/upload/funding/" + fundingCode + "/infoImage/";
 
         fundingDao.saveFunding(funding);
 
         if(mainImage != null && !mainImage.isEmpty()){
-            var image = makeImage(funding.getMainImage(), "/upload/" + fundingCode + "/mainImage/");
+            var image = makeImage(funding.getMainImage(), "/upload/funding/" + fundingCode + "/mainImage/");
 
             try {
                 funding.getMainImage().transferTo(new File(mainImgPath + image.getName()));
@@ -61,7 +61,7 @@ public class FundingServiceImpl implements FundingService {
 
         if(infoImage != null && !infoImage.isEmpty()){
             for (MultipartFile file : funding.getInfoImage()){
-                var image = makeImage(file, "/upload/" + fundingCode + "/infoImage/");
+                var image = makeImage(file, "/upload/funding/" + fundingCode + "/infoImage/");
 
                 try {
                     file.transferTo(new File(fundingImgPath + image.getName()));
@@ -84,8 +84,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public Funding<Image> getFundingByFundingCode(int code) {
-        return fundingDao.getFundingByFundingCode(code);
+    public Funding<Image> getFundingByFundingCode(int fundingCode) {
+        return fundingDao.getFundingByFundingCode(fundingCode);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void fundingApprovalReq(int code, int status) {
-        fundingDao.fundingApprovalReq(code, status);
+    public void fundingApprovalReq(int fundingCode, int status) {
+        fundingDao.fundingApprovalReq(fundingCode, status);
     }
 
     public Image makeImage(MultipartFile file, String location){

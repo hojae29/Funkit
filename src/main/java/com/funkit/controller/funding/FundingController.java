@@ -6,6 +6,7 @@ import com.funkit.service.funding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -21,8 +22,17 @@ public class FundingController {
     public String funding(Model model){
 
         List<Funding<Image>> list = fundingService.getFundingList();
+        for (var item : list)
+            System.out.println(item);
         model.addAttribute("list", list);
 
         return "/funding/funding";
+    }
+
+    @RequestMapping("/{fundingCode}")
+    public String moveFundingPage(@PathVariable int fundingCode, Model model){
+        Funding<Image> funding = fundingService.getFundingByFundingCode(fundingCode);
+        model.addAttribute("funding", funding);
+        return "/funding/view";
     }
 }

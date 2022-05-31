@@ -43,10 +43,13 @@
         <div class="funding_container">
             <c:forEach var="item" items="${list}">
                 <div class="funding_item">
-                    <div class="funding_img_box" style="background-image: url('${item.mainImage.location}${item.mainImage.name}')"></div>
-                    <div><a class="funding_title" href="/funding/${item.fundingCode}">${item.title}</a></div>
-                    <div>
-                        <p class="tag_text">한식 찜</p>
+                    <a href="/funding/${item.fundingCode}"><div class="funding_img_box" style="background-image: url('${item.mainImage.location}${item.mainImage.name}')"></div></a>
+                    <div class="funding_title_container">
+                        <a class="funding_title" href="/funding/${item.fundingCode}">${item.title}</a>
+                    </div>
+                    <div style="display: flex;">
+                        <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>
+                        <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>
                     </div>
                     <div class="funding_percentage">
                         <p>361%</p>

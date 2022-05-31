@@ -14,14 +14,14 @@ public interface FundingService {
 
     ResponseEntity saveFunding(Funding<MultipartFile> funding);
 
-    Funding<Image> getFundingByFundingCode(int code);
+    Funding<Image> getFundingByFundingCode(int fundingCode);
 
     List<Funding<Image>> getFundingList();
 
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
-    ResponseEntity deleteFunding(int code);
+    ResponseEntity deleteFunding(int fundingCode);
 
-    void fundingApprovalReq(int code, int status);
+    void fundingApprovalReq(int fundingCode, int status);
 
 }

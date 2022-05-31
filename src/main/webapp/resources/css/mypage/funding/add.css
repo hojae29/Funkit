@@ -1,0 +1,306 @@
+.top_box{
+    width: 100%;
+    height: 160px;
+    background: #efefef;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 70px;
+
+}
+.container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.top_content_box{
+    width: 980px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.menu_box a{
+    font-size: 14px;
+    color: #888888;
+    text-decoration: none;
+}
+.menu_box a:nth-child(2){
+    margin-left: 16px;
+}
+
+#approval_btn{
+    padding:6px 25px;
+    border: none;
+    background: #ff7e00;
+    color: white;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.bottom_box{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.side_menu_box{
+    width: 180px;
+    margin-right: 20px;
+}
+.form_box{
+    width: 800px;
+}
+
+.form_box p{
+    color: #888888;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.form_box label{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+#menu_title{
+    color: #ff7e00;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+.text_input{
+    width: 500px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    background: white;
+}
+.date_input{
+    width: 100px;
+    height: 30px;
+    background: white;
+    border: 1px solid #cccccc;
+}
+
+#basic_form > div{
+    margin-bottom:20px;
+}
+
+#story_form > div{
+    margin-bottom:20px;
+}
+
+#reward_form > div{
+    margin-bottom:20px;
+}
+
+#title_img_box{
+    width: 350px;
+    height:210px;
+    border: 1px solid #cccccc;
+    background-size: cover;
+}
+
+.file_upload_box {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    height: 100%;
+    align-items: center;
+}
+.file_upload_box:hover{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+#save_btn{
+    width: 90px;
+    height: 30px;
+    color: #ff7e00;
+    border: 1px solid #ff7e00;
+    background: white;
+    border-radius: 5px;
+    font-size:14px;
+}
+
+#next_btn{
+    width: 90px;
+    height: 30px;
+    color: white;
+    border: 1px solid #ff7e00;
+    background: #ff7e00;
+    border-radius: 5px;
+    font-size:14px;
+}
+#side_menu > li {
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 15px;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+.info_img_box{
+    width: 180px;
+    height:120px;
+    border: 1px solid #cccccc;
+    background-size: cover;
+    margin-right: 15px;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+#info_img_wrap{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.file_upload_box button{
+    padding: 3px;
+    color: white;
+    background: none;
+    border: 1px solid white;
+}
+
+.file_upload_box button:hover {
+    background: #cccccc;
+    border: 1px solid #cccccc;
+}
+
+.file_upload_box button{
+    margin: 0px 3px;
+}
+
+#reward_form > div:nth-child(2) > div {
+    margin-bottom: 15px;
+}
+#reward_form > div:nth-child(2) {
+    width: 610px;
+    padding: 20px 30px;
+    background-color: #efefef;
+}
+#reward_form > div:nth-child(2) > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#reward_form > div:nth-child(2) > div:last-child {
+    justify-content: normal;
+    margin-bottom: 0;
+}
+
+#reward_form .text_input{
+    width:400px
+}
+
+#reward_form_box button{
+    padding: 4px 28px;
+    background-color: white;
+    border: 1px solid #ff7e00;
+    font-size: 14px;
+    color: #ff7e00;
+}
+
+#reward_form button:nth-child(1){
+    margin-right: 10px;
+}
+
+.reward_box{
+    width: 230px;
+    height: 330px;
+    background: none;
+    padding: 8px;
+    border: 1px solid #E2E2E2;
+    margin-right: 20px;
+    margin-bottom: 20px;
+}
+
+.reward_container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.reward_box > div:nth-child(1){
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.reward_box > div:nth-child(2) div{
+    font-size: 14px;
+    color: #888888;
+}
+
+.reward_box > div:nth-child(2) div:nth-child(2){
+    font-size: 14px;
+    color: black;
+}
+
+.reward_box > div:nth-child(3){
+    font-size: 14px;
+    color: #888888;
+}
+
+.reward_box > div:nth-child(4){
+    font-size: 14px;
+    color: #888888;
+}
+
+.reward_box > div:nth-child(5){
+    font-size: 14px;
+    color: #ff7e00;
+}
+
+.reward_btn{
+    border: none;
+    color: red ;
+    margin-right: 10px;
+    padding: 4px 10px;
+    background: none;
+}
+
+.reward_btn:hover{
+    color: darkred;
+}
+
+.tag_box{
+    border: none;
+    background: #ff7e00;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
+
+#tag_list_box{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.tag_delete_btn{
+    background: none;
+    border:none;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#tag_add_btn{
+    height: 30px;
+    width: 60px;
+    font-size: 14px;
+    background: none;
+    border: 1px solid #ff7e00;
+    border-radius: 5px;
+    margin-left: 8px;
+    color: #ff7e00;
+}
+
+#tag_select{
+    width: 70px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    background: white;
+}

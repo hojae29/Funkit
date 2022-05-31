@@ -18,7 +18,7 @@
     <update id="updateFundingStatus">
         UPDATE funding
         SET status_code=#{status}
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
     </update>
 
     <insert id="insertMainImage">
@@ -33,7 +33,7 @@
     <select id="getMainImage" resultType="Image">
         SELECT *
         FROM funding_main_image
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
     </select>
 
     <insert id="insertInfoImage">
@@ -43,7 +43,7 @@
     <select id="getInfoImageList" resultType="Image">
         SELECT *
         FROM funding_info_image
-        WHERE funding_code=#{code}
+        WHERE funding_code=#{fundingCode}
         ORDER BY code;
     </select>
     <delete id="deleteInfoImage">
@@ -52,13 +52,13 @@
     </delete>
 
     <select id="getFundingList" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, cml_amount, introduction, code, name, size, location
-        FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code
-        WHERE status_code = 40
-        ORDER BY funding_code DESC
+        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, cml_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name
+        FROM funding f, funding_main_image fmi, funding_tag ft, tag t
+        WHERE f.funding_code = fmi.funding_code AND f.funding_code = ft.funding_code AND ft.tag_code = t.tag_code AND status_code = 40
+        ORDER BY funding_code DESC;
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, status, title, start_date, exp_date, target_amount, cml_amount, introduction, code, name, size, location
+        SELECT f.funding_code, id, status, title, start_date, exp_date, target_amount, cml_amount, introduction, code, name as file_name, size, location
         FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code, funding_status s
         WHERE f.status_code = s.status_code AND id=#{id}
         ORDER BY funding_code DESC
@@ -77,20 +77,24 @@
 
     <resultMap id="fundingResultMap" type="Funding">
         <id property="fundingCode" column="funding_code"/>
-        <id property="id" column="id"/>
-        <id property="status" column="status"/>
-        <id property="title" column="title"/>
-        <id property="startDate" column="start_date"/>
-        <id property="expDate" column="exp_date"/>
-        <id property="targetAmount" column="target_amount"/>
-        <id property="cmlAmount" column="aml_amount"/>
-        <id property="introduction" column="introduction"/>
+        <result property="id" column="id"/>
+        <result property="status" column="status"/>
+        <result property="title" column="title"/>
+        <result property="startDate" column="start_date"/>
+        <result property="expDate" column="exp_date"/>
+        <result property="targetAmount" column="target_amount"/>
+        <result property="cmlAmount" column="aml_amount"/>
+        <result property="introduction" column="introduction"/>
         <association property="mainImage"  javaType="Image" >
-            <result property="code" column="code" />
-            <result property="name" column="name"/>
+            <id property="code" column="code" />
+            <result property="name" column="file_name"/>
             <result property="size" column="size"/>
             <result property="location" column="location"/>
         </association>
+        <collection property="tags" ofType="Tag">
+            <id property="tagCode" column="tag_code"/>
+            <result property="name" column="tag_name"/>
+        </collection>
     </resultMap>
 
 </mapper>
