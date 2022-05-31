@@ -12,7 +12,7 @@ public interface FundingDao {
 
     void saveFunding(Funding<MultipartFile> funding);
 
-    Funding<Image> getFundingByFundingCode(int code);
+    Funding<Image> getFundingByFundingCode(int fundingCode);
 
     void setInfoImage(int fundingCode, Image image);
 
@@ -24,11 +24,13 @@ public interface FundingDao {
 
     void updateMainImage(int fundingCode, Image image);
 
+    List<Funding<Image>> getFundingList();
+
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
     int total(String id);
 
-    void deleteFunding(int code);
+    void deleteFunding(int fundingCode);
 
-    void fundingApprovalReq(int code, int status);
+    void fundingApprovalReq(int fundingCode, int status);
 }

@@ -3,6 +3,7 @@ package com.funkit.dao.funding;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.Reward;
+import com.funkit.model.Tag;
 import com.funkit.util.Pager;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -30,20 +31,30 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public void saveFunding(Funding<MultipartFile> funding) {
         sql.update("funding.saveFunding", funding);
+        sql.delete("tag.deleteFundingTag", funding);
+        if(funding.getTags() != null){
+            for(var tag : funding.getTags()){
+                Map map = new HashMap();
+                map.put("fundingCode", funding.getFundingCode());
+                map.put("tag", tag);
+                sql.insert("tag.setFundingTag", map);
+            }
+        }
     }
 
     @Override
-    public Funding<Image> getFundingByFundingCode(int code) {
+    public Funding<Image> getFundingByFundingCode(int fundingCode) {
 
-        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", code);
-        Image mainImage = sql.selectOne("funding.getMainImage", code);
-        List<Image> infoImages = sql.selectList("funding.getInfoImageList", code);
-        List<Reward> rewards = sql.selectList("reward.getRewardList", code);
-
+        Funding<Image> funding = sql.selectOne("funding.getFundingByFundingCode", fundingCode);
+        Image mainImage = sql.selectOne("funding.getMainImage", fundingCode);
+        List<Image> infoImages = sql.selectList("funding.getInfoImageList", fundingCode);
+        List<Reward> rewards = sql.selectList("reward.getRewardList", fundingCode);
+        List<Tag> tagList = sql.selectList("tag.getTagListByFundingCode", fundingCode);
 
         funding.setMainImage(mainImage);
         funding.setInfoImage(infoImages);
         funding.setReward(rewards);
+        funding.setTags(tagList);
 
         return funding;
     }
@@ -87,6 +98,11 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
+    public List<Funding<Image>> getFundingList() {
+        return sql.selectList("funding.getFundingList");
+    }
+
+    @Override
     public List<Funding<Image>> getFundingListById(String id, Pager pager) {
         Map map = new HashMap();
         map.put("id", id);
@@ -101,14 +117,14 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public void deleteFunding(int code) {
-        sql.delete("funding.deleteFunding", code);
+    public void deleteFunding(int fundingCode) {
+        sql.delete("funding.deleteFunding", fundingCode);
     }
 
     @Override
-    public void fundingApprovalReq(int code, int status) {
+    public void fundingApprovalReq(int fundingCode, int status) {
         Map map = new HashMap();
-        map.put("code", code);
+        map.put("fundingCode", fundingCode);
         map.put("status", status);
 
         sql.update("funding.updateFundingStatus", map);

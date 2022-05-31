@@ -2,7 +2,6 @@ package com.funkit.dao;
 
 import com.funkit.model.Tag;
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,11 +9,14 @@ import java.util.List;
 @Repository
 public class TagDaoImpl implements TagDao{
 
-    @Autowired
-    SqlSession sql;
+    final SqlSession sql;
+
+    public TagDaoImpl(SqlSession sql) {
+        this.sql = sql;
+    }
 
     @Override
-    public List<Tag> tagList() {
-        return sql.selectList("tag.tag");
+    public List<Tag> getTagList() {
+        return sql.selectList("tag.getTagList");
     }
 }

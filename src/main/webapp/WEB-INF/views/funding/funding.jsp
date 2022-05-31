@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <html>
 <head>
     <title>펀키트</title>
@@ -39,20 +41,25 @@
             </div>
         </div>
         <div class="funding_container">
-            <div class="funding_item">
-                <div class="funding_img_box"></div>
-                <div><p class="funding_title">제목입니다 제목입니다 제목입니다 제목입니다 제목입니다 제목입니다 제목입니다 </p></div>
-                <div>
-                    <p class="tag_text">한식 찜</p>
+            <c:forEach var="item" items="${list}">
+                <div class="funding_item">
+                    <a href="/funding/${item.fundingCode}"><div class="funding_img_box" style="background-image: url('${item.mainImage.location}${item.mainImage.name}')"></div></a>
+                    <div class="funding_title_container">
+                        <a class="funding_title" href="/funding/${item.fundingCode}">${item.title}</a>
+                    </div>
+                    <div style="display: flex;">
+                        <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>
+                        <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>
+                    </div>
+                    <div class="funding_percentage">
+                        <p>361%</p>
+                    </div>
+                    <div class="amount_container">
+                        <p>D-${item.DDay}</p>
+                        <p>${item.cmlAmount}원</p>
+                    </div>
                 </div>
-                <div class="funding_percentage">
-                    <p>361%</p>
-                </div>
-                <div class="amount_container">
-                    <p>D-15</p>
-                    <p>6,960,300원</p>
-                </div>
-            </div>
+            </c:forEach>
         </div>
     </div>
     <jsp:include page="../footer.jsp"/>

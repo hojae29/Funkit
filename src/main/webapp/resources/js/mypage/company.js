@@ -7,12 +7,12 @@ function movePage(page){
         success: result => {
             $(".contents_box").empty();
             result.list.forEach(function(item){
-                let fileName = "";
+                let location = "";
                 if(item.mainImage != null)
-                    fileName = item.mainImage.fileName;
+                    location = item.mainImage.location + item.mainImage.name;
                 let html = '<div class="funding_box">' +
                     '<div class="status_text">' + item.status + '</div>' +
-                    `<div class="img_box" style="background-image: url('/upload/${item.fundingCode}/mainImage/${fileName}')"></div>` +
+                    `<div class="img_box" style="background-image: url('${location}')"></div>` +
                     '<div>' +
                     '<p class="funding_title">' + (item.title == null || item.title === "" ? "제작중인 프로젝트" : item.title) + '</p>' +
                     '</div>' +

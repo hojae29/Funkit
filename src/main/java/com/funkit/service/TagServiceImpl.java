@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class TagServiceImpl implements TagService{
+public class TagServiceImpl  implements TagService{
 
-    @Autowired
-    TagDao dao;
+    final TagDao tagDao;
+
+    public TagServiceImpl(TagDao tagDao) {
+        this.tagDao = tagDao;
+    }
 
     @Override
-    public List<Tag> tagList() {
-        return dao.tagList();
+    public List<Tag> getTagList() {
+        return tagDao.getTagList();
     }
 }

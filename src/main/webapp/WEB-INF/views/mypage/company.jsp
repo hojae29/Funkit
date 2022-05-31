@@ -49,7 +49,7 @@
                     <c:forEach var="item" items="${funding}">
                         <div class="funding_box">
                             <div class="status_text">${item.status}</div>
-                            <div class="img_box" style="background-image: url('/upload/${item.fundingCode}/mainImage/${item.mainImage.fileName}')"></div>
+                            <div class="img_box" style="background-image: url(${item.mainImage.location}${item.mainImage.name})"></div>
                             <div>
                                 <p class="funding_title">${item.title == null || item.title == "" ? "제작중인 프로젝트" : item.title}</p></div>
                             <div class="button_box">
@@ -81,6 +81,7 @@
             </div>
         </div>
     </div>
+    <jsp:include page="../footer.jsp"/>
     <script src="/resources/js/mypage/company.js"></script>
 </body>
 </html>

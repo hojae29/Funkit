@@ -5,6 +5,5 @@ import com.funkit.model.Tag;
 import java.util.List;
 
 public interface TagService {
-
-    List<Tag> tagList();
+    List<Tag> getTagList();
 }
