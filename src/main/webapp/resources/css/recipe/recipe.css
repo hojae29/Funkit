@@ -1,121 +1,108 @@
-#recipe_banner{
-    width:1000px;
-    height:400px;
-    margin-top:20px;
-}
-#recipe_banner img{
-    width:1000px;
-    height:400px;
-    object-fit: cover;
-}
-img{
-    object-fit: cover;
-}
-#recipe_area{
-    width:1000px;
-    margin:0 auto;
-}
-#title_area{
-    margin-top:30px;
-    display:flex;
-    font-size:24pt;
-}
-#recipe_tit{
-    color:#ff7e00;
-}
-#tag_area{
-    margin-top:20px;
-    display:flex;
-}
-#tag_area li{
-    padding:0 7px 0 7px;
-    font-size: 16px;
-    margin-right:10px;
-    min-width: 30px;
-    width:fit-content;
-    height:30px;
-    border: 1px solid #ff7e00;
-    border-radius: 5px;
-    cursor: pointer;
-}
-#tag_area li a{
-    color:#ff7e00;
-}
-#grid_area{
-    width:1100px;
-    margin:0 auto;
-    margin-top:50px;
-}
-.preview_area{
-    height:200px;
-}
-.img_area{
+.title_img_box{
+    margin: 25px auto;
+    width: 1000px;
+    height: 350px;
     background-color: #cccccc;
+}
+
+.sub_title{
+    font-size:24px;
+    font-weight: 500;
+    margin-bottom:8px;
+}
+
+.card_box{
+    width: 150px;
+    height: 150px;
+    background-color: #cccccc;
+    border-radius: 10px;
+}
+
+.card_box_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.planning_container{
+    width:1000px;
+    margin: 0px auto 25px auto;
+}
+
+.tag_container{
+    width:1000px;
+    margin: 0px auto 25px auto;
+}
+
+.search_box{
+    width: 230px;
+    border-bottom: 1px solid #888888;
+}
+
+#search_input{
+    width: 230px;
+    height: 30px;
+    border: none;
+}
+
+.tag_sub_container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.tag_text{
+    font-size: 14px;
+    color: #cccccc;
+}
+
+.funding_container{
+    width: 1000px;
+    margin: 0 auto;
+    display:grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+.funding_item{
+    height: 360px;
+}
+
+.funding_img_box{
     border-radius: 5px;
+    height: 200px;
+    background-color: #cccccc;
+    margin-bottom: 4px;
     background-size: cover;
 }
-.card_area{
-    width:270px;
-    height:350px;
-    box-shadow:4px 8px 8px #cccccc;
-    border-radius: 5px;
-}
-.card_tit{
-    width:250px;
-    font-size:20px;
-    height:80px;
 
-}
-.card_tag{
-    width:180px;
-    display: flex;
-}
-.card_tag li{
-    padding:0 7px 0 7px;
+.funding_title{
     font-size: 16px;
-    margin-right:10px;
-    min-width: 30px;
-    width:fit-content;
-    height:30px;
-    color:#ff7e00;
-    border: 1px solid #ff7e00;
-    border-radius: 5px;
-    cursor: pointer;
+    font-weight: 500;
 }
-.card_tag ul{
-    display:flex;
+
+.funding_percentage{
+    display: flex;
+    justify-content: flex-end;
+    font-size:26px;
+    font-weight: bold;
+    color: #FF7E00;
 }
-.card_text{
-    margin:10px;
-}
-.card_tit_area{
-    display:flex;
-    justify-content: space-between;
-}
-.card_tit_area img{
-    width:40px;
-    height:40px;
-}
-.view_area{
-    display:flex;
-    font-size:14px;
-}
-.card_sub{
-    display:flex;
-    margin-top:10px;
-    justify-content: space-between;
-}
-.like_area{
-    font-size:14px;
+
+.amount_container{
     display: flex;
     justify-content: space-between;
 }
-.like_area img{
-    width:25px;
-    height:25px;
+
+.amount_container p{
+    color: #cccccc;
 }
-#grid_contents{
-    display: grid;
-    grid-template-columns: repeat(3,calc(33%));
-    grid-row-gap: 40px;
+
+.tag_icon{
+    margin-right: 5px;
 }
+
+.funding_title_container{
+    margin-bottom: 4px;
+    height: 50px
+}
+
+/*tag css*/

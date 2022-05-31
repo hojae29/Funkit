@@ -14,9 +14,4 @@
         WHERE recipe_code=#{recipeCode}
     </update>
 
-    <select id="list" resultType="Image">
-        SELECT * FROM recipe_main_image
-        ORDER BY recipe_code DESC;
-    </select>
-
 </mapper>
