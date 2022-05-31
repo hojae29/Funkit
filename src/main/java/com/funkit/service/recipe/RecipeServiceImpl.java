@@ -41,5 +41,15 @@ public class RecipeServiceImpl implements RecipeService{
         dao.add(recipe);
     }
 
+    @Override
+    public Recipe recipeView(int recipeCode) {
+        return dao.recipeView(recipeCode);
+    }
+
+    @Override
+    public void updateView(int recipeCode) {
+        dao.updateView(recipeCode);
+    }
+
 
 }

@@ -16,4 +16,8 @@ public interface RecipeService {
     Recipe<Image> getRecipeCode(int recipeCode);
 
     void add(Recipe<MultipartFile> recipe);
+
+    Recipe recipeView(int recipeCode);
+
+    void updateView(int recipeCode);
 }

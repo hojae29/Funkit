@@ -18,10 +18,10 @@
         <div>
             <div>
                 <div>
-                    <p id="recipe_tit">레시피 제목입니다</p>
+                    <p id="recipe_tit">${recipe.title}</p>
                 </div>
                 <div>
-                    <p id="writer_id">작성자</p>
+                    <p id="writer_id">${recipe.id}</p>
                 </div>
             </div>
             <div id="info_all">
@@ -33,7 +33,7 @@
                         <p>레시피 정보</p>
                     </div>
                     <div id="intro">
-                        <p>소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말소개말</p>
+                        <p>${recipe.intro}</p>
                     </div>
                     <dvi id="position_bottom">
                         <div id="tag_area">
@@ -57,7 +57,7 @@
                                         <p>소요시간</p>
                                     </div>
                                     <div>
-                                        <p>약 40분</p>
+                                        <p>약 ${recipe.takes}분</p>
                                     </div>
                                 </div>
                             </div>
@@ -70,7 +70,7 @@
                                         <p>관심수</p>
                                     </div>
                                     <div>
-                                        <p>120</p>
+                                        <p>${recipe.like}</p>
                                     </div>
                                 </div>
                                 <div class="sub_order">
@@ -81,7 +81,7 @@
                                         <p>조회수</p>
                                     </div>
                                     <div>
-                                        <p>320</p>
+                                        <p>${recipe.view}</p>
                                     </div>
                                 </div>
                                 <div class="sub_order">

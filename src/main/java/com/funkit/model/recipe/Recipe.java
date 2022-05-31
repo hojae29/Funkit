@@ -13,6 +13,16 @@ public class Recipe<T> {
     private int view;
     private int takes;
 
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
     private T mainImage;
 
     public T getMainImage() {

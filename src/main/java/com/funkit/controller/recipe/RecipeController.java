@@ -1,7 +1,6 @@
 package com.funkit.controller.recipe;
 
 import com.funkit.model.*;
-import com.funkit.model.recipe.Ingredients;
 import com.funkit.model.recipe.Recipe;
 import com.funkit.service.recipe.RecipeMainImgService;
 import com.funkit.service.recipe.RecipeService;
@@ -33,14 +32,11 @@ public class RecipeController {
     @Autowired
     RecipeMainImgService mainService;
 
-    @Autowired
-    IngredientsService ingService;
-
     @GetMapping({"","/list"})
     public String list(Model model){
-        List<Recipe> list = service.list();
+        List<Recipe> recipe = service.list();
 
-        model.addAttribute("list",list);
+        model.addAttribute("recipe",recipe);
 
         return path + "list";
     }
@@ -82,25 +78,29 @@ public class RecipeController {
     }
 
     @PostMapping("/add/{recipeCode}")
-    public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe, Ingredients ingredients){
+    public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe){
         service.getRecipeCode(recipeCode);
 
         service.add(recipe);
 
-        ingService.addIng(ingredients);
-
-        return "redirect:../list";
+        return "redirect:../";
     }
 
     @GetMapping("/view/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){
         service.delete(recipeCode);
 
-        return "redirect:../list";
+        return "redirect:../";
     }
 
-    @GetMapping("/view")
-    public String view(){
+    @GetMapping("/view/{recipeCode}")
+    public String view(@PathVariable int recipeCode, Model model){
+        Recipe recipe = service.recipeView(recipeCode);
+
+        model.addAttribute("recipe",recipe);
+
+        service.updateView(recipeCode);
+
         return path + "view";
     }
 

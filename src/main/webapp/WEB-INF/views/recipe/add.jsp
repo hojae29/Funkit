@@ -95,10 +95,9 @@
                                     <input type="number" name="takes" id="takes" min="0" class="sm_num">
                                 </div>
                                 <div id="sel_lpad">
-                                    <select name="takes_time">
-                                        <option selected="selected">분</option>
-                                        <option>시간</option>
-                                    </select>
+                                    <div>
+                                        <p>분</p>
+                                    </div>
                                 </div>
                             </div>
                             <div>
@@ -164,6 +163,12 @@
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
     <script>
         var recipeCode = `${recipeCode}`;
+        // input 태그에서 enter 시 submit 방지
+        document.addEventListener('keydown',function(event){
+            if(event.keyCode === 13){
+                event.preventDefault();
+            };
+        }, true);
     </script>
     <script src="/resources/js/recipe/recipe-modal.js"></script>
     <script src="/resources/js/recipe/main-img.js"></script>

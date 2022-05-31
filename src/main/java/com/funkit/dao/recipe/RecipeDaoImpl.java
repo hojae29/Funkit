@@ -45,4 +45,14 @@ public class RecipeDaoImpl implements RecipeDao{
         sql.update("recipe.addUpdate",recipe);
     }
 
+    @Override
+    public Recipe recipeView(int recipeCode) {
+        return sql.selectOne("recipe.recipe",recipeCode);
+    }
+
+    @Override
+    public void updateView(int recipeCode) {
+        sql.update("recipe.updateView",recipeCode);
+    }
+
 }

@@ -4,6 +4,7 @@
 <mapper namespace="recipe">
     <select id="list" resultType="Recipe">
         SELECT * FROM RECIPE
+        ORDER BY recipe_code DESC;
     </select>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="recipeCode">
@@ -13,7 +14,7 @@
 
     <update id="addUpdate">
         UPDATE recipe
-        SET title=#{title},reg_date=NOW(),intro=#{intro},takes=#{takes}
+        SET title=#{title},reg_date=NOW(),intro=#{intro},takes=#{takes},status=10
         WHERE recipe_code=#{recipeCode}
     </update>
 
@@ -33,5 +34,17 @@
         FROM recipe
         WHERE recipe_code=#{recipeCode}
     </select>
+
+    <select id="recipe" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
+    <update id="updateView">
+        UPDATE recipe
+        SET view=view+1
+        WHERE recipe_code=#{recipeCode}
+    </update>
 
 </mapper>

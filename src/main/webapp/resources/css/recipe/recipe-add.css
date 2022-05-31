@@ -103,3 +103,8 @@ textarea{
     border: 1px solid #cccccc;
     border-radius: 5px;
 }
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
