@@ -10,7 +10,7 @@
 
     <update id="updateMain">
         UPDATE recipe_main_image
-        SET file_name=#{fileName},file_size=#{fileSize},location=#{location}
+        SET name=#{name},size=#{size},location=#{location}
         WHERE recipe_code=#{recipeCode}
     </update>
 

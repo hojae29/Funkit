@@ -54,7 +54,7 @@
                             <div>
                                 <a>
                                     <div class="preview_area">
-                                        <img src="/resources/img/recipe/test.jpeg">
+<%--                                        <img src="/resources/img/recipe/test.jpeg">--%>
                                     </div>
                                 </a>
                             </div>
@@ -62,7 +62,7 @@
                                 <div class="card_text">
                                     <div class="card_tit_area" >
                                         <p class="card_tit">${recipe.title}</p>
-                                        <div class="img_area"></div>
+                                        <img src="/resources/img/recipe/good.PNG">
                                     </div>
                                     <div class="card_sub">
                                         <div class="card_tag">

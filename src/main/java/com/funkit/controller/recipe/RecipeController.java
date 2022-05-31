@@ -66,7 +66,7 @@ public class RecipeController {
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
         //tag list 가져오기
-        List<Tag> tag = tagService.tagList();
+        List<Tag> tag = tagService.getTagList();
 
         model.addAttribute("tag",tag);
 
@@ -129,9 +129,9 @@ public class RecipeController {
 
         Map map = new HashMap();
         map.put("recipeCode",recipeCode);
-        map.put("fileName",uploadFileName);
+        map.put("name",uploadFileName);
         map.put("location",uploadMainPath);
-        map.put("fileSize",fileSize);
+        map.put("size",fileSize);
 
         mainService.addMainImgName(map);
 
