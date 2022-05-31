@@ -1,4 +1,4 @@
-package com.funkit.model;
+package com.funkit.model.recipe;
 
 import java.util.Date;
 
@@ -11,8 +11,17 @@ public class Recipe<T> {
     private Date updateDate;
     private int like;
     private int view;
-    private String ingredients;
     private int takes;
+
+    private int status;
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
     private T mainImage;
 
@@ -30,14 +39,6 @@ public class Recipe<T> {
 
     public void setTakes(int takes) {
         this.takes = takes;
-    }
-
-    public String getIngredients() {
-        return ingredients;
-    }
-
-    public void setIngredients(String ingredients) {
-        this.ingredients = ingredients;
     }
 
     public String getId() {
@@ -115,7 +116,6 @@ public class Recipe<T> {
                 ", updateDate=" + updateDate +
                 ", like=" + like +
                 ", view=" + view +
-                ", ingredients='" + ingredients + '\'' +
                 ", takes=" + takes +
                 '}';
     }

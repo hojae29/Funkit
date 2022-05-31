@@ -1,4 +1,4 @@
-package com.funkit.model;
+package com.funkit.model.recipe;
 
 import org.w3c.dom.Text;
 

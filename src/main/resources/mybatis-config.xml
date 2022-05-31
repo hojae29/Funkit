@@ -12,7 +12,10 @@
 
     <mappers>
         <mapper resource="mybatis/login.xml"/>
+        <mapper resource="mybatis/tag.xml"/>
         <mapper resource="mybatis/recipe.xml"/>
+        <mapper resource="mybatis/ingredients.xml"/>
+        <mapper resource="mybatis/recipe_main.xml"/>
         <mapper resource="mybatis/funding.xml"/>
         <mapper resource="mybatis/reward.xml"/>
         <mapper resource="mybatis/notice.xml"/>

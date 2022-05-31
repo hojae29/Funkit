@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="recipe_main">
+
+    <insert id="recipeMainImg">
+        INSERT INTO recipe_main_image(recipe_code)
+        VALUES (#{recipeCode})
+    </insert>
+
+    <update id="updateMain">
+        UPDATE recipe_main_image
+        SET name=#{name},size=#{size},location=#{location}
+        WHERE recipe_code=#{recipeCode}
+    </update>
+
+    <select id="list" resultType="Image">
+        SELECT * FROM recipe_main_image
+        ORDER BY recipe_code DESC;
+    </select>
+
+</mapper>

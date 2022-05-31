@@ -1,10 +1,18 @@
 #recipe_banner{
-    width:1180px;
+    width:1000px;
     height:400px;
     margin-top:20px;
 }
+#recipe_banner img{
+    width:1000px;
+    height:400px;
+    object-fit: cover;
+}
+img{
+    object-fit: cover;
+}
 #recipe_area{
-    width:1180px;
+    width:1000px;
     margin:0 auto;
 }
 #title_area{
@@ -21,7 +29,7 @@
 }
 #tag_area li{
     padding:0 7px 0 7px;
-    font-size: 12pt;
+    font-size: 16px;
     margin-right:10px;
     min-width: 30px;
     width:fit-content;
@@ -34,37 +42,37 @@
     color:#ff7e00;
 }
 #grid_area{
-    width:1180px;
+    width:1100px;
     margin:0 auto;
     margin-top:50px;
 }
 .preview_area{
-    width:356px;
-    height:240px;
+    height:200px;
 }
-.preview_area img{
-    width:100%;
-    height: 100%;
+.img_area{
+    background-color: #cccccc;
     border-radius: 5px;
+    background-size: cover;
 }
 .card_area{
-    width:356px;
-    height:403px;
+    width:270px;
+    height:350px;
     box-shadow:4px 8px 8px #cccccc;
+    border-radius: 5px;
 }
 .card_tit{
     width:250px;
-    font-size:20pt;
+    font-size:20px;
     height:80px;
 
 }
 .card_tag{
-    width:250px;
+    width:180px;
     display: flex;
 }
 .card_tag li{
     padding:0 7px 0 7px;
-    font-size: 12pt;
+    font-size: 16px;
     margin-right:10px;
     min-width: 30px;
     width:fit-content;
@@ -90,13 +98,15 @@
 }
 .view_area{
     display:flex;
+    font-size:14px;
 }
 .card_sub{
     display:flex;
-    margin-top:20px;
+    margin-top:10px;
     justify-content: space-between;
 }
 .like_area{
+    font-size:14px;
     display: flex;
     justify-content: space-between;
 }
@@ -106,7 +116,6 @@
 }
 #grid_contents{
     display: grid;
-    grid-template-columns: repeat(3,calc(33.33333%));
+    grid-template-columns: repeat(3,calc(33%));
     grid-row-gap: 40px;
-    grid-column-gap: 20px;
 }

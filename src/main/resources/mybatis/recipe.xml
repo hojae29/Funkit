@@ -4,20 +4,47 @@
 <mapper namespace="recipe">
     <select id="list" resultType="Recipe">
         SELECT * FROM RECIPE
+        ORDER BY recipe_code DESC;
     </select>
 
     <insert id="add" useGeneratedKeys="true" keyProperty="recipeCode">
-        INSERT INTO recipe(recipe_code, title, id, reg_date,intro,ingredients,takes)
-        VALUES (NULL, #{title},#{id}, NOW(), #{intro},#{ingredients},#{takes})
+        INSERT INTO recipe(recipe_code, id, reg_date)
+        VALUES (NULL, #{id}, NOW())
     </insert>
 
-    <insert id="mainImg">
-        INSERT INTO recipe_main_image
-        VALUES(NULL,#{recipeCode},#{imgae.fileName},#{image.fileSize});
-    </insert>
+    <update id="addUpdate">
+        UPDATE recipe
+        SET title=#{title},reg_date=NOW(),intro=#{intro},takes=#{takes},status=10
+        WHERE recipe_code=#{recipeCode}
+    </update>
 
     <delete id="delete">
         DELETE FROM recipe
         where recipe_code=#{recipeCode}
     </delete>
+
+    <select id="getRecipeCode" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
+    <select id="checkCode" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
+    <select id="recipe" resultType="Recipe">
+        SELECT *
+        FROM recipe
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
+    <update id="updateView">
+        UPDATE recipe
+        SET view=view+1
+        WHERE recipe_code=#{recipeCode}
+    </update>
+
 </mapper>
