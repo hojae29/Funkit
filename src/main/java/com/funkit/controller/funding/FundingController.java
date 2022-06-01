@@ -4,14 +4,12 @@ import com.funkit.exception.CustomException;
 import com.funkit.exception.ErrorCode;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.PayInfo;
 import com.funkit.service.funding.FundingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -40,18 +38,32 @@ public class FundingController {
         return "/funding/view";
     }
 
-    @GetMapping("/{fundingCode}/order")
-    public String moveFundingOrderPage(@PathVariable int fundingCode, Model model, int step){
-        System.out.println(step);
-        switch (step){
-            case 1:
-                return "/funding/order/step1";
-            case 2:
-                return "/funding/order/step2";
-            case 3:
-                return "/funding/order/step3";
-            default:
-                throw new CustomException(ErrorCode.WRONG_ACCESS);
-        }
+    @GetMapping("/{fundingCode}/order/step1")
+    public String moveStepOnePage(@PathVariable int fundingCode, Model model){
+
+        var funding = fundingService.getFundingByFundingCode(fundingCode);
+        model.addAttribute("funding", funding);
+
+        return "/funding/order/step1";
+    }
+
+    @PostMapping("/{fundingCode}/order/step1")
+    public String moveStepTwoPage(@PathVariable int fundingCode, Model model, PayInfo payInfo){
+        System.out.println(payInfo);
+
+        var funding = fundingService.getFundingByFundingCode(fundingCode);
+        model.addAttribute("funding", funding);
+        model.addAttribute("payInfo", payInfo);
+
+        return "redirect:step2";
+    }
+
+    @GetMapping("/{fundingCode}/order/step2")
+    public String moveStepTwoPage(@PathVariable int fundingCode, Model model){
+
+        var funding = fundingService.getFundingByFundingCode(fundingCode);
+        model.addAttribute("funding", funding);
+
+        return "/funding/order/step2";
     }
 }

@@ -54,6 +54,7 @@
 
 .funding_img_box{
     background-color: #cccccc;
+    background-size: cover;
     width: 235px;
     height: 160px;
     margin-right: 20px;
@@ -162,7 +163,7 @@
     color: black !important;
 }
 
-.next_btn{
+#next_btn{
     width: 150px;
     height: 45px;
     background-color: #FF7E00;
@@ -176,7 +177,7 @@
 .amount_input{
     width: 300px;
     height: 35px;
-    border: 2px solid #888888;
+    border: 1px solid #888888;
     border-radius: 5px;
     text-align: right;
     margin-right: 10px;
