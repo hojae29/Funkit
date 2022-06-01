@@ -81,7 +81,5 @@
     </div>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/funding/view.js"></script>
-    <script>
-    </script>
 </body>
 </html>

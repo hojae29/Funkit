@@ -123,6 +123,7 @@
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(payInfo),
+                success: result => console.log(result),
                 error: error => console.log(error)
             });
         });
