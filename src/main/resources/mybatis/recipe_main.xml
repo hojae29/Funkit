@@ -10,13 +10,8 @@
 
     <update id="updateMain">
         UPDATE recipe_main_image
-        SET name=#{name},size=#{size},location=#{location}
+        SET file_name=#{name},size=#{size},location=#{location}
         WHERE recipe_code=#{recipeCode}
     </update>
-
-    <select id="list" resultType="Image">
-        SELECT * FROM recipe_main_image
-        ORDER BY recipe_code DESC;
-    </select>
 
 </mapper>

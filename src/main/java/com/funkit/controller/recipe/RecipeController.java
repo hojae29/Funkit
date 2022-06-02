@@ -12,10 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Controller
 @RequestMapping("/recipe")
@@ -36,7 +33,8 @@ public class RecipeController {
     public String list(Model model){
         List<Recipe> recipe = service.list();
 
-        model.addAttribute("recipe",recipe);
+        System.out.println(recipe);
+        model.addAttribute("recipe", recipe);
 
         return path + "list";
     }
@@ -66,9 +64,9 @@ public class RecipeController {
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
         //tag list 가져오기
-        List<Tag> tag = tagService.getTagList();
+        List<Tag> tagList = tagService.getTagList();
 
-        model.addAttribute("tag",tag);
+        model.addAttribute("tagList",tagList);
 
         Recipe<Image> recipe = service.getRecipeCode(recipeCode);
 
@@ -78,27 +76,37 @@ public class RecipeController {
     }
 
     @PostMapping("/add/{recipeCode}")
-    public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe){
+    public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
+                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode){
+
+        List<Tag> tagList = new ArrayList<>();
+        if(tagCode != null){
+            for(var index : tagCode)
+                tagList.add(new Tag(index));
+            recipe.setTags(tagList);
+        }
+
         service.getRecipeCode(recipeCode);
 
         service.add(recipe);
 
-        return "redirect:../";
+        return "redirect:./../";
     }
 
-    @GetMapping("/view/delete/{recipeCode}")
+    @GetMapping("/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){
         service.delete(recipeCode);
 
         return "redirect:../";
     }
 
-    @GetMapping("/view/{recipeCode}")
+    @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
-        Recipe recipe = service.recipeView(recipeCode);
+        Recipe<Image> recipe = service.recipeView(recipeCode);
 
         model.addAttribute("recipe",recipe);
 
+        System.out.println(recipe);
         service.updateView(recipeCode);
 
         return path + "view";
@@ -110,6 +118,8 @@ public class RecipeController {
         service.getRecipeCode(recipeCode);
 
         String uploadMainPath = "D:/upload/recipe/" +recipeCode + "/mainImage/";
+
+        String MainPath = "/upload/recipe/" +recipeCode + "/mainImage/";
 
         long fileSize = mainImage.getSize();
 
@@ -130,7 +140,7 @@ public class RecipeController {
         Map map = new HashMap();
         map.put("recipeCode",recipeCode);
         map.put("name",uploadFileName);
-        map.put("location",uploadMainPath);
+        map.put("location",MainPath);
         map.put("size",fileSize);
 
         mainService.addMainImgName(map);

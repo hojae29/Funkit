@@ -108,3 +108,47 @@ input[type="number"]::-webkit-inner-spin-button {
     -moz-appearance: none;
     appearance: none;
 }
+#tag_list_box{
+    margin-top: 8px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.tag_delete_btn{
+    background: none;
+    border:none;
+    color: white;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+#tag_add_btn{
+    height: 30px;
+    width: 60px;
+    font-size: 14px;
+    background: none;
+    border: 1px solid #ff7e00;
+    border-radius: 5px;
+    margin-left: 8px;
+    color: #ff7e00;
+}
+
+#tag_select{
+    width: 70px;
+    height: 30px;
+    border: 1px solid #cccccc;
+    background: white;
+}
+
+.tag_box{
+    border: none;
+    background: #ff7e00;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    margin-right: 8px;
+    margin-bottom: 8px;
+}

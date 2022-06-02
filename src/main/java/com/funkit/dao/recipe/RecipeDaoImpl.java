@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class RecipeDaoImpl implements RecipeDao{
@@ -43,6 +45,14 @@ public class RecipeDaoImpl implements RecipeDao{
     @Override
     public void add(Recipe<MultipartFile> recipe) {
         sql.update("recipe.addUpdate",recipe);
+        if(recipe.getTags() != null){
+            for(var tag : recipe.getTags()){
+                Map map = new HashMap();
+                map.put("recipeCode",recipe.getRecipeCode());
+                map.put("tag",tag);
+                sql.insert("tag.setRecipeTag",map);
+            }
+        }
     }
 
     @Override

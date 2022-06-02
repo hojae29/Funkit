@@ -1,6 +1,9 @@
 package com.funkit.model.recipe;
 
+import com.funkit.model.Tag;
+
 import java.util.Date;
+import java.util.List;
 
 public class Recipe<T> {
     private int recipeCode;
@@ -12,8 +15,26 @@ public class Recipe<T> {
     private int like;
     private int view;
     private int takes;
-
     private int status;
+
+    private T mainImage;
+
+    private List<Tag> tags;
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+    public T getMainImage() {
+        return mainImage;
+    }
+
+    public void setMainImage(T mainImage) {
+        this.mainImage = mainImage;
+    }
 
     public int getStatus() {
         return status;
@@ -21,16 +42,6 @@ public class Recipe<T> {
 
     public void setStatus(int status) {
         this.status = status;
-    }
-
-    private T mainImage;
-
-    public T getMainImage() {
-        return mainImage;
-    }
-
-    public void setMainImage(T mainImage) {
-        this.mainImage = mainImage;
     }
 
     public int getTakes() {
@@ -117,6 +128,9 @@ public class Recipe<T> {
                 ", like=" + like +
                 ", view=" + view +
                 ", takes=" + takes +
+                ", status=" + status +
+                ", mainImage=" + mainImage +
+                ", tags=" + tags +
                 '}';
     }
 }

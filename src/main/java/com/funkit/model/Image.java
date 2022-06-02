@@ -37,4 +37,14 @@ public class Image {
     public void setLocation(String location) {
         this.location = location;
     }
+
+    @Override
+    public String toString() {
+        return "Image{" +
+                "code=" + code +
+                ", name='" + name + '\'' +
+                ", size=" + size +
+                ", location='" + location + '\'' +
+                '}';
+    }
 }

@@ -7,6 +7,11 @@
         FROM tag
     </select>
 
+    <insert id="setRecipeTag">
+        INSERT INTO recipe_tag(recipe_code, tag_code)
+        VALUES(#{recipeCode}, #{tag.tagCode})
+    </insert>
+
     <insert id="setFundingTag">
         INSERT INTO funding_tag(funding_code, tag_code)
         VALUES(#{fundingCode}, #{tag.tagCode})
