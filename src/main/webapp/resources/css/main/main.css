@@ -1,0 +1,380 @@
+/*지금 진행중인 펀딩*/
+ol,
+ul {
+    list-style: none;
+}
+
+#main_con {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/*실시간 랭킹*/
+#rank_baner {
+    display: flex;
+}
+
+#rank_banner {
+    margin-top:50px;
+    height: 480px;
+    display: flex;
+    justify-content: space-between;
+}
+#recipe_rank{
+    width:350px;
+}
+.rank_head {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    justify-content: space-between;
+}
+
+.rank_head_live {
+    display: flex;
+}
+
+.rank_head_live h1 {
+    font-size: 24px;
+
+}
+
+.rank_head_live svg {
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+.rank_head_menu {
+    display: flex;
+    margin-top:20px;
+}
+.rank_head_menu a{
+    font-size:12px;
+    font-weight: 500px;
+}
+/*랭킹 콘텐츠*/
+.time_ranking{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+
+}
+.time_ranking a{
+    text-decoration: none;
+}
+.time_ranking h1{
+    font-size:22px;
+    margin-right: 10px;
+}
+.time_ranking_title{
+    display: flex;
+}
+.time_ranking_title_text p{
+    font-size:14px;
+}
+.time_ranking_title_like{
+    display: flex;
+}
+.time_ranking_title_like span{
+    color:#ff7e00;
+    margin-left:5px;
+}
+.time_ranking_title_like img{
+    margin-top:4px;
+}
+.time_ranking_title_like p{
+    font-weight: 400;
+}
+/*지금 진행중인 펀딩*/
+.now_funding_desc{
+    position: absolute;
+    right: 250px;
+    top: 660px;
+}
+.now_funding_desc p{
+    padding: 10px;
+    color: grey;
+    font-size: 11px;
+}
+#funding_button{
+    width:120px;
+    color: #ffffff;
+    background: #ff7e00;
+    border: 1px solid #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.now_funding_desc ul li{
+    display: inline-block;
+    padding: 10px;
+    padding-top: 15px;
+}
+#contents{
+    display: inline-block;
+}
+.contents li img{
+    margin-top: 20px;
+}
+#prev{
+    position: relative;
+    top: -30px;
+}
+#next{
+    position: relative;
+    top: -30px
+}
+
+
+/*크라우드 박스*/
+.croud-box {
+    height: 95px;
+    margin-top: 80px;
+    background-color: #ff7e00;
+}
+
+.croud-box h1 {
+    color: #ffffff;
+    font-size: 24px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.croud-box h2 {
+    color: #ffffff;
+    font-size: 12px;
+    text-align: center;
+    padding-top: 10px;
+    text-decoration: underline;
+    text-underline-position: under;
+}
+
+.croud-box a {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/*스토어 둘러보기*/
+/*스토어 제목*/
+.store {
+    margin-top: 80px;
+}
+
+.store-title {
+    display: flex;
+}
+
+.store-title span {
+    color: #ff7e00;
+}
+
+.store-title h1 {
+    font-size: 20px;
+}
+
+.store-title svg {
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+/*스토어 콘텐츠 박스*/
+.store-content-1 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.store-content-dish {
+    width: 219px;
+    height: 100%;
+}
+
+.store-content-dish h1 {
+    font-size: 14px;
+    margin-top: 5px;
+    width: 219px;
+}
+
+.store-content-dish-bottom {
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.store-content-dish-review {
+    display: flex;
+}
+
+#review {
+    margin-right: 10px;
+}
+
+.store-content-dish-bottom p {
+    font-size: 12px;
+    color: #cccccc;
+    font-weight: 300px;
+}
+
+#store-price {
+    color: #ff7e00;
+}
+
+.store-content-dish-bottom h2 {
+    font-size: 14px;
+    color: #000000;
+}
+
+/*스토어콘텐츠 두줄*/
+.store-content-2 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* FUNKIT 새소식*/
+.news {
+    margin-top: 80px;
+}
+
+.news-title {
+    display: flex;
+}
+
+.news-title span {
+    color: #ff7e00;
+}
+
+.news-title h1 {
+    font-size: 20px;
+}
+
+.news-title svg {
+    margin-top: 6px;
+    margin-left: 10px;
+}
+
+/*FUNKIT 새소식 콘텐츠*/
+.news-content {
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.news-content-1 {
+    display: flex;
+    width: 320px;
+    height: 70px;
+}
+
+.news-content-1-title {
+    display: flex;
+    margin-left: 10px;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.news-content-1-title h1 {
+    font-size: 14px;
+    color: #ff7e00;
+}
+
+.news-content-1-title h2 {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.news-content-1-title p {
+    font-size: 12px;
+    color: #cccccc;
+
+}
+
+.news-content2 {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+/*footer*/
+footer {
+    width: 100%;
+    color: #888888;
+    border-top: 1px solid #888888;
+    background-color: #fafafa;
+    margin-top: 70px;
+}
+
+.footer_container {
+    margin: 0 auto;
+    width: 1200px;
+    height: 240px;
+    padding: 0px 10px;
+    display: flex;
+}
+
+.logo_box {
+    display: flex;
+    ;
+    justify-content: center;
+    align-items: center;
+    width: 320px;
+    ;
+    height: 100%;
+}
+
+.info_box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.about_box {
+    display: flex;
+    flex-direction: column;
+}
+
+.info_box_top {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info_box_top > div {
+    margin: 2px 0px;
+}
+
+.info_box > div {
+    width: 700px;
+    height: 50%;
+}
+
+footer p,
+a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+footer ul {
+    list-style: none;
+}
+
+.info_box li {
+    float: left;
+    margin-right: 30px;
+}
+
+.info_box_bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info_box_bottom > div {
+    margin: 2px 0px;
+}
+
+.about_box li {
+    margin: 5px 0px;
+}
+
+.about_box h2 {
+    margin-top: 50px;
+    margin-bottom: 12px;
+}

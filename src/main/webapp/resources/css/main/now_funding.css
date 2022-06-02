@@ -1,0 +1,71 @@
+/*지금 진행중인 펀딩*/
+/*제목*/
+.now-info-title {
+    display: flex;
+}
+.now-info-title span{
+    color:#ff7e00;
+}
+.now-info-title svg{
+    margin:6px 0 0 10px;
+}
+.now-info-title h1{
+    font-size:20px;
+}
+
+/*콘텐츠*/
+.funding{
+    margin-top:30px;
+    display: flex;
+    justify-content: space-between;
+}
+.funding img{
+    width: 400px;
+    border-radius: 5px;
+}
+.funding-right h2{
+    font-size: 20px;
+}
+.funding-right{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+.funding-right p{
+    font-size:16px;
+    color:#cccccc;
+}
+.funding-right-day {
+    display: flex;
+}
+.funding-right-day span{
+    color:#ff7e00;
+    font-weight: 500;
+}
+.funding-right-day p{
+    font-size:16px;
+    color:#000000;
+    font-weight: 500;
+}
+#funding_button{
+    width:120px;
+    height: 35px;
+    color: #ffffff;
+    background: #ff7e00;
+    border: 1px solid #ffffff;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.funding-right-day-food{
+    margin-top:10px;
+    display: flex;
+    justify-content: space-between;
+}
+.funding-right-day-food svg{
+    margin-top: 30px;
+}
+.funding-right-day-food img{
+    width:100px;
+    height:100px;
+}

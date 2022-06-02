@@ -1,6 +1,6 @@
 package com.funkit.service;
 
-import com.funkit.dao.NoticeDao;
+import com.funkit.dao.notice.NoticeDao;
 import com.funkit.model.Notice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

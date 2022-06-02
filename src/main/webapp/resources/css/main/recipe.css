@@ -1,0 +1,65 @@
+#recipe{
+    margin-top:50px;
+}
+/*제목*/
+.recipe_title{
+    display: flex;
+}
+.recipe_title span{
+    color:#ff7e00;
+}
+.recipe_title svg{
+    margin: 6px 0 0 10px;
+}
+.recipe_title h1{
+    font-size:20px;
+}
+.recommend_img{
+    border-radius: 5px;
+    width:227px;
+    height:200px;
+}
+#recommend_info{
+    padding-top:40px;
+}
+.recommend_title{
+    margin-left: 10px;
+}
+
+.recommend_good{
+    background-color: gray;
+}
+#recommend_con{
+    display: flex;
+    justify-content: space-between;
+}
+.recommend_sty{
+    width:227px;
+    border-radius: 5px;
+    box-shadow:3px 8px 8px #cccccc;
+}
+.recommend_sty_title h1{
+    font-size:16px;
+}
+.recommend_view{
+    margin-top:20px;
+    font-size: 15px;
+    color: #cccccc;
+    font-weight: lighter;
+}
+.recommend_title{
+    display: flex;
+    justify-content: space-between;
+}
+.recommend_sty_good{
+    margin-right: 10px;;
+    display: flex;
+    flex-direction: column;
+}
+.recommend_sty_good img{
+margin: 0 auto;
+}
+.recommend_sty_good span{
+    color:#ff7e00;
+    font-size:16px;
+}

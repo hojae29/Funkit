@@ -1,0 +1,116 @@
+ol,
+ul {
+    list-style: none;
+}
+
+#main_con {
+    width: 1000px;
+    margin: 0 auto;
+}
+
+/*실시간 랭킹*/
+#rank_baner {
+    display: flex;
+}
+
+#rank_banner {
+    margin-top:50px;
+    height: 480px;
+    display: flex;
+    justify-content: space-between;
+}
+#recipe_rank{
+ width:350px;
+}
+.rank_head {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    justify-content: space-between;
+}
+
+.rank_head_live {
+    display: flex;
+}
+
+.rank_head_live h1 {
+    font-size: 24px;
+
+}
+
+.rank_head_live svg {
+    margin-top: 7px;
+    margin-left: 10px;
+}
+
+.rank_head_menu {
+    display: flex;
+    margin-top:20px;
+}
+.rank_head_menu a{
+ font-size:12px;
+font-weight: 500px;
+}
+/*랭킹 콘텐츠*/
+.time_ranking{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+
+}
+.time_ranking a{
+    text-decoration: none;
+}
+.time_ranking h1{
+    font-size:22px;
+    margin-right: 10px;
+}
+.time_ranking_title{
+    display: flex;
+}
+.time_ranking_title_text p{
+    font-size:14px;
+}
+.time_ranking_title_like{
+    display: flex;
+}
+.time_ranking_title_like span{
+    color:#ff7e00;
+    margin-left:5px;
+}
+.time_ranking_title_like img{
+    margin-top:4px;
+}
+.time_ranking_title_like p{
+    font-weight: 400;
+}
+/*지금 진행중인 펀딩*/
+.now_funding_desc{
+    position: absolute;
+    right: 250px;
+    top: 660px;
+}
+.now_funding_desc p{
+    padding: 10px;
+    color: grey;
+    font-size: 11px;
+}
+.now_funding_desc ul li{
+    display: inline-block;
+    padding: 10px;
+    padding-top: 15px;
+}
+#contents{
+    display: inline-block;
+}
+.contents li img{
+    margin-top: 20px;
+}
+#prev{
+    position: relative;
+    top: -30px;
+}
+#next{
+    position: relative;
+    top: -30px
+}
+
