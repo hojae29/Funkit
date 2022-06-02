@@ -1,50 +1,5 @@
-.main_container{
-    width: 660px;
-    margin: 0 auto;
-}
-
-.main_container > div {
+#step2_container > div {
     margin: 25px 0px;
-}
-
-.step_container{
-    margin-top: 40px !important;
-    margin-bottom: 40px !important;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.step_box{
-    display: flex;
-    width: 80px;
-    height: 80px;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0px 10px;
-    border-bottom: 3px solid white;
-}
-
-.step_box > p:nth-child(1){
-    margin-bottom:10px;
-}
-
-.step_line{
-    width: 60px;
-    height: 1px;
-    background-color: #cccccc;
-}
-
-.step_box > p:nth-child(1){
-    font-size: 16px;
-    font-weight: 500;
-    color: #888888;
-}
-
-.step_box > p:nth-child(2){
-    font-size: 16px;
-    font-weight: 500;
 }
 
 .text_box{

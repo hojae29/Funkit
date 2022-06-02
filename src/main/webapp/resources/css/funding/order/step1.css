@@ -163,9 +163,9 @@
     color: black !important;
 }
 
-#next_btn{
+.next_btn{
     width: 150px;
-    height: 45px;
+    height: 40px;
     background-color: #FF7E00;
     border: none;
     border-radius: 5px;
@@ -187,4 +187,40 @@
     display: flex;
     align-items: flex-end;
     justify-content: space-between;
+}
+
+.invest_input_container{
+    display:none;
+}
+
+.reward_input_container{
+    display:none;
+}
+
+.reward_box{
+    display: flex;
+    width: 100%;
+    background: #efefef;
+    height: 100px;
+    align-items: center;
+    justify-content: space-between;
+    margin: 15px 0px;
+}
+
+.reward_checkbox{
+    width: 25px;
+    height: 25px;
+    margin: 40px;
+}
+
+.reward_checkbox_wrap{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.reward_quantity {
+    width: 50px;
+    height: 30px;
 }

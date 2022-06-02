@@ -46,29 +46,12 @@ public class FundingController {
         return "/funding/view";
     }
 
-    @GetMapping("/{fundingCode}/order/step1")
+    @GetMapping("/{fundingCode}/order")
     public String moveStepOnePage(@PathVariable int fundingCode, Model model){
 
         var funding = fundingService.getFundingByFundingCode(fundingCode);
         model.addAttribute("funding", funding);
 
-        return "/funding/order/step1";
-    }
-
-    @PostMapping("/{fundingCode}/order/step1")
-    public String moveStepTwoPage(@PathVariable int fundingCode, Model model, PayInfo payInfo){
-        System.out.println(payInfo);
-
-        var funding = fundingService.getFundingByFundingCode(fundingCode);
-        model.addAttribute("funding", funding);
-        model.addAttribute("payInfo", payInfo);
-
-        return "redirect:step2";
-    }
-
-    @GetMapping("/{fundingCode}/order/step2")
-    public String moveStepTwoPage(@PathVariable int fundingCode, Model model){
-
-        return "/funding/order/step2";
+        return "/funding/order";
     }
 }

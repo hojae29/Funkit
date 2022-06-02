@@ -69,7 +69,7 @@
                 <h2>312명이 펀딩중</h2>
             </div>
             <div>
-                <a href="/funding/${funding.fundingCode}/order/step1"><button type="button" id="funding_btn">펀딩하기</button></a>
+                <a href="/funding/${funding.fundingCode}/order"><button type="button" id="funding_btn">펀딩하기</button></a>
             </div>
             <div>
                 <p class="maker_info_text">메이커 정보</p>
