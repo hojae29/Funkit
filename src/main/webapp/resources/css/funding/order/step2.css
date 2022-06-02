@@ -27,16 +27,24 @@
     padding: 8px 0px;
 }
 
-.text_box_wrap2{
+.invest_info_wrap{
     background-color: #efefef;
     border-bottom: 1px solid #cccccc;
     padding: 8px 0px;
+    display: none;
+}
+
+.reward_info_wrap{
+    background-color: #efefef;
+    padding: 8px 0px;
+    border-bottom: 1px solid #cccccc;
+    display: none;
 }
 
 .text_box_wrap3{
     background-color: #efefef;
     padding: 8px 0px;
-    margin-top: 12px;
+    margin-top: 8px;
 }
 
 .check_box_wrap{

@@ -134,7 +134,7 @@
                             <p>0원</p>
                         </div>
                     </div>
-                    <div class="text_box_wrap2">
+                    <div class="invest_info_wrap">
                         <div class="text_box">
                             <p>수익 지급일</p>
                             <p>2022.07.14</p>
@@ -142,6 +142,12 @@
                         <div class="text_box">
                             <p>수익 분배율</p>
                             <p>30%</p>
+                        </div>
+                    </div>
+                    <div class="reward_info_wrap">
+                        <div class="text_box">
+                            <p>리워드 발송일</p>
+                            <p>2022.07.14</p>
                         </div>
                     </div>
                 </div>
@@ -223,8 +229,10 @@
         });
 
         $(".next_btn").on("click", function() {
-            if(payInfo.type === "invest")
+            if(payInfo.type === "invest"){
                 payInfo.investAmount = $("#invest_amount").val();
+                $(".invest_info_wrap").css("display", "block");
+            }
             else if(payInfo.type === "reward"){
                 $(".reward_checkbox:checked").each(function(index, item){
                     let reward = {
@@ -233,7 +241,9 @@
                     }
                     payInfo.rewardList.push(reward);
                 });
+                $(".reward_info_wrap").css("display", "block");
             }
+
             $("#step2_container").css("display", "block");
             $("#step1_container").css("display", "none");
             $(".step_box").eq(0).css("border-bottom", "3px solid white");
