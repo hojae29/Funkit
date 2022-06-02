@@ -6,6 +6,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
     <title>레시피 소개</title>
@@ -26,7 +27,7 @@
             </div>
             <div id="info_all">
                 <div>
-                    <img src="/resources/img/recipe/test2.jpg" id="main_img">
+                    <div id="main_img" style="background-image: url('${recipe.mainImage.location}${recipe.mainImage.name}')"></div>
                 </div>
                 <div id="info_area">
                     <div id="recipe_info">
@@ -40,9 +41,9 @@
                             <div id="tag_div">
                                 <div>
                                     <ul id="tag_sty">
-                                        <li>태그</li>
-                                        <li>태그</li>
-                                        <li>태그</li>
+                                        <c:forEach var="item" items="${recipe.tags}">
+                                            <li>${item.name}</li>
+                                        </c:forEach>
                                     </ul>
                                 </div>
                             </div>

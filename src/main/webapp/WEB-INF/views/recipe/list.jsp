@@ -46,7 +46,7 @@
                 <div class="funding_item">
                     <a href="/recipe/${item.recipeCode}"><div class="funding_img_box" style="background-image: url('${item.mainImage.location}${item.mainImage.name}')"></div></a>
                     <div class="funding_title_container">
-                        <a class="funding_title" href="/funding/${item.recipeCode}">${item.title}</a>
+                        <a class="funding_title" href="/recipe/${item.recipeCode}">${item.title}</a>
                     </div>
                     <div style="display: flex;">
                         <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>

@@ -102,10 +102,11 @@ public class RecipeController {
 
     @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
-        Recipe recipe = service.recipeView(recipeCode);
+        Recipe<Image> recipe = service.recipeView(recipeCode);
 
         model.addAttribute("recipe",recipe);
 
+        System.out.println(recipe);
         service.updateView(recipeCode);
 
         return path + "view";

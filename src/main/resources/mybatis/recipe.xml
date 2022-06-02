@@ -3,7 +3,7 @@
 
 <mapper namespace="recipe">
     <select id="list" resultMap="recipeMap">
-        SELECT * FROM RECIPE NATURAL JOIN recipe_main_image
+        SELECT * FROM RECIPE NATURAL JOIN recipe_main_image NATURAL JOIN recipe_tag LEFT OUTER JOIN tag USING(tag_code)
         ORDER BY recipe_code DESC;
     </select>
 
@@ -35,9 +35,8 @@
         WHERE recipe_code=#{recipeCode}
     </select>
 
-    <select id="recipe" resultType="Recipe">
-        SELECT *
-        FROM recipe
+    <select id="recipe" resultMap="recipeMap">
+        SELECT * FROM RECIPE NATURAL JOIN recipe_main_image
         WHERE recipe_code=#{recipeCode}
     </select>
 
@@ -58,15 +57,15 @@
         <result property="view" column="view"/>
         <result property="status" column="status"/>
         <result property="takes" column="takes"/>
-        <association property="mainImage"  javaType="Image" >
+        <association property="mainImage"  javaType="Image" ><!--1:1관계일떄 사용-->
             <id property="code" column="code" />
-            <result property="name" column="name"/>
+            <result property="name" column="file_name"/>
             <result property="size" column="size"/>
             <result property="location" column="location"/>
         </association>
-        <!--<collection property="tags" ofType="Tag">
+        <collection property="tags" ofType="Tag"><!--1:N 관계일떄 사용-->
             <id property="tagCode" column="tag_code"/>
-            <result property="name" column="tag_name"/>
-        </collection>-->
+            <result property="name" column="name"/>
+        </collection>
     </resultMap>
 </mapper>
