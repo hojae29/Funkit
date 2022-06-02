@@ -152,7 +152,6 @@ public class Funding<T> {
         long calculate = expDate.getTime() - today.getTime();
 
         int Ddays = (int) (calculate / ( 24*60*60*1000));
-        System.out.println("두 날짜 차이일 : " + Ddays);
 
         return Ddays;
     }

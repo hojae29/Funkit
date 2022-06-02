@@ -1,0 +1,82 @@
+#step2_container > div {
+    margin: 25px 0px;
+}
+
+.text_box{
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 10px;
+}
+
+.text_box > p:nth-child(1){
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.text_box > p:nth-child(2){
+    font-size: 16px;
+    font-weight: 400;
+    color: #888888;
+
+}
+
+.text_box_wrap{
+    border-top: 1px solid #cccccc;
+    border-bottom: 1px solid #cccccc;
+    margin: 8px 0px 0px 0px;
+    padding: 8px 0px;
+}
+
+.text_box_wrap2{
+    background-color: #efefef;
+    border-bottom: 1px solid #cccccc;
+    padding: 8px 0px;
+}
+
+.text_box_wrap3{
+    background-color: #efefef;
+    padding: 8px 0px;
+    margin-top: 12px;
+}
+
+.check_box_wrap{
+    display: flex;
+    flex-direction: column;
+}
+
+.check_box_wrap > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.check_box_wrap a{
+    font-size: 16px;
+    font-weight: 500;
+    border-bottom: 1px solid #888888;
+}
+
+.check_box_wrap label{
+    display: flex;
+    align-items: center;
+    margin: 10px 0px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.check_box_wrap input{
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
+.pay_btn{
+    width: 200px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FF7E00;
+    font-size: 16px;
+    font-weight: 400;
+    color: white;
+}
