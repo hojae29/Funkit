@@ -11,12 +11,26 @@
 <html>
 <head>
     <title>펀키트</title>
-    <link rel="stylesheet" href="/resources/css/funding/funding.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link rel="stylesheet" href="/resources/css/recipe/list.css"/>
 </head>
 <body>
 <jsp:include page="../header.jsp"/>
 <div>
-    <div class="title_img_box">
+    <div class="swiper">
+
+        <div class="swiper-wrapper">
+            <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
+            <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
+            <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
+            <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
+        </div>
+
+        <div class="swiper_button_wrap">
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
 
     </div>
     <div class="planning_container">
@@ -65,5 +79,7 @@
     </div>
 </div>
 <jsp:include page="../footer.jsp"/>
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="/resources/js/swiper.js"></script>
 </body>
 </html>

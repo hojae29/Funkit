@@ -83,6 +83,6 @@
     </div>
     <jsp:include page="../footer.jsp"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-    <script src="/resources/js/funding/funding.js"></script>
+    <script src="/resources/js/swiper.js"></script>
 </body>
 </html>
