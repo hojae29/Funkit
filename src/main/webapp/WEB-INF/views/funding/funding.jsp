@@ -20,12 +20,10 @@
         <div class="swiper">
 
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img src="/resources/img/1.png"></div>
-                <div class="swiper-slide"><img src="/resources/img/2.jpg"></div>
-                <div class="swiper-slide">이미지3</div>
-                <div class="swiper-slide">이미지4</div>
-                <div class="swiper-slide">이미지5</div>
-                <div class="swiper-slide">이미지6</div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
             </div>
 
             <div class="swiper_button_wrap">
