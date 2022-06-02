@@ -20,10 +20,10 @@
         <div class="swiper">
 
             <div class="swiper-wrapper">
-                <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
-                <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
-                <div class="swiper-slide"><img class="title_img" src="/resources/img/1.png"></div>
-                <div class="swiper-slide"><img class="title_img" src="/resources/img/2.jpg"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/funding/배너1.png"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/funding/배너2.png"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/funding/배너3.png"></div>
+                <div class="swiper-slide"><img class="title_img" src="/resources/img/funding/배너4.png"></div>
             </div>
 
             <div class="swiper_button_wrap">
