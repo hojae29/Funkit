@@ -152,3 +152,54 @@ input[type="number"]::-webkit-inner-spin-button {
     margin-right: 8px;
     margin-bottom: 8px;
 }
+.quantity{
+    margin-left:10px;
+    width:40px;
+    height:35px;
+    text-align: right;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+}
+#plus_ingredients{
+    width:110px;
+    height:35px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.quantity::placeholder{
+    text-align: center;
+}
+#ingredients_area{
+    width:600px;
+    display: grid;
+    grid-template-columns: repeat(3,calc(33%));
+    grid-column-gap: 15px;
+    grid-row-gap: 10px;
+}
+#ingredients_order{
+    display: flex;
+    width:150px;
+}
+.ingredients_box{
+    background: #FF7E00;
+    padding: 6px 12px;
+    border-radius: 10px;
+    min-width: auto;
+    display: flex;
+    font-size:16px;
+    color:white;
+    height:35px;
+    justify-content: space-between;
+}
+.del_btn_area{
+    display: flex;
+    align-items: baseline
+}
+.del_btn_area button{
+    margin-left:5px;
+    border:none;
+    background-color:#FF7E00;
+}

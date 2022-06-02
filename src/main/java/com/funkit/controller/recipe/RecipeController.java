@@ -77,7 +77,7 @@ public class RecipeController {
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
-                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode){
+                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode,@RequestParam HashMap<String, String> ingredients){
 
         List<Tag> tagList = new ArrayList<>();
         if(tagCode != null){

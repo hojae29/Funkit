@@ -97,7 +97,16 @@
                                 <label>재료</label>
                             </div>
                             <div class="align_input">
-                                <input type="text" name="ingredients" id="ingredients" class="mid_text">
+                                <input type="text" name="i_name" id="i_name" class="sm_num" placeholder="재료명">
+                                <input type="text" name="quantity" id="quantity" placeholder="개수" min="1" class="quantity">
+                                <button type="button" id="plus_ingredients" onclick="add_Ingredients()">재료 추가하기</button>
+                            </div>
+                        </div>
+                        <div class="align_info">
+                            <div class="label_area"></div>
+                            <div id="ingredients_area">
+                                <div id="ingredients_order">
+                                </div>
                             </div>
                         </div>
                         <div class="align_info">
@@ -187,6 +196,7 @@
 </script>
 <script src="/resources/js/recipe/recipe-tag.js"></script>
 <script src="/resources/js/recipe/main-img.js"></script>
+<script src="/resources/js/recipe/recipe_ingredients.js"></script>
 <script src="/resources/js/recipe/recipe-order.js"></script>
 <script src="/resources/js/recipe/multi-img.js"></script>
 </body>

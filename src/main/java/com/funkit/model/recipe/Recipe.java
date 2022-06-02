@@ -21,6 +21,16 @@ public class Recipe<T> {
 
     private List<Tag> tags;
 
+    public List<Ingredients> ingredients;
+
+    public List<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
+
     public List<Tag> getTags() {
         return tags;
     }
@@ -131,6 +141,7 @@ public class Recipe<T> {
                 ", status=" + status +
                 ", mainImage=" + mainImage +
                 ", tags=" + tags +
+                ", ingredients=" + ingredients +
                 '}';
     }
 }

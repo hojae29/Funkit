@@ -1,6 +1,8 @@
 $("#tag_add_btn").on("click", () => {
     let html = '<div class="tag_box">' + $("#tag_select option:checked").text() +
-        '<button type="button" class="tag_delete_btn"><img width="10" src="/resources/img/icon/close_icon_white.svg"></button>' +
+        '<button type="button" class="tag_delete_btn">' +
+        '<img width="10" src="/resources/img/icon/close_icon_white.svg">' +
+        '</button>' +
         '<input type="hidden" name="tagCode" value="' + $("#tag_select").val() + '">' +
         '</div>';
 

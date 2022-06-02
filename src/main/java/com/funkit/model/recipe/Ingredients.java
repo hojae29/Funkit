@@ -4,7 +4,7 @@ public class Ingredients {
 
     private int code;
     private String name;
-    private int quantity;
+    private String quantity;
 
     public int getCode() {
         return code;
@@ -22,11 +22,11 @@ public class Ingredients {
         this.name = name;
     }
 
-    public int getQuantity() {
+    public String getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(String quantity) {
         this.quantity = quantity;
     }
 }
