@@ -67,6 +67,7 @@
                                 <div><p>프로젝트 진행기간을 설정해주세요</p></div>
                                 <div>
                                     <input class="date_input" name="startDate" type="date" value="<fmt:formatDate value="${funding.startDate}" pattern="yyyy-MM-dd"/>">
+                                     ~
                                     <input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>">
                                 </div>
                             </div>

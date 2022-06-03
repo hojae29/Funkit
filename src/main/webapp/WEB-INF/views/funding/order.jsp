@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Student
@@ -102,7 +103,7 @@
                         <div style="display: flex;align-items: center;">
                             <input class="reward_checkbox" type="checkbox" value="${reward.rewardCode}" onclick='toggleNumBox(this)'>
                             <div>
-                                <p>${reward.amount}원</p>
+                                <p class="reward_amount">${reward.amount}</p>
                                 <p>${reward.title}</p>
                                 <p>${reward.info}</p>
                             </div>
@@ -127,7 +128,7 @@
                         </div>
                         <div class="text_box">
                             <p>펀딩 금액</p>
-                            <p>120,000원</p>
+                            <p id="funding_amount"></p>
                         </div>
                         <div class="text_box">
                             <p>배송비</p>
@@ -137,17 +138,17 @@
                     <div class="invest_info_wrap">
                         <div class="text_box">
                             <p>수익 지급일</p>
-                            <p>2022.07.14</p>
+                            <p><fmt:formatDate value="${funding.deliveryDate}" pattern="yyyy-MM-dd"/></p>
                         </div>
                         <div class="text_box">
                             <p>수익 분배율</p>
-                            <p>30%</p>
+                            <p>${funding.distribution}%</p>
                         </div>
                     </div>
                     <div class="reward_info_wrap">
                         <div class="text_box">
                             <p>리워드 발송일</p>
-                            <p>2022.07.14</p>
+                            <p><fmt:formatDate value="${funding.deliveryDate}" pattern="yyyy-MM-dd"/></p>
                         </div>
                     </div>
                 </div>
@@ -191,7 +192,7 @@
             </div>
 
             <div style="display: flex; justify-content: center;">
-                <button class="pay_btn">결제예약</button>
+                <button class="pay_btn" onclick="requestPay()">결제예약</button>
             </div>
         </div>
     </div>
@@ -205,7 +206,8 @@
         let payInfo = {
             type: null,
             investAmount: null,
-            rewardList: []
+            rewardList: [],
+            totalAmount: null
         };
 
         $("#invest_type_btn").on("click", function(){
@@ -230,17 +232,27 @@
 
         $(".next_btn").on("click", function() {
             if(payInfo.type === "invest"){
+                $("#funding_type").text("지분");
                 payInfo.investAmount = $("#invest_amount").val();
+                $("#funding_amount").text(payInfo.investAmount + "원");
                 $(".invest_info_wrap").css("display", "block");
             }
             else if(payInfo.type === "reward"){
+                $("#funding_type").text("리워드");
                 $(".reward_checkbox:checked").each(function(index, item){
                     let reward = {
                         rewardCode: $(item).val(),
-                        quantity: $(item).closest(".reward_box").find(".reward_quantity").val()
+                        quantity: $(item).closest(".reward_box").find(".reward_quantity").val(),
+                        amount: Number($(item).closest(".reward_box").find(".reward_amount").text())
                     }
                     payInfo.rewardList.push(reward);
                 });
+
+                for(let index=0; index < payInfo.rewardList.length; index++)
+                    payInfo.totalAmount += payInfo.rewardList[index].amount * payInfo.rewardList[index].quantity;
+
+                $("#funding_amount").text(payInfo.totalAmount + "원");
+
                 $(".reward_info_wrap").css("display", "block");
             }
 
