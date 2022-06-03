@@ -153,10 +153,11 @@
                                         <img src="/resources/img/recipe/default.png" id="order_img_1"/>
                                     </a>
                                 </div>
-                                <input type="file" class="img_input" id="img_input_1" accept="image/*">
+                                <input type="file" class="img_input" id="img_input_1" accept="image/*" name="subImage">
                                 <div>
-                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>
+                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box" name="cookingProcess"></textarea>
                                 </div>
+                                <input type="hidden" value="1" name="cookingSeq">
                             </div>
                         </div>
                         <div class="orders_mar">

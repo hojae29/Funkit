@@ -1,6 +1,7 @@
 package com.funkit.model.recipe;
 
 import com.funkit.model.Tag;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -19,9 +20,29 @@ public class Recipe<T> {
 
     private T mainImage;
 
+    private List<T> subImage;
+
+    private List<Cooking> cookings;
+
     private List<Tag> tags;
 
     public List<Ingredients> ingredients;
+
+    public List<T> getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(List<T> subImage) {
+        this.subImage = subImage;
+    }
+
+    public List<Cooking> getCookings() {
+        return cookings;
+    }
+
+    public void setCookings(List<Cooking> cookings) {
+        this.cookings = cookings;
+    }
 
     public List<Ingredients> getIngredients() {
         return ingredients;
@@ -140,6 +161,8 @@ public class Recipe<T> {
                 ", takes=" + takes +
                 ", status=" + status +
                 ", mainImage=" + mainImage +
+                ", subImage=" + subImage +
+                ", cookings=" + cookings +
                 ", tags=" + tags +
                 ", ingredients=" + ingredients +
                 '}';

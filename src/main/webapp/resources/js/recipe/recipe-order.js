@@ -13,10 +13,11 @@ function add_order(){
         +'<img src="/resources/img/recipe/default.png" id="order_img_' + no + '"/>'
         +'</a>'
         +'</div>'
-        +'<input type="file" class="img_input" id="img_input_'+ no +'" accept="image/*">'
+        +'<input type="file" class="img_input" name="subImage" id="img_input_'+ no +'" accept="image/*">'
         +'<div>'
-        +'<textarea placeholder="조리 과정을 입력해주세요." class="text_box">' + '</textarea>'
+        +'<textarea placeholder="조리 과정을 입력해주세요." class="text_box" name="cookingProcess">' + '</textarea>'
         +'</div>'
+        +'<input type="hidden" value="' + no + '" name="cookingSeq">'
         +'</div>';
 
     var orderHtml = $(".order_count:last");

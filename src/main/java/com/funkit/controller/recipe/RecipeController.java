@@ -1,6 +1,7 @@
 package com.funkit.controller.recipe;
 
 import com.funkit.model.*;
+import com.funkit.model.recipe.Cooking;
 import com.funkit.model.recipe.Ingredients;
 import com.funkit.model.recipe.Recipe;
 import com.funkit.service.recipe.RecipeMainImgService;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.*;
@@ -30,7 +32,7 @@ public class RecipeController {
     @Autowired
     RecipeMainImgService mainService;
 
-    @GetMapping({"","/list"})
+    @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
 
@@ -79,8 +81,53 @@ public class RecipeController {
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
                       @RequestParam(value="tagCode",required = false) List<Integer> tagCode,
                       @RequestParam(value="ingreName",required = false) List<String> ingreName,
-                      @RequestParam(value = "ingreQua",required = false) List<String> ingreQua){
+                      @RequestParam(value = "ingreQua",required = false) List<String> ingreQua,
+                      @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage,
+                      @RequestParam(value = "cookingSeq",required = false) List<Integer> cookingSeq,
+                      @RequestParam(value = "cookingProcess",required = false)List<String> cookingProcess){
 
+        String subPath = "D:/upload/recipe/" +recipeCode + "/cookImage/";
+        String subLocation = "/upload/recipe/" +recipeCode + "/cookImage/";
+
+        //조리과정 추가
+        int imgNum=1;
+        int seqNum=1;
+        int processNum=1;
+        List<Cooking> cookingList = new ArrayList<>();
+        if(subImage != null){
+            for(var indexSeq : cookingSeq){
+                for(var indexProcess : cookingProcess) {
+                    for (MultipartFile multipartFile : subImage) {
+                        if (seqNum == processNum && processNum == imgNum) {
+                            String subName = multipartFile.getOriginalFilename();
+                            long size = multipartFile.getSize();
+
+                            String uuid = UUID.randomUUID().toString();
+
+                            String uploadSubName = uuid + "_" + subName;
+                            File saveSubImage = new File(subPath, uploadSubName);
+
+                            try {
+                                multipartFile.transferTo(saveSubImage);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            cookingList.add(new Cooking(indexSeq, indexProcess, uploadSubName, size, subLocation));
+                            System.out.println(cookingList);
+                        }
+                        imgNum = imgNum+1;
+                    }
+                    processNum = processNum + 1;
+                }
+
+                imgNum = 1;
+                processNum = 1;
+                seqNum = seqNum +1;
+            }
+        }
+
+
+        //태그 추가
         List<Tag> tagList = new ArrayList<>();
         if(tagCode != null){
             for(var index : tagCode)
@@ -88,6 +135,7 @@ public class RecipeController {
             recipe.setTags(tagList);
         }
 
+        //재료 추가
         int nameNum = 1;
         int quaNum = 1;
         List<Ingredients> ingreList = new ArrayList<>();
