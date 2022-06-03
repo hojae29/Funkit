@@ -8,7 +8,7 @@
     </insert>
     <update id="saveFunding">
         UPDATE funding
-        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}
+        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}, distribution=#{distribution}, delivery_date=#{deliveryDate}
         WHERE funding_code = #{fundingCode}
     </update>
     <delete id="deleteFunding">
