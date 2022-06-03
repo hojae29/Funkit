@@ -97,8 +97,8 @@
                                 <label>재료</label>
                             </div>
                             <div class="align_input">
-                                <input type="text" name="i_name" id="i_name" class="sm_num" placeholder="재료명">
-                                <input type="text" name="quantity" id="quantity" placeholder="개수" min="1" class="quantity">
+                                <input type="text" id="iName" class="sm_num" placeholder="재료명">
+                                <input type="text" id="quantity" placeholder="개수" min="1" class="quantity">
                                 <button type="button" id="plus_ingredients" onclick="add_Ingredients()">재료 추가하기</button>
                             </div>
                         </div>

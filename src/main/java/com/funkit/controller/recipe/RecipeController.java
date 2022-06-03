@@ -1,6 +1,7 @@
 package com.funkit.controller.recipe;
 
 import com.funkit.model.*;
+import com.funkit.model.recipe.Ingredients;
 import com.funkit.model.recipe.Recipe;
 import com.funkit.service.recipe.RecipeMainImgService;
 import com.funkit.service.recipe.RecipeService;
@@ -33,7 +34,6 @@ public class RecipeController {
     public String list(Model model){
         List<Recipe> recipe = service.list();
 
-        System.out.println(recipe);
         model.addAttribute("recipe", recipe);
 
         return path + "list";
@@ -77,7 +77,9 @@ public class RecipeController {
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
-                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode,@RequestParam HashMap<String, String> ingredients){
+                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode,
+                      @RequestParam(value="ingreName",required = false) List<String> ingreName,
+                      @RequestParam(value = "ingreQua",required = false) List<String> ingreQua){
 
         List<Tag> tagList = new ArrayList<>();
         if(tagCode != null){
@@ -85,6 +87,25 @@ public class RecipeController {
                 tagList.add(new Tag(index));
             recipe.setTags(tagList);
         }
+
+        int nameNum = 1;
+        int quaNum = 1;
+        List<Ingredients> ingreList = new ArrayList<>();
+        if(ingreName != null && ingreQua !=null){
+            for(var indexName : ingreName) {
+                for(var indexQua : ingreQua){
+                    if (nameNum==quaNum) {
+                        ingreList.add(new Ingredients(indexName, indexQua));
+                        System.out.println(ingreList);
+                    }
+                    quaNum = quaNum+1;
+                }
+                quaNum = 1;
+                nameNum = nameNum + 1;
+            }
+            recipe.setIngredients(ingreList);
+        }
+
 
         service.getRecipeCode(recipeCode);
 

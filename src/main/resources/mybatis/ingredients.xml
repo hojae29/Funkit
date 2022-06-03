@@ -3,9 +3,9 @@
 
 <mapper namespace="ingredients">
 
-    <insert id="add">
-        INSERT INTO ingredients(code, name, quantity)
-        VALUES (NULL, #{name}, #{quantity})
+    <insert id="setRecipeIngredients">
+        INSERT INTO ingredients(code,recipe_code, name, quantity)
+        VALUES (NULL, #{recipeCode},#{ingredients.ingreName}, #{ingredients.ingreQua})
     </insert>
 
 
