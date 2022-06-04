@@ -47,6 +47,15 @@
     margin-top: 8px;
 }
 
+.card_info_container{
+    background-color: #efefef;
+    padding: 20px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
 .check_box_wrap{
     display: flex;
     flex-direction: column;
@@ -87,4 +96,13 @@
     font-size: 16px;
     font-weight: 400;
     color: white;
+}
+
+.card_info_input{
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
 }

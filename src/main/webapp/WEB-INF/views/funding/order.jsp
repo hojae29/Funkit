@@ -173,6 +173,59 @@
             </div>
 
             <div>
+                <div><h2>카드 정보입력</h2></div>
+                <div class="card_info_container">
+                    <div>
+                        <div><label>카드번호</label></div>
+                        <div>
+                            <input class="card_info_input" id="card_num_1" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_2" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_3" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_4" type="text" maxlength="4"/>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <div><label>유효기간</label></div>
+                            <div>
+                                <select class="card_info_input" id="card_expiry_year">
+                                    <option value="2022">2022년</option>
+                                    <option value="2023">2023년</option>
+                                    <option value="2024">2024년</option>
+                                    <option value="2025">2025년</option>
+                                    <option value="2026">2026년</option>
+                                    <option value="2027">2027년</option>
+                                    <option value="2028">2028년</option>
+                                </select>
+                                <select class="card_info_input" id="card_expiry_month">
+                                    <option value="01">1월</option>
+                                    <option value="02">2월</option>
+                                    <option value="03">3월</option>
+                                    <option value="04">4월</option>
+                                    <option value="05">5월</option>
+                                    <option value="06">6월</option>
+                                    <option value="07">7월</option>
+                                    <option value="08">8월</option>
+                                    <option value="09">9월</option>
+                                    <option value="10">10월</option>
+                                    <option value="11">11월</option>
+                                    <option value="12">12월</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div><label>생년월일</label></div>
+                            <div><input class="card_info_input" id="card_birth" type="text" maxlength="6"/></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div><label>카드 비밀번호 앞 2자리</label></div>
+                        <div><input class="card_info_input" id="card_passwd" type="text" maxlength="2"/></div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
                 <div><h2>약관 동의</h2></div>
                 <div style="margin-top:12px;">
                     <div class="check_box_wrap">
@@ -192,7 +245,7 @@
             </div>
 
             <div style="display: flex; justify-content: center;">
-                <button class="pay_btn" onclick="requestPay()">결제예약</button>
+                <button class="pay_btn">결제예약</button>
             </div>
         </div>
     </div>
@@ -205,10 +258,29 @@
 
         let payInfo = {
             type: null,
-            investAmount: null,
             rewardList: [],
-            totalAmount: null
+            totalAmount: null,
+            cardNumber: null,
+            expiry: null,
+            birth: null,
+            cardPasswd: null,
         };
+
+        $(".pay_btn").on("click", () => {
+            payInfo.cardNumber = $("#card_num_1").val() + "-" + $("#card_num_2").val() + "-" + $("#card_num_3").val() + "-" + $("#card_num_4").val();
+            payInfo.expiry = $("#card_expiry_year").val() + "-" + $("#card_expiry_month").val();
+            payInfo.birth = $("#card_birth").val();
+            payInfo.cardPasswd = $("#card_passwd").val();
+
+            $.ajax({
+                url: window.location.pathname,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payInfo),
+                success: result => alert("결제예약이 완료됐습니다"),
+                error: error => console.log(error)
+            });
+        });
 
         $("#invest_type_btn").on("click", function(){
             $(this).css("border", "1px solid #ff7e00")
@@ -233,8 +305,8 @@
         $(".next_btn").on("click", function() {
             if(payInfo.type === "invest"){
                 $("#funding_type").text("지분");
-                payInfo.investAmount = $("#invest_amount").val();
-                $("#funding_amount").text(payInfo.investAmount + "원");
+                payInfo.totalAmount = $("#invest_amount").val();
+                $("#funding_amount").text(payInfo.totalAmount + "원");
                 $(".invest_info_wrap").css("display", "block");
             }
             else if(payInfo.type === "reward"){
@@ -248,6 +320,7 @@
                     payInfo.rewardList.push(reward);
                 });
 
+                //결제 총 금액
                 for(let index=0; index < payInfo.rewardList.length; index++)
                     payInfo.totalAmount += payInfo.rewardList[index].amount * payInfo.rewardList[index].quantity;
 
