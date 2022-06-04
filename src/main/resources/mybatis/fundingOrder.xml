@@ -3,17 +3,17 @@
 
 <mapper namespace="fundingOrder">
     <insert id="addOrder" useGeneratedKeys="true" keyProperty="orderCode">
-        INSERT INTO funding_order(order_code, id, type, card_number, expiry, birth, card_passwd)
-        VALUES(null, #{id}, #{type}, #{cardNumber}, #{expiry}, #{birth}, #{cardPasswd})
+        INSERT INTO funding_order(order_code, funding_code, id, type, card_number, expiry, birth, card_passwd)
+        VALUES(null, #{fundingCode}, #{id}, #{type}, #{cardNumber}, #{expiry}, #{birth}, #{cardPasswd})
     </insert>
 
     <insert id="addRewardOrder">
-        INSERT INTO reward_order(order_code, reward_code, quantity, status)
-        VALUES (#{orderCode}, #{reward.rewardCode}, #{reward.quantity}, '상태')
+        INSERT INTO reward_order(order_code, reward_code, quantity, status_code)
+        VALUES (#{orderCode}, #{reward.rewardCode}, #{reward.quantity}, 10)
     </insert>
 
     <insert id="addInvestOrder">
-        INSERT INTO invest_order(order_code, funding_code, invest_amount, status)
-        VALUES (#{orderCode}, #{fundingCode}, #{totalAmount}, '상태')
+        INSERT INTO invest_order(order_code, invest_amount, status_code)
+        VALUES (#{orderCode}, #{totalAmount}, 10)
     </insert>
 </mapper>

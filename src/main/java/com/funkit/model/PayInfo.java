@@ -5,6 +5,7 @@ import java.util.List;
 public class PayInfo {
     private long orderCode;
     private long fundingCode;
+    private String id;
     private String type;
     private List<Reward> rewardList;
     private String totalAmount;
@@ -12,8 +13,6 @@ public class PayInfo {
     private String expiry;
     private String birth;
     private String cardPasswd;
-
-    private String id;
 
     public long getOrderCode() {
         return orderCode;
