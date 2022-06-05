@@ -61,6 +61,14 @@ public class RecipeDaoImpl implements RecipeDao{
                 sql.insert("ingredients.setRecipeIngredients",map);
             }
         }
+        if(recipe.getCookings() != null){
+            for(var cooking : recipe.getCookings()){
+                Map map = new HashMap();
+                map.put("recipeCode",recipe.getRecipeCode());
+                map.put("cooking",cooking);
+                sql.insert("cooking.setCooking",map);
+            }
+        }
     }
 
     @Override

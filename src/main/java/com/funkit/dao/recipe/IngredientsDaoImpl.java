@@ -11,8 +11,4 @@ public class IngredientsDaoImpl implements IngredientsDao{
     @Autowired
     SqlSession sql;
 
-    @Override
-    public void addIng(Ingredients ingredients) {
-        sql.insert("ingredients.add",ingredients);
-    }
 }

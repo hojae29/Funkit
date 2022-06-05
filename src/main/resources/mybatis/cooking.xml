@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cooking">
+    <insert id="setCooking">
+        INSERT INTO cooking(code,recipe_code, cooking_seq,cooking_process,file_name,size,location)
+        VALUES (NULL,#{recipeCode},#{cooking.cookingSeq},#{cooking.cookingProcess},#{cooking.fileName},#{cooking.size},#{cooking.location})
+    </insert>
+
+</mapper>

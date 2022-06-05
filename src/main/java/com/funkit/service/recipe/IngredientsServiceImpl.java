@@ -11,8 +11,4 @@ public class IngredientsServiceImpl implements IngredientsService{
     @Autowired
     IngredientsDao dao;
 
-    @Override
-    public void addIng(Ingredients ingredients) {
-        dao.addIng(ingredients);
-    }
 }

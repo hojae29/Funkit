@@ -3,7 +3,7 @@ package com.funkit.model.recipe;
 import org.w3c.dom.Text;
 
 public class Cooking {
-    private int recipeCode;
+    private int code;
     private int cookingSeq;
     private String cookingProcess;
 
@@ -19,13 +19,14 @@ public class Cooking {
         this.location = location;
     }
 
-    public int getRecipeCode() {
-        return recipeCode;
+    public int getCode() {
+        return code;
     }
 
-    public void setRecipeCode(int recipeCode) {
-        this.recipeCode = recipeCode;
+    public void setCode(int code) {
+        this.code = code;
     }
+
 
     public int getCookingSeq() {
         return cookingSeq;
@@ -70,7 +71,7 @@ public class Cooking {
     @Override
     public String toString() {
         return "Cooking{" +
-                "recipeCode=" + recipeCode +
+                "code=" + code +
                 ", cookingSeq=" + cookingSeq +
                 ", cookingProcess='" + cookingProcess + '\'' +
                 ", fileName='" + fileName + '\'' +

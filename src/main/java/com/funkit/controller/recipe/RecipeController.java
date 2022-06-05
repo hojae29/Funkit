@@ -96,8 +96,11 @@ public class RecipeController {
         List<Cooking> cookingList = new ArrayList<>();
         if(subImage != null){
             for(var indexSeq : cookingSeq){
+                System.out.println("seqNum:"+ seqNum);
                 for(var indexProcess : cookingProcess) {
+                    System.out.println("processNum:"+ processNum);
                     for (MultipartFile multipartFile : subImage) {
+                        System.out.println("imgNum:"+ imgNum);
                         if (seqNum == processNum && processNum == imgNum) {
                             String subName = multipartFile.getOriginalFilename();
                             long size = multipartFile.getSize();
@@ -117,6 +120,7 @@ public class RecipeController {
                         }
                         imgNum = imgNum+1;
                     }
+                    imgNum = 1;
                     processNum = processNum + 1;
                 }
 
@@ -124,6 +128,8 @@ public class RecipeController {
                 processNum = 1;
                 seqNum = seqNum +1;
             }
+            System.out.println(cookingList);
+            recipe.setCookings(cookingList);
         }
 
 
@@ -144,7 +150,6 @@ public class RecipeController {
                 for(var indexQua : ingreQua){
                     if (nameNum==quaNum) {
                         ingreList.add(new Ingredients(indexName, indexQua));
-                        System.out.println(ingreList);
                     }
                     quaNum = quaNum+1;
                 }
