@@ -172,19 +172,21 @@
                 </div>
             </div>
             <div class="contents_box">
-                <div class="funding_box">
-                    <div>
-                        <p>투자</p>
-                        <p>진행중</p>
+                <c:forEach var="order" items="${orderList}">
+                    <div class="funding_box">
+                        <div>
+                            <p>${order.type}</p>
+                            <p>${order.fundingStatus}</p>
+                        </div>
+                        <div>
+                            <p>${order.title}</p>
+                            <p>${order.corporateName}</p>
+                        </div>
+                        <div class="status_box">
+                            <p>${order.orderStatus}</p>
+                        </div>
                     </div>
-                    <div>
-                        <p>[7차펀딩] 스지와 고기를 합친 최고의 맛! 인생소뽈찜</p>
-                        <p>(주) 쿠나이츠</p>
-                    </div>
-                    <div class="status_box">
-                        <p>결제예약</p>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
     </div>

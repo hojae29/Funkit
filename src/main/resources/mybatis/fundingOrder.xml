@@ -16,4 +16,14 @@
         INSERT INTO invest_order(order_code, invest_amount, status_code)
         VALUES (#{orderCode}, #{totalAmount}, 10)
     </insert>
+
+    <select id="getOrderListById" resultType="Order">
+        SELECT distinct fo.order_code, TYPE, title, corporate_name, f.status AS funding_status, ro.status AS order_status
+        FROM funding_order fo, (SELECT f.funding_code, f.title, m.corporate_name, fs.status
+                                FROM funding f, member m, funding_status fs
+                                WHERE f.id = m.id AND f.status_code = fs.status_code) AS f, (SELECT ro.order_code, ros.status_code, STATUS
+                                                                                             FROM reward_order ro, reward_order_status ros
+                                                                                             WHERE ro.status_code = ros.status_code) AS ro
+        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND id=#{id};
+    </select>
 </mapper>

@@ -1,10 +1,12 @@
 package com.funkit.dao.funding;
 
+import com.funkit.model.Order;
 import com.funkit.model.PayInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -29,5 +31,10 @@ public class OrderDaoImpl implements OrderDao {
         }else if(payInfo.getType().equals("invest")){ //지분
             sql.insert("fundingOrder.addInvestOrder", payInfo);
         }
+    }
+
+    @Override
+    public List<Order> getOrderListById(String id) {
+        return sql.selectList("fundingOrder.getOrderListById", id);
     }
 }
