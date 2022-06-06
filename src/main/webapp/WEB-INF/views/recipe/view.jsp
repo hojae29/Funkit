@@ -38,20 +38,17 @@
                     </div>
                     <dvi id="position_bottom">
                         <div id="tag_area">
-                            <div id="tag_div">
-                                <div>
-                                    <ul id="tag_sty">
-                                        <c:forEach var="item" items="${recipe.tags}">
-                                            <li>${item.name}</li>
-                                        </c:forEach>
-                                    </ul>
-                                </div>
+                            <div>
+                                <img src="/resources/img/icon/tag_icon.svg">
                             </div>
                         </div>
                         <div id="sub_info">
                             <div id="time_area">
                                 <div>
                                     <img src="/resources/img/recipe/time.PNG">
+                                </div>
+                                <div>
+
                                 </div>
                                 <div id="time_txt">
                                     <div>

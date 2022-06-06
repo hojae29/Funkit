@@ -34,14 +34,11 @@
 
     </div>
     <div class="planning_container">
-        <div><p class="sub_title">이번 주 기획전</p></div>
-        <div class="card_box_container">
-            <div class="card_box"></div>
-            <div class="card_box"></div>
-            <div class="card_box"></div>
-            <div class="card_box"></div>
-            <div class="card_box"></div>
-            <div class="card_box"></div>
+        <div class="sub_banner">
+
+        </div>
+        <div class="sub_banner">
+
         </div>
     </div>
     <div class="tag_container">
@@ -64,14 +61,14 @@
                     </div>
                     <div style="display: flex;">
                         <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>
-    <%--                    <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>--%>
+                        <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>
                     </div>
                     <div class="funding_percentage">
-                        <p>361%</p>
+                        <p>by id</p>
                     </div>
                     <div class="amount_container">
-    <%--                    <p>D-${item.DDay}</p>--%>
-    <%--                    <p>${item.cmlAmount}원</p>--%>
+                        <p>찜</p>
+                        <p>조회수</p>
                     </div>
                 </div>
             </c:if>

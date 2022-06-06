@@ -21,6 +21,8 @@ a{
     height:450px;
     object-fit: cover;
     border-radius: 5px;
+    background-repeat: no-repeat;
+    background-size:cover;
 }
 #info_all{
     padding: 0px 50px 0px 50px;
@@ -88,10 +90,6 @@ a{
     justify-content: space-around;
     margin-bottom:10px;
 }
-#tag_sty{
-    height:30px;
-    display: flex;
-}
 #tag_sty li{
     height:25px;
     font-size: 14px;
@@ -101,9 +99,6 @@ a{
     border:1px solid #FF7E00;
     padding:0 7px 0 7px;
     cursor: pointer;
-}
-#tag_div{
-    display: flex;
 }
 #tag_area{
     margin-bottom:100px;
