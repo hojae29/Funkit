@@ -3,8 +3,8 @@
 
 <mapper namespace="funding">
     <insert id="makeFunding" useGeneratedKeys="true" keyProperty="fundingCode">
-        INSERT INTO funding(funding_code, id, start_date, exp_date, status_code)
-        VALUES(null, #{id}, NOW(), NOW(), 10);
+        INSERT INTO funding(funding_code, id, start_date, exp_date, delivery_date, status_code)
+        VALUES(null, #{id}, NOW(), NOW(), NOW(), 10);
     </insert>
     <update id="saveFunding">
         UPDATE funding

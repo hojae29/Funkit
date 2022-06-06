@@ -19,8 +19,8 @@
         <div class="title_container"><h1>펀키트</h1></div>
         <div>
             <ul id="menu_list_ul">
-                <li><a href="/mgr/funding/">회원관리</a></li>
-                <li><a href="">펀딩 승인 관리</a></li>
+                <li><a href="">회원관리</a></li>
+                <li><a href="/mgr/funding/">펀딩 관리</a></li>
                 <li><a href="">공지사항 관리</a></li>
             </ul>
         </div>
