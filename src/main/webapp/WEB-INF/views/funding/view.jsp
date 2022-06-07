@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div>
-                <h2>312명이 펀딩중</h2>
+                <h2>${userCount}명이 펀딩중</h2>
             </div>
             <div>
                 <a href="/funding/${funding.fundingCode}/order"><button type="button" id="funding_btn">펀딩하기</button></a>

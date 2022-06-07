@@ -112,6 +112,11 @@ public class FundingServiceImpl implements FundingService {
         fundingDao.fundingApprovalReq(fundingCode, status);
     }
 
+    @Override
+    public int getFundingUserCount(int fundingCode) {
+        return fundingDao.getFundingUserCount(fundingCode);
+    }
+
     public Image makeImage(MultipartFile file, String location){
         UUID uuid = UUID.randomUUID();
 

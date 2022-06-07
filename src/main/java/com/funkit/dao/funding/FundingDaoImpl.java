@@ -129,4 +129,9 @@ public class FundingDaoImpl implements FundingDao {
 
         sql.update("funding.updateFundingStatus", map);
     }
+
+    @Override
+    public int getFundingUserCount(int fundingCode) {
+        return sql.selectOne("funding.getFundingUserCount", fundingCode);
+    }
 }

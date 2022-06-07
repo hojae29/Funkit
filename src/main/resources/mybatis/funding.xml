@@ -74,6 +74,11 @@
         FROM funding
         WHERE id=#{id};
     </select>
+    <select id="getFundingUserCount" resultType="Integer">
+        SELECT COUNT(distinct id)
+        FROM funding_order
+        WHERE funding_code = #{fundingCode}
+    </select>
 
     <resultMap id="fundingResultMap" type="Funding">
         <id property="fundingCode" column="funding_code"/>
