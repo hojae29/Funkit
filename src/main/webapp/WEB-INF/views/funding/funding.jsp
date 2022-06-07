@@ -36,12 +36,12 @@
         <div class="planning_container">
             <div><p class="sub_title">이번 주 기획전</p></div>
             <div class="card_box_container">
-                <div class="card_box"></div>
-                <div class="card_box"></div>
-                <div class="card_box"></div>
-                <div class="card_box"></div>
-                <div class="card_box"></div>
-                <div class="card_box"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/1.png')"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/2.png')"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/3.png')"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/4.png')"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/5.png')"></div>
+                <div class="card_box" style="background-image: url('/resources/img/funding_banner/6.png')"></div>
             </div>
         </div>
         <div class="tag_container">

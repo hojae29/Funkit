@@ -11,10 +11,10 @@
 <html>
 <head>
     <title>펀키트</title>
-    <link rel="stylesheet" href="/resources/css/mypage/funding/add.css"/>
+    <link rel="stylesheet" href="/resources/css/funding/add.css"/>
 </head>
 <body>
-    <jsp:include page="../../header.jsp"/>
+    <jsp:include page="../header.jsp"/>
     <div></div>
     <div class="container">
         <div class="top_box">

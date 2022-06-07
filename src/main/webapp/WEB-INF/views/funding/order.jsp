@@ -289,7 +289,7 @@
                 .find(".type_title").css("color", "black");
             $(".invest_input_container").css("display", "block");
             $(".reward_input_container").css("display", "none");
-            payInfo.type = "invest";
+            payInfo.type = "지분";
         });
 
         $("#reward_type_btn").on("click", function(){
@@ -299,18 +299,18 @@
                 .find(".type_title").css("color", "black");
             $(".reward_input_container").css("display", "block");
             $(".invest_input_container").css("display", "none");
-            payInfo.type = "reward";
+            payInfo.type = "리워드";
         });
 
         $(".next_btn").on("click", function() {
-            if(payInfo.type === "invest"){
-                $("#funding_type").text("지분");
+            if(payInfo.type === "지분"){
+                $("#funding_type").text(payInfo.type);
                 payInfo.totalAmount = $("#invest_amount").val();
                 $("#funding_amount").text(payInfo.totalAmount + "원");
                 $(".invest_info_wrap").css("display", "block");
             }
-            else if(payInfo.type === "reward"){
-                $("#funding_type").text("리워드");
+            else if(payInfo.type === "리워드"){
+                $("#funding_type").text(payInfo.type);
                 $(".reward_checkbox:checked").each(function(index, item){
                     let reward = {
                         rewardCode: $(item).val(),

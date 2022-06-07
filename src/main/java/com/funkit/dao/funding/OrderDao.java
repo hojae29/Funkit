@@ -9,4 +9,10 @@ public interface OrderDao {
     void addOrder(PayInfo payInfo);
 
     List<Order> getOrderListById(String id);
+
+    Order getOrderByOrderCode(int orderCode);
+
+    void changeOrderStatus(int orderCode, int statusCode);
+
+    int getOrderCount(String id);
 }

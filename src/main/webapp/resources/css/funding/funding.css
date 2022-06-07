@@ -71,6 +71,7 @@
     height: 150px;
     background-color: #cccccc;
     border-radius: 10px;
+    background-size: cover;
 }
 
 .card_box_container{

@@ -3,13 +3,10 @@ package com.funkit.controller.mypage.individual;
 import com.funkit.model.Member;
 import com.funkit.model.Order;
 import com.funkit.service.funding.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,10 +19,18 @@ public class IndividualController {
         this.orderService = orderService;
     }
 
-    @RequestMapping("/funding")
+    @GetMapping("")
     public String myPage(@SessionAttribute Member member, Model model){
-        List<Order> orderList = orderService.getOrderListById(member.getId());
-        model.addAttribute("orderList", orderList);
+        int count = orderService.getOrderCount(member.getId());
+        model.addAttribute("orderCount", count);
         return "/mypage/individual";
     }
+
+    @GetMapping("/funding")
+    public String myFunding(@SessionAttribute Member member, Model model){
+        List<Order> orderList = orderService.getOrderListById(member.getId());
+        model.addAttribute("orderList", orderList);
+        return "/mypage/myFunding";
+    }
+
 }

@@ -61,7 +61,7 @@ public class CompanyFundingController {
         model.addAttribute("funding", funding);
         model.addAttribute("tagList", tagList);
 
-        return "/mypage/funding/add";
+        return "funding/add";
     }
 
     @PostMapping("/{fundingCode}")

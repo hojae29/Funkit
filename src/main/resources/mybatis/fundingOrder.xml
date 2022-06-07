@@ -3,8 +3,8 @@
 
 <mapper namespace="fundingOrder">
     <insert id="addOrder" useGeneratedKeys="true" keyProperty="orderCode">
-        INSERT INTO funding_order(order_code, funding_code, id, type, card_number, expiry, birth, card_passwd)
-        VALUES(null, #{fundingCode}, #{id}, #{type}, #{cardNumber}, #{expiry}, #{birth}, #{cardPasswd})
+        INSERT INTO funding_order(order_code, funding_code, id, type, card_number, expiry, birth, card_passwd, pay_date)
+        VALUES(null, #{fundingCode}, #{id}, #{type}, #{cardNumber}, #{expiry}, #{birth}, #{cardPasswd}, NOW())
     </insert>
 
     <insert id="addRewardOrder">
@@ -25,5 +25,33 @@
                                                                                              FROM reward_order ro, reward_order_status ros
                                                                                              WHERE ro.status_code = ros.status_code) AS ro
         WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND id=#{id};
+    </select>
+
+    <select id="getOrderByOrderCode" resultType="Order">
+        SELECT distinct fo.order_code, TYPE, title, corporate_name, f.status AS funding_status, ro.status AS order_status, fo.pay_date
+        FROM funding_order fo, (SELECT f.funding_code, f.title, m.corporate_name, fs.status
+                                FROM funding f, member m, funding_status fs
+                                WHERE f.id = m.id AND f.status_code = fs.status_code) AS f, (SELECT ro.order_code, ros.status_code, STATUS
+                                                                                             FROM reward_order ro, reward_order_status ros
+                                                                                             WHERE ro.status_code = ros.status_code) AS ro
+        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND fo.order_code=#{orderCode};
+    </select>
+
+    <update id="changeRewardOrderStatus">
+        UPDATE reward_order
+        SET status_code = #{statusCode}
+        WHERE order_code = #{orderCode}
+    </update>
+
+    <update id="changeInvestOrderStatus">
+        UPDATE invest_order
+        SET status_code = #{statusCode}
+        WHERE order_code = #{orderCode}
+    </update>
+
+    <select id="getOrderCount" resultType="Integer">
+        SELECT COUNT(*)
+        FROM funding_order
+        WHERE id = #{id};
     </select>
 </mapper>

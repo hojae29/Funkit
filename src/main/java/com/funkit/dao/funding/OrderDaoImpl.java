@@ -37,4 +37,28 @@ public class OrderDaoImpl implements OrderDao {
     public List<Order> getOrderListById(String id) {
         return sql.selectList("fundingOrder.getOrderListById", id);
     }
+
+    @Override
+    public Order getOrderByOrderCode(int orderCode) {
+        return sql.selectOne("fundingOrder.getOrderByOrderCode", orderCode);
+    }
+
+    @Override
+    public void changeOrderStatus(int orderCode, int statusCode) {
+        Order order = sql.selectOne("fundingOrder.getOrderByOrderCode", orderCode);
+        Map map = new HashMap();
+        map.put("orderCode", orderCode);
+        map.put("statusCode", statusCode);
+        System.out.println(order.getType());
+        if(order.getType().equals("리워드")){
+            sql.update("fundingOrder.changeRewardOrderStatus", map);
+        }else if(order.getType().equals("지분")){
+            sql.update("fundingOrder.changeInvestOrderStatus", map);
+        }
+    }
+
+    @Override
+    public int getOrderCount(String id) {
+        return sql.selectOne("fundingOrder.getOrderCount", id);
+    }
 }

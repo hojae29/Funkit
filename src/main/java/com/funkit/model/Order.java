@@ -1,5 +1,9 @@
 package com.funkit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
+
 public class Order {
     private long orderCode;
     private String id;
@@ -8,6 +12,16 @@ public class Order {
     private String corporateName;
     private String fundingStatus;
     private String orderStatus;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+    private Date payDate;
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
+    }
 
     public long getOrderCode() {
         return orderCode;

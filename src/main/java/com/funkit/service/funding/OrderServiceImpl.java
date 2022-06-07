@@ -31,4 +31,21 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> getOrderListById(String id) {
         return orderDao.getOrderListById(id);
     }
+
+    @Override
+    public Order getOrderByOrderCode(int orderCode) {
+
+        return orderDao.getOrderByOrderCode(orderCode);
+    }
+
+    @Override
+    public ResponseEntity changeOrderStatus(int orderCode, int statusCode) {
+        orderDao.changeOrderStatus(orderCode, statusCode);
+        return new JsonResponse<>(HttpStatus.OK, "success").toResponseEntity();
+    }
+
+    @Override
+    public int getOrderCount(String id) {
+        return orderDao.getOrderCount(id);
+    }
 }
