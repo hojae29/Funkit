@@ -13,10 +13,9 @@ footer{
 }
 
 .logo_box{
-    display: flex;;
-    justify-content: center;
+    display: flex;
     align-items: center;
-    width: 320px;;
+    width: 320px;
     height:100%;
 }
 .info_box{

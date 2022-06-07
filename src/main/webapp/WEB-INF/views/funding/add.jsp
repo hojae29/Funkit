@@ -11,10 +11,10 @@
 <html>
 <head>
     <title>펀키트</title>
-    <link rel="stylesheet" href="/resources/css/mypage/funding/add.css"/>
+    <link rel="stylesheet" href="/resources/css/funding/add.css"/>
 </head>
 <body>
-    <jsp:include page="../../header.jsp"/>
+    <jsp:include page="../header.jsp"/>
     <div></div>
     <div class="container">
         <div class="top_box">
@@ -51,10 +51,23 @@
                                 <div><input class="text_input" name="targetAmount" type="text" value="${funding.targetAmount}"></div>
                             </div>
                             <div>
+                                <div><label>수익분배율</label></div>
+                                <div><p>지분방식으로 투자한 회원에게 돌아갈 수익률을 정해주세요</p></div>
+                                <div><input class="text_input" name="distribution" type="text" value="${funding.distribution}"></div>
+                            </div>
+                            <div>
+                                <div><label>리워드 발송일</label></div>
+                                <div><p>리워드 발송 예정일을 적어주세요</p></div>
+                                <div>
+                                    <input class="date_input" name="deliveryDate" type="date" value="<fmt:formatDate value="${funding.deliveryDate}" pattern="yyyy-MM-dd"/>">
+                                </div>
+                            </div>
+                            <div>
                                 <div><label>진행기간</label></div>
                                 <div><p>프로젝트 진행기간을 설정해주세요</p></div>
                                 <div>
                                     <input class="date_input" name="startDate" type="date" value="<fmt:formatDate value="${funding.startDate}" pattern="yyyy-MM-dd"/>">
+                                     ~
                                     <input class="date_input" name="expDate" type="date" value="<fmt:formatDate value="${funding.expDate}" pattern="yyyy-MM-dd"/>">
                                 </div>
                             </div>

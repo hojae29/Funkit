@@ -27,16 +27,33 @@
     padding: 8px 0px;
 }
 
-.text_box_wrap2{
+.invest_info_wrap{
     background-color: #efefef;
     border-bottom: 1px solid #cccccc;
     padding: 8px 0px;
+    display: none;
+}
+
+.reward_info_wrap{
+    background-color: #efefef;
+    padding: 8px 0px;
+    border-bottom: 1px solid #cccccc;
+    display: none;
 }
 
 .text_box_wrap3{
     background-color: #efefef;
     padding: 8px 0px;
-    margin-top: 12px;
+    margin-top: 8px;
+}
+
+.card_info_container{
+    background-color: #efefef;
+    padding: 20px;
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .check_box_wrap{
@@ -79,4 +96,13 @@
     font-size: 16px;
     font-weight: 400;
     color: white;
+}
+
+.card_info_input{
+    width: 100px;
+    height: 30px;
+    font-size: 14px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
 }

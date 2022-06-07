@@ -23,6 +23,10 @@ public class Funding<T> {
     private Long targetAmount;
     private Long cmlAmount;
 
+    private int distribution;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+    private Date deliveryDate;
+
     private T mainImage;
     private List<T> infoImage;
     private List<Reward> reward;
@@ -130,6 +134,23 @@ public class Funding<T> {
         return startDate;
     }
 
+    public int getDistribution() {
+        return distribution;
+    }
+
+    public void setDistribution(int distribution) {
+        this.distribution = distribution;
+    }
+
+    public Date getDeliveryDate() {
+        return deliveryDate;
+    }
+
+    public void setDeliveryDate(String deliveryDate) throws ParseException {
+        var formatter = new SimpleDateFormat("yyyy-MM-dd");
+        this.deliveryDate = formatter.parse(deliveryDate);;
+    }
+
     public void setStartDate(String startDate) throws ParseException {
         var formatter = new SimpleDateFormat("yyyy-MM-dd");
         this.startDate = formatter.parse(startDate);
@@ -168,6 +189,8 @@ public class Funding<T> {
                 ", expDate=" + expDate +
                 ", targetAmount=" + targetAmount +
                 ", cmlAmount=" + cmlAmount +
+                ", distribution=" + distribution +
+                ", deliveryDate=" + deliveryDate +
                 ", mainImage=" + mainImage +
                 ", infoImage=" + infoImage +
                 ", reward=" + reward +

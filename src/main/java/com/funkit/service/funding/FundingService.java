@@ -2,7 +2,6 @@ package com.funkit.service.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
-import com.funkit.model.JsonResponse;
 import com.funkit.util.Pager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;

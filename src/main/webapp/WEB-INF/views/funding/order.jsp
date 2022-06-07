@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%--
   Created by IntelliJ IDEA.
   User: Student
@@ -102,7 +103,7 @@
                         <div style="display: flex;align-items: center;">
                             <input class="reward_checkbox" type="checkbox" value="${reward.rewardCode}" onclick='toggleNumBox(this)'>
                             <div>
-                                <p>${reward.amount}원</p>
+                                <p class="reward_amount">${reward.amount}</p>
                                 <p>${reward.title}</p>
                                 <p>${reward.info}</p>
                             </div>
@@ -127,21 +128,27 @@
                         </div>
                         <div class="text_box">
                             <p>펀딩 금액</p>
-                            <p>120,000원</p>
+                            <p id="funding_amount"></p>
                         </div>
                         <div class="text_box">
                             <p>배송비</p>
                             <p>0원</p>
                         </div>
                     </div>
-                    <div class="text_box_wrap2">
+                    <div class="invest_info_wrap">
                         <div class="text_box">
                             <p>수익 지급일</p>
-                            <p>2022.07.14</p>
+                            <p><fmt:formatDate value="${funding.deliveryDate}" pattern="yyyy-MM-dd"/></p>
                         </div>
                         <div class="text_box">
                             <p>수익 분배율</p>
-                            <p>30%</p>
+                            <p>${funding.distribution}%</p>
+                        </div>
+                    </div>
+                    <div class="reward_info_wrap">
+                        <div class="text_box">
+                            <p>리워드 발송일</p>
+                            <p><fmt:formatDate value="${funding.deliveryDate}" pattern="yyyy-MM-dd"/></p>
                         </div>
                     </div>
                 </div>
@@ -161,6 +168,59 @@
                     <div class="text_box">
                         <p>이메일</p>
                         <p>gkqthd6386@naver.com</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <div><h2>카드 정보입력</h2></div>
+                <div class="card_info_container">
+                    <div>
+                        <div><label>카드번호</label></div>
+                        <div>
+                            <input class="card_info_input" id="card_num_1" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_2" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_3" type="text" maxlength="4"/>
+                            <input class="card_info_input" id="card_num_4" type="text" maxlength="4"/>
+                        </div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between;">
+                        <div>
+                            <div><label>유효기간</label></div>
+                            <div>
+                                <select class="card_info_input" id="card_expiry_year">
+                                    <option value="2022">2022년</option>
+                                    <option value="2023">2023년</option>
+                                    <option value="2024">2024년</option>
+                                    <option value="2025">2025년</option>
+                                    <option value="2026">2026년</option>
+                                    <option value="2027">2027년</option>
+                                    <option value="2028">2028년</option>
+                                </select>
+                                <select class="card_info_input" id="card_expiry_month">
+                                    <option value="01">1월</option>
+                                    <option value="02">2월</option>
+                                    <option value="03">3월</option>
+                                    <option value="04">4월</option>
+                                    <option value="05">5월</option>
+                                    <option value="06">6월</option>
+                                    <option value="07">7월</option>
+                                    <option value="08">8월</option>
+                                    <option value="09">9월</option>
+                                    <option value="10">10월</option>
+                                    <option value="11">11월</option>
+                                    <option value="12">12월</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <div><label>생년월일</label></div>
+                            <div><input class="card_info_input" id="card_birth" type="text" maxlength="6"/></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div><label>카드 비밀번호 앞 2자리</label></div>
+                        <div><input class="card_info_input" id="card_passwd" type="text" maxlength="2"/></div>
                     </div>
                 </div>
             </div>
@@ -198,9 +258,29 @@
 
         let payInfo = {
             type: null,
-            investAmount: null,
-            rewardList: []
+            rewardList: [],
+            totalAmount: null,
+            cardNumber: null,
+            expiry: null,
+            birth: null,
+            cardPasswd: null,
         };
+
+        $(".pay_btn").on("click", () => {
+            payInfo.cardNumber = $("#card_num_1").val() + "-" + $("#card_num_2").val() + "-" + $("#card_num_3").val() + "-" + $("#card_num_4").val();
+            payInfo.expiry = $("#card_expiry_year").val() + "-" + $("#card_expiry_month").val();
+            payInfo.birth = $("#card_birth").val();
+            payInfo.cardPasswd = $("#card_passwd").val();
+
+            $.ajax({
+                url: window.location.pathname,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(payInfo),
+                success: result => alert("결제예약이 완료됐습니다"),
+                error: error => console.log(error)
+            });
+        });
 
         $("#invest_type_btn").on("click", function(){
             $(this).css("border", "1px solid #ff7e00")
@@ -209,7 +289,7 @@
                 .find(".type_title").css("color", "black");
             $(".invest_input_container").css("display", "block");
             $(".reward_input_container").css("display", "none");
-            payInfo.type = "invest";
+            payInfo.type = "지분";
         });
 
         $("#reward_type_btn").on("click", function(){
@@ -219,21 +299,36 @@
                 .find(".type_title").css("color", "black");
             $(".reward_input_container").css("display", "block");
             $(".invest_input_container").css("display", "none");
-            payInfo.type = "reward";
+            payInfo.type = "리워드";
         });
 
         $(".next_btn").on("click", function() {
-            if(payInfo.type === "invest")
-                payInfo.investAmount = $("#invest_amount").val();
-            else if(payInfo.type === "reward"){
+            if(payInfo.type === "지분"){
+                $("#funding_type").text(payInfo.type);
+                payInfo.totalAmount = $("#invest_amount").val();
+                $("#funding_amount").text(payInfo.totalAmount + "원");
+                $(".invest_info_wrap").css("display", "block");
+            }
+            else if(payInfo.type === "리워드"){
+                $("#funding_type").text(payInfo.type);
                 $(".reward_checkbox:checked").each(function(index, item){
                     let reward = {
                         rewardCode: $(item).val(),
-                        quantity: $(item).closest(".reward_box").find(".reward_quantity").val()
+                        quantity: $(item).closest(".reward_box").find(".reward_quantity").val(),
+                        amount: Number($(item).closest(".reward_box").find(".reward_amount").text())
                     }
                     payInfo.rewardList.push(reward);
                 });
+
+                //결제 총 금액
+                for(let index=0; index < payInfo.rewardList.length; index++)
+                    payInfo.totalAmount += payInfo.rewardList[index].amount * payInfo.rewardList[index].quantity;
+
+                $("#funding_amount").text(payInfo.totalAmount + "원");
+
+                $(".reward_info_wrap").css("display", "block");
             }
+
             $("#step2_container").css("display", "block");
             $("#step1_container").css("display", "none");
             $(".step_box").eq(0).css("border-bottom", "3px solid white");

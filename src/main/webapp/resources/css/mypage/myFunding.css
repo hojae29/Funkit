@@ -1,0 +1,161 @@
+.mypage_top{
+    width: 100%;
+    height: 230px;
+    background: #efefef;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 60px;
+
+}
+.container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.mypage_top_content_box{
+    width: 780px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.profile_img_box{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: skyblue;
+    margin-right: 16px;
+}
+.profile_box{
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+.menu_box a{
+    font-size: 14px;
+    color: #888888;
+    text-decoration: none;
+}
+.menu_box a:nth-child(2){
+    margin-left: 16px;
+}
+
+.mypage_bottom{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mypage_bottom_container {
+    width: 780px;
+}
+
+.title_box{
+    display: flex;
+    align-items: center;
+}
+
+.title_box h1{
+    color: #ff7e00;
+}
+
+.menu_box{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.menu_box button{
+    color: #888888;
+    font-size: 16px;
+    padding: 8px 16px;
+    border: none;
+    background: none;
+    margin-right: 10px;
+}
+
+.menu_box button:nth-child(1){
+    color: black;
+    border-bottom: 2px solid #888888;
+}
+
+.contents_box{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.funding_box{
+    width: 100%;
+    height: 120px;
+    border: 1px solid #E2E2E2;
+    padding: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.funding_box > div:nth-child(1) > p:nth-child(1){
+    width: 80px;
+    color: #53A3FF;
+}
+
+.funding_box > div:nth-child(1) > p{
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.funding_box > div:nth-child(1){
+    display: flex;
+    margin-bottom: 4px;
+}
+
+.funding_box > div:nth-child(2) > p:nth-child(1){
+    font-size: 18px;
+}
+
+.funding_box > div:nth-child(2) > p:nth-child(2){
+    font-size: 14px;
+    color: #888888;
+}
+
+.status_box{
+    position: absolute;
+    right: 20px;
+    top: 40%;
+    font-size: 18px;
+}
+
+.modal_content {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    gap: 4px;
+    width: 450px;
+}
+
+.modal_content > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.modal_info_box{
+    font-size: 14px;
+    color: #888888;
+}
+
+#modal_title{
+    font-weight: 500;
+    font-size: 16px;
+}
+
+#order_cancel_btn{
+    padding: 4px 6px;
+    background: none;
+    border: 1px solid black;
+    margin-top: 10px;
+}
+
+#modal_order_type{
+    color: #53A3FF;
+}

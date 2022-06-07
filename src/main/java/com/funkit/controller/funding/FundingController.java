@@ -1,18 +1,15 @@
 package com.funkit.controller.funding;
 
-import com.funkit.exception.CustomException;
-import com.funkit.exception.ErrorCode;
-import com.funkit.model.Funding;
-import com.funkit.model.Image;
-import com.funkit.model.PayInfo;
-import com.funkit.model.Tag;
+import com.funkit.model.*;
 import com.funkit.service.TagService;
 import com.funkit.service.funding.FundingService;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.funkit.service.funding.OrderService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,10 +18,12 @@ public class FundingController {
 
     final FundingService fundingService;
     final TagService tagService;
+    final OrderService orderService;
 
-    public FundingController(FundingService fundingService, TagService tagService) {
+    public FundingController(FundingService fundingService, TagService tagService, OrderService orderService) {
         this.fundingService = fundingService;
         this.tagService = tagService;
+        this.orderService = orderService;
     }
 
     @RequestMapping("")
@@ -53,5 +52,15 @@ public class FundingController {
         model.addAttribute("funding", funding);
 
         return "/funding/order";
+    }
+
+    @ResponseBody
+    @PostMapping("/{fundingCode}/order")
+    public ResponseEntity addOrder(@PathVariable int fundingCode, @RequestBody PayInfo payInfo, HttpSession session){
+        Member member = (Member) session.getAttribute("member");
+        payInfo.setId(member.getId());
+        payInfo.setFundingCode(fundingCode);
+
+        return orderService.addOrder(payInfo);
     }
 }
