@@ -75,7 +75,7 @@
                     </div>
                     <div class="amount_container">
                         <p>D-${item.DDay}</p>
-                        <p>${item.cmlAmount}원</p>
+                        <p><fmt:formatNumber value="${item.cmlAmount}" pattern="#,###"/>원</p>
                     </div>
                 </div>
             </c:forEach>
