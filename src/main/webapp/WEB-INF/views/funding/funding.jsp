@@ -71,11 +71,11 @@
                         <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>
                     </div>
                     <div class="funding_percentage">
-                        <p>361%</p>
+                        <p>${item.percentage}%</p>
                     </div>
                     <div class="amount_container">
                         <p>D-${item.DDay}</p>
-                        <p>${item.cmlAmount}원</p>
+                        <p><fmt:formatNumber value="${item.cmlAmount}" pattern="#,###"/>원</p>
                     </div>
                 </div>
             </c:forEach>

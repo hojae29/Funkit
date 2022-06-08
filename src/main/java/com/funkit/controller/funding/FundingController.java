@@ -41,12 +41,15 @@ public class FundingController {
     @RequestMapping("/{fundingCode}")
     public String moveFundingPage(@PathVariable int fundingCode, Model model){
         Funding<Image> funding = fundingService.getFundingByFundingCode(fundingCode);
+        int userCount = fundingService.getFundingUserCount(fundingCode);
+
         model.addAttribute("funding", funding);
+        model.addAttribute("userCount", userCount);
         return "/funding/view";
     }
 
     @GetMapping("/{fundingCode}/order")
-    public String moveStepOnePage(@PathVariable int fundingCode, Model model){
+    public String moveOrderPage(@PathVariable int fundingCode, Model model){
 
         var funding = fundingService.getFundingByFundingCode(fundingCode);
         model.addAttribute("funding", funding);

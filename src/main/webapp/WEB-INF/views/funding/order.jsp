@@ -74,7 +74,7 @@
                             <div><p class="fudning_info_text">${funding.introduction}</p></div>
                         </div>
                         <div>
-                            <div><h2 class="funding_percentage">323%</h2></div>
+                            <div><h2 class="funding_percentage">${funding.percentage}%</h2></div>
                             <div class="funding_last_info">
                                 <p>D-${funding.DDay}</p>
                                 <P>${funding.cmlAmount}원</P>

@@ -52,11 +52,11 @@
             </div>
             <div>
                 <p class="info_label">달성률</p>
-                <h1 class="funding_percentage">321%</h1>
+                <h1 class="funding_percentage">${funding.percentage}%</h1>
             </div>
             <div>
                 <p class="info_label">누적 금액</p>
-                <h2>2,409,200원</h2>
+                <h2><fmt:formatNumber value="${funding.cmlAmount}" pattern="#,###"/>원</h2>
             </div>
             <div>
                 <p class="info_label">남은기간</p>
@@ -66,7 +66,7 @@
                 </div>
             </div>
             <div>
-                <h2>312명이 펀딩중</h2>
+                <h2>${userCount}명이 펀딩중</h2>
             </div>
             <div>
                 <a href="/funding/${funding.fundingCode}/order"><button type="button" id="funding_btn">펀딩하기</button></a>

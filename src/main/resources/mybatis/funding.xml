@@ -52,13 +52,28 @@
     </delete>
 
     <select id="getFundingList" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, cml_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name
-        FROM funding f, funding_main_image fmi, funding_tag ft, tag t
-        WHERE f.funding_code = fmi.funding_code AND f.funding_code = ft.funding_code AND ft.tag_code = t.tag_code AND status_code = 40
-        ORDER BY funding_code DESC;
+        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name, s.cml_amount, s.percentage
+        FROM funding f,
+            funding_main_image fmi,
+            funding_tag ft,
+            tag t,
+            (SELECT r.funding_code,
+            ifnull(sum(ro.quantity * r.amount), 0) as cml_amount,
+            ifnull(floor(sum(ro.quantity * r.amount) / f.target_amount * 100), 0) AS percentage
+            FROM reward_order ro, reward r, funding f
+            WHERE ro.reward_code = r.reward_code AND
+            r.funding_code = f.funding_code AND
+            ro.status_code != 50
+            GROUP BY r.funding_code) s
+        WHERE f.funding_code = fmi.funding_code AND
+            f.funding_code = ft.funding_code AND
+            ft.tag_code = t.tag_code AND
+            status_code = 40 AND
+            s.funding_code = f.funding_code
+        ORDER BY f.funding_code DESC;
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, status, title, start_date, exp_date, target_amount, cml_amount, introduction, code, name as file_name, size, location
+        SELECT f.funding_code, id, status, title, start_date, exp_date, target_amount, introduction, code, name as file_name, size, location
         FROM funding f LEFT OUTER JOIN funding_main_image mi ON f.funding_code = mi.funding_code, funding_status s
         WHERE f.status_code = s.status_code AND id=#{id}
         ORDER BY funding_code DESC
@@ -74,6 +89,24 @@
         FROM funding
         WHERE id=#{id};
     </select>
+    <!--펀딩중인 유저수-->
+    <select id="getFundingUserCount" resultType="Integer">
+        SELECT COUNT(distinct id)
+        FROM funding_order fo, reward_order ro
+        WHERE fo.order_code = ro.order_code AND ro.status_code != 50 AND funding_code = #{fundingCode}
+    </select>
+    <!--퍼센트-->
+    <select id="getFundingPercentage" resultType="Integer">
+        SELECT IFNULL(FLOOR(SUM(ro.quantity * r.amount) / f.target_amount * 100), 0)
+        FROM reward_order ro, reward r, funding f
+        WHERE ro.reward_code = r.reward_code AND r.funding_code = f.funding_code AND r.funding_code = #{fundingCode} AND ro.status_code != 50;
+    </select>
+    <!--누적금액-->
+    <select id="getFundingCmlAmount" resultType="Long">
+        SELECT IFNULL(SUM(ro.quantity * r.amount), 0)
+        FROM reward_order ro, reward r, funding f
+        WHERE ro.reward_code = r.reward_code AND r.funding_code = f.funding_code AND r.funding_code = #{fundingCode} AND ro.status_code != 50;
+    </select>
 
     <resultMap id="fundingResultMap" type="Funding">
         <id property="fundingCode" column="funding_code"/>
@@ -83,8 +116,9 @@
         <result property="startDate" column="start_date"/>
         <result property="expDate" column="exp_date"/>
         <result property="targetAmount" column="target_amount"/>
-        <result property="cmlAmount" column="aml_amount"/>
         <result property="introduction" column="introduction"/>
+        <result property="cmlAmount" column="cml_amount"/>
+        <result property="percentage" column="percentage"/>
         <association property="mainImage"  javaType="Image" >
             <id property="code" column="code" />
             <result property="name" column="file_name"/>

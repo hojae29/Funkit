@@ -50,11 +50,15 @@ public class FundingDaoImpl implements FundingDao {
         List<Image> infoImages = sql.selectList("funding.getInfoImageList", fundingCode);
         List<Reward> rewards = sql.selectList("reward.getRewardList", fundingCode);
         List<Tag> tagList = sql.selectList("tag.getTagListByFundingCode", fundingCode);
+        long cmlAmount = sql.selectOne("funding.getFundingCmlAmount", fundingCode);
+        int percentage = sql.selectOne("funding.getFundingPercentage", fundingCode);
 
         funding.setMainImage(mainImage);
         funding.setInfoImage(infoImages);
         funding.setReward(rewards);
         funding.setTags(tagList);
+        funding.setCmlAmount(cmlAmount);
+        funding.setPercentage(percentage);
 
         return funding;
     }
@@ -129,4 +133,10 @@ public class FundingDaoImpl implements FundingDao {
 
         sql.update("funding.updateFundingStatus", map);
     }
+
+    @Override
+    public int getFundingUserCount(int fundingCode) {
+        return sql.selectOne("funding.getFundingUserCount", fundingCode);
+    }
+
 }

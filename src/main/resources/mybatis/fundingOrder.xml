@@ -24,7 +24,8 @@
                                 WHERE f.id = m.id AND f.status_code = fs.status_code) AS f, (SELECT ro.order_code, ros.status_code, STATUS
                                                                                              FROM reward_order ro, reward_order_status ros
                                                                                              WHERE ro.status_code = ros.status_code) AS ro
-        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND id=#{id};
+        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND id=#{id}
+        ORDER BY fo.order_code DESC
     </select>
 
     <select id="getOrderByOrderCode" resultType="Order">
@@ -34,7 +35,7 @@
                                 WHERE f.id = m.id AND f.status_code = fs.status_code) AS f, (SELECT ro.order_code, ros.status_code, STATUS
                                                                                              FROM reward_order ro, reward_order_status ros
                                                                                              WHERE ro.status_code = ros.status_code) AS ro
-        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND fo.order_code=#{orderCode};
+        WHERE fo.order_code = ro.order_code AND f.funding_code = fo.funding_code AND fo.order_code=#{orderCode}
     </select>
 
     <update id="changeRewardOrderStatus">

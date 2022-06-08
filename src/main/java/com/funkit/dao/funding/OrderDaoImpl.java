@@ -21,14 +21,14 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public void addOrder(PayInfo payInfo) {
         sql.insert("fundingOrder.addOrder", payInfo);
-        if(payInfo.getType().equals("reward")){ //리워드
+        if(payInfo.getType().equals("리워드")){ //리워드
             for(var reward : payInfo.getRewardList()){
                 Map map = new HashMap();
                 map.put("orderCode", payInfo.getOrderCode());
                 map.put("reward", reward);
                 sql.insert("fundingOrder.addRewardOrder", map);
             }
-        }else if(payInfo.getType().equals("invest")){ //지분
+        }else if(payInfo.getType().equals("지분")){ //지분
             sql.insert("fundingOrder.addInvestOrder", payInfo);
         }
     }
