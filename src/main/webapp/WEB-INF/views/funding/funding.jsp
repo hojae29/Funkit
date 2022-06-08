@@ -55,7 +55,7 @@
             </div>
             <div class="tag_box_wrap">
                 <c:forEach var="tag" items="${tagList}">
-                    <div class="tag_box">${tag.name}</div>
+                    <div class="tag_box">#${tag.name}</div>
                 </c:forEach>
             </div>
         </div>

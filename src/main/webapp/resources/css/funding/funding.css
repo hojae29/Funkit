@@ -167,20 +167,24 @@
 }
 
 .tag_box{
-    color: #ff7e00;
-    border: 1px solid #ff7e00;
-    padding: 2px 8px;
-    border-radius: 5px;
+    color: #888888;
+    padding: 4px 10px;
     font-weight: 500;
     font-size: 14px;
     cursor: pointer;
+    border-bottom: 1px solid #888888;
+}
+
+.tag_box:hover{
+    background-color: black;
+    color:white;
 }
 
 .tag_box_wrap{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 18px;
 }
 
 .title_img{
