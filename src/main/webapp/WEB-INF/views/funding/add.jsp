@@ -144,7 +144,7 @@
                             <div>
                                 <div><label>스토리 작성</label></div>
                                 <div><p>프로젝트의 스토리를 적어주세요</p></div>
-                                <div id="editor"></div>
+                                <textarea id="content"></textarea>
                             </div>
                         </div>
                     </form>
@@ -223,5 +223,24 @@
         </div>
     </div>
     <script src="/resources/js/mypage/funding/add.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <script>
+        $('#content').summernote({
+            placeholder: '내용을 입력해주세요',
+            lang: "ko-KR",
+            height: 450,
+            tabsize: 2,
+            toolbar: [
+                ['style', ['style']],
+                ['font', ['bold', 'underline', 'clear']],
+                ['color', ['color']],
+                ['para', ['ul', 'ol', 'paragraph']],
+                ['table', ['table']],
+                ['insert', ['link', 'picture', 'video']],
+                ['view', ['fullscreen', 'codeview', 'help']]
+            ]
+        });
+    </script>
 </body>
 </html>

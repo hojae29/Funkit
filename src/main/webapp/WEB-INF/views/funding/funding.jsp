@@ -16,7 +16,7 @@
 </head>
 <body>
     <jsp:include page="../header.jsp"/>
-    <div>
+    <div class="main_container">
         <div class="swiper">
 
             <div class="swiper-wrapper">

@@ -172,6 +172,7 @@
     color: white;
     font-size: 16px;
     font-weight: 500;
+    margin: 0 auto;
 }
 
 .amount_input{
@@ -190,27 +191,30 @@
 }
 
 .invest_input_container{
-    display:none;
+    display: none;
 }
 
 .reward_input_container{
-    display:none;
+    display: none;
+    flex-direction: column;
 }
 
 .reward_box{
     display: flex;
     width: 100%;
-    background: #efefef;
     height: 100px;
     align-items: center;
     justify-content: space-between;
     margin: 15px 0px;
+    border: 1px solid #cccccc;
+    border-radius: 5px;
+    padding: 15px 25px;
 }
 
 .reward_checkbox{
     width: 25px;
     height: 25px;
-    margin: 40px;
+    margin-right: 25px;
 }
 
 .reward_checkbox_wrap{
@@ -223,4 +227,8 @@
 .reward_quantity {
     width: 50px;
     height: 30px;
+}
+
+.reward_amount{
+    font-weight: 500;
 }
