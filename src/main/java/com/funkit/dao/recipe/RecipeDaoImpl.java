@@ -1,6 +1,9 @@
 package com.funkit.dao.recipe;
 
 import com.funkit.model.Image;
+import com.funkit.model.Tag;
+import com.funkit.model.recipe.Cooking;
+import com.funkit.model.recipe.Ingredients;
 import com.funkit.model.recipe.Recipe;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +76,16 @@ public class RecipeDaoImpl implements RecipeDao{
 
     @Override
     public Recipe recipeView(int recipeCode) {
-        return sql.selectOne("recipe.recipe",recipeCode);
+        Recipe<Image> recipe = sql.selectOne("recipe.recipe",recipeCode);
+        List<Cooking> cookings = sql.selectList("cooking.getCookingList",recipeCode);
+        List<Tag> tagList = sql.selectList("tag.getRecipeTags",recipeCode);
+        List<Ingredients> ingredients = sql.selectList("ingredients.getIngredients",recipeCode);
+
+        recipe.setCookings(cookings);
+        recipe.setTags(tagList);
+        recipe.setIngredients(ingredients);
+
+        return recipe;
     }
 
     @Override

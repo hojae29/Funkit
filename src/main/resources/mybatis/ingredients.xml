@@ -4,9 +4,14 @@
 <mapper namespace="ingredients">
 
     <insert id="setRecipeIngredients">
-        INSERT INTO ingredients(code,recipe_code, name, quantity)
+        INSERT INTO ingredients(code,recipe_code, ingre_name, ingre_qua)
         VALUES (NULL, #{recipeCode},#{ingredients.ingreName}, #{ingredients.ingreQua})
     </insert>
 
+    <select id="getIngredients" resultType="Ingredients">
+        SELECT *
+        FROM ingredients
+        WHERE recipe_code=#{recipeCode}
+    </select>
 
 </mapper>

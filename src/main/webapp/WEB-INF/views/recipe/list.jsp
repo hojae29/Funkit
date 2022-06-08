@@ -64,7 +64,7 @@
                         <p class="tag_text"><c:forEach var="tag" items="${item.tags}">${tag.name} </c:forEach></p>
                     </div>
                     <div class="funding_percentage">
-                        <p>by id</p>
+                        <p>by ${item.id}</p>
                     </div>
                     <div class="amount_container">
                         <p>찜</p>

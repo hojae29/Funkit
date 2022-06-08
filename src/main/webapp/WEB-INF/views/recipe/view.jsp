@@ -41,6 +41,13 @@
                             <div>
                                 <img src="/resources/img/icon/tag_icon.svg">
                             </div>
+                            <div>
+                                <p>
+                                    <c:forEach var="tag" items="${recipe.tags}">
+                                        ${tag.name}
+                                    </c:forEach>
+                                </p>
+                            </div>
                         </div>
                         <div id="sub_info">
                             <div id="time_area">
@@ -68,7 +75,7 @@
                                         <p>관심수</p>
                                     </div>
                                     <div>
-                                        <p>${recipe.like}</p>
+<%--                                        <p>${recipe.favorite}</p>--%>
                                     </div>
                                 </div>
                                 <div class="sub_order">
@@ -82,7 +89,7 @@
                                         <p>${recipe.view}</p>
                                     </div>
                                 </div>
-                                <div class="sub_order">
+                                <div class="sub_order" onclick="link_copy(); return false;">
                                     <div>
                                         <img src="/resources/img/recipe/link.PNG">
                                     </div>
@@ -92,8 +99,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div id="like_btn">
-                            <a><p>관심 레시피 등록</p></a>
+                        <div id="like_btn" onclick="like_btn()">
+                            <p>관심 레시피 등록</p>
                         </div>
                     </dvi>
                 </div>
@@ -104,42 +111,12 @@
                 <p>재료</p>
             </div>
             <div id="ingred_info_area">
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
-                <div class="ingred_info">
-                    <p>재료명</p>
-                    <p>개수</p>
-                </div>
+                <c:forEach var="ingred" items="${recipe.ingredients}">
+                    <div class="ingred_info">
+                        <p>${ingred.ingreName}</p>
+                        <p>${ingred.ingreQua}</p>
+                    </div>
+                </c:forEach>
             </div>
         </div>
         <div id="cooking_order">
@@ -148,44 +125,45 @@
             </div>
             <div>
                 <div id="order_div">
-                    <div class="order_area">
-                        <div class="num_area">
-                            <p>1</p>
+                    <c:forEach var="cook" items="${recipe.cookings}">
+                        <div class="order_area">
+                            <div class="num_area">
+                                <p>${cook.cookingSeq}</p>
+                            </div>
+                            <div class="order_info_area">
+                                <p>${cook.cookingProcess}</p>
+                            </div>
+                            <div class="order_img_area">
+                                <img src="${cook.location}${cook.fileName}">
+                            </div>
                         </div>
-                        <div class="order_info_area">
-                            <p>조리과정입니다.</p>
-                        </div>
-                        <div class="order_img_area">
-                            <img src="/resources/img/recipe/test3.jpeg">
-                        </div>
-                    </div>
-                    <div class="order_area">
-                        <div class="num_area">
-                            <p>2</p>
-                        </div>
-                        <div class="order_info_area">
-                            <p>조리과정입니다.</p>
-                        </div>
-                        <div class="order_img_area">
-                            <img src="/resources/img/recipe/test3.jpeg">
-                        </div>
-                    </div>
-                    <div class="order_area">
-                        <div class="num_area">
-                            <p>3</p>
-                        </div>
-                        <div class="order_info_area">
-                            <p>조리과정입니다.</p>
-                        </div>
-                        <div class="order_img_area">
-                            <img src="/resources/img/recipe/test3.jpeg">
-                        </div>
-                    </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
     </div>
     <jsp:include page="../footer.jsp"/>
+    <script src="/resources/js/recipe/link-copy.js"></script>
+    <script>
+        function like_btn(){
+            if (${sessionScope.member.id == null}){
+                alert("관심 기능은 로그인 후 이용 가능합니다.")
+            }
+            if(${sessionScope.member.id == recipe.id}){
+                alert("본인 글에는 추천이 불가능합니다.")
+            }
+            if(${sessionScope.member.id != null}){
+                $.ajax({
+                    url:"/recipe/favoriteAjaxAction",
+                    type:"POST",
+                    data:{
+                        code : ${recipe.recipeCode}
+                    },
+                    dataType:"json"
+                })
+            }
+        }
+    </script>
 </div>
 </body>
 </html>

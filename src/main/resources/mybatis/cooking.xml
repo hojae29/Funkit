@@ -7,4 +7,10 @@
         VALUES (NULL,#{recipeCode},#{cooking.cookingSeq},#{cooking.cookingProcess},#{cooking.fileName},#{cooking.size},#{cooking.location})
     </insert>
 
+    <select id="getCookingList" resultType="Cooking">
+        SELECT *
+        FROM cooking
+        WHERE recipe_code=#{recipeCode}
+    </select>
+
 </mapper>

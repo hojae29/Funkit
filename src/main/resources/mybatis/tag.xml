@@ -27,4 +27,10 @@
         FROM funding_tag ft, tag t
         WHERE funding_code=#{fundingCode} AND ft.tag_code = t.tag_code
     </select>
+
+    <select id="getRecipeTags" resultType="Tag">
+        SELECT t.tag_code, name
+        FROM recipe_tag r, tag t
+        WHERE recipe_code=#{recipeCode} AND r.tag_code = t.tag_code
+    </select>
 </mapper>

@@ -3,7 +3,9 @@ package com.funkit.controller.recipe;
 import com.funkit.model.*;
 import com.funkit.model.recipe.Cooking;
 import com.funkit.model.recipe.Ingredients;
+import com.funkit.model.recipe.Favorite;
 import com.funkit.model.recipe.Recipe;
+import com.funkit.service.recipe.FavoriteService;
 import com.funkit.service.recipe.RecipeMainImgService;
 import com.funkit.service.recipe.RecipeService;
 import com.funkit.service.TagService;
@@ -12,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.util.*;
@@ -31,6 +32,9 @@ public class RecipeController {
 
     @Autowired
     RecipeMainImgService mainService;
+
+    @Autowired
+    FavoriteService favoriteService;
 
     @GetMapping("")
     public String list(Model model){
@@ -177,7 +181,6 @@ public class RecipeController {
     @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
         Recipe<Image> recipe = service.recipeView(recipeCode);
-
         model.addAttribute("recipe",recipe);
 
         System.out.println(recipe);
@@ -221,6 +224,17 @@ public class RecipeController {
 
 
 
+    }
+
+    @ResponseBody
+    @PostMapping("/favoriteAjaxAction")
+    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
+        favorite.setId(member.getId());
+
+        int recipeCode = code;
+
+        favorite.setRecipeCode(recipeCode);
+        favoriteService.updateLike(favorite);
     }
 
 }
