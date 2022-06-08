@@ -52,11 +52,11 @@
             </div>
             <div>
                 <p class="info_label">달성률</p>
-                <h1 class="funding_percentage">321%</h1>
+                <h1 class="funding_percentage">${funding.percentage}%</h1>
             </div>
             <div>
                 <p class="info_label">누적 금액</p>
-                <h2>2,409,200원</h2>
+                <h2><fmt:formatNumber value="${funding.cmlAmount}" pattern="#,###"/>원</h2>
             </div>
             <div>
                 <p class="info_label">남은기간</p>

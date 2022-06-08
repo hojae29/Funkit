@@ -22,6 +22,7 @@ public class Funding<T> {
 
     private Long targetAmount;
     private Long cmlAmount;
+    private int percentage;
 
     private int distribution;
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
@@ -33,6 +34,14 @@ public class Funding<T> {
     private List<Tag> tags;
 
     private List<String> deleteImages;
+
+    public int getPercentage() {
+        return percentage;
+    }
+
+    public void setPercentage(int percentage) {
+        this.percentage = percentage;
+    }
 
     public List<Tag> getTags() {
         return tags;

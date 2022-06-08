@@ -24,4 +24,5 @@ public interface FundingService {
     void fundingApprovalReq(int fundingCode, int status);
 
     int getFundingUserCount(int fundingCode);
+
 }
