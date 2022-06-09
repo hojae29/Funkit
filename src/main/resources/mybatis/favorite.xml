@@ -6,4 +6,16 @@
         INSERT INTO favorite(recipe_code,id,like_info)
         VALUES(#{recipeCode},#{id},1)
     </insert>
+
+    <select id="updateCnt" resultType="Recipe">
+        UPDATE recipe
+        SET favorite_cnt = (SELECT COUNT(*) FROM favorite WHERE recipe_code=#{recipeCode})
+        WHERE recipe_code=#{recipeCode};
+    </select>
+
+    <select id="checkId" resultType="Favorite">
+        SELECT like_info
+        FROM favorite
+        WHERE recipe_code=#{recipeCode} and id=#{id}
+    </select>
 </mapper>

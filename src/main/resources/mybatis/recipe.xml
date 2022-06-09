@@ -56,6 +56,7 @@
         <result property="favorite" column="favorite"/>
         <result property="view" column="view"/>
         <result property="status" column="status"/>
+        <result property="favoriteCnt" column="favorite_cnt"/>
         <result property="takes" column="takes"/>
         <association property="mainImage"  javaType="Image" ><!--1:1관계일떄 사용-->
             <id property="code" column="code" />

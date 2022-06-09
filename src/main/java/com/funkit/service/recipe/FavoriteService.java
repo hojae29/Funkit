@@ -4,4 +4,6 @@ import com.funkit.model.recipe.Favorite;
 
 public interface FavoriteService {
     void updateLike(Favorite favorite);
+
+    void updateCnt(Favorite favorite);
 }

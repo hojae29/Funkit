@@ -67,8 +67,8 @@
                         <p>by ${item.id}</p>
                     </div>
                     <div class="amount_container">
-                        <p>찜</p>
-                        <p>조회수</p>
+                        <p>찜 ${item.favoriteCnt}</p>
+                        <p>조회수 ${item.view}</p>
                     </div>
                 </div>
             </c:if>

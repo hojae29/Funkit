@@ -32,7 +32,7 @@ public class Favorite {
 
     @Override
     public String toString() {
-        return "Like{" +
+        return "Favorite{" +
                 "likeInfo=" + likeInfo +
                 ", id='" + id + '\'' +
                 ", recipeCode=" + recipeCode +

@@ -1,7 +1,6 @@
 package com.funkit.model.recipe;
 
 import com.funkit.model.Tag;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.List;
@@ -14,6 +13,7 @@ public class Recipe<T> {
     private Date regDate;
     private Date updateDate;
     private int view;
+    private int favoriteCnt;
     private int takes;
     private int status;
 
@@ -26,6 +26,14 @@ public class Recipe<T> {
     private List<Tag> tags;
 
     public List<Ingredients> ingredients;
+
+    public int getFavoriteCnt() {
+        return favoriteCnt;
+    }
+
+    public void setFavoriteCnt(int favoriteCnt) {
+        this.favoriteCnt = favoriteCnt;
+    }
 
     public List<T> getSubImage() {
         return subImage;
@@ -149,6 +157,7 @@ public class Recipe<T> {
                 ", regDate=" + regDate +
                 ", updateDate=" + updateDate +
                 ", view=" + view +
+                ", favoriteCnt=" + favoriteCnt +
                 ", takes=" + takes +
                 ", status=" + status +
                 ", mainImage=" + mainImage +

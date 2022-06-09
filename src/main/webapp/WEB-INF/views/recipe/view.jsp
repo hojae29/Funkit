@@ -75,7 +75,7 @@
                                         <p>관심수</p>
                                     </div>
                                     <div>
-<%--                                        <p>${recipe.favorite}</p>--%>
+                                        <p>${recipe.favoriteCnt}</p>
                                     </div>
                                 </div>
                                 <div class="sub_order">

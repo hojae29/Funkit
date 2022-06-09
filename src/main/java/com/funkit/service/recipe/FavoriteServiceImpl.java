@@ -15,4 +15,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     public void updateLike(Favorite favorite) {
         dao.updateLike(favorite);
     }
+
+    @Override
+    public void updateCnt(Favorite favorite) {
+        dao.updateCnt(favorite);
+    }
+
 }

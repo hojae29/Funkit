@@ -39,6 +39,7 @@ public class RecipeController {
     @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
+        System.out.println(recipe);
 
         model.addAttribute("recipe", recipe);
 
@@ -235,6 +236,7 @@ public class RecipeController {
 
         favorite.setRecipeCode(recipeCode);
         favoriteService.updateLike(favorite);
+        favoriteService.updateCnt(favorite);
     }
 
 }

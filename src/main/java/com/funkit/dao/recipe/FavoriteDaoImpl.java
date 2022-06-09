@@ -16,4 +16,9 @@ public class FavoriteDaoImpl implements FavoriteDao {
         System.out.println(favorite);
         sql.insert("favorite.updateLike", favorite);
     }
+
+    @Override
+    public void updateCnt(Favorite favorite) {
+        sql.update("favorite.updateCnt",favorite);
+    }
 }
