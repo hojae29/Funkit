@@ -2,6 +2,7 @@ package com.funkit.service.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Member;
 import com.funkit.util.Pager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +16,7 @@ public interface FundingService {
 
     Funding<Image> getFundingByFundingCode(int fundingCode);
 
-    List<Funding<Image>> getFundingList();
+    List<Funding<Image>> getFundingList(int tagCode);
 
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
@@ -25,4 +26,5 @@ public interface FundingService {
 
     int getFundingUserCount(int fundingCode);
 
+    Member getMaker(int fundingCode);
 }

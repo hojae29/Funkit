@@ -4,6 +4,7 @@ import com.funkit.dao.funding.FundingDao;
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
 import com.funkit.model.JsonResponse;
+import com.funkit.model.Member;
 import com.funkit.util.Pager;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,8 +90,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public List<Funding<Image>> getFundingList() {
-        return fundingDao.getFundingList();
+    public List<Funding<Image>> getFundingList(int tagCode) {
+        return fundingDao.getFundingList(tagCode);
     }
 
     @Override
@@ -115,6 +116,11 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public int getFundingUserCount(int fundingCode) {
         return fundingDao.getFundingUserCount(fundingCode);
+    }
+
+    @Override
+    public Member getMaker(int fundingCode) {
+        return fundingDao.getMaker(fundingCode);
     }
 
     public Image makeImage(MultipartFile file, String location){

@@ -29,6 +29,8 @@ public class Member {
 
     private String corporateName;
 
+    private String info;
+
     private String phone;
 
     @NotEmpty(message = "*이메일은 필수사항입니다")
@@ -40,6 +42,14 @@ public class Member {
     private String address;
 
     private String detailAddress;
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
 
     public String getId() {
         return id;
@@ -119,5 +129,22 @@ public class Member {
 
     public void setTypeCode(int typeCode) {
         this.typeCode = typeCode;
+    }
+
+    @Override
+    public String toString() {
+        return "Member{" +
+                "id='" + id + '\'' +
+                ", passwd='" + passwd + '\'' +
+                ", typeCode=" + typeCode +
+                ", name='" + name + '\'' +
+                ", corporateName='" + corporateName + '\'' +
+                ", info='" + info + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
+                ", postCode='" + postCode + '\'' +
+                ", address='" + address + '\'' +
+                ", detailAddress='" + detailAddress + '\'' +
+                '}';
     }
 }

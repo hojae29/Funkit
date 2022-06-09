@@ -55,7 +55,7 @@
             </div>
             <div class="tag_box_wrap">
                 <c:forEach var="tag" items="${tagList}">
-                    <div class="tag_box">#${tag.name}</div>
+                    <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box">#${tag.name}</div></a>
                 </c:forEach>
             </div>
         </div>

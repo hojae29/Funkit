@@ -1,9 +1,6 @@
 package com.funkit.dao.funding;
 
-import com.funkit.model.Funding;
-import com.funkit.model.Image;
-import com.funkit.model.Reward;
-import com.funkit.model.Tag;
+import com.funkit.model.*;
 import com.funkit.util.Pager;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
@@ -102,8 +99,8 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public List<Funding<Image>> getFundingList() {
-        return sql.selectList("funding.getFundingList");
+    public List<Funding<Image>> getFundingList(int tagCode) {
+        return sql.selectList("funding.getFundingList", tagCode);
     }
 
     @Override
@@ -137,6 +134,11 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public int getFundingUserCount(int fundingCode) {
         return sql.selectOne("funding.getFundingUserCount", fundingCode);
+    }
+
+    @Override
+    public Member getMaker(int fundingCode) {
+        return sql.selectOne("funding.getMaker", fundingCode);
     }
 
 }

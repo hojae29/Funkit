@@ -26,10 +26,11 @@ public class FundingController {
         this.orderService = orderService;
     }
 
-    @RequestMapping("")
-    public String funding(Model model){
+    @GetMapping("")
+    public String funding(@RequestParam(value = "tagCode", required = false, defaultValue = "0") int tagCode,
+                          Model model){
 
-        List<Funding<Image>> fundingList = fundingService.getFundingList();
+        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode);
         List<Tag> tagList = tagService.getTagList();
 
         model.addAttribute("fundingList", fundingList);
@@ -42,9 +43,12 @@ public class FundingController {
     public String moveFundingPage(@PathVariable int fundingCode, Model model){
         Funding<Image> funding = fundingService.getFundingByFundingCode(fundingCode);
         int userCount = fundingService.getFundingUserCount(fundingCode);
+        Member company = fundingService.getMaker(fundingCode);
 
         model.addAttribute("funding", funding);
         model.addAttribute("userCount", userCount);
+        model.addAttribute("company", company);
+
         return "/funding/view";
     }
 
