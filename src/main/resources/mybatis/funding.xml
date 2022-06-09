@@ -83,6 +83,12 @@
               ft.tag_code = t.tag_code AND
               status_code = 40 AND
               s.funding_code = f.funding_code
+              <if test="tagCode != (null || 0)">
+                  AND
+                  f.funding_code in (SELECT funding.funding_code
+                                     FROM funding, funding_tag
+                                     WHERE funding.funding_code = funding_tag.funding_code AND tag_code=#{tagCode})
+              </if>
         ORDER BY f.funding_code DESC;
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
@@ -119,6 +125,12 @@
         SELECT IFNULL(SUM(ro.quantity * r.amount), 0)
         FROM reward_order ro, reward r, funding f
         WHERE ro.reward_code = r.reward_code AND r.funding_code = f.funding_code AND r.funding_code = #{fundingCode} AND ro.status_code != 50;
+    </select>
+    <!--메이커정보-->
+    <select id="getMaker" resultType="Member">
+        SELECT corporate_name, info
+        FROM funding, member
+        WHERE funding.id = member.id AND funding.funding_code = #{fundingCode};
     </select>
 
     <resultMap id="fundingResultMap" type="Funding">

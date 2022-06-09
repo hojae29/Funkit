@@ -74,7 +74,11 @@
             <div>
                 <p class="maker_info_text">메이커 정보</p>
                 <div class="maker_box">
-
+                    <div class="company_profile_img"></div>
+                    <div>
+                        <p class="company_name">${company.corporateName}</p>
+                        <p class="company_info">${company.info}</p>
+                    </div>
                 </div>
             </div>
         </div>

@@ -203,3 +203,26 @@
     color: white;
 }
 
+.maker_box{
+    padding: 12px;
+    display: flex;
+    align-items: center;
+}
+
+.company_profile_img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: #58bfff;
+    margin-right: 12px;
+}
+
+.company_info{
+    font-size: 14px;
+    color: #888888;
+}
+
+.company_name{
+    font-size: 14px;
+    font-weight: 500;
+}
