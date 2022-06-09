@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="favorite">
+    <insert id="updateLike">
+        INSERT INTO favorite(recipe_code,id,like_info)
+        VALUES(#{recipeCode},#{id},1)
+    </insert>
+
+    <select id="updateCnt" resultType="Recipe">
+        UPDATE recipe
+        SET favorite_cnt = (SELECT COUNT(*) FROM favorite WHERE recipe_code=#{recipeCode})
+        WHERE recipe_code=#{recipeCode};
+    </select>
+
+    <select id="checkId" resultType="Favorite">
+        SELECT like_info
+        FROM favorite
+        WHERE recipe_code=#{recipeCode} and id=#{id}
+    </select>
+</mapper>

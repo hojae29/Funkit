@@ -3,17 +3,30 @@ package com.funkit.model.recipe;
 import org.w3c.dom.Text;
 
 public class Cooking {
-    private int recipeCode;
+    private int code;
     private int cookingSeq;
-    private Text cookingProcess;
+    private String cookingProcess;
 
-    public int getRecipeCode() {
-        return recipeCode;
+    private String fileName;
+    private long size;
+    private String location;
+
+    public Cooking(int cookingSeq, String cookingProcess, String fileName, long size, String location) {
+        this.cookingSeq = cookingSeq;
+        this.cookingProcess = cookingProcess;
+        this.fileName = fileName;
+        this.size = size;
+        this.location = location;
     }
 
-    public void setRecipeCode(int recipeCode) {
-        this.recipeCode = recipeCode;
+    public int getCode() {
+        return code;
     }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
 
     public int getCookingSeq() {
         return cookingSeq;
@@ -23,11 +36,47 @@ public class Cooking {
         this.cookingSeq = cookingSeq;
     }
 
-    public Text getCookingProcess() {
+    public String getCookingProcess() {
         return cookingProcess;
     }
 
-    public void setCookingProcess(Text cookingProcess) {
+    public void setCookingProcess(String cookingProcess) {
         this.cookingProcess = cookingProcess;
+    }
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
+
+    public long getSize() {
+        return size;
+    }
+
+    public void setSize(long size) {
+        this.size = size;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @Override
+    public String toString() {
+        return "Cooking{" +
+                "code=" + code +
+                ", cookingSeq=" + cookingSeq +
+                ", cookingProcess='" + cookingProcess + '\'' +
+                ", fileName='" + fileName + '\'' +
+                ", size=" + size +
+                ", location='" + location + '\'' +
+                '}';
     }
 }

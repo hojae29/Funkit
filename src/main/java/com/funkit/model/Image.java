@@ -1,10 +1,13 @@
 package com.funkit.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class Image {
     private int code;
     private String name;
     private long size;
     private String location;
+
 
     public int getCode() {
         return code;

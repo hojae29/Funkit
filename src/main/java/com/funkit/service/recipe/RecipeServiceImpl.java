@@ -17,7 +17,6 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public List<Recipe> list() {
-
         return dao.list();
     }
 

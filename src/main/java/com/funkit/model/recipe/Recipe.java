@@ -12,14 +12,52 @@ public class Recipe<T> {
     private String intro;
     private Date regDate;
     private Date updateDate;
-    private int like;
     private int view;
+    private int favoriteCnt;
     private int takes;
     private int status;
 
     private T mainImage;
 
+    private List<T> subImage;
+
+    private List<Cooking> cookings;
+
     private List<Tag> tags;
+
+    public List<Ingredients> ingredients;
+
+    public int getFavoriteCnt() {
+        return favoriteCnt;
+    }
+
+    public void setFavoriteCnt(int favoriteCnt) {
+        this.favoriteCnt = favoriteCnt;
+    }
+
+    public List<T> getSubImage() {
+        return subImage;
+    }
+
+    public void setSubImage(List<T> subImage) {
+        this.subImage = subImage;
+    }
+
+    public List<Cooking> getCookings() {
+        return cookings;
+    }
+
+    public void setCookings(List<Cooking> cookings) {
+        this.cookings = cookings;
+    }
+
+    public List<Ingredients> getIngredients() {
+        return ingredients;
+    }
+
+    public void setIngredients(List<Ingredients> ingredients) {
+        this.ingredients = ingredients;
+    }
 
     public List<Tag> getTags() {
         return tags;
@@ -100,13 +138,6 @@ public class Recipe<T> {
         this.updateDate = updateDate;
     }
 
-    public int getLike() {
-        return like;
-    }
-
-    public void setLike(int like) {
-        this.like = like;
-    }
 
     public int getView() {
         return view;
@@ -125,12 +156,15 @@ public class Recipe<T> {
                 ", intro='" + intro + '\'' +
                 ", regDate=" + regDate +
                 ", updateDate=" + updateDate +
-                ", like=" + like +
                 ", view=" + view +
+                ", favoriteCnt=" + favoriteCnt +
                 ", takes=" + takes +
                 ", status=" + status +
                 ", mainImage=" + mainImage +
+                ", subImage=" + subImage +
+                ", cookings=" + cookings +
                 ", tags=" + tags +
+                ", ingredients=" + ingredients +
                 '}';
     }
 }

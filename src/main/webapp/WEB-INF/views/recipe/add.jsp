@@ -97,7 +97,16 @@
                                 <label>재료</label>
                             </div>
                             <div class="align_input">
-                                <input type="text" name="ingredients" id="ingredients" class="mid_text">
+                                <input type="text" id="iName" class="sm_num" placeholder="재료명">
+                                <input type="text" id="quantity" placeholder="개수" min="1" class="quantity">
+                                <button type="button" id="plus_ingredients" onclick="add_Ingredients()">재료 추가하기</button>
+                            </div>
+                        </div>
+                        <div class="align_info">
+                            <div class="label_area"></div>
+                            <div id="ingredients_area">
+                                <div id="ingredients_order">
+                                </div>
                             </div>
                         </div>
                         <div class="align_info">
@@ -144,10 +153,11 @@
                                         <img src="/resources/img/recipe/default.png" id="order_img_1"/>
                                     </a>
                                 </div>
-                                <input type="file" class="img_input" id="img_input_1" accept="image/*">
+                                <input type="file" class="img_input" id="img_input_1" accept="image/*" name="subImage">
                                 <div>
-                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box"></textarea>
+                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box" name="cookingProcess"></textarea>
                                 </div>
+                                <input type="hidden" value="1" name="cookingSeq">
                             </div>
                         </div>
                         <div class="orders_mar">
@@ -187,6 +197,7 @@
 </script>
 <script src="/resources/js/recipe/recipe-tag.js"></script>
 <script src="/resources/js/recipe/main-img.js"></script>
+<script src="/resources/js/recipe/recipe_ingredients.js"></script>
 <script src="/resources/js/recipe/recipe-order.js"></script>
 <script src="/resources/js/recipe/multi-img.js"></script>
 </body>

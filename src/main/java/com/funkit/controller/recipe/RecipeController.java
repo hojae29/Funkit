@@ -1,7 +1,11 @@
 package com.funkit.controller.recipe;
 
 import com.funkit.model.*;
+import com.funkit.model.recipe.Cooking;
+import com.funkit.model.recipe.Ingredients;
+import com.funkit.model.recipe.Favorite;
 import com.funkit.model.recipe.Recipe;
+import com.funkit.service.recipe.FavoriteService;
 import com.funkit.service.recipe.RecipeMainImgService;
 import com.funkit.service.recipe.RecipeService;
 import com.funkit.service.TagService;
@@ -29,11 +33,14 @@ public class RecipeController {
     @Autowired
     RecipeMainImgService mainService;
 
-    @GetMapping({"","/list"})
+    @Autowired
+    FavoriteService favoriteService;
+
+    @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
-
         System.out.println(recipe);
+
         model.addAttribute("recipe", recipe);
 
         return path + "list";
@@ -77,14 +84,86 @@ public class RecipeController {
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
-                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode){
+                      @RequestParam(value="tagCode",required = false) List<Integer> tagCode,
+                      @RequestParam(value="ingreName",required = false) List<String> ingreName,
+                      @RequestParam(value = "ingreQua",required = false) List<String> ingreQua,
+                      @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage,
+                      @RequestParam(value = "cookingSeq",required = false) List<Integer> cookingSeq,
+                      @RequestParam(value = "cookingProcess",required = false)List<String> cookingProcess){
 
+        String subPath = "D:/upload/recipe/" +recipeCode + "/cookImage/";
+        String subLocation = "/upload/recipe/" +recipeCode + "/cookImage/";
+
+        //조리과정 추가
+        int imgNum=1;
+        int seqNum=1;
+        int processNum=1;
+        List<Cooking> cookingList = new ArrayList<>();
+        if(subImage != null){
+            for(var indexSeq : cookingSeq){
+                System.out.println("seqNum:"+ seqNum);
+                for(var indexProcess : cookingProcess) {
+                    System.out.println("processNum:"+ processNum);
+                    for (MultipartFile multipartFile : subImage) {
+                        System.out.println("imgNum:"+ imgNum);
+                        if (seqNum == processNum && processNum == imgNum) {
+                            String subName = multipartFile.getOriginalFilename();
+                            long size = multipartFile.getSize();
+
+                            String uuid = UUID.randomUUID().toString();
+
+                            String uploadSubName = uuid + "_" + subName;
+                            File saveSubImage = new File(subPath, uploadSubName);
+
+                            try {
+                                multipartFile.transferTo(saveSubImage);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                            cookingList.add(new Cooking(indexSeq, indexProcess, uploadSubName, size, subLocation));
+                            System.out.println(cookingList);
+                        }
+                        imgNum = imgNum+1;
+                    }
+                    imgNum = 1;
+                    processNum = processNum + 1;
+                }
+
+                imgNum = 1;
+                processNum = 1;
+                seqNum = seqNum +1;
+            }
+            System.out.println(cookingList);
+            recipe.setCookings(cookingList);
+        }
+
+
+        //태그 추가
         List<Tag> tagList = new ArrayList<>();
         if(tagCode != null){
             for(var index : tagCode)
                 tagList.add(new Tag(index));
             recipe.setTags(tagList);
         }
+
+        //재료 추가
+        int nameNum = 1;
+        int quaNum = 1;
+        List<Ingredients> ingreList = new ArrayList<>();
+        if(ingreName != null && ingreQua !=null){
+            for(var indexName : ingreName) {
+                for(var indexQua : ingreQua){
+                    if (nameNum==quaNum) {
+                        ingreList.add(new Ingredients(indexName, indexQua));
+                    }
+                    quaNum = quaNum+1;
+                }
+                quaNum = 1;
+                nameNum = nameNum + 1;
+            }
+            recipe.setIngredients(ingreList);
+        }
+
 
         service.getRecipeCode(recipeCode);
 
@@ -103,7 +182,6 @@ public class RecipeController {
     @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
         Recipe<Image> recipe = service.recipeView(recipeCode);
-
         model.addAttribute("recipe",recipe);
 
         System.out.println(recipe);
@@ -147,6 +225,18 @@ public class RecipeController {
 
 
 
+    }
+
+    @ResponseBody
+    @PostMapping("/favoriteAjaxAction")
+    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
+        favorite.setId(member.getId());
+
+        int recipeCode = code;
+
+        favorite.setRecipeCode(recipeCode);
+        favoriteService.updateLike(favorite);
+        favoriteService.updateCnt(favorite);
     }
 
 }
