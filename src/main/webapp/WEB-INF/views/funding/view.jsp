@@ -79,6 +79,21 @@
             </div>
         </div>
     </div>
+    <div class="menu_container">
+        <div>스토리</div>
+        <div>새 소식</div>
+        <div>댓글</div>
+    </div>
+    <div class="story_container">
+        <div>
+            ${funding.story}
+        </div>
+    </div>
+    <div id="top_btn">
+        TOP
+    </div>
+
+    <jsp:include page="../footer.jsp"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/funding/view.js"></script>
 </body>

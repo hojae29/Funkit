@@ -131,6 +131,11 @@
     color: white;
     font-size: 20px;
     font-weight: 400;
+    transition: all 0.3s ease-in-out;
+}
+
+#funding_btn:hover{
+    transform: scale(1.02);
 }
 
 .maker_box{
@@ -145,3 +150,56 @@
     color: #888888;
     margin-bottom: 4px;
 }
+
+.story_container{
+    width: 1000px;
+    margin: 0 auto;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    background-color: #f9f9f9;
+}
+
+.menu_container {
+    width: 1000px;
+    display: flex;
+    height: 60px;
+    margin: 60px auto 0px auto;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #cccccc;
+    gap: 30px;
+}
+
+.menu_container > div {
+    font-size: 18px;
+    border-bottom: 2px solid white;
+    font-weight: 500;
+    padding: 4px 8px;
+    color: #888888;
+}
+
+#top_btn{
+    font-size: 18px;
+    width: 55px;
+    height: 55px;
+    border: 2px solid #000000;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #000000;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+#top_btn:hover{
+    border-radius: 50%;
+    background-color: #888888;
+    border: none;
+    color: white;
+}
+

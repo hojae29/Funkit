@@ -103,9 +103,9 @@
                         <div style="display: flex;align-items: center;">
                             <input class="reward_checkbox" type="checkbox" value="${reward.rewardCode}" onclick='toggleNumBox(this)'>
                             <div>
-                                <p class="reward_amount">${reward.amount}</p>
+                                <p class="reward_amount" data-amount="${reward.amount}"><fmt:formatNumber value="${reward.amount}" pattern="#,###"/>원</p>
                                 <p>${reward.title}</p>
-                                <p>${reward.info}</p>
+                                <p style="font-size: 14px;color: #888888;">${reward.info}</p>
                             </div>
                         </div>
                         <div>
@@ -297,7 +297,7 @@
                 .find(".type_title").css("color", "#ff7e00");
             $("#invest_type_btn").css("border", "1px solid #cccccc")
                 .find(".type_title").css("color", "black");
-            $(".reward_input_container").css("display", "block");
+            $(".reward_input_container").css("display", "flex");
             $(".invest_input_container").css("display", "none");
             payInfo.type = "리워드";
         });
@@ -315,7 +315,7 @@
                     let reward = {
                         rewardCode: $(item).val(),
                         quantity: $(item).closest(".reward_box").find(".reward_quantity").val(),
-                        amount: Number($(item).closest(".reward_box").find(".reward_amount").text())
+                        amount: Number($(item).closest(".reward_box").find(".reward_amount").data("amount"))
                     }
                     payInfo.rewardList.push(reward);
                 });

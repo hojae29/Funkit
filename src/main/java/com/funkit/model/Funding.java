@@ -33,7 +33,17 @@ public class Funding<T> {
     private List<Reward> reward;
     private List<Tag> tags;
 
+    private String story;
+
     private List<String> deleteImages;
+
+    public String getStory() {
+        return story;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
+    }
 
     public int getPercentage() {
         return percentage;

@@ -8,7 +8,8 @@
     </insert>
     <update id="saveFunding">
         UPDATE funding
-        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}, distribution=#{distribution}, delivery_date=#{deliveryDate}
+        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount},
+            introduction=#{introduction}, distribution=#{distribution}, delivery_date=#{deliveryDate}, story=#{story}
         WHERE funding_code = #{fundingCode}
     </update>
     <delete id="deleteFunding">
@@ -52,24 +53,36 @@
     </delete>
 
     <select id="getFundingList" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name, s.cml_amount, s.percentage
+        SELECT f.funding_code,
+               id,
+               title,
+               start_date,
+               exp_date,
+               target_amount,
+               introduction,
+               fmi.name AS file_name,
+               size,
+               location,
+               t.tag_code,
+               t.name AS tag_name,
+               s.cml_amount,
+               s.percentage
         FROM funding f,
             funding_main_image fmi,
             funding_tag ft,
             tag t,
-            (SELECT r.funding_code,
-            ifnull(sum(ro.quantity * r.amount), 0) as cml_amount,
-            ifnull(floor(sum(ro.quantity * r.amount) / f.target_amount * 100), 0) AS percentage
-            FROM reward_order ro, reward r, funding f
-            WHERE ro.reward_code = r.reward_code AND
-            r.funding_code = f.funding_code AND
-            ro.status_code != 50
-            GROUP BY r.funding_code) s
+            (SELECT funding.funding_code,
+                    IFNULL(SUM(reward_order.quantity * reward.amount), 0) AS cml_amount,
+                    IFNULL(FLOOR(SUM(reward_order.quantity * reward.amount) / funding.target_amount * 100), 0) AS percentage
+            FROM funding
+            LEFT OUTER JOIN reward ON funding.funding_code = reward.funding_code
+            LEFT OUTER JOIN reward_order ON reward.reward_code = reward_order.reward_code
+            GROUP BY funding.funding_code) s
         WHERE f.funding_code = fmi.funding_code AND
-            f.funding_code = ft.funding_code AND
-            ft.tag_code = t.tag_code AND
-            status_code = 40 AND
-            s.funding_code = f.funding_code
+              f.funding_code = ft.funding_code AND
+              ft.tag_code = t.tag_code AND
+              status_code = 40 AND
+              s.funding_code = f.funding_code
         ORDER BY f.funding_code DESC;
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
