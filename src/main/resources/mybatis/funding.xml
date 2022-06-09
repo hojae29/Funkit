@@ -8,7 +8,8 @@
     </insert>
     <update id="saveFunding">
         UPDATE funding
-        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount}, introduction=#{introduction}, distribution=#{distribution}, delivery_date=#{deliveryDate}
+        SET title=#{title}, start_date=#{startDate}, exp_date=#{expDate}, target_amount=#{targetAmount},
+            introduction=#{introduction}, distribution=#{distribution}, delivery_date=#{deliveryDate}, story=#{story}
         WHERE funding_code = #{fundingCode}
     </update>
     <delete id="deleteFunding">
@@ -52,7 +53,20 @@
     </delete>
 
     <select id="getFundingList" resultMap="fundingResultMap">
-        SELECT f.funding_code, id, title, start_date, exp_date, target_amount, introduction, fmi.name AS file_name, size, location, t.tag_code, t.name AS tag_name, s.cml_amount, s.percentage
+        SELECT f.funding_code,
+               id,
+               title,
+               start_date,
+               exp_date,
+               target_amount,
+               introduction,
+               fmi.name AS file_name,
+               size,
+               location,
+               t.tag_code,
+               t.name AS tag_name,
+               s.cml_amount,
+               s.percentage
         FROM funding f,
             funding_main_image fmi,
             funding_tag ft,
@@ -65,10 +79,10 @@
             LEFT OUTER JOIN reward_order ON reward.reward_code = reward_order.reward_code
             GROUP BY funding.funding_code) s
         WHERE f.funding_code = fmi.funding_code AND
-            f.funding_code = ft.funding_code AND
-            ft.tag_code = t.tag_code AND
-            status_code = 40 AND
-            s.funding_code = f.funding_code
+              f.funding_code = ft.funding_code AND
+              ft.tag_code = t.tag_code AND
+              status_code = 40 AND
+              s.funding_code = f.funding_code
         ORDER BY f.funding_code DESC;
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
