@@ -13,8 +13,13 @@
         WHERE recipe_code=#{recipeCode};
     </select>
 
-    <select id="checkId" resultType="Favorite">
-        SELECT like_info
+    <delete id="likeCancel">
+        DELETE FROM favorite
+        WHERE recipe_code=#{recipeCode} and id=#{id}
+    </delete>
+
+    <select id="likeCheck" resultType="int">
+        SELECT COUNT(*)
         FROM favorite
         WHERE recipe_code=#{recipeCode} and id=#{id}
     </select>

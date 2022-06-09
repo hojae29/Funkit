@@ -146,6 +146,7 @@
     <script src="/resources/js/recipe/link-copy.js"></script>
     <script>
         function like_btn(){
+
             if (${sessionScope.member.id == null}){
                 alert("관심 기능은 로그인 후 이용 가능합니다.")
             }
@@ -156,11 +157,20 @@
                 $.ajax({
                     url:"/recipe/favoriteAjaxAction",
                     type:"POST",
+                    // type:"GET",
                     data:{
                         code : ${recipe.recipeCode}
                     },
-                    dataType:"json"
+                    dataType:"json",
+                    success:function (likeCheck){
+                        if(likeCheck == 0) {
+                            alert("관심 레시피로 등록하였습니다.")
+                        }else if (likeCheck==1){
+                            alert("관심 레시피를 취소하셨습니다.")
+                        }
+                    }
                 })
+
             }
         }
     </script>

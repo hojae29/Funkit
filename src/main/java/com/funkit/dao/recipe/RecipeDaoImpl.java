@@ -77,14 +77,15 @@ public class RecipeDaoImpl implements RecipeDao{
     @Override
     public Recipe recipeView(int recipeCode) {
         Recipe<Image> recipe = sql.selectOne("recipe.recipe",recipeCode);
-        List<Cooking> cookings = sql.selectList("cooking.getCookingList",recipeCode);
         List<Tag> tagList = sql.selectList("tag.getRecipeTags",recipeCode);
         List<Ingredients> ingredients = sql.selectList("ingredients.getIngredients",recipeCode);
+        List<Cooking> cookingList = sql.selectList("cooking.getCookingList",recipeCode);
 
-        recipe.setCookings(cookings);
+        recipe.setCookings(cookingList);
         recipe.setTags(tagList);
         recipe.setIngredients(ingredients);
 
+        System.out.println("all : "+recipe);
         return recipe;
     }
 

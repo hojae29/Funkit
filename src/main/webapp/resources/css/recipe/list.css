@@ -61,9 +61,9 @@
 }
 
 .sub_title{
-    font-size:24px;
-    font-weight: 500;
-    margin-bottom:8px;
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 16px;
 }
 
 .card_box_container{
@@ -78,7 +78,7 @@
 
 .tag_container{
     width:1000px;
-    margin: 0px auto 25px auto;
+    margin: 0 auto;
 }
 
 .search_box{
@@ -88,7 +88,7 @@
 
 #search_input{
     width: 230px;
-    height: 30px;
+    height: 35px;
     border: none;
 }
 
@@ -108,6 +108,7 @@
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
+    margin-top:30px;
 }
 
 .funding_item{
@@ -160,19 +161,27 @@
 }
 
 .tag_box{
-    color: #ff7e00;
-    border: 1px solid #ff7e00;
-    padding: 2px 8px;
-    border-radius: 5px;
+    color: #888888;
+    padding: 4px 10px;
     font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
+    border-bottom: 1px solid #888888;
+}
+
+.tag_box:hover{
+    background-color: #494949;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: all 0.2s ease-in-out;
 }
 
 .tag_box_wrap{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 8px;
+    gap: 18px;
 }
 
 .title_img{

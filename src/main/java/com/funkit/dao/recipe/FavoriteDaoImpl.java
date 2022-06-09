@@ -21,4 +21,14 @@ public class FavoriteDaoImpl implements FavoriteDao {
     public void updateCnt(Favorite favorite) {
         sql.update("favorite.updateCnt",favorite);
     }
+
+    @Override
+    public int likeCheck(Favorite favorite) {
+        return sql.selectOne("favorite.likeCheck",favorite);
+    }
+
+    @Override
+    public void deleteLike(Favorite favorite) {
+        sql.delete("favorite.likeCancel",favorite);
+    }
 }

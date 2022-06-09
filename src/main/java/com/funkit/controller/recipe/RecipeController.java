@@ -39,9 +39,12 @@ public class RecipeController {
     @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
+        List<Tag> tagList = tagService.getTagList();
+
         System.out.println(recipe);
 
         model.addAttribute("recipe", recipe);
+        model.addAttribute("tagList",tagList);
 
         return path + "list";
     }
@@ -184,6 +187,7 @@ public class RecipeController {
         Recipe<Image> recipe = service.recipeView(recipeCode);
         model.addAttribute("recipe",recipe);
 
+
         System.out.println(recipe);
         service.updateView(recipeCode);
 
@@ -227,16 +231,39 @@ public class RecipeController {
 
     }
 
+//    @ResponseBody
+//    @PostMapping("/favoriteAjaxAction")
+//    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
+//        favorite.setId(member.getId());
+//
+//        int recipeCode = code;
+//
+//        favorite.setRecipeCode(recipeCode);
+//        favoriteService.updateLike(favorite);
+//        favoriteService.updateCnt(favorite);
+//    }
+
+
     @ResponseBody
     @PostMapping("/favoriteAjaxAction")
-    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
+    public int favoriteCheck(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
         favorite.setId(member.getId());
 
         int recipeCode = code;
 
         favorite.setRecipeCode(recipeCode);
-        favoriteService.updateLike(favorite);
-        favoriteService.updateCnt(favorite);
+
+        int likeCheck=favoriteService.likeCheck(favorite);
+        if(likeCheck == 0){
+            favoriteService.updateLike(favorite);
+            favoriteService.updateCnt(favorite);
+        }else if(likeCheck == 1){
+            favoriteService.deleteLike(favorite);
+            favoriteService.updateCnt(favorite);
+        }
+
+        return likeCheck;
     }
+
 
 }
