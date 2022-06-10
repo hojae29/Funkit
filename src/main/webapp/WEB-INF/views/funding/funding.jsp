@@ -54,6 +54,7 @@
                 </div>
             </div>
             <div class="tag_box_wrap">
+                <a href="/funding?tagCode=0"><div class="tag_box">#전체</div></a>
                 <c:forEach var="tag" items="${tagList}">
                     <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box">#${tag.name}</div></a>
                 </c:forEach>
