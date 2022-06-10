@@ -33,7 +33,7 @@
                                 <label>소개</label>
                             </div>
                             <div class="align_input">
-                                <textarea type="text" name="intro" id="intro" class="long_text"></textarea>
+                                <textarea type="text" name="intro" id="intro" class="long_text" placeholder="레시피에 대해 간단한 소개를 적어주세요."></textarea>
                             </div>
                         </div>
                         <div class="align_info">
@@ -155,7 +155,7 @@
                                 </div>
                                 <input type="file" class="img_input" id="img_input_1" accept="image/*" name="subImage">
                                 <div>
-                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box" name="cookingProcess"></textarea>
+                                    <textarea placeholder="조리 과정을 입력해주세요." class="text_box" name="cookingExplain"></textarea>
                                 </div>
                                 <input type="hidden" value="1" name="cookingSeq">
                             </div>

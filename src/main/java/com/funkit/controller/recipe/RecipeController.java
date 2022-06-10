@@ -36,15 +36,20 @@ public class RecipeController {
     @Autowired
     FavoriteService favoriteService;
 
+
     @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
+        List<Tag> tagList = tagService.getTagList();
+
         System.out.println(recipe);
 
         model.addAttribute("recipe", recipe);
+        model.addAttribute("tagList",tagList);
 
         return path + "list";
     }
+
 
     @RequestMapping("/add")
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
@@ -68,6 +73,7 @@ public class RecipeController {
         return "redirect:add/" + recipeCode;
     }
 
+
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
         //tag list 가져오기
@@ -82,6 +88,7 @@ public class RecipeController {
         return path + "add";
     }
 
+
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
                       @RequestParam(value="tagCode",required = false) List<Integer> tagCode,
@@ -89,7 +96,7 @@ public class RecipeController {
                       @RequestParam(value = "ingreQua",required = false) List<String> ingreQua,
                       @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage,
                       @RequestParam(value = "cookingSeq",required = false) List<Integer> cookingSeq,
-                      @RequestParam(value = "cookingProcess",required = false)List<String> cookingProcess){
+                      @RequestParam(value = "cookingExplain",required = false)List<String> cookingExplain){
 
         String subPath = "D:/upload/recipe/" +recipeCode + "/cookImage/";
         String subLocation = "/upload/recipe/" +recipeCode + "/cookImage/";
@@ -102,7 +109,7 @@ public class RecipeController {
         if(subImage != null){
             for(var indexSeq : cookingSeq){
                 System.out.println("seqNum:"+ seqNum);
-                for(var indexProcess : cookingProcess) {
+                for(var indexInfo : cookingExplain) {
                     System.out.println("processNum:"+ processNum);
                     for (MultipartFile multipartFile : subImage) {
                         System.out.println("imgNum:"+ imgNum);
@@ -120,7 +127,8 @@ public class RecipeController {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            cookingList.add(new Cooking(indexSeq, indexProcess, uploadSubName, size, subLocation));
+                            cookingList.add(new Cooking(indexSeq, indexInfo, uploadSubName, size, subLocation));
+//                            cookingList.add(new Cooking(indexSeq, indexInfo));
                             System.out.println(cookingList);
                         }
                         imgNum = imgNum+1;
@@ -172,12 +180,14 @@ public class RecipeController {
         return "redirect:./../";
     }
 
+
     @GetMapping("/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){
         service.delete(recipeCode);
 
         return "redirect:../";
     }
+
 
     @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
@@ -189,6 +199,7 @@ public class RecipeController {
 
         return path + "view";
     }
+
 
     @PostMapping("/uploadAjaxAction/{recipeCode}")
     public void uploadAjaxAction(@PathVariable int recipeCode ,MultipartFile mainImage){
@@ -227,16 +238,27 @@ public class RecipeController {
 
     }
 
+
     @ResponseBody
     @PostMapping("/favoriteAjaxAction")
-    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
+    public int favoriteCheck(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
         favorite.setId(member.getId());
 
         int recipeCode = code;
 
         favorite.setRecipeCode(recipeCode);
-        favoriteService.updateLike(favorite);
-        favoriteService.updateCnt(favorite);
+
+        int likeCheck=favoriteService.likeCheck(favorite);
+        if(likeCheck == 0){
+            favoriteService.updateLike(favorite);
+            favoriteService.updateCnt(favorite);
+        }else if(likeCheck == 1){
+            favoriteService.deleteLike(favorite);
+            favoriteService.updateCnt(favorite);
+        }
+
+        return likeCheck;
     }
+
 
 }

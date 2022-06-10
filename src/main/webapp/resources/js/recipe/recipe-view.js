@@ -1,3 +1,10 @@
+$("#top_btn").on("click", () => {
+    $('html, body').animate({
+        scrollTop : 0
+    }, 1000);
+    return false;
+});
+
 function link_copy(){
     var url = '';
     var textarea = document.createElement("textarea");

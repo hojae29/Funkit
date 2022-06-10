@@ -21,4 +21,14 @@ public class FavoriteServiceImpl implements FavoriteService {
         dao.updateCnt(favorite);
     }
 
+    @Override
+    public int likeCheck(Favorite favorite) {
+        return dao.likeCheck(favorite);
+    }
+
+    @Override
+    public void deleteLike(Favorite favorite) {
+        dao.deleteLike(favorite);
+    }
+
 }

@@ -16,97 +16,86 @@
 <div>
     <jsp:include page="../header.jsp"/>
     <div id="all">
-        <div>
+        <div id="main_contents">
             <div>
-                <div>
-                    <p id="recipe_tit">${recipe.title}</p>
+                <div id="title_area">
+                    <h1>${recipe.title}</h1>
                 </div>
-                <div>
-                    <p id="writer_id">${recipe.id}</p>
+                <div id="tag_area">
+                    <img src="/resources/img/icon/tag_icon.svg">
+                    <p>
+                        <c:forEach var="tag" items="${recipe.tags}">
+                            ${tag.name}
+                        </c:forEach>
+                    </p>
+                </div>
+                <div id="main_img_area">
+                    <img id="main_img" src="${recipe.mainImage.location}${recipe.mainImage.name}"/>
                 </div>
             </div>
-            <div id="info_all">
+            <div id="info_area">
                 <div>
-                    <div id="main_img" style="background-image: url('${recipe.mainImage.location}${recipe.mainImage.name}')"></div>
+
                 </div>
-                <div id="info_area">
-                    <div id="recipe_info">
-                        <p>레시피 정보</p>
-                    </div>
-                    <div id="intro">
+
+                <div>
+                    <p id="recipe_intro_tit">레시피 소개</p>
+                    <div id="intro_area">
                         <p>${recipe.intro}</p>
                     </div>
-                    <dvi id="position_bottom">
-                        <div id="tag_area">
-                            <div>
-                                <img src="/resources/img/icon/tag_icon.svg">
-                            </div>
-                            <div>
-                                <p>
-                                    <c:forEach var="tag" items="${recipe.tags}">
-                                        ${tag.name}
-                                    </c:forEach>
-                                </p>
-                            </div>
-                        </div>
-                        <div id="sub_info">
-                            <div id="time_area">
-                                <div>
-                                    <img src="/resources/img/recipe/time.PNG">
-                                </div>
-                                <div>
+                </div>
 
-                                </div>
-                                <div id="time_txt">
-                                    <div>
-                                        <p>소요시간</p>
-                                    </div>
-                                    <div>
-                                        <p>약 ${recipe.takes}분</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div>
-                                <div class="sub_order">
-                                    <div>
-                                        <img src="/resources/img/recipe/love.PNG">
-                                    </div>
-                                    <div>
-                                        <p>관심수</p>
-                                    </div>
-                                    <div>
-                                        <p>${recipe.favoriteCnt}</p>
-                                    </div>
-                                </div>
-                                <div class="sub_order">
-                                    <div>
-                                        <img src="/resources/img/recipe/view.PNG">
-                                    </div>
-                                    <div>
-                                        <p>조회수</p>
-                                    </div>
-                                    <div>
-                                        <p>${recipe.view}</p>
-                                    </div>
-                                </div>
-                                <div class="sub_order" onclick="link_copy(); return false;">
-                                    <div>
-                                        <img src="/resources/img/recipe/link.PNG">
-                                    </div>
-                                    <div>
-                                        <p>링크 복사하기</p>
-                                    </div>
-                                </div>
-                            </div>
+                <div>
+                    <div id="time_area">
+                        <div>
+                            <img src="/resources/img/recipe/time.PNG">
                         </div>
-                        <div id="like_btn" onclick="like_btn()">
-                            <p>관심 레시피 등록</p>
+                        <div style="margin-left:10px;">
+                            <p>소요시간 약 ${recipe.takes} 분</p>
                         </div>
-                    </dvi>
+                    </div>
+                </div>
+
+                <div class="info_area">
+                    <div id="link_area" onclick="link_copy(); return false;">
+                        <img src="/resources/img/recipe/link.PNG"/>
+                    </div>
+
+                    <div class="viewLike">
+                        <div class="sub_img_box">
+                            <img src="/resources/img/recipe/love.PNG">
+                        </div>
+                        <div class="sub_info_area">
+                            <p>${recipe.favoriteCnt}</p>
+                        </div>
+                    </div>
+
+                    <div class="viewLike">
+                        <div class="sub_img_box">
+                            <img src="/resources/img/recipe/view.PNG">
+                        </div>
+                        <div class="sub_info_area">
+                            <p>${recipe.view}</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <button type="button" id="like_btn" onclick="like_btn()">레시피 찜하기</button>
+                </div>
+                <div>
+                    <p class="maker_info_text">메이커 정보</p>
+                    <div class="maker_box">
+                        <div class="company_profile_img"></div>
+                        <div>
+                            <p class="company_name">${recipe.id}</p>
+                            <p class="company_info"></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div id="ingredient">
+       <div id="ingredient">
             <div class="sub_tit">
                 <p>재료</p>
             </div>
@@ -131,7 +120,7 @@
                                 <p>${cook.cookingSeq}</p>
                             </div>
                             <div class="order_info_area">
-                                <p>${cook.cookingProcess}</p>
+                                <p>${cook.cookingExplain}</p>
                             </div>
                             <div class="order_img_area">
                                 <img src="${cook.location}${cook.fileName}">
@@ -142,10 +131,13 @@
             </div>
         </div>
     </div>
+    <div id="top_btn">
+        TOP
+    </div>
     <jsp:include page="../footer.jsp"/>
-    <script src="/resources/js/recipe/link-copy.js"></script>
     <script>
         function like_btn(){
+
             if (${sessionScope.member.id == null}){
                 alert("관심 기능은 로그인 후 이용 가능합니다.")
             }
@@ -156,14 +148,26 @@
                 $.ajax({
                     url:"/recipe/favoriteAjaxAction",
                     type:"POST",
+                    // type:"GET",
                     data:{
                         code : ${recipe.recipeCode}
                     },
-                    dataType:"json"
+                    dataType:"json",
+                    success:function (likeCheck){
+                        if(likeCheck == 0) {
+                            alert("관심 레시피로 등록하였습니다.");
+                            location.reload();
+                        }else if (likeCheck==1){
+                            alert("관심 레시피를 취소하셨습니다.");
+                            location.reload();
+                        }
+                    }
                 })
+
             }
         }
     </script>
+    <script src="/resources/js/recipe/recipe-view.js" />
 </div>
 </body>
 </html>

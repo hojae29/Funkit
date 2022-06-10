@@ -6,4 +6,8 @@ public interface FavoriteDao {
     void updateLike(Favorite favorite);
 
     void updateCnt(Favorite favorite);
+
+    int likeCheck(Favorite favorite);
+
+    void deleteLike(Favorite favorite);
 }
