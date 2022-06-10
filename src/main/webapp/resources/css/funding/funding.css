@@ -62,7 +62,6 @@
 .sub_title{
     font-size: 30px;
     font-weight: bold;
-    margin-bottom: 16px;
 }
 
 .card_box{
@@ -76,7 +75,7 @@
 }
 
 .card_box:hover{
-    transform: scale(1.02);
+    transform: scale(1.1);
     background-color: #e4e4e4;
 }
 
@@ -96,19 +95,24 @@
 }
 
 .search_box{
-    width: 230px;
-    border-bottom: 1px solid #888888;
+    display: flex;
+    justify-content: flex-end;
+    gap: 25px;
 }
 
 #search_input{
-    width: 230px;
+    width: 200px;
     height: 35px;
     border: none;
+    border-bottom: 1px solid black;
+    outline: none;
 }
 
 .tag_sub_container{
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
 }
 
 .tag_text{
@@ -121,7 +125,7 @@
     margin: 0 auto;
     display:grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 28px;
+    gap: 32px;
 }
 
 .funding_item{
@@ -187,6 +191,13 @@
     border: none;
     border-radius: 5px;
     transition: all 0.2s ease-in-out;
+}
+
+.tag_box_hover{
+    background-color: #494949;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
 .tag_box_wrap{

@@ -100,7 +100,12 @@
 }
 
 .content_box > div{
-    width: 95%;
-    height: 95%;
+    width: calc(100% - 30px);
+    height: calc(100% - 30px);
     background: white;
+}
+
+.table{
+    width: 80% !important;
+    margin: 0 auto;
 }

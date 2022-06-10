@@ -83,11 +83,15 @@
               ft.tag_code = t.tag_code AND
               status_code = 40 AND
               s.funding_code = f.funding_code
-              <if test="tagCode != (null || 0)">
+              <if test="tagCode != null">
                   AND
                   f.funding_code in (SELECT funding.funding_code
                                      FROM funding, funding_tag
                                      WHERE funding.funding_code = funding_tag.funding_code AND tag_code=#{tagCode})
+              </if>
+              <if test="keyword != null">
+                  AND
+                  title LIKE CONCAT('%',#{keyword},'%')
               </if>
         ORDER BY f.funding_code DESC;
     </select>

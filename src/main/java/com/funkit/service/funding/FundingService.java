@@ -16,7 +16,7 @@ public interface FundingService {
 
     Funding<Image> getFundingByFundingCode(int fundingCode);
 
-    List<Funding<Image>> getFundingList(int tagCode);
+    List<Funding<Image>> getFundingList(Integer tagCode, String keyword);
 
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 

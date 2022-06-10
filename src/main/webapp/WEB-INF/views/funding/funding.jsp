@@ -34,7 +34,7 @@
 
         </div>
         <div class="planning_container">
-            <div><p class="sub_title">이번 주 기획전</p></div>
+            <div style="margin-bottom: 16px;"><p class="sub_title">이번 주 기획전</p></div>
             <div class="card_box_container">
                 <div class="card_box" style="background-image: url('/resources/img/funding_banner/1.png')"></div>
                 <div class="card_box" style="background-image: url('/resources/img/funding_banner/2.png')"></div>
@@ -49,14 +49,20 @@
                 <div><p class="sub_title">태그별로 보기</p></div>
                 <div>
                     <div class="search_box">
-                        <input id="search_input" type="text" placeholder="검색하기">
+                        <select style="border: none; outline: none;">
+                            <option value="1">최신순</option>
+                            <option value="2">오래된순</option>
+                        </select>
+                        <form method="get">
+                            <input id="search_input" type="text" name="keyword" placeholder="검색하기">
+                        </form>
                     </div>
                 </div>
             </div>
             <div class="tag_box_wrap">
-                <a href="/funding?tagCode=0"><div class="tag_box">#전체</div></a>
+                <a href="/funding"><div class="tag_box" data-tagCode="0">#전체</div></a>
                 <c:forEach var="tag" items="${tagList}">
-                    <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box">#${tag.name}</div></a>
+                    <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box" data-tagCode="${tag.tagCode}">#${tag.name}</div></a>
                 </c:forEach>
             </div>
         </div>
@@ -85,5 +91,14 @@
     <jsp:include page="../footer.jsp"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
+    <script>
+        const url = new URL(window.location.href);
+        let tagCode = url.searchParams.get("tagCode");
+        if(tagCode === null)
+            tagCode = 0;
+
+        $(".tag_box[data-tagCode=" + tagCode +"]").addClass("tag_box_hover");
+        $("#search_input").val(url.searchParams.get("keyword"));
+    </script>
 </body>
 </html>

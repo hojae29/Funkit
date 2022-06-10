@@ -27,16 +27,22 @@ public class FundingController {
     }
 
     @GetMapping("")
-    public String funding(@RequestParam(value = "tagCode", required = false, defaultValue = "0") int tagCode,
-                          Model model){
-
-        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode);
+    public String funding(Integer tagCode, String keyword, Model model){
+        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword);
         List<Tag> tagList = tagService.getTagList();
 
         model.addAttribute("fundingList", fundingList);
         model.addAttribute("tagList", tagList);
 
         return "/funding/funding";
+    }
+
+    @ResponseBody
+    @GetMapping("/test")
+    public List<Funding<Image>> test(Integer tagCode, String keyword){
+        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword);
+
+        return fundingList;
     }
 
     @RequestMapping("/{fundingCode}")
