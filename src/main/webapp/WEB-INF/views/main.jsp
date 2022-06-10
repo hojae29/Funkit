@@ -536,7 +536,7 @@
             </a>
         </div>
     </div>
-
+    <script src="/resources/js/slide.js"></script>
     <jsp:include page="footer.jsp"/>
 </div>
 </html>
