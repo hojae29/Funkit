@@ -96,7 +96,7 @@ public class RecipeController {
                       @RequestParam(value = "ingreQua",required = false) List<String> ingreQua,
                       @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage,
                       @RequestParam(value = "cookingSeq",required = false) List<Integer> cookingSeq,
-                      @RequestParam(value = "cookingInfo",required = false)List<String> cookingInfo){
+                      @RequestParam(value = "cookingExplain",required = false)List<String> cookingExplain){
 
         String subPath = "D:/upload/recipe/" +recipeCode + "/cookImage/";
         String subLocation = "/upload/recipe/" +recipeCode + "/cookImage/";
@@ -109,7 +109,7 @@ public class RecipeController {
         if(subImage != null){
             for(var indexSeq : cookingSeq){
                 System.out.println("seqNum:"+ seqNum);
-                for(var indexInfo : cookingInfo) {
+                for(var indexInfo : cookingExplain) {
                     System.out.println("processNum:"+ processNum);
                     for (MultipartFile multipartFile : subImage) {
                         System.out.println("imgNum:"+ imgNum);
@@ -128,6 +128,7 @@ public class RecipeController {
                                 e.printStackTrace();
                             }
                             cookingList.add(new Cooking(indexSeq, indexInfo, uploadSubName, size, subLocation));
+//                            cookingList.add(new Cooking(indexSeq, indexInfo));
                             System.out.println(cookingList);
                         }
                         imgNum = imgNum+1;

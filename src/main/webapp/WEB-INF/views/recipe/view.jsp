@@ -120,7 +120,7 @@
                                 <p>${cook.cookingSeq}</p>
                             </div>
                             <div class="order_info_area">
-                                <p>${cook.cookingInfo}</p>
+                                <p>${cook.cookingExplain}</p>
                             </div>
                             <div class="order_img_area">
                                 <img src="${cook.location}${cook.fileName}">

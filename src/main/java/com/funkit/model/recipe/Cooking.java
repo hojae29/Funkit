@@ -3,15 +3,15 @@ package com.funkit.model.recipe;
 public class Cooking {
     private int code;
     private int cookingSeq;
-    private String cookingInfo;
+    private String cookingExplain;
 
     private String fileName;
     private long size;
     private String location;
 
-    public Cooking (int cookingSeq, String cookingInfo, String fileName, long size, String location){
+    public Cooking (int cookingSeq, String cookingExplain, String fileName, long size, String location){
         this.cookingSeq=cookingSeq;
-        this.cookingInfo=cookingInfo;
+        this.cookingExplain=cookingExplain;
         this.fileName=fileName;
         this.size=size;
         this.location=location;
@@ -33,12 +33,12 @@ public class Cooking {
         this.cookingSeq = cookingSeq;
     }
 
-    public String getCookingInfo() {
-        return cookingInfo;
+    public String getCookingExplain() {
+        return cookingExplain;
     }
 
-    public void setCookingInfo(String cookingInfo) {
-        this.cookingInfo = cookingInfo;
+    public void setCookingExplain(String cookingExplain) {
+        this.cookingExplain = cookingExplain;
     }
 
     public String getFileName() {
@@ -70,7 +70,7 @@ public class Cooking {
         return "Cooking{" +
                 "code=" + code +
                 ", cookingSeq=" + cookingSeq +
-                ", cookingInfo='" + cookingInfo + '\'' +
+                ", cookingExplain='" + cookingExplain + '\'' +
                 ", fileName='" + fileName + '\'' +
                 ", size=" + size +
                 ", location='" + location + '\'' +
