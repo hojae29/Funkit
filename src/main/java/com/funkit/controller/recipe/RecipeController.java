@@ -36,6 +36,7 @@ public class RecipeController {
     @Autowired
     FavoriteService favoriteService;
 
+
     @GetMapping("")
     public String list(Model model){
         List<Recipe> recipe = service.list();
@@ -95,7 +96,7 @@ public class RecipeController {
                       @RequestParam(value = "ingreQua",required = false) List<String> ingreQua,
                       @RequestParam(value = "subImage",required = false) List<MultipartFile> subImage,
                       @RequestParam(value = "cookingSeq",required = false) List<Integer> cookingSeq,
-                      @RequestParam(value = "cookingProcess",required = false)List<String> cookingProcess){
+                      @RequestParam(value = "cookingInfo",required = false)List<String> cookingInfo){
 
         String subPath = "D:/upload/recipe/" +recipeCode + "/cookImage/";
         String subLocation = "/upload/recipe/" +recipeCode + "/cookImage/";
@@ -108,7 +109,7 @@ public class RecipeController {
         if(subImage != null){
             for(var indexSeq : cookingSeq){
                 System.out.println("seqNum:"+ seqNum);
-                for(var indexProcess : cookingProcess) {
+                for(var indexInfo : cookingInfo) {
                     System.out.println("processNum:"+ processNum);
                     for (MultipartFile multipartFile : subImage) {
                         System.out.println("imgNum:"+ imgNum);
@@ -126,7 +127,7 @@ public class RecipeController {
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
-                            cookingList.add(new Cooking(indexSeq, indexProcess, uploadSubName, size, subLocation));
+                            cookingList.add(new Cooking(indexSeq, indexInfo, uploadSubName, size, subLocation));
                             System.out.println(cookingList);
                         }
                         imgNum = imgNum+1;
@@ -191,7 +192,6 @@ public class RecipeController {
     public String view(@PathVariable int recipeCode, Model model){
         Recipe<Image> recipe = service.recipeView(recipeCode);
         model.addAttribute("recipe",recipe);
-
 
         System.out.println(recipe);
         service.updateView(recipeCode);

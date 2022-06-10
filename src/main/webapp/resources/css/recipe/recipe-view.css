@@ -315,3 +315,29 @@ h1 {
 #link_btn{
     cursor: pointer;
 }
+
+
+#top_btn{
+    font-size: 18px;
+    width: 55px;
+    height: 55px;
+    border: 2px solid #000000;
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #000000;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.4s ease-in-out;
+}
+
+#top_btn:hover{
+    border-radius: 50%;
+    background-color: #888888;
+    border: none;
+    color: white;
+}

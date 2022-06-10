@@ -120,7 +120,7 @@
                                 <p>${cook.cookingSeq}</p>
                             </div>
                             <div class="order_info_area">
-                                <p>${cook.cookingProcess}</p>
+                                <p>${cook.cookingInfo}</p>
                             </div>
                             <div class="order_img_area">
                                 <img src="${cook.location}${cook.fileName}">
@@ -131,8 +131,10 @@
             </div>
         </div>
     </div>
+    <div id="top_btn">
+        TOP
+    </div>
     <jsp:include page="../footer.jsp"/>
-    <script src="/resources/js/recipe/link-copy.js"></script>
     <script>
         function like_btn(){
 
@@ -165,6 +167,7 @@
             }
         }
     </script>
+    <script src="/resources/js/recipe/recipe-view.js" />
 </div>
 </body>
 </html>
