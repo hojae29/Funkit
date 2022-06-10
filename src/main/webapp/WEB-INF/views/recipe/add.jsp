@@ -33,7 +33,7 @@
                                 <label>소개</label>
                             </div>
                             <div class="align_input">
-                                <textarea type="text" name="intro" id="intro" class="long_text"></textarea>
+                                <textarea type="text" name="intro" id="intro" class="long_text" placeholder="레시피에 대해 간단한 소개를 적어주세요."></textarea>
                             </div>
                         </div>
                         <div class="align_info">

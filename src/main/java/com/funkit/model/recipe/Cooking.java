@@ -1,7 +1,5 @@
 package com.funkit.model.recipe;
 
-import org.w3c.dom.Text;
-
 public class Cooking {
     private int code;
     private int cookingSeq;

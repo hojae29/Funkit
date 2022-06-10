@@ -85,7 +85,6 @@ public class RecipeDaoImpl implements RecipeDao{
         recipe.setTags(tagList);
         recipe.setIngredients(ingredients);
 
-        System.out.println("all : "+recipe);
         return recipe;
     }
 

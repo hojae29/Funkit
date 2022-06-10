@@ -49,6 +49,7 @@ public class RecipeController {
         return path + "list";
     }
 
+
     @RequestMapping("/add")
     public String add(@SessionAttribute Member member,Recipe<MultipartFile> recipe){
 
@@ -71,6 +72,7 @@ public class RecipeController {
         return "redirect:add/" + recipeCode;
     }
 
+
     @GetMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode,Model model){
         //tag list 가져오기
@@ -84,6 +86,7 @@ public class RecipeController {
 
         return path + "add";
     }
+
 
     @PostMapping("/add/{recipeCode}")
     public String add(@PathVariable int recipeCode, Recipe<MultipartFile> recipe,
@@ -175,12 +178,14 @@ public class RecipeController {
         return "redirect:./../";
     }
 
+
     @GetMapping("/delete/{recipeCode}")
     public String delete(@PathVariable int recipeCode){
         service.delete(recipeCode);
 
         return "redirect:../";
     }
+
 
     @GetMapping("/{recipeCode}")
     public String view(@PathVariable int recipeCode, Model model){
@@ -193,6 +198,7 @@ public class RecipeController {
 
         return path + "view";
     }
+
 
     @PostMapping("/uploadAjaxAction/{recipeCode}")
     public void uploadAjaxAction(@PathVariable int recipeCode ,MultipartFile mainImage){
@@ -230,18 +236,6 @@ public class RecipeController {
 
 
     }
-
-//    @ResponseBody
-//    @PostMapping("/favoriteAjaxAction")
-//    public void favoriteAjaxAction(@RequestParam(value = "code") Integer code, @SessionAttribute Member member, Favorite favorite){
-//        favorite.setId(member.getId());
-//
-//        int recipeCode = code;
-//
-//        favorite.setRecipeCode(recipeCode);
-//        favoriteService.updateLike(favorite);
-//        favoriteService.updateCnt(favorite);
-//    }
 
 
     @ResponseBody
