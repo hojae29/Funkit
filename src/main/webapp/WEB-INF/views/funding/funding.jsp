@@ -60,9 +60,9 @@
                 </div>
             </div>
             <div class="tag_box_wrap">
-                <a href="/funding"><div class="tag_box" data-tagCode="0">#전체</div></a>
+                <div class="tag_box" data-tagCode="0">#전체</div>
                 <c:forEach var="tag" items="${tagList}">
-                    <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box" data-tagCode="${tag.tagCode}">#${tag.name}</div></a>
+                    <div class="tag_box" data-tag-code="${tag.tagCode}">#${tag.name}</div>
                 </c:forEach>
             </div>
         </div>
@@ -92,13 +92,29 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
     <script>
-        const url = new URL(window.location.href);
+ /*       const url = new URL(window.location.href);
         let tagCode = url.searchParams.get("tagCode");
         if(tagCode === null)
             tagCode = 0;
 
         $(".tag_box[data-tagCode=" + tagCode +"]").addClass("tag_box_hover");
-        $("#search_input").val(url.searchParams.get("keyword"));
+        $("#search_input").val(url.searchParams.get("keyword"));*/
+
+         $(".tag_box").on("click", function(){
+             $(".funding_container > .tag_box").remove();
+             $.ajax({
+                 url: window.location.pathname + "/filter?tagCode=" + $(this).data("tag-code"),
+                 method: "GET",
+                 success: result => {
+                     // $(".funding_container > .funding_item").fadeOut("normal", function() { $(this).remove(); });
+                     $(".funding_container > .funding_item").remove();
+
+                     result.forEach(item => {
+                     });
+                 },
+                 error: error => console.log(error)
+             });
+         });
     </script>
 </body>
 </html>
