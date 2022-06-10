@@ -1,0 +1,194 @@
+/*게시판 전체 CSS설정*/
+#notice_box {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    min-height: 200px;
+}
+
+#notice_box a {
+    text-decoration: none;
+}
+
+/* 공지사항 글씨 */
+h1 {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 50px;
+
+}
+
+/* 검색창 CSS */
+#board_top_content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+#board_top_content h2 {
+    font-size: 20px;
+    margin-left: 30px;
+}
+
+.bsch_box select {
+    border: 1px solid #c3c6d0;
+    height: 30px;
+    min-width: 88px;
+    margin-right: 4px;
+    width: auto;
+}
+
+.bsch_box {
+    display: flex;
+}
+
+.search input {
+    border: 1px solid #c3c6d0;
+    height: 28px;
+    width: 240px;
+    margin-right: 4px;
+
+}
+
+#board_top_button button {
+    padding: 0 11px;
+    background-color: #efefef;
+    color: #000;
+    border: none;
+    height: 30px;
+    background-color: #777;
+    color: #fff;
+}
+
+
+/* 게시판 table */
+.boardlist {
+    width: 100%;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    table-layout: fixed;
+}
+
+.boardlist a {
+    font-weight: 600;
+}
+
+/* 게시판 헤더 */
+/*.boardlist th{
+    height:30px;
+    font-size: 14px;
+    border-top:none;
+    border-left:none;
+    border-right:none;
+    border-bottom: 2px solid #333;
+}*/
+
+.c_table {
+    width: 1000px;
+    height: 20%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    /*    border-bottom: 1px solid #333;*/
+}
+
+/*
+.c_table thead {
+    border-bottom: 2px solid #333;
+    border-top: 1px solid #3;
+    height:30px;
+}
+*/
+.c_table th {
+    border-top: 1px solid #333333;
+    border-left: none;
+    border-right: none;
+    border-bottom: 1px solid #333333;
+    font-size: 18px;
+    height: 35px;
+}
+
+.table_b tr {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.table_b {
+    border-bottom: 1px solid #dcdbdb;
+    height: 50px;
+    border-right: none;
+}
+
+.table_b_center {
+    text-align: center;
+}
+
+.foot {
+    height: 50px;
+}
+
+
+#first-last {
+    border: none;
+    padding: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#pg-container {
+    text-align: center;
+    padding: 30px 0px 20px 0px;
+    border-top: 1px solid #dcdbdb;
+}
+
+
+/*
+#prev-next{
+   border:2px solid #ebe8e8;
+   border-radius:5px;
+   padding:10px;
+   font-size:14px;
+   font-weight:500;
+}
+*/
+
+/* 게시판 바디 */
+.boardlist tbody {
+    border: none;
+}
+
+.boardlist td {
+    border: none;
+}
+
+/* 페이지 네이션 */
+.bordlist .pa {
+    width: 800px;
+    display: flex;
+    text-align: center;
+}
+
+
+/* 버튼 */
+#add {
+    padding: 0 11px;
+    background-color: #efefef;
+    color: #000;
+    border: none;
+    height: 30px;
+    margin-top: 20px;
+}
+
+table_b > th:nth-child(1) {
+    width: 50px;
+}
+
+table_b > th:nth-child(3) {
+    width: 100px;
+}
+
+table_b > th:nth-child(4) {
+    width: 100px;
+}
