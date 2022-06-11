@@ -34,7 +34,7 @@
 
         </div>
         <div class="planning_container">
-            <div><p class="sub_title">이번 주 기획전</p></div>
+            <div style="margin-bottom: 16px;"><p class="sub_title">이번 주 기획전</p></div>
             <div class="card_box_container">
                 <div class="card_box" style="background-image: url('/resources/img/funding_banner/1.png')"></div>
                 <div class="card_box" style="background-image: url('/resources/img/funding_banner/2.png')"></div>
@@ -49,13 +49,18 @@
                 <div><p class="sub_title">태그별로 보기</p></div>
                 <div>
                     <div class="search_box">
-                        <input id="search_input" type="text" placeholder="검색하기">
+                        <select id="order_select" style="border: none; outline: none;">
+                            <option value="1">최신순</option>
+                            <option value="2">오래된순</option>
+                        </select>
+                        <input id="search_funding" type="text" name="keyword" placeholder="검색하기">
                     </div>
                 </div>
             </div>
             <div class="tag_box_wrap">
+                <div class="tag_box tag_box_hover" data-tag-code="0">#전체</div>
                 <c:forEach var="tag" items="${tagList}">
-                    <a href="/funding?tagCode=${tag.tagCode}"><div class="tag_box">#${tag.name}</div></a>
+                    <div class="tag_box" data-tag-code="${tag.tagCode}">#${tag.name}</div>
                 </c:forEach>
             </div>
         </div>
@@ -84,5 +89,87 @@
     <jsp:include page="../footer.jsp"/>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
+    <script>
+        function FundingFilter(tagCode){
+            let keyword = $("#search_funding").val(); //keyword
+            let order = $("#order_select").val(); //order
+
+            return "/funding/filter?tagCode=" + tagCode + "&keyword=" + keyword + "&order=" + order;
+        }
+
+         $(".tag_box").on("click", function(){
+             $(".funding_container > .tag_box").remove();
+             $.ajax({
+                 url: FundingFilter($(this).data("tag-code")),
+                 method: "GET",
+                 success: result => {
+                     makeFundingItem(result);
+
+                     $(".tag_box_hover").removeClass("tag_box_hover");
+                     $(".tag_box[data-tag-code=" + $(this).data("tag-code") + "]").addClass("tag_box_hover");
+                 },
+                 error: error => alert("불러오기 실패")
+             });
+         });
+
+         $("#search_funding").on("keyup", function(key){
+             if(key.keyCode === 13){ //Enter 누를 시
+                 $.ajax({
+                     url: FundingFilter($(".tag_box_hover").data("tag-code")),
+                     method: "GET",
+                     success: result => {
+                         makeFundingItem(result);
+                     },
+                     error: () => alert("불러오기 실패")
+                 });
+             }
+         });
+
+         $("#order_select").on("change", function(){
+             $.ajax({
+                 url: FundingFilter($(".tag_box_hover").data("tag-code")),
+                 method: "GET",
+                 success: result => {
+                     makeFundingItem(result);
+                 },
+                 error: () => alert("불러오기 실패")
+             });
+         });
+
+         function makeFundingItem(list){
+             let fundingItemHTML = "";
+             list.forEach(item => {
+                 let tags = "";
+                 item.tags.forEach(item => tags += item.name + " ");
+
+                 let html =  '<div class="funding_item">'+
+                     '    <a href="/funding/' + item.fundingCode + '"><div class="funding_img_box" style="background-image: url(' + item.mainImage.location + item.mainImage.name + ')"></div></a>'+
+                     '    <div class="funding_title_container">'+
+                     '        <a class="funding_title" href="/funding/' + item.fundingCode + '">' + item.title + '</a>'+
+                     '    </div>'+
+                     '    <div style="display: flex;">'+
+                     '        <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>'+
+                     '        <p class="tag_text">' + tags + '</p>'+
+                     '    </div>'+
+                     '    <div class="funding_percentage">'+
+                     '        <p>' + item.percentage + '%</p>'+
+                     '    </div>'+
+                     '    <div class="amount_container">'+
+                     '        <p>D-' + item.dday + '</p>'+
+                     '        <p>' + item.cmlAmount + '원</p>'+
+                     '    </div>'+
+                     '</div>';
+                 fundingItemHTML += html;
+             });
+
+             $(".funding_container > .funding_item").remove(); //기존 펀딩 삭제
+             $(fundingItemHTML).appendTo(".funding_container").hide().fadeIn(300); //새로 펀딩 추가
+         }
+
+         function tagBoxHover(tagCode){
+             $(".tag_box_hover").removeClass("tag_box_hover");
+             $(".tag_box[data-tag-code=" + tagCode + "]").addClass("tag_box_hover");
+         }
+    </script>
 </body>
 </html>

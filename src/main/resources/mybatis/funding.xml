@@ -83,13 +83,25 @@
               ft.tag_code = t.tag_code AND
               status_code = 40 AND
               s.funding_code = f.funding_code
-              <if test="tagCode != (null || 0)">
+              <if test="tagCode != null and tagCode != 0">
                   AND
                   f.funding_code in (SELECT funding.funding_code
                                      FROM funding, funding_tag
                                      WHERE funding.funding_code = funding_tag.funding_code AND tag_code=#{tagCode})
               </if>
-        ORDER BY f.funding_code DESC;
+              <if test="keyword != null">
+                  AND
+                  title LIKE CONCAT('%',#{keyword},'%')
+              </if>
+              <choose>
+                  <when test="order == 1">
+                      ORDER BY f.funding_code DESC;
+                  </when>
+                  <when test="order == 2">
+                      ORDER BY f.funding_code ASC;
+                  </when>
+                  <otherwise>ORDER BY f.funding_code DESC;</otherwise>
+              </choose>
     </select>
     <select id="getFundingListById" resultMap="fundingResultMap">
         SELECT f.funding_code, id, status, title, start_date, exp_date, target_amount, introduction, code, name as file_name, size, location

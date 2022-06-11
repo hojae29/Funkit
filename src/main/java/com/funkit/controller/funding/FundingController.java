@@ -27,10 +27,10 @@ public class FundingController {
     }
 
     @GetMapping("")
-    public String funding(@RequestParam(value = "tagCode", required = false, defaultValue = "0") int tagCode,
-                          Model model){
+    public String funding(Integer tagCode, String keyword, Integer order, Model model){
+        System.out.println(tagCode + keyword);
 
-        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode);
+        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword, order);
         List<Tag> tagList = tagService.getTagList();
 
         model.addAttribute("fundingList", fundingList);

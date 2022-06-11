@@ -90,8 +90,8 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public List<Funding<Image>> getFundingList(int tagCode) {
-        return fundingDao.getFundingList(tagCode);
+    public List<Funding<Image>> getFundingList(Integer tagCode, String keyword, Integer order) {
+        return fundingDao.getFundingList(tagCode, keyword, order);
     }
 
     @Override

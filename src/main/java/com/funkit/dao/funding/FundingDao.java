@@ -25,7 +25,7 @@ public interface FundingDao {
 
     void updateMainImage(int fundingCode, Image image);
 
-    List<Funding<Image>> getFundingList(int tagCode);
+    List<Funding<Image>> getFundingList(Integer tagCode, String keyword, Integer order);
 
     List<Funding<Image>> getFundingListById(String id, Pager pager);
 
