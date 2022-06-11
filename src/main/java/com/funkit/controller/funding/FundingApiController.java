@@ -2,6 +2,7 @@ package com.funkit.controller.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
+import com.funkit.model.Order;
 import com.funkit.service.TagService;
 import com.funkit.service.funding.FundingService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,8 +24,8 @@ public class FundingApiController {
     }
 
     @GetMapping("")
-    public List<Funding<Image>> funding(Integer tagCode, String keyword){
-        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword);
+    public List<Funding<Image>> funding(Integer tagCode, String keyword, Integer order){
+        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword, order);
 
         return fundingList;
     }

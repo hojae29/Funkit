@@ -49,7 +49,7 @@
                 <div><p class="sub_title">태그별로 보기</p></div>
                 <div>
                     <div class="search_box">
-                        <select style="border: none; outline: none;">
+                        <select id="order_select" style="border: none; outline: none;">
                             <option value="1">최신순</option>
                             <option value="2">오래된순</option>
                         </select>
@@ -90,10 +90,17 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
     <script>
+        function FundingFilter(tagCode){
+            let keyword = $("#search_funding").val(); //keyword
+            let order = $("#order_select").val(); //order
+
+            return "/funding/filter?tagCode=" + tagCode + "&keyword=" + keyword + "&order=" + order;
+        }
+
          $(".tag_box").on("click", function(){
              $(".funding_container > .tag_box").remove();
              $.ajax({
-                 url: window.location.pathname + "/filter?tagCode=" + $(this).data("tag-code"),
+                 url: FundingFilter($(this).data("tag-code")),
                  method: "GET",
                  success: result => {
                      makeFundingItem(result);
@@ -108,7 +115,7 @@
          $("#search_funding").on("keyup", function(key){
              if(key.keyCode === 13){ //Enter 누를 시
                  $.ajax({
-                     url: window.location.pathname + "/filter?keyword=" + $(this).val(),
+                     url: FundingFilter($(".tag_box_hover").data("tag-code")),
                      method: "GET",
                      success: result => {
                          makeFundingItem(result);
@@ -116,6 +123,17 @@
                      error: () => alert("불러오기 실패")
                  });
              }
+         });
+
+         $("#order_select").on("change", function(){
+             $.ajax({
+                 url: FundingFilter($(".tag_box_hover").data("tag-code")),
+                 method: "GET",
+                 success: result => {
+                     makeFundingItem(result);
+                 },
+                 error: () => alert("불러오기 실패")
+             });
          });
 
          function makeFundingItem(list){

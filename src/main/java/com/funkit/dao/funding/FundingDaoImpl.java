@@ -99,10 +99,11 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public List<Funding<Image>> getFundingList(Integer tagCode, String keyword) {
+    public List<Funding<Image>> getFundingList(Integer tagCode, String keyword, Integer order) {
         Map map = new HashMap();
         map.put("tagCode", tagCode);
         map.put("keyword", keyword);
+        map.put("order", order);
 
         return sql.selectList("funding.getFundingList", map);
     }
