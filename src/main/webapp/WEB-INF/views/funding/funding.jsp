@@ -53,14 +53,12 @@
                             <option value="1">최신순</option>
                             <option value="2">오래된순</option>
                         </select>
-                        <form method="get">
-                            <input id="search_input" type="text" name="keyword" placeholder="검색하기">
-                        </form>
+                        <input id="search_funding" type="text" name="keyword" placeholder="검색하기">
                     </div>
                 </div>
             </div>
             <div class="tag_box_wrap">
-                <div class="tag_box" data-tagCode="0">#전체</div>
+                <div class="tag_box tag_box_hover" data-tag-code="0">#전체</div>
                 <c:forEach var="tag" items="${tagList}">
                     <div class="tag_box" data-tag-code="${tag.tagCode}">#${tag.name}</div>
                 </c:forEach>
@@ -92,29 +90,51 @@
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="/resources/js/swiper.js"></script>
     <script>
- /*       const url = new URL(window.location.href);
-        let tagCode = url.searchParams.get("tagCode");
-        if(tagCode === null)
-            tagCode = 0;
-
-        $(".tag_box[data-tagCode=" + tagCode +"]").addClass("tag_box_hover");
-        $("#search_input").val(url.searchParams.get("keyword"));*/
-
          $(".tag_box").on("click", function(){
              $(".funding_container > .tag_box").remove();
              $.ajax({
                  url: window.location.pathname + "/filter?tagCode=" + $(this).data("tag-code"),
                  method: "GET",
                  success: result => {
-                     // $(".funding_container > .funding_item").fadeOut("normal", function() { $(this).remove(); });
-                     $(".funding_container > .funding_item").remove();
+                     let fundingItemHTML = "";
 
                      result.forEach(item => {
+                         let tags = "";
+                         item.tags.forEach(item => tags += item.name + " ");
+
+                         let html =  '<div class="funding_item">'+
+                                     '    <a href="/funding/' + item.fundingCode + '"><div class="funding_img_box" style="background-image: url(' + item.mainImage.location + item.mainImage.name + ')"></div></a>'+
+                                     '    <div class="funding_title_container">'+
+                                     '        <a class="funding_title" href="/funding/' + item.fundingCode + '">' + item.title + '</a>'+
+                                     '    </div>'+
+                                     '    <div style="display: flex;">'+
+                                     '        <img class="tag_icon" src="/resources/img/icon/tag_icon.svg"/>'+
+                                     '        <p class="tag_text">' + tags + '</p>'+
+                                     '    </div>'+
+                                     '    <div class="funding_percentage">'+
+                                     '        <p>' + item.percentage + '%</p>'+
+                                     '    </div>'+
+                                     '    <div class="amount_container">'+
+                                     '        <p>D-' + item.dday + '</p>'+
+                                     '        <p>' + item.cmlAmount + '원</p>'+
+                                     '    </div>'+
+                                     '</div>';
+
+                         fundingItemHTML += html;
                      });
+
+                     $(".funding_container > .funding_item").remove();
+                     $(fundingItemHTML).appendTo(".funding_container").hide().fadeIn(300);
+                     tagBoxHover($(this).data("tag-code"));
                  },
                  error: error => console.log(error)
              });
          });
+
+         function tagBoxHover(tagCode){
+             $(".tag_box_hover").removeClass("tag_box_hover");
+             $(".tag_box[data-tag-code=" + tagCode + "]").addClass("tag_box_hover");
+         }
     </script>
 </body>
 </html>

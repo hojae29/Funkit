@@ -28,6 +28,8 @@ public class FundingController {
 
     @GetMapping("")
     public String funding(Integer tagCode, String keyword, Model model){
+        System.out.println(tagCode + keyword);
+
         List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword);
         List<Tag> tagList = tagService.getTagList();
 

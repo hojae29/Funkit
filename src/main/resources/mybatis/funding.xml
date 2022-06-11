@@ -83,7 +83,7 @@
               ft.tag_code = t.tag_code AND
               status_code = 40 AND
               s.funding_code = f.funding_code
-              <if test="tagCode != null">
+              <if test="tagCode != null and tagCode != 0">
                   AND
                   f.funding_code in (SELECT funding.funding_code
                                      FROM funding, funding_tag
