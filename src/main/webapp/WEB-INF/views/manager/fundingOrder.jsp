@@ -37,21 +37,25 @@
                     <table class="table table-striped">
                         <thead>
                         <tr>
-                            <th scope="col" style="width: 10%;">코드</th>
-                            <th scope="col" style="width: 60%;">제목</th>
-                            <th scope="col" style="width: 15%;">상호명</th>
-                            <th scope="col" style="width: 15%;">관리</th>
+                            <th scope="col">주문번호</th>
+                            <th scope="col">아이디</th>
+                            <th scope="col">종류</th>
+                            <th scope="col">카드번호</th>
+                            <th scope="col">유효기간</th>
+                            <th scope="col">생년월일</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="item" items="${list}">
                             <tr>
                                 <th scope="row" class="funding_code">${item.fundingCode}</th>
-                                <td>${item.title}</td>
                                 <td>${item.id}</td>
+                                <td>${item.type}</td>
+                                <td>${item.cardNumber}</td>
+                                <td>${item.expiry}</td>
+                                <td>${item.birth}</td>
                                 <td>
-                                    <button id="approval_btn" class="btn btn-sm btn-primary">승인</button>
-                                    <button class="btn btn-sm btn-danger">거절</button>
+                                    <a href="/mgr/funding/payment/${item.orderCode}"><button class="btn btn-sm btn-primary">결제</button></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -63,16 +67,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-        $("#approval_btn").on("click", function(){
-            let code = $(this).closest("td").siblings('.funding_code').text();
-
-            $.ajax({
-                url: "/mgr/funding/" + code + "/approval",
-                method: "PATCH",
-                success: result => window.location.reload(),
-                error: error => console.log("승인실패")
-            });
-        });
     </script>
 </body>
 </html>

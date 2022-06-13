@@ -22,18 +22,18 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public ResponseEntity addOrder(PayInfo payInfo) {
-        orderDao.addOrder(payInfo);
+    public ResponseEntity addOrder(Order order) {
+        orderDao.addOrder(order);
         return new JsonResponse<>(HttpStatus.CREATED, "order success").toResponseEntity();
     }
 
     @Override
-    public List<Order> getOrderListById(String id) {
+    public List<PayInfo> getOrderListById(String id) {
         return orderDao.getOrderListById(id);
     }
 
     @Override
-    public Order getOrderByOrderCode(int orderCode) {
+    public PayInfo getOrderByOrderCode(int orderCode) {
 
         return orderDao.getOrderByOrderCode(orderCode);
     }
@@ -47,5 +47,10 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public int getOrderCount(String id) {
         return orderDao.getOrderCount(id);
+    }
+
+    @Override
+    public List<Order> findOrderListByFundingCode(int fundingCode) {
+        return orderDao.findOrderListByFundingCode(fundingCode);
     }
 }

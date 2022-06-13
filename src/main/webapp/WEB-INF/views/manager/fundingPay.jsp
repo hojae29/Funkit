@@ -50,8 +50,7 @@
                                 <td>${item.title}</td>
                                 <td>${item.id}</td>
                                 <td>
-                                    <button id="approval_btn" class="btn btn-sm btn-primary">승인</button>
-                                    <button class="btn btn-sm btn-danger">거절</button>
+                                    <a href="/mgr/funding/${item.fundingCode}/order"><button class="btn btn-sm btn-primary">이동</button></a>
                                 </td>
                             </tr>
                         </c:forEach>
@@ -63,16 +62,6 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     <script>
-        $("#approval_btn").on("click", function(){
-            let code = $(this).closest("td").siblings('.funding_code').text();
-
-            $.ajax({
-                url: "/mgr/funding/" + code + "/approval",
-                method: "PATCH",
-                success: result => window.location.reload(),
-                error: error => console.log("승인실패")
-            });
-        });
     </script>
 </body>
 </html>

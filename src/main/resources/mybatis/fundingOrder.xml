@@ -17,7 +17,7 @@
         VALUES (#{orderCode}, #{totalAmount}, 10)
     </insert>
 
-    <select id="getOrderListById" resultType="Order">
+    <select id="getOrderListById" resultType="PayInfo">
         SELECT distinct fo.order_code, TYPE, title, corporate_name, f.status AS funding_status, ro.status AS order_status
         FROM funding_order fo, (SELECT f.funding_code, f.title, m.corporate_name, fs.status
                                 FROM funding f, member m, funding_status fs
@@ -28,7 +28,7 @@
         ORDER BY fo.order_code DESC
     </select>
 
-    <select id="getOrderByOrderCode" resultType="Order">
+    <select id="getOrderByOrderCode" resultType="PayInfo">
         SELECT distinct fo.order_code, TYPE, title, corporate_name, f.status AS funding_status, ro.status AS order_status, fo.pay_date
         FROM funding_order fo, (SELECT f.funding_code, f.title, m.corporate_name, fs.status
                                 FROM funding f, member m, funding_status fs
@@ -54,5 +54,11 @@
         SELECT COUNT(*)
         FROM funding_order
         WHERE id = #{id};
+    </select>
+
+    <select id="findOrderListByFundingCode" resultType="Order">
+        SELECT *
+        FROM funding_order NATURAL JOIN reward_order
+        WHERE funding_code = #{fundingCode} AND status_code != 50;
     </select>
 </mapper>

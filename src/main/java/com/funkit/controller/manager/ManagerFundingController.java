@@ -2,14 +2,13 @@ package com.funkit.controller.manager;
 
 
 import com.funkit.model.Funding;
-import com.funkit.service.manager.ManagerService;
+import com.funkit.service.funding.FundingService;
+import com.funkit.service.funding.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,24 +16,42 @@ import java.util.List;
 @RequestMapping("/mgr/funding")
 public class ManagerFundingController {
 
-    final ManagerService managerService;
+    final FundingService fundingService;
+    final OrderService orderService;
 
-    public ManagerFundingController(ManagerService managerService) {
-        this.managerService = managerService;
+    public ManagerFundingController(FundingService fundingService, OrderService orderService) {
+        this.fundingService = fundingService;
+        this.orderService = orderService;
     }
 
-    @RequestMapping("")
-    public String fundingManagement(Model model){
+    @GetMapping("/approval")
+    public String moveFundingApprovalPage(Model model){
 
-        List<Funding> list = managerService.getApprovalReqFundingList();
+        var list = fundingService.findFundingByStatusCode(20);
         model.addAttribute("list", list);
 
         return "/manager/funding";
     }
 
+    @GetMapping("/payment")
+    public String moveFundingPaymentMgrPage(Model model){
+
+        var list = fundingService.findFundingByStatusCode(50);
+        model.addAttribute("list", list);
+
+        return "/manager/fundingPay";
+    }
+
+    @GetMapping("/{fundingCode}/order")
+    public String moveFundingOrderMgrPage(@PathVariable int fundingCode, Model model){
+        var list = orderService.findOrderListByFundingCode(fundingCode);
+        model.addAttribute("list", list);
+        return "manager/fundingOrder";
+    }
+
     @ResponseBody
-    @PatchMapping("/{code}")
-    public ResponseEntity fundingApproval(@PathVariable int code){
-        return managerService.fundingApproval(code);
+    @PatchMapping("/{fundingCode}/approval")
+    public ResponseEntity fundingApproval(@PathVariable int fundingCode){
+        return fundingService.updateFundingStatusCode(fundingCode, 30);
     }
 }

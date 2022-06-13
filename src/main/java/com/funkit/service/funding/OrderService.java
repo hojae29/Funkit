@@ -7,13 +7,15 @@ import org.springframework.http.ResponseEntity;
 import java.util.List;
 
 public interface OrderService {
-    ResponseEntity addOrder(PayInfo payInfo);
+    ResponseEntity addOrder(Order order);
 
-    List<Order> getOrderListById(String id);
+    List<PayInfo> getOrderListById(String id);
 
-    Order getOrderByOrderCode(int orderCode);
+    PayInfo getOrderByOrderCode(int orderCode);
 
     ResponseEntity changeOrderStatus(int orderCode, int statusCode);
 
     int getOrderCount(String id);
+
+    List<Order> findOrderListByFundingCode(int fundingCode);
 }

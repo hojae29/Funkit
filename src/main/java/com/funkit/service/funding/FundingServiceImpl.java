@@ -109,11 +109,6 @@ public class FundingServiceImpl implements FundingService {
     }
 
     @Override
-    public void fundingApprovalReq(int fundingCode, int status) {
-        fundingDao.fundingApprovalReq(fundingCode, status);
-    }
-
-    @Override
     public int getFundingUserCount(int fundingCode) {
         return fundingDao.getFundingUserCount(fundingCode);
     }
@@ -121,6 +116,17 @@ public class FundingServiceImpl implements FundingService {
     @Override
     public Member getMaker(int fundingCode) {
         return fundingDao.getMaker(fundingCode);
+    }
+
+    @Override
+    public List<Funding> findFundingByStatusCode(int statusCode) {
+        return fundingDao.findFundingByStatusCode(statusCode);
+    }
+
+    @Override
+    public ResponseEntity updateFundingStatusCode(int fundingCode, int statusCode) {
+        fundingDao.updateFundingStatusCode(fundingCode, statusCode);
+        return new JsonResponse<>(HttpStatus.OK, "ok").toResponseEntity();
     }
 
     public Image makeImage(MultipartFile file, String location){

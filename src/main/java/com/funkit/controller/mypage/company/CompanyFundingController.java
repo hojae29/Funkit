@@ -84,8 +84,8 @@ public class CompanyFundingController {
     }
 
     @RequestMapping("/{fundingCode}/approval")
-    public String fundingApprovalReq(@PathVariable int fundingCode, @RequestParam("status") int status){
-        fundingService.fundingApprovalReq(fundingCode, status);
+    public String fundingApprovalReq(@PathVariable int fundingCode){
+        fundingService.updateFundingStatusCode(fundingCode, 20);
 
         return "redirect:/myfunkit/company";
     }

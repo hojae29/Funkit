@@ -128,15 +128,6 @@ public class FundingDaoImpl implements FundingDao {
     }
 
     @Override
-    public void fundingApprovalReq(int fundingCode, int status) {
-        Map map = new HashMap();
-        map.put("fundingCode", fundingCode);
-        map.put("status", status);
-
-        sql.update("funding.updateFundingStatus", map);
-    }
-
-    @Override
     public int getFundingUserCount(int fundingCode) {
         return sql.selectOne("funding.getFundingUserCount", fundingCode);
     }
@@ -144,6 +135,19 @@ public class FundingDaoImpl implements FundingDao {
     @Override
     public Member getMaker(int fundingCode) {
         return sql.selectOne("funding.getMaker", fundingCode);
+    }
+
+    @Override
+    public List<Funding> findFundingByStatusCode(int statusCode) {
+        return sql.selectList("funding.findFundingByStatusCode", statusCode);
+    }
+
+    @Override
+    public void updateFundingStatusCode(int fundingCode, int statusCode) {
+        Map map = new HashMap();
+        map.put("fundingCode", fundingCode);
+        map.put("statusCode", statusCode);
+        sql.update("funding.updateFundingStatusCode", map);
     }
 
 }

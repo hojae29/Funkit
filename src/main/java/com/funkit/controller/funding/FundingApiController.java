@@ -2,7 +2,6 @@ package com.funkit.controller.funding;
 
 import com.funkit.model.Funding;
 import com.funkit.model.Image;
-import com.funkit.model.Order;
 import com.funkit.service.TagService;
 import com.funkit.service.funding.FundingService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,11 +15,9 @@ import java.util.List;
 public class FundingApiController {
 
     final FundingService fundingService;
-    final TagService tagService;
 
     public FundingApiController(FundingService fundingService, TagService tagService) {
         this.fundingService = fundingService;
-        this.tagService = tagService;
     }
 
     @GetMapping("")

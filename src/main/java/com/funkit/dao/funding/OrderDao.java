@@ -6,13 +6,15 @@ import com.funkit.model.PayInfo;
 import java.util.List;
 
 public interface OrderDao {
-    void addOrder(PayInfo payInfo);
+    void addOrder(Order order);
 
-    List<Order> getOrderListById(String id);
+    List<PayInfo> getOrderListById(String id);
 
-    Order getOrderByOrderCode(int orderCode);
+    PayInfo getOrderByOrderCode(int orderCode);
 
     void changeOrderStatus(int orderCode, int statusCode);
 
     int getOrderCount(String id);
+
+    List<Order> findOrderListByFundingCode(int fundingCode);
 }

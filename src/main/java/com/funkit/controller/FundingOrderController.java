@@ -1,6 +1,6 @@
 package com.funkit.controller;
 
-import com.funkit.model.Order;
+import com.funkit.model.PayInfo;
 import com.funkit.service.funding.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,9 +25,9 @@ public class FundingOrderController {
 
     @ResponseBody
     @GetMapping("")
-    public Order getOrder(@RequestParam("code") int orderCode){
-        Order order = orderService.getOrderByOrderCode(orderCode);
+    public PayInfo getOrder(@RequestParam("code") int orderCode){
+        PayInfo payInfo = orderService.getOrderByOrderCode(orderCode);
 
-        return order;
+        return payInfo;
     }
 }
