@@ -329,8 +329,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/떡볶이.png">
+                    <div class="store-content-dish-h1">
                     <h1>드디어 인생 떡볶이를 찾았다!
                         미정당 떡볶이</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 1,024개</p>
@@ -344,8 +346,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/돼지갈비.png">
+                    <div class="store-content-dish-h1">
                     <h1>깊고
                         부드러운 풍미 매콤크림 돼지갈비!</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 1,010개</p>
@@ -359,7 +363,9 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/카레라이스.png">
+                    <div class="store-content-dish-h1">
                     <h1>무엇보다도 카레의 맛을 살렸다! <br>장진우 셰프의 카레라이스!</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 993개</p>
@@ -373,8 +379,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/어묵탕.png">
+                    <div class="store-content-dish-h1">
                     <h1>처음 맛보는 인생어묵탕! 소 한마리 다
                         들어간 오오야 프리미엄 스지어묵탕</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 982개</p>
@@ -391,8 +399,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/만두.png">
+                    <div class="store-content-dish-h1">
                     <h1>만두가 이렇게 촉촉해도 되
                         는건가요? 제주 흑돼지만두</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 976개</p>
@@ -406,8 +416,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/백합.png">
+                    <div class="store-content-dish-h1">
                     <h1>딱 3분! 파티음식 준비 끝! 해
                         감 필요없는 갈릭버터 백합팩</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 972개</p>
@@ -421,8 +433,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/삼계탕.png">
+                    <div class="store-content-dish-h1">
                     <h1>힘내세요~ 울끈불끈 겨울 최고의 보양
                         식, 아버지 삼계탕</h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 964개</p>
@@ -436,8 +450,10 @@
             <a href="">
                 <div class="store-content-dish">
                     <img src="/resources/img/main/store/쭈꾸미.png">
+                    <div class="store-content-dish-h1">
                     <h1>성수동맛집 '열혈쭈꾸미'
                         의맛 그대로 1팩에 3인분 </h1>
+                    </div>
                     <div class="store-content-dish-bottom">
                         <div class="store-content-dish-review">
                             <p id="review">리뷰 957개</p>
@@ -537,6 +553,6 @@
         </div>
     </div>
     <script src="/resources/js/slide.js"></script>
-    <jsp:include page="footer.jsp"/>
 </div>
+<jsp:include page="footer.jsp"/>
 </html>
