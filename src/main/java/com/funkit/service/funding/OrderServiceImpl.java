@@ -52,4 +52,9 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> findOrderListByFundingCode(int fundingCode) {
         return orderDao.findOrderListByFundingCode(fundingCode);
     }
+
+    @Override
+    public Order getPayInfoByOrderCode(int orderCode) {
+        return orderDao.getPayInfoByOrderCode(orderCode);
+    }
 }

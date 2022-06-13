@@ -66,4 +66,9 @@ public class OrderDaoImpl implements OrderDao {
         return sql.selectList("fundingOrder.findOrderListByFundingCode", fundingCode);
     }
 
+    @Override
+    public Order getPayInfoByOrderCode(int orderCode) {
+        return sql.selectOne("fundingOrder.getPayInfoByOrderCode", orderCode);
+    }
+
 }

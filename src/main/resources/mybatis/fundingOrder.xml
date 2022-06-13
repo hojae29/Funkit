@@ -57,10 +57,20 @@
     </select>
 
     <select id="findOrderListByFundingCode" resultType="Order">
-        SELECT *
-        FROM funding_order fo, funding f, reward_order ro, reward_order_status ros, reward r
-        WHERE fo.funding_code = f.funding_code AND fo.order_code = ro.order_code AND ros.status_code = ro.status_code AND ro.reward_code = r.reward_code AND
-              funding_code = #{fundingCode} AND status_code != 50;
+        SELECT order_code, id, type, card_number, expiry, birth, status AS order_status, a.total_amount
+        FROM funding_order NATURAL JOIN reward_order NATURAL JOIN reward_order_status NATURAL JOIN (SELECT order_code, sum(reward_order.quantity * amount) AS total_amount
+                                                                                                    FROM reward_order, reward
+                                                                                                    WHERE reward_order.reward_code = reward.reward_code
+                                                                                                    GROUP BY order_code) a
+        WHERE funding_code = #{fundingCode} AND status_code != 50;
     </select>
 
+    <select id="getPayInfoByOrderCode" resultType="Order">
+        SELECT order_code, id, type, card_number, expiry, birth, status AS order_status, a.total_amount
+        FROM funding_order NATURAL JOIN reward_order NATURAL JOIN reward_order_status NATURAL JOIN (SELECT order_code, sum(reward_order.quantity * amount) AS total_amount
+                                                                                                    FROM reward_order, reward
+                                                                                                    WHERE reward_order.reward_code = reward.reward_code
+                                                                                                    GROUP BY order_code) a
+        WHERE order_code = #{orderCode} AND status_code != 50;
+    </select>
 </mapper>

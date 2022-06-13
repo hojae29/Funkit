@@ -18,4 +18,5 @@ public interface OrderService {
 
     List<Order> findOrderListByFundingCode(int fundingCode);
 
+    Order getPayInfoByOrderCode(int orderCode);
 }

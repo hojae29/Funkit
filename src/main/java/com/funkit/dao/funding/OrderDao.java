@@ -17,4 +17,5 @@ public interface OrderDao {
 
     List<Order> findOrderListByFundingCode(int fundingCode);
 
+    Order getPayInfoByOrderCode(int orderCode);
 }
