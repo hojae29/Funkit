@@ -3,7 +3,6 @@ package com.funkit.service.funding;
 import com.funkit.dao.funding.OrderDao;
 import com.funkit.model.JsonResponse;
 import com.funkit.model.Order;
-import com.funkit.model.PayInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -28,12 +27,12 @@ public class OrderServiceImpl implements OrderService{
     }
 
     @Override
-    public List<PayInfo> getOrderListById(String id) {
+    public List<Order> getOrderListById(String id) {
         return orderDao.getOrderListById(id);
     }
 
     @Override
-    public PayInfo getOrderByOrderCode(int orderCode) {
+    public Order getOrderByOrderCode(int orderCode) {
 
         return orderDao.getOrderByOrderCode(orderCode);
     }

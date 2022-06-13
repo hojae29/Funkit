@@ -16,14 +16,13 @@ public class FundingApiController {
 
     final FundingService fundingService;
 
-    public FundingApiController(FundingService fundingService, TagService tagService) {
+    public FundingApiController(FundingService fundingService) {
         this.fundingService = fundingService;
     }
 
     @GetMapping("")
     public List<Funding<Image>> funding(Integer tagCode, String keyword, Integer order){
-        List<Funding<Image>> fundingList = fundingService.getFundingList(tagCode, keyword, order);
 
-        return fundingList;
+        return fundingService.getFundingList(tagCode, keyword, order);
     }
 }

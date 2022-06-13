@@ -1,16 +1,12 @@
 package com.funkit.controller.manager;
 
 
-import com.funkit.model.Funding;
 import com.funkit.service.funding.FundingService;
 import com.funkit.service.funding.OrderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/mgr/funding")
@@ -46,6 +42,7 @@ public class ManagerFundingController {
     public String moveFundingOrderMgrPage(@PathVariable int fundingCode, Model model){
         var list = orderService.findOrderListByFundingCode(fundingCode);
         model.addAttribute("list", list);
+
         return "manager/fundingOrder";
     }
 

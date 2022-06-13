@@ -1,7 +1,7 @@
 package com.funkit.controller.mypage.individual;
 
 import com.funkit.model.Member;
-import com.funkit.model.PayInfo;
+import com.funkit.model.Order;
 import com.funkit.service.funding.OrderService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,7 +28,7 @@ public class IndividualController {
 
     @GetMapping("/funding")
     public String myFunding(@SessionAttribute Member member, Model model){
-        List<PayInfo> orderList = orderService.getOrderListById(member.getId());
+        List<Order> orderList = orderService.getOrderListById(member.getId());
         model.addAttribute("orderList", orderList);
         return "/mypage/myFunding";
     }

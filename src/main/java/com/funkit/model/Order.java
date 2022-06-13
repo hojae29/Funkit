@@ -1,5 +1,8 @@
 package com.funkit.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import java.util.Date;
 import java.util.List;
 
 public class Order {
@@ -13,6 +16,13 @@ public class Order {
     private String expiry;
     private String birth;
     private String cardPasswd;
+
+    private String title;
+    private String corporateName;
+    private String fundingStatus;
+    private String orderStatus;
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
+    private Date payDate;
 
     public long getOrderCode() {
         return orderCode;
@@ -28,6 +38,14 @@ public class Order {
 
     public void setFundingCode(long fundingCode) {
         this.fundingCode = fundingCode;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getType() {
@@ -86,27 +104,43 @@ public class Order {
         this.cardPasswd = cardPasswd;
     }
 
-    public String getId() {
-        return id;
+    public String getTitle() {
+        return title;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    @Override
-    public String toString() {
-        return "PayInfo{" +
-                "orderCode=" + orderCode +
-                ", fundingCode=" + fundingCode +
-                ", type='" + type + '\'' +
-                ", rewardList=" + rewardList +
-                ", totalAmount='" + totalAmount + '\'' +
-                ", cardNumber='" + cardNumber + '\'' +
-                ", expiry='" + expiry + '\'' +
-                ", birth='" + birth + '\'' +
-                ", cardPasswd='" + cardPasswd + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+    public String getCorporateName() {
+        return corporateName;
+    }
+
+    public void setCorporateName(String corporateName) {
+        this.corporateName = corporateName;
+    }
+
+    public String getFundingStatus() {
+        return fundingStatus;
+    }
+
+    public void setFundingStatus(String fundingStatus) {
+        this.fundingStatus = fundingStatus;
+    }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 }

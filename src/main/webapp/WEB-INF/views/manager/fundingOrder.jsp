@@ -43,19 +43,23 @@
                             <th scope="col">카드번호</th>
                             <th scope="col">유효기간</th>
                             <th scope="col">생년월일</th>
+                            <th scope="col">상태</th>
+                            <th scope="col">금액</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:forEach var="item" items="${list}">
                             <tr>
-                                <th scope="row" class="funding_code">${item.fundingCode}</th>
+                                <th scope="row" class="funding_code">${item.orderCode}</th>
                                 <td>${item.id}</td>
                                 <td>${item.type}</td>
                                 <td>${item.cardNumber}</td>
                                 <td>${item.expiry}</td>
                                 <td>${item.birth}</td>
+                                <td>${item.orderStatus}</td>
+                                <td>${item.totalAmount}</td>
                                 <td>
-                                    <a href="/mgr/funding/payment/${item.orderCode}"><button class="btn btn-sm btn-primary">결제</button></a>
+                                    <a href="/funding/order/${item.orderCode}/payment"><button class="btn btn-sm btn-primary">결제</button></a>
                                 </td>
                             </tr>
                         </c:forEach>

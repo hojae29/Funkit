@@ -108,7 +108,7 @@
             let orderCode = $(this).data("order-code");
 
             $.ajax({
-               url: "/funding/order?code=" + orderCode,
+               url: "/funding/order/"+ orderCode,
                method: "GET",
                dataType: "json",
                success: result => {
@@ -139,7 +139,7 @@
             console.log($(this).data("code"));
 
             $.ajax({
-                url: "/funding/order?orderCode=" + $(this).data("code") + "&statusCode=50",
+                url: "/funding/order/" + $(this).data("code") + "?statusCode=50",
                 method: "PATCH",
                 success: result => {
                     alert("취소 완료");

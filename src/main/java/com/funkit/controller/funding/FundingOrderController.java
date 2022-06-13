@@ -1,12 +1,12 @@
-package com.funkit.controller;
+package com.funkit.controller.funding;
 
-import com.funkit.model.PayInfo;
+import com.funkit.model.Order;
 import com.funkit.service.funding.OrderService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @RequestMapping("/funding/order")
 public class FundingOrderController {
 
@@ -16,18 +16,15 @@ public class FundingOrderController {
         this.orderService = orderService;
     }
 
-    @ResponseBody
-    @PatchMapping("")
-    public ResponseEntity changeOrderStatus(@RequestParam("orderCode") int orderCode,
+    @PatchMapping("/{orderCode}")
+    public ResponseEntity changeOrderStatus(@PathVariable int orderCode,
                                             @RequestParam("statusCode") int statusCode){
         return orderService.changeOrderStatus(orderCode, statusCode);
     }
 
-    @ResponseBody
-    @GetMapping("")
-    public PayInfo getOrder(@RequestParam("code") int orderCode){
-        PayInfo payInfo = orderService.getOrderByOrderCode(orderCode);
-
-        return payInfo;
+    @GetMapping("/{orderCode}")
+    public Order getOrder(@PathVariable int orderCode){
+        return orderService.getOrderByOrderCode(orderCode);
     }
+
 }
