@@ -130,10 +130,10 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 60px;
     font-size: 14px;
     background: none;
-    border: 1px solid #ff7e00;
+    border: 1px solid #CCCCCC;
     border-radius: 5px;
     margin-left: 8px;
-    color: #ff7e00;
+    color: #000000;
 }
 
 #tag_select{
@@ -176,24 +176,21 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 #ingredients_area{
     width:600px;
+}
+#ingredients_order{
     display: grid;
     grid-template-columns: repeat(3,calc(33%));
     grid-column-gap: 15px;
     grid-row-gap: 10px;
-}
-#ingredients_order{
-    display: flex;
-    width:150px;
+    width:600px;
 }
 .ingredients_box{
     margin-left:5px;
-    background: #FF7E00;
+    border-bottom: 1px solid #dcdcdc;
     padding: 6px 12px;
-    border-radius: 10px;
     min-width: auto;
     display: flex;
     font-size:16px;
-    color:white;
     height:35px;
     justify-content: space-between;
 }

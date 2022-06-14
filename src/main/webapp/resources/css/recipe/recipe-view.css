@@ -259,7 +259,6 @@ h1 {
 }
 .sub_tit{
     margin-top: 100px;
-    margin-left:50px;
     font-size:26px;
     font-weight: bold;
 }
@@ -273,8 +272,8 @@ h1 {
     display: grid;
     grid-template-columns: repeat(3,calc(33.333%));
     grid-row-gap: 40px;
-    margin-left:90px;
-    margin-right:90px;
+    margin-left:50px;
+    margin-right:50px;
     margin-top:50px;
     font-size:18px;
 }
@@ -289,8 +288,8 @@ h1 {
 }
 #order_div{
     margin-top:70px;
-    margin-left:90px;
-    margin-right:90px;
+    margin-left:50px;
+    margin-right:50px;
 }
 .num_area{
     font-size:24px;

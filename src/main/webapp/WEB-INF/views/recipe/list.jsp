@@ -35,10 +35,10 @@
     </div>
     <div class="planning_container">
         <div class="sub_banner">
-
+            <img class="sub_banner_sty" src="/resources/img/recipe/Recipe_list_1.png"/>
         </div>
         <div class="sub_banner">
-
+            <img class="sub_banner_sty" src="/resources/img/recipe/Recipe_list_2.png"/>
         </div>
     </div>
     <div class="tag_container">
