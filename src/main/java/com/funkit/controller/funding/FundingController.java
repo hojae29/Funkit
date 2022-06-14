@@ -63,11 +63,11 @@ public class FundingController {
 
     @ResponseBody
     @PostMapping("/{fundingCode}/order")
-    public ResponseEntity addOrder(@PathVariable int fundingCode, @RequestBody PayInfo payInfo, HttpSession session){
+    public ResponseEntity addOrder(@PathVariable int fundingCode, @RequestBody Order order, HttpSession session){
         Member member = (Member) session.getAttribute("member");
-        payInfo.setId(member.getId());
-        payInfo.setFundingCode(fundingCode);
+        order.setId(member.getId());
+        order.setFundingCode(fundingCode);
 
-        return orderService.addOrder(payInfo);
+        return orderService.addOrder(order);
     }
 }

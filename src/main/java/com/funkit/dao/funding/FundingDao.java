@@ -33,9 +33,11 @@ public interface FundingDao {
 
     void deleteFunding(int fundingCode);
 
-    void fundingApprovalReq(int fundingCode, int status);
-
     int getFundingUserCount(int fundingCode);
 
     Member getMaker(int fundingCode);
+
+    List<Funding> findFundingByStatusCode(int statusCode);
+
+    void updateFundingStatusCode(int fundingCode, int statusCode);
 }

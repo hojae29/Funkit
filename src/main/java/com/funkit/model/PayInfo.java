@@ -1,65 +1,35 @@
 package com.funkit.model;
 
-import java.util.List;
-
 public class PayInfo {
-    private long orderCode;
-    private long fundingCode;
-    private String id;
-    private String type;
-    private List<Reward> rewardList;
-    private String totalAmount;
-    private String cardNumber;
+    private String merchant_uid;
+    private double amount;
+    private String card_number;
     private String expiry;
     private String birth;
-    private String cardPasswd;
+    private String pwd_2digit;
 
-    public long getOrderCode() {
-        return orderCode;
+    public String getMerchant_uid() {
+        return merchant_uid;
     }
 
-    public void setOrderCode(long orderCode) {
-        this.orderCode = orderCode;
+    public void setMerchant_uid(String merchant_uid) {
+        this.merchant_uid = merchant_uid;
     }
 
-    public long getFundingCode() {
-        return fundingCode;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setFundingCode(long fundingCode) {
-        this.fundingCode = fundingCode;
+    public void setAmount(double amount) {
+        this.amount = amount;
     }
 
-    public String getType() {
-        return type;
+    public String getCard_number() {
+        return card_number;
     }
 
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public List<Reward> getRewardList() {
-        return rewardList;
-    }
-
-    public void setRewardList(List<Reward> rewardList) {
-        this.rewardList = rewardList;
-    }
-
-    public String getTotalAmount() {
-        return totalAmount;
-    }
-
-    public void setTotalAmount(String totalAmount) {
-        this.totalAmount = totalAmount;
-    }
-
-    public String getCardNumber() {
-        return cardNumber;
-    }
-
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setCard_number(String card_number) {
+        this.card_number = card_number;
     }
 
     public String getExpiry() {
@@ -78,35 +48,11 @@ public class PayInfo {
         this.birth = birth;
     }
 
-    public String getCardPasswd() {
-        return cardPasswd;
+    public String getPwd_2digit() {
+        return pwd_2digit;
     }
 
-    public void setCardPasswd(String cardPasswd) {
-        this.cardPasswd = cardPasswd;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return "PayInfo{" +
-                "orderCode=" + orderCode +
-                ", fundingCode=" + fundingCode +
-                ", type='" + type + '\'' +
-                ", rewardList=" + rewardList +
-                ", totalAmount='" + totalAmount + '\'' +
-                ", cardNumber='" + cardNumber + '\'' +
-                ", expiry='" + expiry + '\'' +
-                ", birth='" + birth + '\'' +
-                ", cardPasswd='" + cardPasswd + '\'' +
-                ", id='" + id + '\'' +
-                '}';
+    public void setPwd_2digit(String pwd_2digit) {
+        this.pwd_2digit = pwd_2digit;
     }
 }

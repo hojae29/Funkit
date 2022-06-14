@@ -3,7 +3,6 @@ package com.funkit.service.funding;
 import com.funkit.dao.funding.OrderDao;
 import com.funkit.model.JsonResponse;
 import com.funkit.model.Order;
-import com.funkit.model.PayInfo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -22,8 +21,8 @@ public class OrderServiceImpl implements OrderService{
 
     @Override
     @Transactional
-    public ResponseEntity addOrder(PayInfo payInfo) {
-        orderDao.addOrder(payInfo);
+    public ResponseEntity addOrder(Order order) {
+        orderDao.addOrder(order);
         return new JsonResponse<>(HttpStatus.CREATED, "order success").toResponseEntity();
     }
 
@@ -47,5 +46,15 @@ public class OrderServiceImpl implements OrderService{
     @Override
     public int getOrderCount(String id) {
         return orderDao.getOrderCount(id);
+    }
+
+    @Override
+    public List<Order> findOrderListByFundingCode(int fundingCode) {
+        return orderDao.findOrderListByFundingCode(fundingCode);
+    }
+
+    @Override
+    public Order getPayInfoByOrderCode(int orderCode) {
+        return orderDao.getPayInfoByOrderCode(orderCode);
     }
 }

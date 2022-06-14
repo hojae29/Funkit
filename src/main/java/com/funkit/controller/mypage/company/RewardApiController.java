@@ -32,7 +32,7 @@ public class RewardApiController {
     }
 
     @PatchMapping
-    public  ResponseEntity updateReward(@RequestBody Reward reward){
+    public ResponseEntity updateReward(@RequestBody Reward reward){
         return rewardService.updateReward(reward);
     }
 }

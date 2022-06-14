@@ -16,7 +16,7 @@
         DELETE FROM funding
         WHERE funding_code=#{fundingCode}
     </delete>
-    <update id="updateFundingStatus">
+    <update id="updateFundingStatusCode">
         UPDATE funding
         SET status_code=#{status}
         WHERE funding_code=#{fundingCode}
@@ -52,6 +52,11 @@
         WHERE name = #{name}
     </delete>
 
+    <select id="findFundingByStatusCode" resultType="Funding">
+        SELECT *
+        FROM funding
+        WHERE status_code=#{statusCode}
+    </select>
     <select id="getFundingList" resultMap="fundingResultMap">
         SELECT f.funding_code,
                id,
@@ -94,10 +99,10 @@
                   title LIKE CONCAT('%',#{keyword},'%')
               </if>
               <choose>
-                  <when test="order == 1">
+                  <when test="payInfo == 1">
                       ORDER BY f.funding_code DESC;
                   </when>
-                  <when test="order == 2">
+                  <when test="payInfo == 2">
                       ORDER BY f.funding_code ASC;
                   </when>
                   <otherwise>ORDER BY f.funding_code DESC;</otherwise>

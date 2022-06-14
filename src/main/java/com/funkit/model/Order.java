@@ -3,11 +3,20 @@ package com.funkit.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import java.util.Date;
+import java.util.List;
 
 public class Order {
     private long orderCode;
+    private long fundingCode;
     private String id;
     private String type;
+    private List<Reward> rewardList;
+    private String totalAmount;
+    private String cardNumber;
+    private String expiry;
+    private String birth;
+    private String cardPasswd;
+
     private String title;
     private String corporateName;
     private String fundingStatus;
@@ -15,20 +24,20 @@ public class Order {
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-MM-dd", timezone="Asia/Seoul")
     private Date payDate;
 
-    public Date getPayDate() {
-        return payDate;
-    }
-
-    public void setPayDate(Date payDate) {
-        this.payDate = payDate;
-    }
-
     public long getOrderCode() {
         return orderCode;
     }
 
     public void setOrderCode(long orderCode) {
         this.orderCode = orderCode;
+    }
+
+    public long getFundingCode() {
+        return fundingCode;
+    }
+
+    public void setFundingCode(long fundingCode) {
+        this.fundingCode = fundingCode;
     }
 
     public String getId() {
@@ -45,6 +54,54 @@ public class Order {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public List<Reward> getRewardList() {
+        return rewardList;
+    }
+
+    public void setRewardList(List<Reward> rewardList) {
+        this.rewardList = rewardList;
+    }
+
+    public String getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(String totalAmount) {
+        this.totalAmount = totalAmount;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
+    public String getExpiry() {
+        return expiry;
+    }
+
+    public void setExpiry(String expiry) {
+        this.expiry = expiry;
+    }
+
+    public String getBirth() {
+        return birth;
+    }
+
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
+
+    public String getCardPasswd() {
+        return cardPasswd;
+    }
+
+    public void setCardPasswd(String cardPasswd) {
+        this.cardPasswd = cardPasswd;
     }
 
     public String getTitle() {
@@ -79,16 +136,11 @@ public class Order {
         this.orderStatus = orderStatus;
     }
 
-    @Override
-    public String toString() {
-        return "Order{" +
-                "orderCode=" + orderCode +
-                ", id='" + id + '\'' +
-                ", type='" + type + '\'' +
-                ", title='" + title + '\'' +
-                ", corporateName='" + corporateName + '\'' +
-                ", fundingStatus='" + fundingStatus + '\'' +
-                ", orderStatus='" + orderStatus + '\'' +
-                '}';
+    public Date getPayDate() {
+        return payDate;
+    }
+
+    public void setPayDate(Date payDate) {
+        this.payDate = payDate;
     }
 }

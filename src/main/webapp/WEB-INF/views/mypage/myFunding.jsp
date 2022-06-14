@@ -45,18 +45,18 @@
                     </div>
                 </div>
                 <div class="contents_box">
-                    <c:forEach var="order" items="${orderList}">
-                        <div class="funding_box" data-order="${order.orderCode}">
+                    <c:forEach var="payInfo" items="${orderList}">
+                        <div class="funding_box" data-order-code="${payInfo.orderCode}">
                             <div>
-                                <p>${order.type}</p>
-                                <p>${order.fundingStatus}</p>
+                                <p>${payInfo.type}</p>
+                                <p>${payInfo.fundingStatus}</p>
                             </div>
                             <div>
-                                <p>${order.title}</p>
-                                <p>${order.corporateName}</p>
+                                <p>${payInfo.title}</p>
+                                <p>${payInfo.corporateName}</p>
                             </div>
                             <div class="status_box">
-                                <p>${order.orderStatus}</p>
+                                <p>${payInfo.orderStatus}</p>
                             </div>
                         </div>
                     </c:forEach>
@@ -105,10 +105,10 @@
 
             $("#order_modal").css("display", "flex");
 
-            let orderCode = $(this).data("order");
+            let orderCode = $(this).data("order-code");
 
             $.ajax({
-               url: "/funding/order?code=" + orderCode,
+               url: "/funding/order/"+ orderCode,
                method: "GET",
                dataType: "json",
                success: result => {
@@ -139,7 +139,7 @@
             console.log($(this).data("code"));
 
             $.ajax({
-                url: "/funding/order?orderCode=" + $(this).data("code") + "&statusCode=50",
+                url: "/funding/order/" + $(this).data("code") + "?statusCode=50",
                 method: "PATCH",
                 success: result => {
                     alert("취소 완료");

@@ -92,9 +92,9 @@
     <script>
         function FundingFilter(tagCode){
             let keyword = $("#search_funding").val(); //keyword
-            let order = $("#order_select").val(); //order
+            let payInfo = $("#order_select").val(); //payInfo
 
-            return "/funding/filter?tagCode=" + tagCode + "&keyword=" + keyword + "&order=" + order;
+            return "/funding/filter?tagCode=" + tagCode + "&keyword=" + keyword + "&payInfo=" + payInfo;
         }
 
          $(".tag_box").on("click", function(){

@@ -198,7 +198,7 @@
 <script src="/resources/js/recipe/recipe-tag.js"></script>
 <script src="/resources/js/recipe/main-img.js"></script>
 <script src="/resources/js/recipe/recipe_ingredients.js"></script>
-<script src="/resources/js/recipe/recipe-order.js"></script>
+<script src="/resources/js/recipe/recipe-payInfo.js"></script>
 <script src="/resources/js/recipe/multi-img.js"></script>
 </body>
 </html>
