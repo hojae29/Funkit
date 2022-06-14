@@ -166,6 +166,7 @@
 
             }
         }
+
         $("#top_btn").on("click", () => {
             $('html, body').animate({
                 scrollTop : 0
