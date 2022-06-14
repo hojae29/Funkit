@@ -39,7 +39,7 @@
                 <div class="nav_bottom">
                     <div class="nav_contents">
                         <ul>
-                            <li>홈</li>
+                            <li><a href="/">홈</a></li>
                             <li><a href="/recipe">레시피</a></li>
                             <li><a href="/funding">펀딩</a></li>
                             <li>랭킹</li>
