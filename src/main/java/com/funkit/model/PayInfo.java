@@ -1,19 +1,19 @@
 package com.funkit.model;
 
 public class PayInfo {
-    private String merchantUid;
+    private String merchant_uid;
     private double amount;
-    private String cardNumber;
+    private String card_number;
     private String expiry;
     private String birth;
-    private String pwd2digit;
+    private String pwd_2digit;
 
-    public String getMerchantUid() {
-        return merchantUid;
+    public String getMerchant_uid() {
+        return merchant_uid;
     }
 
-    public void setMerchantUid(String merchantUid) {
-        this.merchantUid = merchantUid;
+    public void setMerchant_uid(String merchant_uid) {
+        this.merchant_uid = merchant_uid;
     }
 
     public double getAmount() {
@@ -24,12 +24,12 @@ public class PayInfo {
         this.amount = amount;
     }
 
-    public String getCardNumber() {
-        return cardNumber;
+    public String getCard_number() {
+        return card_number;
     }
 
-    public void setCardNumber(String cardNumber) {
-        this.cardNumber = cardNumber;
+    public void setCard_number(String card_number) {
+        this.card_number = card_number;
     }
 
     public String getExpiry() {
@@ -48,11 +48,11 @@ public class PayInfo {
         this.birth = birth;
     }
 
-    public String getPwd2digit() {
-        return pwd2digit;
+    public String getPwd_2digit() {
+        return pwd_2digit;
     }
 
-    public void setPwd2digit(String pwd2digit) {
-        this.pwd2digit = pwd2digit;
+    public void setPwd_2digit(String pwd_2digit) {
+        this.pwd_2digit = pwd_2digit;
     }
 }

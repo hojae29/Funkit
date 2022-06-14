@@ -66,7 +66,7 @@
     </select>
 
     <select id="getPayInfoByOrderCode" resultType="Order">
-        SELECT order_code, id, type, card_number, expiry, birth, status AS order_status, a.total_amount
+        SELECT order_code, id, type, card_number, expiry, birth, status AS order_status, a.total_amount, card_passwd
         FROM funding_order NATURAL JOIN reward_order NATURAL JOIN reward_order_status NATURAL JOIN (SELECT order_code, sum(reward_order.quantity * amount) AS total_amount
                                                                                                     FROM reward_order, reward
                                                                                                     WHERE reward_order.reward_code = reward.reward_code

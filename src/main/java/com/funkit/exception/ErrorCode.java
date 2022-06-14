@@ -2,8 +2,7 @@ package com.funkit.exception;
 
 import org.springframework.http.HttpStatus;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.CONFLICT;
+import static org.springframework.http.HttpStatus.*;
 
 //Custom Exception ENUM
 public enum ErrorCode {
@@ -12,7 +11,7 @@ public enum ErrorCode {
     WRONG_ACCESS(BAD_REQUEST, "잘못된 접근입니다"),
 
     /* 401 UNAUTHORIZED */
-
+    PAYMENT_FAILED(UNAUTHORIZED, "결제 실패"),
     /* 404 NOT_FOUND */
 
     /* 409 CONFLICT */
