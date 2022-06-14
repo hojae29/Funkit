@@ -20,7 +20,7 @@
         <div>
             <ul id="menu_list_ul">
                 <li><a href="">회원관리</a></li>
-                <li><a href="/mgr/funding/approval">펀딩승인관리</a></li>
+                <li><a href="/mgr/funding/approval">펀딩 승인관리</a></li>
                 <li><a href="/mgr/funding/payment">펀딩 결제관리</a></li>
                 <li><a href="">공지사항 관리</a></li>
             </ul>

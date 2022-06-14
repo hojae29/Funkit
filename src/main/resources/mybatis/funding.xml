@@ -79,10 +79,12 @@
             (SELECT funding.funding_code,
                     IFNULL(SUM(reward_order.quantity * reward.amount), 0) AS cml_amount,
                     IFNULL(FLOOR(SUM(reward_order.quantity * reward.amount) / funding.target_amount * 100), 0) AS percentage
-            FROM funding
-            LEFT OUTER JOIN reward ON funding.funding_code = reward.funding_code
-            LEFT OUTER JOIN reward_order ON reward.reward_code = reward_order.reward_code
-            GROUP BY funding.funding_code) s
+             FROM funding
+             LEFT OUTER JOIN reward ON funding.funding_code = reward.funding_code
+             LEFT OUTER JOIN (SELECT *
+                              FROM reward_order
+                              WHERE status_code != 50) reward_order ON reward.reward_code = reward_order.reward_code
+                              GROUP BY funding.funding_code) s
         WHERE f.funding_code = fmi.funding_code AND
               f.funding_code = ft.funding_code AND
               ft.tag_code = t.tag_code AND
